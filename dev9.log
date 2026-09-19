@@ -1,0 +1,9 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3107
+- Environments: .env.local
+✓ Ready in 456ms
+✓ Running next.config.ts took 85ms
+Failed to benchmark file I/O: Operation not permitted (os error 1)
+
+ POST /api/quote 400 in 298ms (next.js: 282ms, application-code: 17ms)
+ POST /api/quote 200 in 5ms (next.js: 2ms, application-code: 3ms)

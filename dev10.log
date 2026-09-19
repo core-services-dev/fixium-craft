@@ -1,0 +1,50 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3108
+- Environments: .env.local
+✓ Ready in 469ms
+✓ Running next.config.ts took 89ms
+Failed to benchmark file I/O: Operation not permitted (os error 1)
+
+[Telegram] env check: {
+  TELEGRAM_BOT_TOKEN: 'present (46 chars)',
+  TELEGRAM_CHAT_ID: '453410101'
+}
+Telegram sendMessage error: TypeError: fetch failed
+    at async notifyTelegram (app/api/quote/route.ts:205:17)
+    at async POST (app/api/quote/route.ts:406:36)
+  203 | async function notifyTelegram(botToken: string, chatId: string, fields: ParsedFields): Promise<boolean> {
+  204 |   try {
+> 205 |     const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      |                 ^
+  206 |       method: "POST",
+  207 |       headers: { "Content-Type": "application/json" },
+  208 |       body: JSON.stringify({ {
+  [cause]: Error: getaddrinfo EAI_AGAIN api.telegram.org
+      at ignore-listed frames {
+    errno: -3001,
+    code: 'EAI_AGAIN',
+    syscall: 'getaddrinfo',
+    hostname: 'api.telegram.org'
+  }
+}
+Resend send error: TypeError: fetch failed
+    at async sendEmailViaResend (app/api/quote/route.ts:289:17)
+    at async POST (app/api/quote/route.ts:406:36)
+  287 |
+  288 |   try {
+> 289 |     const res = await fetch(RESEND_ENDPOINT, {
+      |                 ^
+  290 |       method: "POST",
+  291 |       headers: {
+  292 |         "Content-Type": "application/json", {
+  [cause]: Error: getaddrinfo EAI_AGAIN api.resend.com
+      at ignore-listed frames {
+    errno: -3001,
+    code: 'EAI_AGAIN',
+    syscall: 'getaddrinfo',
+    hostname: 'api.resend.com'
+  }
+}
+Telegram alert failed for quote request from Resend Recheck (555-0177) — see the API response logged above.
+Resend email failed or is unconfigured for quote request from Resend Recheck (555-0177).
+ POST /api/quote 200 in 388ms (next.js: 283ms, application-code: 104ms)

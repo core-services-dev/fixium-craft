@@ -1,0 +1,47 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3100
+- Environments: .env.local
+✓ Ready in 446ms
+✓ Running next.config.ts took 57ms
+Failed to benchmark file I/O: Operation not permitted (os error 1)
+
+ GET / 200 in 1146ms (next.js: 1076ms, application-code: 69ms)
+ POST /api/quote 400 in 194ms (next.js: 181ms, application-code: 13ms)
+ POST /api/quote 200 in 5ms (next.js: 1.6ms, application-code: 3ms)
+Telegram sendMessage error: TypeError: fetch failed
+    at async notifyTelegram (app/api/quote/route.ts:67:17)
+    at async POST (app/api/quote/route.ts:166:33)
+  65 |
+  66 |   try {
+> 67 |     const res = await fetch(telegramApiUrl(botToken), {
+     |                 ^
+  68 |       method: "POST",
+  69 |       headers: { "Content-Type": "application/json" },
+  70 |       // Plain text, no parse_mode: a customer's own notes could contain {
+  [cause]: Error: getaddrinfo EAI_AGAIN api.telegram.org
+      at ignore-listed frames {
+    errno: -3001,
+    code: 'EAI_AGAIN',
+    syscall: 'getaddrinfo',
+    hostname: 'api.telegram.org'
+  }
+}
+Web3Forms submission error: TypeError: fetch failed
+    at async forwardToWeb3Forms (app/api/quote/route.ts:107:17)
+    at async POST (app/api/quote/route.ts:166:33)
+  105 |
+  106 |   try {
+> 107 |     const res = await fetch(WEB3FORMS_ENDPOINT, {
+      |                 ^
+  108 |       method: "POST",
+  109 |       body: payload,
+  110 |       headers: { Accept: "application/json" }, {
+  [cause]: Error: getaddrinfo EAI_AGAIN api.web3forms.com
+      at ignore-listed frames {
+    errno: -3001,
+    code: 'EAI_AGAIN',
+    syscall: 'getaddrinfo',
+    hostname: 'api.web3forms.com'
+  }
+}
+ POST /api/quote 502 in 96ms (next.js: 1.4ms, application-code: 94ms)

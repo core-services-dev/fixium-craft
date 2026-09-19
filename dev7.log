@@ -1,0 +1,9 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3105
+✓ Ready in 409ms
+✓ Running next.config.ts took 54ms
+Failed to benchmark file I/O: Operation not permitted (os error 1)
+
+[Telegram] env check: { TELEGRAM_BOT_TOKEN: 'undefined', TELEGRAM_CHAT_ID: 'undefined' }
+Missing Telegram credentials: TELEGRAM_BOT_TOKEN and/or TELEGRAM_CHAT_ID is undefined in this environment. If it's set in .env.local but this is a Vercel deployment, .env.local never reaches Vercel — add both in Project Settings → Environment Variables (or `vercel env add`) and redeploy.
+ POST /api/quote 500 in 300ms (next.js: 281ms, application-code: 19ms)

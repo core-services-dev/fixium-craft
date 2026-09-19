@@ -1,0 +1,49 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3102
+- Environments: .env.local
+✓ Ready in 477ms
+✓ Running next.config.ts took 64ms
+Failed to benchmark file I/O: Operation not permitted (os error 1)
+
+[Telegram] env check: {
+  TELEGRAM_BOT_TOKEN: 'present (46 chars)',
+  TELEGRAM_CHAT_ID: '453410101'
+}
+Telegram sendMessage error: TypeError: fetch failed
+    at async notifyTelegram (app/api/quote/route.ts:77:22)
+    at async POST (app/api/quote/route.ts:203:35)
+  75 |
+  76 |   try {
+> 77 |     const response = await fetch(telegramApiUrl(botToken), {
+     |                      ^
+  78 |       method: "POST",
+  79 |       headers: { "Content-Type": "application/json" },
+  80 |       // Plain text, no parse_mode: a customer's own notes could contain {
+  [cause]: Error: getaddrinfo EAI_AGAIN api.telegram.org
+      at ignore-listed frames {
+    errno: -3001,
+    code: 'EAI_AGAIN',
+    syscall: 'getaddrinfo',
+    hostname: 'api.telegram.org'
+  }
+}
+Web3Forms submission error: TypeError: fetch failed
+    at async forwardToWeb3Forms (app/api/quote/route.ts:132:17)
+    at async POST (app/api/quote/route.ts:203:35)
+  130 |
+  131 |   try {
+> 132 |     const res = await fetch(WEB3FORMS_ENDPOINT, {
+      |                 ^
+  133 |       method: "POST",
+  134 |       body: payload,
+  135 |       headers: { Accept: "application/json" }, {
+  [cause]: Error: getaddrinfo EAI_AGAIN api.web3forms.com
+      at ignore-listed frames {
+    errno: -3001,
+    code: 'EAI_AGAIN',
+    syscall: 'getaddrinfo',
+    hostname: 'api.web3forms.com'
+  }
+}
+CRITICAL: quote request from Debug Test (555-0199) was NOT delivered — both Telegram and Web3Forms failed. Check that TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, and WEB3FORMS_ACCESS_KEY are set for this environment.
+ POST /api/quote 200 in 414ms (next.js: 313ms, application-code: 102ms)
