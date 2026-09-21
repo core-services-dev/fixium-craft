@@ -47,7 +47,7 @@ export const seo = {
   // This is the live, currently-deployed URL (verified reachable) — swap
   // to the custom domain here (and nowhere else) once fixiumcraft.com is
   // actually pointed at this deployment.
-  canonicalUrl: "https://fixium-craft.vercel.app/",
+  canonicalUrl: "https://fixium-craft.vercel.app",
   ogImage: "/og-image.jpg",
 };
 
