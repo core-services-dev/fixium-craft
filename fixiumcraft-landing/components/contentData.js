@@ -25,7 +25,7 @@ export const business = {
     "https://wa.me/19297803017?text=Hi%20Fixium%20Craft%2C%20I'd%20like%20a%20quote%20for%20a%20job.",
   email: "fixiumcraft@gmail.com",
   serviceArea: "Pittsburgh, PA & Surrounding Areas",
-  hours: "Mon–Sun, 8am–8pm",
+  hours: "Mon–Sun, 7am–11pm",
   address: {
     city: "Pittsburgh",
     state: "PA",
@@ -61,7 +61,7 @@ export const seo = {
 // given — a common, accepted pattern for this kind of listing.
 //
 // openingHoursSpecification below is a *structured* re-statement of
-// business.hours ("Mon–Sat, 8am–7pm") — schema.org needs actual day/time
+// business.hours ("Mon–Sun, 7am–11pm") — schema.org needs actual day/time
 // values, not the free-text string, so if business.hours ever changes,
 // update dayOfWeek/opens/closes here too or the two will drift apart.
 export const localBusinessSchema = {
@@ -87,7 +87,7 @@ export const localBusinessSchema = {
     "@type": "Place",
     name: business.serviceArea,
   },
-  // Structured re-statement of business.hours ("Mon–Sun, 8am–8pm") — keep
+  // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") — keep
   // the two in sync if hours ever change (see the comment on business.hours).
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -100,8 +100,8 @@ export const localBusinessSchema = {
       "Saturday",
       "Sunday",
     ],
-    opens: "08:00",
-    closes: "20:00",
+    opens: "07:00",
+    closes: "23:00",
   },
   priceRange: "$$",
 };
