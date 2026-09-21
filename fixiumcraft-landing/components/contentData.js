@@ -12,15 +12,20 @@
 
 export const business = {
   name: "Fixium Craft",
+  legalName: "Fixium Craft LLC",
   tagline: "Furniture Assembly & Home Repairs, Done Right",
   phoneDisplay: "(929)780-3017",
   phoneHref: "tel:+19297803017",
+  // E.164-style, hyphenated form for structured data (schema.org
+  // LocalBusiness.telephone) — keep in sync with phoneHref/phoneDisplay
+  // above if the number ever changes.
+  phoneE164: "+1-929-780-3017",
   smsHref: "sms:+19297803017",
   whatsappHref:
     "https://wa.me/19297803017?text=Hi%20Fixium%20Craft%2C%20I'd%20like%20a%20quote%20for%20a%20job.",
   email: "fixiumcraft@gmail.com",
-  serviceArea: "Pittsburgh & Surrounding Areas",
-  hours: "Mon–Sat, 8am–7pm",
+  serviceArea: "Pittsburgh, PA & Surrounding Areas",
+  hours: "Mon–Sun, 8am–8pm",
   address: {
     city: "Pittsburgh",
     state: "PA",
@@ -28,9 +33,9 @@ export const business = {
 };
 
 export const seo = {
-  title: "Fixium Craft | IKEA Furniture Assembly & Handyman Services in Pittsburgh",
+  title: "IKEA Furniture Assembly & Handyman Services in Pittsburgh | Fixium Craft",
   description:
-    "Same-day furniture assembly, TV wall mounting, and minor home repairs in Pittsburgh, PA. Upfront pricing, fully insured, 5-star rated. Get an instant quote by text or WhatsApp.",
+    "Expert IKEA furniture assembly, TV wall mounting, and minor home repairs in Pittsburgh & surrounding areas. Flat-rate pricing & same-day slots. Get a free quote today!",
   keywords: [
     "furniture assembly Pittsburgh",
     "IKEA assembly service",
@@ -39,7 +44,10 @@ export const seo = {
     "flat pack furniture assembly",
     "small home repairs Pittsburgh",
   ],
-  canonicalUrl: "https://www.fixiumcraft.com/",
+  // This is the live, currently-deployed URL (verified reachable) — swap
+  // to the custom domain here (and nowhere else) once fixiumcraft.com is
+  // actually pointed at this deployment.
+  canonicalUrl: "https://fixium-craft.vercel.app/",
   ogImage: "/og-image.jpg",
 };
 
@@ -58,11 +66,16 @@ export const seo = {
 // update dayOfWeek/opens/closes here too or the two will drift apart.
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
+  // HandymanService is a subtype of HomeAndConstructionBusiness (itself a
+  // LocalBusiness subtype) — the most specific still-valid schema.org type
+  // for this business, so it inherits every HomeAndConstructionBusiness/
+  // LocalBusiness property below while describing the business precisely.
+  "@type": "HandymanService",
   name: business.name,
+  legalName: business.legalName,
   description: seo.description,
   url: seo.canonicalUrl,
-  telephone: business.phoneDisplay,
+  telephone: business.phoneE164,
   email: business.email,
   address: {
     "@type": "PostalAddress",
@@ -74,11 +87,21 @@ export const localBusinessSchema = {
     "@type": "Place",
     name: business.serviceArea,
   },
+  // Structured re-statement of business.hours ("Mon–Sun, 8am–8pm") — keep
+  // the two in sync if hours ever change (see the comment on business.hours).
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
     opens: "08:00",
-    closes: "19:00",
+    closes: "20:00",
   },
   priceRange: "$$",
 };
@@ -144,6 +167,7 @@ export const services = [
     title: "Furniture Assembly",
     icon: "assembly",
     image: "/services/furniture-assembly.jpg",
+    alt: "IKEA and flat-pack furniture assembly service in Pittsburgh, PA",
     description:
       "Beds, wardrobes, desks, shelving, office furniture — if it comes in a box, we build it fast, sturdy, and level. No leftover screws, no wobble.",
     features: [
@@ -158,6 +182,7 @@ export const services = [
     title: "TV & Wall Mounting",
     icon: "mounting",
     image: "/services/tv-wall-mounting.jpg",
+    alt: "TV wall mounting and shelf installation service in Pittsburgh, PA",
     description:
       "Stud-anchored TV, shelf, and artwork mounting with clean cord concealment — hung right the first time, no drywall guesswork.",
     features: [
@@ -172,6 +197,7 @@ export const services = [
     title: "Minor Home Repairs",
     icon: "repairs",
     image: "/services/minor-home-repairs.jpg",
+    alt: "Minor home repair and cabinet hinge fix service in Pittsburgh, PA",
     description:
       "Sticking cabinet hinges, doors that won't latch, loose drawers — the small fixes on your list that keep getting pushed back, done in one visit.",
     features: [
@@ -186,6 +212,7 @@ export const services = [
     title: "Window AC & Appliance Installation",
     icon: "ac",
     image: "/services/installation-services.jpg",
+    alt: "Window AC unit and appliance installation service in Pittsburgh, PA",
     description:
       "Seasonal window AC units, heavy wall fixtures, and curtain rods installed secure and level — no drafts, no pulled-out anchors.",
     features: [

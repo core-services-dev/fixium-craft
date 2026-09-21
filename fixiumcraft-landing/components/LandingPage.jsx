@@ -367,7 +367,7 @@ function Services() {
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                   <Image
                     src={service.image}
-                    alt={service.title}
+                    alt={service.alt || service.title}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover"
