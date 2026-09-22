@@ -498,6 +498,12 @@ export const footer = {
     { label: "FAQ", href: "#faq" },
     { label: "Get a Quote", href: "#quote" },
   ],
+  // Rendered directly in LandingPage.jsx's Footer() as a small legal-links
+  // row (routes to the standalone pages in app/privacy and app/terms).
+  legalLinks: [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+  ],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
 

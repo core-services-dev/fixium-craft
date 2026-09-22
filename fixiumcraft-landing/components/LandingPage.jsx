@@ -18,6 +18,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   business,
   hero,
@@ -34,6 +35,7 @@ import {
   testimonialsSection,
   faq,
   faqSection,
+  footer,
 } from "./contentData";
 
 /* -------------------------------------------------------------------------- */
@@ -987,6 +989,16 @@ function Footer() {
           <a href={`mailto:${business.email}`} className="hover:text-white">
             {business.email}
           </a>
+        </div>
+        <div className="mt-4 flex justify-center gap-4 text-xs">
+          {footer.legalLinks.map((link, index) => (
+            <span key={link.href} className="flex items-center gap-4">
+              {index > 0 && <span aria-hidden="true">&middot;</span>}
+              <Link href={link.href} className="hover:text-white">
+                {link.label}
+              </Link>
+            </span>
+          ))}
         </div>
         <p className="mt-6 text-xs text-slate-500">
           © {new Date().getFullYear()} {business.name}. All rights reserved.
