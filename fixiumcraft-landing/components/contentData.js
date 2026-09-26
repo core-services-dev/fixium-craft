@@ -13,6 +13,9 @@
 export const business = {
   name: "Fixium Craft",
   legalName: "Fixium Craft LLC",
+  // Used for schema.org `founder` in localBusinessSchema below, so
+  // AI/search engines can attribute the business to an owner.
+  owner: "Vadim",
   tagline: "Furniture Assembly & Home Repairs, Done Right",
   phoneDisplay: "(929)780-3017",
   phoneHref: "tel:+19297803017",
@@ -32,6 +35,20 @@ export const business = {
   },
 };
 
+// Specific neighborhoods/municipalities we serve around the core Pittsburgh
+// service area — used in localBusinessSchema's areaServed (below), in the
+// FAQ "what areas do you service" answer, and on each dedicated
+// service+location page (see `servicePages`), so both search engines and AI
+// assistants see the exact coverage area, not just "Pittsburgh."
+export const neighborhoods = [
+  "Mt. Lebanon",
+  "Bethel Park",
+  "Upper St. Clair",
+  "Dormont",
+  "Carnegie",
+  "Robinson Township",
+];
+
 export const seo = {
   title: "IKEA Furniture Assembly & Handyman Services in Pittsburgh | Fixium Craft",
   description:
@@ -49,61 +66,6 @@ export const seo = {
   // actually pointed at this deployment.
   canonicalUrl: "https://fixium-craft.vercel.app",
   ogImage: "/og-image.jpg",
-};
-
-// JSON-LD structured data (schema.org), rendered as a <script
-// type="application/ld+json"> in app/page.tsx. Using HomeAndConstructionBusiness
-// (a LocalBusiness subtype) rather than the generic LocalBusiness — it's the
-// more specific, still-valid type for a repair/assembly/handyman service, and
-// Google's structured-data guidelines accept any type in the LocalBusiness
-// hierarchy. No streetAddress is included on purpose: this is a service-area
-// business with no public storefront, so only city/state + areaServed are
-// given — a common, accepted pattern for this kind of listing.
-//
-// openingHoursSpecification below is a *structured* re-statement of
-// business.hours ("Mon–Sun, 7am–11pm") — schema.org needs actual day/time
-// values, not the free-text string, so if business.hours ever changes,
-// update dayOfWeek/opens/closes here too or the two will drift apart.
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  // HandymanService is a subtype of HomeAndConstructionBusiness (itself a
-  // LocalBusiness subtype) — the most specific still-valid schema.org type
-  // for this business, so it inherits every HomeAndConstructionBusiness/
-  // LocalBusiness property below while describing the business precisely.
-  "@type": "HandymanService",
-  name: business.name,
-  legalName: business.legalName,
-  description: seo.description,
-  url: seo.canonicalUrl,
-  telephone: business.phoneE164,
-  email: business.email,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: business.address.city,
-    addressRegion: business.address.state,
-    addressCountry: "US",
-  },
-  areaServed: {
-    "@type": "Place",
-    name: business.serviceArea,
-  },
-  // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") — keep
-  // the two in sync if hours ever change (see the comment on business.hours).
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "07:00",
-    closes: "23:00",
-  },
-  priceRange: "$$",
 };
 
 export const trustBadges = [
@@ -176,6 +138,9 @@ export const services = [
       "Old furniture disassembly & haul-away available",
     ],
     startingPrice: "Starting at $59",
+    // Dedicated SEO page this service card links to (see servicePages
+    // below and app/furniture-assembly-pittsburgh/page.tsx).
+    learnMoreHref: "/furniture-assembly-pittsburgh",
   },
   {
     id: "mounting",
@@ -191,21 +156,26 @@ export const services = [
       "Shelves, mirrors & artwork mounting too",
     ],
     startingPrice: "Starting at $89",
+    learnMoreHref: "/tv-mounting-pittsburgh",
   },
   {
     id: "repairs",
     title: "Minor Home Repairs",
     icon: "repairs",
     image: "/services/minor-home-repairs.jpg",
-    alt: "Minor home repair and cabinet hinge fix service in Pittsburgh, PA",
+    alt: "Minor home repair, cabinet hinge, and door lock adjustment service in Pittsburgh, PA",
     description:
-      "Sticking cabinet hinges, doors that won't latch, loose drawers — the small fixes on your list that keep getting pushed back, done in one visit.",
+      "Sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments — the small fixes on your list that keep getting pushed back, done in one visit.",
     features: [
       "Cabinet & drawer hinge adjustments",
-      "Door alignment & hardware fixes",
+      "Door alignment, lock & handle adjustments or replacement",
       "General furniture repair & childproofing",
     ],
     startingPrice: "Starting at $49",
+    // Links to the direct-match dedicated page; door-lock-repair-pittsburgh
+    // is a second, differently-angled page for the same underlying
+    // service, reachable from the footer instead (see footer.servicePageLinks).
+    learnMoreHref: "/minor-home-repairs-pittsburgh",
   },
   {
     id: "installation",
@@ -221,6 +191,9 @@ export const services = [
       "Curtain rods & blinds, hung straight",
     ],
     startingPrice: "Starting at $69",
+    // No dedicated page for this one — only the 5 URLs in servicePages
+    // were requested, and this service wasn't among them.
+    learnMoreHref: null,
   },
 ];
 
@@ -230,6 +203,96 @@ export const services = [
 export const servicesSection = {
   heading: "What We Do",
   subheading: "Four services, one call away — all backed by the same guarantee.",
+};
+
+// JSON-LD structured data (schema.org), rendered as a <script
+// type="application/ld+json"> in app/page.tsx, and referenced by @id from
+// each dedicated service+location page's own Service schema (see
+// components/ServicePage.tsx) so every page resolves to the same single
+// business entity instead of duplicating this whole block. Defined here,
+// after `services`, because hasOfferCatalog below needs that array to
+// already exist.
+//
+// Using HandymanService (a HomeAndConstructionBusiness/LocalBusiness
+// subtype) rather than the generic LocalBusiness — the most specific,
+// still-valid type for a repair/assembly/handyman service, per Google's
+// structured-data guidelines. No streetAddress is included on purpose:
+// this is a service-area business with no public storefront, so only
+// city/state + areaServed are given — a common, accepted pattern.
+//
+// openingHoursSpecification below is a *structured* re-statement of
+// business.hours ("Mon–Sun, 7am–11pm") — schema.org needs actual day/time
+// values, not the free-text string, so if business.hours ever changes,
+// update dayOfWeek/opens/closes here too or the two will drift apart.
+export const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HandymanService",
+  // Stable identifier other pages' Service schema points back to via
+  // `provider: { "@id": ... }` instead of repeating this whole block.
+  "@id": `${seo.canonicalUrl}/#business`,
+  name: business.name,
+  legalName: business.legalName,
+  founder: {
+    "@type": "Person",
+    name: business.owner,
+  },
+  description: seo.description,
+  url: seo.canonicalUrl,
+  telephone: business.phoneE164,
+  email: business.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: business.address.city,
+    addressRegion: business.address.state,
+    addressCountry: "US",
+  },
+  // The core city plus every specific neighborhood/municipality we serve
+  // (see `neighborhoods` above) — an array of Place entries is valid
+  // schema.org, and naming each one (rather than just "Pittsburgh &
+  // Surrounding Areas") is what lets AI assistants and Google confidently
+  // match "handyman in Mt. Lebanon" to this business.
+  areaServed: [
+    {
+      "@type": "City",
+      name: `${business.address.city}, ${business.address.state}`,
+    },
+    ...neighborhoods.map((name) => ({
+      "@type": "Place",
+      name: `${name}, ${business.address.state}`,
+    })),
+  ],
+  // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") — keep
+  // the two in sync if hours ever change (see the comment on business.hours).
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "07:00",
+    closes: "23:00",
+  },
+  priceRange: "$$",
+  // Explicit, machine-readable list of what we offer — built from the same
+  // `services` array the homepage renders, so this can never list a
+  // service the site doesn't actually show.
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Fixium Craft Services",
+    itemListElement: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+      },
+    })),
+  },
 };
 
 export const process = {
@@ -478,13 +541,149 @@ export const faq = [
   {
     id: "area",
     question: "What areas do you service?",
-    answer: `We currently serve ${business.serviceArea}. Send us your ZIP code and we'll confirm availability right away.`,
+    answer: `We serve ${business.serviceArea}, including ${neighborhoods.join(", ")}. Send us your ZIP code and we'll confirm availability right away.`,
   },
   {
     id: "insurance",
     question: "Are you insured?",
     answer:
       "Yes — we're fully licensed and insured, and every technician is background-checked before joining the team.",
+  },
+];
+
+// Content for the dedicated service+location pages under
+// app/<slug>/page.tsx (rendered by components/ServicePage.tsx). Two of
+// these (door-lock-repair-pittsburgh, minor-home-repairs-pittsburgh) point
+// at the SAME underlying `services` entry ("repairs") rather than a
+// fabricated standalone service — Fixium Craft doesn't offer separate
+// locksmith or plumbing service lines, so door/lock and general repair
+// content both draw from the one real "Minor Home Repairs" service, just
+// with a different keyword angle and FAQ per page.
+export const servicePages = [
+  {
+    slug: "furniture-assembly-pittsburgh",
+    serviceId: "assembly",
+    h1: "Furniture Assembly in Pittsburgh, PA",
+    metaTitle: "Furniture Assembly Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "Fixium Craft assembles IKEA, Wayfair, and flat-pack furniture in Pittsburgh, PA and nearby neighborhoods. Flat-rate pricing, same-day slots. Get a free quote.",
+    intro: [
+      `Fixium Craft provides professional furniture assembly in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
+      "We assemble beds, wardrobes, desks, shelving, and office furniture from IKEA, Wayfair, Amazon, and other flat-pack brands — built fast, sturdy, and level, with no leftover screws.",
+    ],
+    faqs: [
+      {
+        question: "Does Fixium Craft assemble IKEA furniture in Pittsburgh?",
+        answer:
+          "Yes. Fixium Craft assembles IKEA, Wayfair, Amazon, and other flat-pack furniture throughout Pittsburgh, PA and surrounding areas.",
+      },
+      {
+        question: "How much does furniture assembly cost in Pittsburgh?",
+        answer:
+          "Furniture assembly starts at $59, with a flat-rate quote based on the piece and any details you send us — no hourly surprises.",
+      },
+    ],
+  },
+  {
+    slug: "tv-mounting-pittsburgh",
+    serviceId: "mounting",
+    h1: "TV Mounting in Pittsburgh, PA",
+    metaTitle: "TV Wall Mounting Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "Fixium Craft mounts TVs, shelves, and artwork in Pittsburgh, PA and nearby neighborhoods. Stud-anchored, cables concealed, flat-rate pricing. Get a free quote.",
+    intro: [
+      `Fixium Craft provides TV wall mounting in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
+      "We mount TVs, shelves, mirrors, and artwork with stud-anchored hardware and clean cord concealment — hung right the first time, with no drywall guesswork.",
+    ],
+    faqs: [
+      {
+        question: "Do you mount TVs on drywall in Pittsburgh?",
+        answer:
+          "Yes. Fixium Craft locates and anchors into wall studs behind drywall for a secure mount, and conceals cables for a clean finish.",
+      },
+      {
+        question: "How much does TV mounting cost in Pittsburgh?",
+        answer:
+          "TV wall mounting starts at $89, with a flat-rate quote confirmed before we begin the job.",
+      },
+    ],
+  },
+  {
+    slug: "handyman-pittsburgh",
+    serviceId: null,
+    h1: "Handyman Services in Pittsburgh, PA",
+    metaTitle: "Handyman Services Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "Fixium Craft is a local handyman company serving Pittsburgh, PA and surrounding neighborhoods: furniture assembly, TV mounting, minor repairs, and appliance installs.",
+    intro: [
+      `Fixium Craft is a local handyman company based in ${business.address.city}, ${business.address.state}, serving ${business.address.city} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
+      "We provide furniture assembly, TV and wall mounting, minor home repairs (including door and lock adjustments), and window AC and appliance installation — all with flat-rate pricing and same-day availability.",
+    ],
+    faqs: [
+      {
+        question: "What handyman services does Fixium Craft offer in Pittsburgh?",
+        answer:
+          "Fixium Craft offers furniture assembly, TV and wall mounting, minor home repairs, and window AC and appliance installation throughout Pittsburgh, PA and surrounding areas.",
+      },
+      {
+        question: "How do I book a handyman in Pittsburgh with Fixium Craft?",
+        answer:
+          "Send us your details and a photo by text, WhatsApp, or our quote form, and we'll text back a flat-rate quote — usually within an hour.",
+      },
+      {
+        question: "Is Fixium Craft insured?",
+        answer:
+          "Yes — Fixium Craft technicians are fully insured and background-checked before joining the team.",
+      },
+    ],
+  },
+  {
+    slug: "door-lock-repair-pittsburgh",
+    serviceId: "repairs",
+    h1: "Door & Lock Repair in Pittsburgh, PA",
+    metaTitle: "Door & Lock Repair Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "Fixium Craft handles door, handle, and lock adjustments as part of our Minor Home Repairs service in Pittsburgh, PA and nearby neighborhoods. Flat-rate quotes.",
+    intro: [
+      `Fixium Craft handles door and lock repair in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}, as part of our Minor Home Repairs service.`,
+      "This covers doors that won't latch or close properly, sticking or misaligned doors, and loose or worn door handles and locks — realigned, tightened, or replaced in one visit.",
+    ],
+    faqs: [
+      {
+        question: "Does Fixium Craft fix doors that won't close or latch?",
+        answer:
+          "Yes. Door alignment and latch adjustments are part of our Minor Home Repairs service, available throughout Pittsburgh, PA and surrounding areas.",
+      },
+      {
+        question: "Can Fixium Craft adjust or replace a door lock or handle?",
+        answer:
+          "Yes — as part of our Minor Home Repairs service we adjust and replace door handles and standard locksets. For advanced locksmith or security work, we can point you to a specialist.",
+      },
+    ],
+  },
+  {
+    slug: "minor-home-repairs-pittsburgh",
+    serviceId: "repairs",
+    h1: "Minor Home Repairs in Pittsburgh, PA",
+    metaTitle: "Minor Home Repairs Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "Fixium Craft handles minor home repairs in Pittsburgh, PA and nearby neighborhoods: cabinet hinges, door and lock adjustments, and general fixes. Flat-rate quotes.",
+    intro: [
+      `Fixium Craft provides minor home repairs in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
+      "We fix sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments — the small fixes on your list that keep getting pushed back, done in one visit.",
+    ],
+    faqs: [
+      {
+        question: "What counts as a minor home repair for Fixium Craft?",
+        answer:
+          "Cabinet and drawer hinge adjustments, door alignment and hardware fixes (including locks and handles), and general furniture repair or childproofing.",
+      },
+      {
+        question: "How much do minor home repairs cost in Pittsburgh?",
+        answer:
+          "Minor home repairs start at $49, with a flat-rate quote based on the details and photos you send us.",
+      },
+    ],
   },
 ];
 
@@ -504,12 +703,24 @@ export const footer = {
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],
+  // Internal links to the dedicated service+location pages (see
+  // `servicePages` above and app/<slug>/page.tsx) — rendered in
+  // LandingPage.jsx's Footer() so they're discoverable from every page,
+  // not just the sitemap.
+  servicePageLinks: [
+    { label: "Furniture Assembly in Pittsburgh", href: "/furniture-assembly-pittsburgh" },
+    { label: "TV Mounting in Pittsburgh", href: "/tv-mounting-pittsburgh" },
+    { label: "Handyman Services in Pittsburgh", href: "/handyman-pittsburgh" },
+    { label: "Door & Lock Repair in Pittsburgh", href: "/door-lock-repair-pittsburgh" },
+    { label: "Minor Home Repairs in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
+  ],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
 
 // Grouped default export for convenience (e.g. `import content from './contentData'`)
 const contentData = {
   business,
+  neighborhoods,
   seo,
   localBusinessSchema,
   trustBadges,
@@ -527,6 +738,7 @@ const contentData = {
   testimonialsSection,
   faq,
   faqSection,
+  servicePages,
   footer,
 };
 

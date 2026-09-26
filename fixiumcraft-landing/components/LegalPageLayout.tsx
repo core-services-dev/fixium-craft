@@ -1,19 +1,12 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { business } from "./contentData";
+import { SiteHeader, SiteFooterMini, BTN_PRIMARY } from "./SiteChrome";
 
 // LegalPageLayout.tsx
 //
 // Shared shell for standalone informational pages (Privacy Policy, Terms
 // of Service) that aren't part of the single-page LandingPage.jsx flow.
-// Mirrors LandingPage's design tokens (colors, spacing, button styling)
-// by hand, since Navbar/Footer inside LandingPage.jsx aren't exported —
-// if a third legal-style page is ever added, consider exporting those
-// instead of a third copy of this shell.
-
-const BTN_PRIMARY =
-  "rounded-lg bg-sky-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-400";
+// Header/footer live in SiteChrome.tsx, shared with ServicePage.tsx.
 
 export function LegalSection({
   heading,
@@ -43,27 +36,7 @@ export default function LegalPageLayout({
 }) {
   return (
     <main className="min-h-screen bg-white font-sans text-slate-900">
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-slate-900 transition-opacity hover:opacity-80"
-          >
-            <Image
-              src="/logo-icon.png"
-              alt={`${business.name} logo`}
-              width={44}
-              height={44}
-              priority
-              className="h-10 w-10 shrink-0 sm:h-11 sm:w-11"
-            />
-            <span className="leading-none">{business.name}</span>
-          </Link>
-          <Link href="/" className={BTN_PRIMARY}>
-            Back to Home
-          </Link>
-        </div>
-      </header>
+      <SiteHeader />
 
       <article className="px-4 py-14 sm:py-20">
         <div className="mx-auto max-w-3xl">
@@ -82,14 +55,7 @@ export default function LegalPageLayout({
         </div>
       </article>
 
-      <footer className="bg-slate-900 px-4 py-10 text-slate-400">
-        <div className="mx-auto max-w-5xl text-center">
-          <p className="text-lg font-bold text-white">{business.name}</p>
-          <p className="mt-6 text-xs text-slate-500">
-            © {new Date().getFullYear()} {business.name}. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <SiteFooterMini />
     </main>
   );
 }

@@ -403,6 +403,14 @@ function Services() {
                       {service.startingPrice}
                     </span>
                   </div>
+                  {service.learnMoreHref && (
+                    <Link
+                      href={service.learnMoreHref}
+                      className="mt-3 inline-block text-sm font-medium text-sky-600 hover:underline"
+                    >
+                      Learn more about {service.title} in Pittsburgh &rarr;
+                    </Link>
+                  )}
                 </div>
               </div>
             );
@@ -981,6 +989,26 @@ function Footer() {
         <p className="mx-auto mt-2 max-w-md text-sm">
           Serving {business.serviceArea} &middot; {business.hours}
         </p>
+        <nav
+          aria-label="Page sections"
+          className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-sm"
+        >
+          {footer.links.map((link) => (
+            <a key={link.href} href={link.href} className="hover:text-white">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <nav
+          aria-label="Service areas"
+          className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs"
+        >
+          {footer.servicePageLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="hover:text-white">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
         <div className="mt-4 flex justify-center gap-4 text-sm">
           <a href={business.phoneHref} className="hover:text-white">
             {business.phoneDisplay}
