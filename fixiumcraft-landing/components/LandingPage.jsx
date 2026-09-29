@@ -19,6 +19,10 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+// Build-time JSON import (webpack/Turbopack resolve this to a plain JS
+// module, no runtime fs access) — keeps the footer's version string in
+// sync with package.json without hardcoding a second copy of it.
+import packageJson from "../package.json";
 import {
   business,
   hero,
@@ -1084,6 +1088,12 @@ function FAQ() {
 /* -------------------------------------------------------------------------- */
 
 function Footer() {
+  const rawCommitSha =
+    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ||
+    process.env.NEXT_PUBLIC_COMMIT_SHA ||
+    "";
+  const shortCommitSha = rawCommitSha ? rawCommitSha.slice(0, 7) : "";
+
   return (
     <footer className="bg-slate-900 px-4 py-10 pb-24 text-slate-400 lg:pb-10">
       <div className="mx-auto max-w-5xl text-center">
@@ -1132,6 +1142,16 @@ function Footer() {
         </div>
         <p className="mt-6 text-xs text-slate-500">
           © {new Date().getFullYear()} {business.name}. All rights reserved.
+        </p>
+        {/* Subtle build/version marker — deliberately the most muted text on
+            the page (darker than the copyright line above it) so it never
+            competes for attention, but gives a quick rollback reference
+            point when checking which deploy is live. Commit SHA is only
+            present on Vercel builds (see next.config.ts); it's silently
+            omitted in local dev instead of showing a broken/empty value. */}
+        <p className="mt-2 text-[11px] text-slate-600">
+          v{packageJson.version}
+          {shortCommitSha ? ` (${shortCommitSha})` : ""}
         </p>
       </div>
     </footer>
