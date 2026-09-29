@@ -84,6 +84,15 @@ function IconMessage(props) {
   );
 }
 
+function IconCamera(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+      <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
+}
+
 function IconCheck(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -576,6 +585,7 @@ const EMPTY_FORM_DATA = {
   email: "",
   zip: "",
   services: [],
+  preferredWindow: "",
   notes: "",
 };
 
@@ -680,6 +690,7 @@ function QuoteForm() {
       submission.append("email", formData.email);
       submission.append("zip_code", formData.zip);
       submission.append("service_needed", selectedServiceLabels.join(", "));
+      submission.append("preferred_window", formData.preferredWindow);
       submission.append("message", formData.notes);
       submission.append("botcheck", ""); // honeypot — must stay empty
       if (photoFile) {
@@ -850,17 +861,50 @@ function QuoteForm() {
           </fieldset>
 
           <div>
-            <label htmlFor="photo" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.photo.label}
+            <label htmlFor="preferredWindow" className="text-sm font-medium text-slate-700">
+              {quoteForm.fields.preferredWindow.label}
             </label>
+            <input
+              id="preferredWindow"
+              name="preferredWindow"
+              type="text"
+              value={formData.preferredWindow}
+              onChange={handleChange}
+              placeholder={quoteForm.fields.preferredWindow.placeholder}
+              className="mt-1.5 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+            />
+            <p className="mt-1 text-xs text-slate-400">
+              {quoteForm.fields.preferredWindow.helpText}
+            </p>
+          </div>
+
+          {/* Deliberately the most visually prominent field in the form —
+              a photo is the single biggest lever on lead quality (an
+              accurate flat-rate quote vs. a rough guess), so it gets a
+              highlighted card, an icon, and a "Recommended" badge instead
+              of blending in with the optional fields around it. */}
+          <div>
+            <div className="flex items-center gap-2">
+              <label htmlFor="photo" className="text-sm font-medium text-slate-700">
+                {quoteForm.fields.photo.label}
+              </label>
+              <span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
+                Recommended
+              </span>
+            </div>
             <label
               htmlFor="photo"
-              className="mt-1.5 flex cursor-pointer items-center justify-between rounded-lg border border-dashed border-slate-300 px-3.5 py-2.5 text-sm text-slate-500 hover:border-sky-400 hover:text-sky-600"
+              className="mt-1.5 flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-sky-300 bg-sky-50 px-3.5 py-3 text-sm text-sky-700 transition hover:border-sky-400 hover:bg-sky-100"
             >
-              <span className="truncate">
-                {photoName || "Tap to attach a photo"}
+              <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-sky-600 shadow-sm">
+                <IconCamera className="h-4.5 w-4.5" />
               </span>
-              <span className="ml-2 flex-shrink-0 text-xs font-semibold uppercase text-sky-600">
+              <span className="min-w-0 flex-1">
+                <span className="block truncate font-medium">
+                  {photoName || "Tap to attach a photo"}
+                </span>
+              </span>
+              <span className="flex-shrink-0 text-xs font-semibold uppercase text-sky-600">
                 Browse
               </span>
             </label>
@@ -873,7 +917,7 @@ function QuoteForm() {
               onChange={handlePhotoChange}
               className="hidden"
             />
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1.5 text-xs font-medium text-slate-500">
               {quoteForm.fields.photo.helpText}
             </p>
           </div>

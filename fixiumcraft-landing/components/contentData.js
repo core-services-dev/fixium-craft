@@ -395,9 +395,22 @@ export const quoteForm = {
         { value: "other", label: "Something Else" },
       ],
     },
+    // Optional — lets a lead flag their own timeline without forcing a
+    // rigid date-picker/slot-booking UI; a technician still confirms the
+    // actual appointment by phone/text.
+    preferredWindow: {
+      label: "Preferred Date/Time (optional)",
+      placeholder: "e.g. This Saturday morning, or Oct 3 after 5pm",
+      helpText: "Tell us your timeline and we'll try to match it.",
+    },
+    // Deliberately called out as the single highest-leverage field for lead
+    // quality — a photo turns a rough estimate into an accurate flat-rate
+    // quote, so both the label and the surrounding UI (see QuoteForm() in
+    // LandingPage.jsx) treat this as "recommended," not just "optional."
     photo: {
-      label: "Upload a Photo (optional)",
-      helpText: "A quick photo helps us quote accurately the first time.",
+      label: "Upload a Photo",
+      helpText:
+        "Attaching a photo gets you a faster and more accurate flat-rate quote within 1 hour.",
     },
     notes: {
       label: "Anything else we should know?",
@@ -562,6 +575,12 @@ export const faq = [
     question: "Are you insured?",
     answer:
       "Yes — we're fully licensed and insured, and every technician is background-checked before joining the team.",
+  },
+  {
+    id: "wall-anchoring",
+    question: "How do you anchor TVs and IKEA furniture to the wall?",
+    answer:
+      "We locate real wall studs with a stud finder before drilling and use the mount or furniture manufacturer's rated hardware — never drywall anchors alone for anything load-bearing. For tall IKEA pieces like PAX wardrobes and BILLY bookcases, we install the included anti-tip wall strap so the piece can't tip forward, which matters most in homes with kids or pets.",
   },
 ];
 

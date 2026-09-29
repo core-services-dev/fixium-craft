@@ -53,6 +53,7 @@ const MAX_FIELD_LENGTHS = {
   email: 200,
   zip: 20,
   serviceLabel: 250, // joined multi-select labels (e.g. all 5 services) can run long
+  preferredWindow: 100,
   notes: 1000,
 };
 const MAX_PHOTO_BYTES = 4 * 1024 * 1024; // 4MB — keeps the Resend request body small and fast
@@ -131,6 +132,7 @@ type ParsedFields = {
   email: string;
   zip: string;
   serviceLabel: string;
+  preferredWindow: string;
   notes: string;
   hasPhoto: boolean;
 };
@@ -145,6 +147,7 @@ function findFieldTooLong(fields: ParsedFields): string | null {
   if (fields.email.length > MAX_FIELD_LENGTHS.email) return "email";
   if (fields.zip.length > MAX_FIELD_LENGTHS.zip) return "zip";
   if (fields.serviceLabel.length > MAX_FIELD_LENGTHS.serviceLabel) return "service";
+  if (fields.preferredWindow.length > MAX_FIELD_LENGTHS.preferredWindow) return "preferred time window";
   if (fields.notes.length > MAX_FIELD_LENGTHS.notes) return "notes";
   return null;
 }
@@ -158,6 +161,7 @@ function buildTelegramMessage(fields: ParsedFields): string {
     `<b>ZIP / Address:</b> ${escapeHtml(fields.zip) || "—"}`,
   ];
   if (fields.email) lines.push(`<b>Email:</b> ${escapeHtml(fields.email)}`);
+  if (fields.preferredWindow) lines.push(`<b>Preferred Time:</b> ${escapeHtml(fields.preferredWindow)}`);
   if (fields.notes) lines.push(`<b>Notes:</b> ${escapeHtml(fields.notes)}`);
   if (fields.hasPhoto) lines.push("📎 Photo attached — check email for the file.");
   return lines.join("\n");
@@ -179,6 +183,9 @@ function buildEmailHtml(fields: ParsedFields): string {
     )
     .join("");
 
+  const preferredWindowBlock = fields.preferredWindow
+    ? `<p style="margin-top:16px;"><strong>Preferred Time:</strong> ${escapeHtml(fields.preferredWindow)}</p>`
+    : "";
   const notesBlock = fields.notes
     ? `<p style="margin-top:16px;"><strong>Notes:</strong><br>${escapeHtml(fields.notes).replace(/\n/g, "<br>")}</p>`
     : "";
@@ -190,6 +197,7 @@ function buildEmailHtml(fields: ParsedFields): string {
     <div style="font-family:sans-serif;font-size:14px;color:#0f172a;">
       <h2 style="margin-bottom:12px;">New quote request — ${escapeHtml(business.name)}</h2>
       <table>${rows}</table>
+      ${preferredWindowBlock}
       ${notesBlock}
       ${photoBlock}
     </div>
@@ -367,6 +375,7 @@ export async function POST(request: NextRequest) {
       email: readField(formData, "email"),
       zip: readField(formData, "zip_code"),
       serviceLabel: readField(formData, "service_needed"),
+      preferredWindow: readField(formData, "preferred_window"),
       notes: readField(formData, "message"),
       hasPhoto: photo !== null,
     };
