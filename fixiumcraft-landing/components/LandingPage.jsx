@@ -22,6 +22,7 @@ import Link from "next/link";
 import {
   business,
   hero,
+  serviceAreasSection,
   painPoints,
   services,
   servicesSection,
@@ -111,6 +112,15 @@ function IconStar(props) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
       <path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3 6.1 20.5l1.3-6.6-4.9-4.5 6.6-.8z" />
+    </svg>
+  );
+}
+
+function IconMapPin(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
     </svg>
   );
 }
@@ -303,6 +313,54 @@ function Hero() {
             </span>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Service areas banner                                                      */
+/*                                                                             */
+/*  Sits right below the Hero so visitors immediately see their town is      */
+/*  covered, instead of having to scroll or infer it from the eyebrow text.  */
+/* -------------------------------------------------------------------------- */
+
+function ServiceAreas() {
+  return (
+    <section
+      id="service-areas"
+      className="border-b border-slate-100 bg-white px-4 py-10 sm:py-14"
+    >
+      <div className="mx-auto max-w-4xl text-center">
+        <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
+          {serviceAreasSection.heading}
+        </h2>
+        <p className="mt-3 text-slate-600">{serviceAreasSection.subheading}</p>
+
+        <ul className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+          {serviceAreasSection.areas.map((area, index) => (
+            <li
+              key={area}
+              className={
+                index === 0
+                  ? "inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white"
+                  : "inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700"
+              }
+            >
+              <IconMapPin
+                className={index === 0 ? "h-4 w-4" : "h-4 w-4 text-sky-500"}
+              />
+              {area}
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href={serviceAreasSection.cta.href}
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sky-600 hover:underline"
+        >
+          {serviceAreasSection.cta.label} &rarr;
+        </a>
       </div>
     </section>
   );
@@ -1045,6 +1103,7 @@ export default function LandingPage() {
     <main className="min-h-screen bg-white font-sans text-slate-900">
       <Navbar />
       <Hero />
+      <ServiceAreas />
       <PainPoints />
       <Services />
       <Gallery />

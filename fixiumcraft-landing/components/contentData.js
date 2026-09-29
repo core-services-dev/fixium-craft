@@ -49,10 +49,24 @@ export const neighborhoods = [
   "Robinson Township",
 ];
 
+// Homepage "Service Areas" banner (see ServiceAreas() in LandingPage.jsx) —
+// a visible, above-the-fold-adjacent section so visitors immediately see
+// their town is covered, separate from the schema/FAQ uses of `neighborhoods`.
+export const serviceAreasSection = {
+  heading: "Proudly Serving Pittsburgh & the Surrounding Areas",
+  subheading:
+    "Wherever you are around Pittsburgh, we come to you — same-day and next-day slots available.",
+  areas: [`${business.address.city}, ${business.address.state}`, ...neighborhoods],
+  cta: {
+    label: "Not sure we cover your area? Text us your ZIP code.",
+    href: business.smsHref,
+  },
+};
+
 export const seo = {
-  title: "IKEA Furniture Assembly & Handyman Services in Pittsburgh | Fixium Craft",
+  title: "IKEA Furniture Assembly & Handyman Services in Pittsburgh, PA | Fixium Craft",
   description:
-    "Expert IKEA furniture assembly, TV wall mounting, and minor home repairs in Pittsburgh & surrounding areas. Flat-rate pricing & same-day slots. Get a free quote today!",
+    "Expert IKEA furniture assembly, TV wall mounting, and minor home repairs in Pittsburgh, PA & surrounding areas. Flat-rate pricing & same-day slots. Get a free quote today!",
   keywords: [
     "furniture assembly Pittsburgh",
     "IKEA assembly service",
@@ -76,9 +90,9 @@ export const trustBadges = [
 
 export const hero = {
   eyebrow: `Serving ${business.serviceArea}`,
-  headline: "Get Your Weekend Back — We'll Build It For You.",
+  headline: "Furniture Assembly & Handyman Repairs in Pittsburgh, PA",
   subheadline:
-    "IKEA assembly, TV mounting, and home repairs with flat-rate pricing and same-day slots — done right the first time.",
+    "Get your weekend back — IKEA assembly, TV mounting, and home repairs done right, with flat-rate pricing and same-day slots.",
   primaryCta: { label: "Get My Instant Quote", action: "form" },
   secondaryCtas: [
     { label: "Call Now", href: business.phoneHref, type: "call" },
@@ -201,7 +215,7 @@ export const services = [
 // hardcoded in JSX, so all page copy lives in one place — see the file
 // header comment).
 export const servicesSection = {
-  heading: "What We Do",
+  heading: "Our Handyman Services in Pittsburgh, PA",
   subheading: "Four services, one call away — all backed by the same guarantee.",
 };
 
@@ -721,6 +735,7 @@ export const footer = {
 const contentData = {
   business,
   neighborhoods,
+  serviceAreasSection,
   seo,
   localBusinessSchema,
   trustBadges,
