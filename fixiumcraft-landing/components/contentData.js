@@ -471,42 +471,17 @@ export const projectsGallery = {
   subheading: "A look at the kind of work we handle, week in and week out.",
   items: [
     {
-      id: "bed-frame",
-      title: "Modern Bed Frame Assembly",
+      id: "furniture-assembly",
+      title: "Dresser & Furniture Assembly",
       category: "Furniture Assembly",
       icon: "assembly",
       description:
-        "Platform and storage bed frames built square, level, and silent — no wobble, no leftover hardware.",
-      beforeDescription:
-        "Before: a flat-pack box of panels, dowels, and an instruction sheet nobody wants to read.",
-      // See public/images/projects/README.md for the exact filenames each
-      // of these slots expects.
-      beforeImage: "/images/projects/bed-before.jpg",
-      afterImage: "/images/projects/bed-after.jpg",
-    },
-    {
-      id: "wardrobe",
-      title: "Wardrobe & Closet System Assembly",
-      category: "Furniture Assembly",
-      icon: "wardrobe",
-      description:
-        "IKEA PAX wardrobes and closet systems assembled and anchored, with doors and drawers aligned and running smoothly.",
-      beforeDescription:
-        "Before: stacked panels and hardware bags for a wardrobe or PAX closet system, still in the box.",
-      beforeImage: "/images/projects/wardrobe-before.jpg",
-      afterImage: "/images/projects/wardrobe-after.jpg",
-    },
-    {
-      id: "ac-install",
-      title: "Window AC Unit Installation",
-      category: "Home Repairs",
-      icon: "ac",
-      description:
-        "Window air conditioners mounted secure and sealed, with proper support bracketing and no drafts around the frame.",
-      beforeDescription:
-        "Before: a window AC unit still boxed, with no bracket or sealing done yet.",
-      beforeImage: "/images/projects/ac-before.jpg",
-      afterImage: "/images/projects/ac-after.jpg",
+        "A 6-drawer dresser built square and level — drawers glide smoothly, every knob lines up, and there's no leftover hardware.",
+      // Single static photo per card (see public/images/projects/README.md
+      // for the exact filename each slot expects). If the file isn't in
+      // place yet, GalleryCard falls back to the icon/gradient below with
+      // no broken-image icon and no build or load error.
+      image: "/images/projects/furniture-assembly.jpg",
     },
     {
       id: "tv-mounting",
@@ -514,11 +489,26 @@ export const projectsGallery = {
       category: "Mounting & Repairs",
       icon: "mounting",
       description:
-        "TVs, shelves, and fixtures mounted level and stud-anchored, with cables concealed for a clean finish.",
-      beforeDescription:
-        "Before: a TV leaning against the wall, cables everywhere, no mount in sight.",
-      beforeImage: "/images/projects/tv-mount-before.jpg",
-      afterImage: "/images/projects/tv-mount-after.jpg",
+        "A flat-screen TV mounted level above the media console, stud-anchored with cables concealed for a clean finish.",
+      image: "/images/projects/tv-mounting.jpg",
+    },
+    {
+      id: "home-repairs",
+      title: "Home Repairs & Maintenance",
+      category: "Home Repairs",
+      icon: "repairs",
+      description:
+        "From water heater shutoff valves to the small fixes that keep getting pushed back — repaired, sealed, and inspected, done right.",
+      image: "/images/projects/home-repairs.jpg",
+    },
+    {
+      id: "ac-install",
+      title: "Window AC Unit Installation",
+      category: "Home Repairs",
+      icon: "ac",
+      description:
+        "A window air conditioner mounted secure and sealed, with proper support bracketing and no drafts around the frame.",
+      image: "/images/projects/ac-installation.jpg",
     },
   ],
 };

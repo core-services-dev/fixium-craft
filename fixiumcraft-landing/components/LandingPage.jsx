@@ -349,19 +349,25 @@ function Hero() {
         </div>
 
         {/* Real Google-review rating (2 real 5-star reviews as of writing —
-            not a placeholder), placed right next to the CTAs per request. */}
+            not a placeholder), placed right next to the CTAs per request.
+            Solid white pill (not a translucent overlay) with bold, dark
+            text — stays crisp and legible against the dark hero gradient
+            on any screen, rather than relying on white-on-dark contrast at
+            a small size. */}
         <div className="mt-5 flex justify-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-white sm:text-sm">
-            <span className="flex text-amber-400">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-900 shadow-lg shadow-black/25 sm:gap-x-2.5 sm:px-5 sm:py-2.5 sm:text-base">
+            <span className="flex text-amber-500">
               {Array.from({ length: hero.googleRating.stars }).map((_, i) => (
-                <IconStar key={i} className="h-3.5 w-3.5" />
+                <IconStar key={i} className="h-4 w-4 sm:h-5 sm:w-5" />
               ))}
             </span>
-            <span>{hero.googleRating.label}</span>
-            <span aria-hidden="true" className="text-white/30">
+            <span className="text-slate-900">{hero.googleRating.label}</span>
+            <span aria-hidden="true" className="hidden text-slate-300 sm:inline">
               |
             </span>
-            <span className="text-slate-200">{hero.googleRating.sublabel}</span>
+            <span className="w-full text-center text-xs font-semibold text-slate-600 sm:w-auto sm:text-sm">
+              {hero.googleRating.sublabel}
+            </span>
           </div>
         </div>
 
@@ -564,113 +570,54 @@ function Services() {
 // it needs its own useState — each card's toggle is independent of the
 // others.
 function GalleryCard({ item }) {
-  const [showAfter, setShowAfter] = useState(true);
-  // Each real photo slot tracks its own load failure independently, so a
-  // missing "before" photo doesn't affect whether the "after" photo (once
-  // added) still works, and vice versa.
-  const [beforeFailed, setBeforeFailed] = useState(false);
-  const [afterFailed, setAfterFailed] = useState(false);
+  // No before/after toggle — a single static project photo per card. The
+  // gradient+icon base layer always renders first (so the card is never
+  // blank), and the real photo fades in on top of it once it loads; if
+  // the file is missing or fails to load, onError just leaves that layer
+  // transparent and the base layer keeps showing — no broken-image icon,
+  // no build or load error.
+  const [imageFailed, setImageFailed] = useState(false);
   const Icon = SERVICE_ICONS[item.icon];
 
   return (
     <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <div className="p-3 pb-0">
-        {/* Category tag gets its own full-width line — never sharing a row
-            with the toggle means it never has to compete for space, so it's
-            never truncated, however long the category name is. Font size
-            steps up slightly at wider breakpoints for legibility. */}
         <span className="inline-block max-w-full rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-700 sm:text-[11px]">
           {item.category}
         </span>
 
-        {/* Before/After toggle sits on its own line too, right above the
-            image — right-aligned so it reads as a control on the photo
-            below rather than competing with the category tag above it. */}
-        <div className="mt-2 flex justify-end">
-          <div
-            role="group"
-            aria-label={`${item.title} — before and after`}
-            className="flex rounded-full bg-slate-100 p-0.5 text-[11px] font-semibold"
-          >
-            <button
-              type="button"
-              onClick={() => setShowAfter(false)}
-              aria-pressed={!showAfter}
-              className={`rounded-full px-2.5 py-1 transition ${
-                !showAfter ? "bg-slate-800 text-white" : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Before
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowAfter(true)}
-              aria-pressed={showAfter}
-              className={`rounded-full px-2.5 py-1 transition ${
-                showAfter ? "bg-sky-600 text-white" : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              After
-            </button>
-          </div>
-        </div>
-
-        {/* Image container: fixed 4:3 aspect ratio, its own rounded
-            corners. The gradient+icon base layer always renders (so the
-            card is never blank), and the real before/after photo — once
-            one exists at item.beforeImage/afterImage — fades in on top of
-            it. Until then (or if a file is missing), onError quietly
-            leaves that layer transparent and the base layer keeps showing,
-            so dropping in real photos later needs no code changes here. */}
+        {/* Image container: fixed 4:3 aspect ratio, subtle rounded
+            corners. */}
         <div className="relative mt-3 aspect-[4/3] w-full overflow-hidden rounded-xl">
-          <div
-            className={`absolute inset-0 flex items-center justify-center transition-colors duration-300 ${
-              showAfter ? "bg-gradient-to-br from-slate-800 to-sky-900" : "bg-gradient-to-br from-slate-500 to-slate-600"
-            }`}
-          >
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-            {showAfter && Icon ? (
+            {Icon ? (
               <Icon className="relative h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110" />
             ) : (
               <IconBox className="relative h-14 w-14 text-white/70" />
             )}
           </div>
 
-          {item.beforeImage && !beforeFailed && (
+          {item.image && !imageFailed && (
             <Image
-              src={item.beforeImage}
-              alt={`${item.title} — before`}
+              src={item.image}
+              alt={item.title}
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-              className={`absolute inset-0 object-cover transition-opacity duration-500 ${
-                !showAfter ? "opacity-100" : "opacity-0"
-              }`}
-              onError={() => setBeforeFailed(true)}
-            />
-          )}
-          {item.afterImage && !afterFailed && (
-            <Image
-              src={item.afterImage}
-              alt={`${item.title} — after`}
-              fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-              className={`absolute inset-0 object-cover transition-opacity duration-500 ${
-                showAfter ? "opacity-100" : "opacity-0"
-              }`}
-              onError={() => setAfterFailed(true)}
+              className="absolute inset-0 object-cover"
+              onError={() => setImageFailed(true)}
             />
           )}
         </div>
       </div>
       <div className="p-4">
         <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
-        <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
-          {showAfter ? item.description : item.beforeDescription}
-        </p>
+        <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{item.description}</p>
       </div>
     </div>
   );
 }
+
 
 function Gallery() {
   return (
