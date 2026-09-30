@@ -30,6 +30,7 @@ import {
   painPoints,
   services,
   servicesSection,
+  pricingTrustSection,
   projectsGallery,
   process as processSteps,
   formService,
@@ -555,6 +556,72 @@ function Services() {
               </div>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Upfront & Fixed Pricing — trust badge, what's always included, CTA      */
+/* -------------------------------------------------------------------------- */
+
+function PricingTrust() {
+  return (
+    <section className="bg-white px-4 pb-14 sm:pb-20">
+      <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
+            {pricingTrustSection.heading}
+          </h2>
+          <p className="mt-3 text-slate-600">{pricingTrustSection.subheading}</p>
+        </div>
+
+        {/* No-surprise guarantee badge — solid, high-contrast pill (same
+            pattern as the Hero's rating badge) so it reads as a distinct
+            trust signal rather than blending into the page copy. */}
+        <div className="mt-6 flex justify-center">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-center text-sm font-bold text-emerald-900 sm:px-5 sm:py-3 sm:text-base">
+            <span aria-hidden="true">{pricingTrustSection.badge.icon}</span>
+            <span>{pricingTrustSection.badge.label}</span>
+            <span aria-hidden="true" className="hidden text-emerald-300 sm:inline">
+              |
+            </span>
+            <span className="w-full text-center text-xs font-semibold text-emerald-700 sm:w-auto sm:text-sm">
+              {pricingTrustSection.badge.sublabel}
+            </span>
+          </div>
+        </div>
+
+        {/* What's always included — grounded in the same facts shown
+            elsewhere on the site (QualityGuarantee's laser-level/clean-up
+            items, the wall-anchoring FAQ), just surfaced here too, right
+            next to the prices themselves. */}
+        <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+          <h3 className="text-center text-xs font-bold uppercase tracking-wide text-slate-500 sm:text-sm">
+            {pricingTrustSection.includedHeading}
+          </h3>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {pricingTrustSection.included.map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
+                <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Instant, photo-based quote CTA */}
+        <div className="mx-auto mt-10 max-w-xl text-center">
+          <p className="text-balance text-base text-slate-600 sm:text-lg">
+            {pricingTrustSection.cta.text}
+          </p>
+          <a
+            href="#quote"
+            className={`mt-5 inline-flex items-center justify-center px-6 py-3 text-sm sm:text-base ${BTN_PRIMARY}`}
+          >
+            {pricingTrustSection.cta.label}
+          </a>
         </div>
       </div>
     </section>
@@ -1310,6 +1377,7 @@ export default function LandingPage() {
       <ServiceAreas />
       <PainPoints />
       <Services />
+      <PricingTrust />
       <Gallery />
       <Process />
       <QuoteForm />

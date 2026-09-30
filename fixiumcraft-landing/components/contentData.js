@@ -229,6 +229,38 @@ export const services = [
   },
 ];
 
+// "Upfront & Fixed Pricing" trust section — rendered directly under the
+// Services grid (see PricingTrust() in LandingPage.jsx) so the flat-rate
+// framing, the no-hidden-fees guarantee, and what's always included in a
+// quote sit in the same breath as the real starting prices above, not
+// buried further down the page. The "always included" list restates facts
+// already established elsewhere in this file (qualityGuaranteeSection's
+// laser-level/clean-up items, the wall-anchoring FAQ's stud-anchored +
+// drywall-rated hardware answer) — nothing new is being promised here that
+// isn't already true and shown elsewhere on the site.
+export const pricingTrustSection = {
+  heading: "Upfront & Fixed Pricing",
+  subheading:
+    "Every price above is a flat rate, not an hourly guess — you know the number before we ever pick up a tool.",
+  badge: {
+    icon: "\ud83d\udee1\ufe0f",
+    label: "100% Upfront Quote Guarantee",
+    sublabel: "No Hidden Fees, No Surprise On-Site Costs.",
+  },
+  includedHeading: "Always Included in Every Quote",
+  included: [
+    "Professional-grade tools & equipment",
+    "Laser-level precision on every mount and install",
+    "Stud-anchored mounting & drywall-rated hardware",
+    "Full post-job clean-up \u2014 sawdust, packaging, and all",
+  ],
+  cta: {
+    text:
+      "Send us a quick photo or a link to what you need done, and we'll text back a guaranteed, exact price \u2014 usually within the hour.",
+    label: "Get My Exact Price",
+  },
+};
+
 // Heading/subheading for the Services section (kept in contentData, not
 // hardcoded in JSX, so all page copy lives in one place — see the file
 // header comment).
@@ -837,6 +869,7 @@ const contentData = {
   painPoints,
   services,
   servicesSection,
+  pricingTrustSection,
   projectsGallery,
   process,
   formService,
