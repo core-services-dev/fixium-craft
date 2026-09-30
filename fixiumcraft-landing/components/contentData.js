@@ -47,6 +47,7 @@ export const neighborhoods = [
   "Dormont",
   "Carnegie",
   "Robinson Township",
+  "Shadyside",
 ];
 
 // Homepage "Service Areas" banner (see ServiceAreas() in LandingPage.jsx) —
@@ -61,6 +62,15 @@ export const serviceAreasSection = {
     label: "Not sure we cover your area? Text us your ZIP code.",
     href: business.smsHref,
   },
+  // Long-tail local-search phrases, each linking to the dedicated
+  // service+location page that actually targets it (see `servicePages`
+  // below) — internal links with keyword-rich anchor text, not just more
+  // copy, for both traditional SEO and AI-assistant discoverability.
+  popularSearches: [
+    { label: "IKEA PAX assembly in Pittsburgh", href: "/furniture-assembly-pittsburgh" },
+    { label: "TV wall mounting service in Mt. Lebanon", href: "/tv-mounting-pittsburgh" },
+    { label: "handyman in Shadyside", href: "/handyman-pittsburgh" },
+  ],
 };
 
 export const seo = {
@@ -93,6 +103,13 @@ export const hero = {
   headline: "Furniture Assembly & Handyman Repairs in Pittsburgh, PA",
   subheadline:
     "Get your weekend back — IKEA assembly, TV mounting, and home repairs done right, with flat-rate pricing and same-day slots.",
+  // Real rating from actual Google reviews — confirmed, not a
+  // placeholder. Update `stars` if the average ever changes.
+  googleRating: {
+    stars: 5,
+    label: "5.0/5 Rating on Google Reviews",
+    sublabel: "Pittsburgh Local Handyman",
+  },
   primaryCta: { label: "Get My Instant Quote", action: "form" },
   secondaryCtas: [
     { label: "Call Now", href: business.phoneHref, type: "call" },
@@ -145,8 +162,9 @@ export const services = [
     image: "/services/furniture-assembly.jpg",
     alt: "IKEA and flat-pack furniture assembly service in Pittsburgh, PA",
     description:
-      "Beds, wardrobes, desks, shelving, office furniture — if it comes in a box, we build it fast, sturdy, and level. No leftover screws, no wobble.",
+      "Beds, wardrobes (including IKEA PAX systems), desks, shelving, office furniture — if it comes in a box, we build it fast, sturdy, and level. No leftover screws, no wobble.",
     features: [
+      "IKEA PAX wardrobes & closet systems",
       "IKEA, Wayfair, Amazon & all major brands",
       "Bedroom, office & living room sets",
       "Old furniture disassembly & haul-away available",
@@ -448,6 +466,8 @@ export const projectsGallery = {
       icon: "assembly",
       description:
         "Platform and storage bed frames built square, level, and silent — no wobble, no leftover hardware.",
+      beforeDescription:
+        "Before: a flat-pack box of panels, dowels, and an instruction sheet nobody wants to read.",
     },
     {
       id: "wardrobe",
@@ -455,7 +475,9 @@ export const projectsGallery = {
       category: "Furniture Assembly",
       icon: "wardrobe",
       description:
-        "IKEA-style wardrobes and closet systems assembled and anchored, with doors and drawers aligned and running smoothly.",
+        "IKEA PAX wardrobes and closet systems assembled and anchored, with doors and drawers aligned and running smoothly.",
+      beforeDescription:
+        "Before: stacked panels and hardware bags for a wardrobe or PAX closet system, still in the box.",
     },
     {
       id: "ac-install",
@@ -464,6 +486,8 @@ export const projectsGallery = {
       icon: "ac",
       description:
         "Window air conditioners mounted secure and sealed, with proper support bracketing and no drafts around the frame.",
+      beforeDescription:
+        "Before: a window AC unit still boxed, with no bracket or sealing done yet.",
     },
     {
       id: "tv-mounting",
@@ -472,6 +496,8 @@ export const projectsGallery = {
       icon: "mounting",
       description:
         "TVs, shelves, and fixtures mounted level and stud-anchored, with cables concealed for a clean finish.",
+      beforeDescription:
+        "Before: a TV leaning against the wall, cables everywhere, no mount in sight.",
     },
   ],
 };
@@ -500,6 +526,41 @@ export const guarantees = [
   },
 ];
 
+// Supplementary block within the trust/guarantees section — the equipment
+// and standards behind the work itself, not just the outcome promises
+// above. Rendered by QualityGuarantee() in LandingPage.jsx.
+export const qualityGuaranteeSection = {
+  heading: "Our Clean Home & Quality Guarantee",
+  subheading: "The equipment and standards behind every job, not just the finished result.",
+  items: [
+    {
+      id: "stud-finder",
+      label: "Stud-Finder Precision",
+      description: "Every mount and anchor point is verified with a stud finder before drilling.",
+    },
+    {
+      id: "laser-level",
+      label: "Laser-Level Accuracy",
+      description: "TVs, shelves, and furniture leveled with a laser, not just a bubble level.",
+    },
+    {
+      id: "floor-protection",
+      label: "Floor Protection Mats",
+      description: "Mats go down before any tools come out, protecting your floors through the whole job.",
+    },
+    {
+      id: "clean-up",
+      label: "Post-Job Vacuum Clean-Up",
+      description: "We vacuum sawdust and packaging debris before we leave — you shouldn't have to clean up after us.",
+    },
+    {
+      id: "background-check",
+      label: "Background-Checked Technicians",
+      description: "Every technician is background-checked before stepping into your home.",
+    },
+  ],
+};
+
 // PLACEHOLDER CONTENT — these are illustrative sample reviews, not real
 // customers. Swap these for genuine customer testimonials once you have
 // them; the FTC's 2024 rule against fake/fabricated reviews means these
@@ -516,6 +577,7 @@ export const testimonials = [
     name: "Rachel M.",
     location: "Shadyside, PA",
     rating: 5,
+    serviceTag: "IKEA Wardrobe Assembly",
     text: "Assembled two IKEA wardrobes and a bed frame in under two hours. Way better than my last attempt (which ended with extra screws and a wobbly shelf).",
   },
   {
@@ -523,6 +585,7 @@ export const testimonials = [
     name: "David K.",
     location: "Squirrel Hill, PA",
     rating: 5,
+    serviceTag: "TV Wall Mount",
     text: "Mounted our 65\" TV perfectly level with all the cables hidden. Quoted me a flat price over text before they even showed up — no surprises.",
   },
   {
@@ -530,6 +593,7 @@ export const testimonials = [
     name: "Sarah B.",
     location: "Lawrenceville, PA",
     rating: 5,
+    serviceTag: "Repairs & Assembly",
     text: "Fixed a cabinet door, hung three shelves, and put together a desk — all in one visit. Fast, professional, and my house feels put together again.",
   },
 ];
@@ -768,6 +832,7 @@ const contentData = {
   quoteForm,
   guarantees,
   guaranteesSection,
+  qualityGuaranteeSection,
   testimonials,
   testimonialsSection,
   faq,

@@ -36,6 +36,7 @@ import {
   quoteForm,
   guarantees,
   guaranteesSection,
+  qualityGuaranteeSection,
   testimonials,
   testimonialsSection,
   faq,
@@ -93,6 +94,28 @@ function IconCamera(props) {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
       <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
+}
+
+function IconTag(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M20.59 13.41 12 22l-9-9V4h9l8.59 8.59a2 2 0 0 1 0 2.82Z" />
+      <circle cx="7.5" cy="7.5" r="1.25" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+// A generic flat-pack box, used only for the Gallery's "Before" toggle
+// state — deliberately generic/iconographic, never a stand-in photo for
+// a real completed job (see the note on GalleryCard() below).
+function IconBox(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M21 8 12 3 3 8l9 5 9-5Z" />
+      <path d="M3 8v9l9 5 9-5V8" />
+      <path d="M12 13v9" />
     </svg>
   );
 }
@@ -254,12 +277,12 @@ function StickyMobileBar() {
         <span className="text-[11px] font-medium">Call</span>
       </a>
       <a
-        href={business.smsHref}
+        href="#quote"
         className="flex flex-1 flex-col items-center justify-center gap-0.5 border-x border-slate-200 py-2.5 text-slate-700 active:bg-slate-50"
-        aria-label="Text us a photo"
+        aria-label="Get a quote"
       >
-        <IconMessage className="h-5 w-5" />
-        <span className="text-[11px] font-medium">Text Photo</span>
+        <IconTag className="h-5 w-5" />
+        <span className="text-[11px] font-medium">Get Quote</span>
       </a>
       <a
         href={business.whatsappHref}
@@ -293,32 +316,56 @@ function Hero() {
           {hero.subheadline}
         </p>
 
-        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        {/* Single primary visual button — Call/WhatsApp are still one tap
+            away, just demoted to lightweight text links underneath instead
+            of competing full-size buttons, per the reduced-cognitive-load
+            request. */}
+        <div className="mt-8 flex flex-col items-center gap-3">
           <a
             href="#quote"
-            className={`w-full px-6 py-3.5 text-center text-base shadow-lg shadow-sky-500/30 sm:w-auto ${BTN_PRIMARY}`}
+            className={`w-full max-w-xs px-6 py-3.5 text-center text-base shadow-lg shadow-sky-500/30 sm:w-auto sm:px-10 ${BTN_PRIMARY}`}
           >
             {hero.primaryCta.label}
           </a>
-          <div className="flex w-full gap-3 sm:w-auto">
+          <div className="flex items-center gap-4 text-sm font-medium text-slate-300">
             <a
               href={business.phoneHref}
-              className={`flex flex-1 items-center justify-center gap-2 px-4 py-3.5 text-sm sm:flex-none ${BTN_OUTLINE_LIGHT}`}
+              className="inline-flex items-center gap-1.5 transition hover:text-white"
             >
               <IconPhone className="h-4 w-4" /> Call
             </a>
+            <span aria-hidden="true" className="text-slate-600">
+              |
+            </span>
             <a
               href={business.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex flex-1 items-center justify-center gap-2 px-4 py-3.5 text-sm sm:flex-none ${BTN_OUTLINE_LIGHT_WHATSAPP}`}
+              className="inline-flex items-center gap-1.5 transition hover:text-white"
             >
               <IconWhatsapp className="h-4 w-4 text-emerald-400" /> WhatsApp
             </a>
           </div>
         </div>
 
-        <div className="mx-auto mt-9 flex max-w-lg flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-slate-300 sm:text-sm">
+        {/* Real Google-review rating (2 real 5-star reviews as of writing —
+            not a placeholder), placed right next to the CTAs per request. */}
+        <div className="mt-5 flex justify-center">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-white sm:text-sm">
+            <span className="flex text-amber-400">
+              {Array.from({ length: hero.googleRating.stars }).map((_, i) => (
+                <IconStar key={i} className="h-3.5 w-3.5" />
+              ))}
+            </span>
+            <span>{hero.googleRating.label}</span>
+            <span aria-hidden="true" className="text-white/30">
+              |
+            </span>
+            <span className="text-slate-200">{hero.googleRating.sublabel}</span>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-6 flex max-w-lg flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-slate-300 sm:text-sm">
           {hero.trustBadges.map((badge) => (
             <span key={badge.id} className="inline-flex items-center gap-1.5">
               <IconCheck className="h-3.5 w-3.5 text-emerald-400" />
@@ -374,6 +421,22 @@ function ServiceAreas() {
         >
           {serviceAreasSection.cta.label} &rarr;
         </a>
+
+        {/* Keyword-rich internal links to the dedicated service+location
+            pages — anchor text is the actual long-tail phrase being
+            targeted, not generic "click here" copy. */}
+        <p className="mx-auto mt-6 max-w-2xl text-xs text-slate-500">
+          Popular searches we cover:{" "}
+          {serviceAreasSection.popularSearches.map((item, index) => (
+            <span key={item.href}>
+              {index > 0 && ", "}
+              <Link href={item.href} className="font-medium text-sky-600 hover:underline">
+                {item.label}
+              </Link>
+            </span>
+          ))}
+          .
+        </p>
       </div>
     </section>
   );
@@ -496,6 +559,67 @@ function Services() {
 /*  Recent Projects / Services Gallery                                       */
 /* -------------------------------------------------------------------------- */
 
+// One gallery card, with its own Before/After toggle state. Kept as a
+// dedicated component (rather than inline in Gallery()'s .map()) because
+// it needs its own useState — each card's toggle is independent of the
+// others.
+function GalleryCard({ item }) {
+  const [showAfter, setShowAfter] = useState(true);
+  const Icon = SERVICE_ICONS[item.icon];
+
+  return (
+    <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+      <div
+        className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden transition-colors duration-300 ${
+          showAfter ? "bg-gradient-to-br from-slate-800 to-sky-900" : "bg-gradient-to-br from-slate-500 to-slate-600"
+        }`}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
+        {showAfter && Icon ? (
+          <Icon className="relative h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110" />
+        ) : (
+          <IconBox className="relative h-14 w-14 text-white/70" />
+        )}
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-800">
+          {item.category}
+        </span>
+        <div
+          role="group"
+          aria-label={`${item.title} — before and after`}
+          className="absolute right-3 top-3 flex rounded-full bg-white/90 p-0.5 text-[11px] font-semibold"
+        >
+          <button
+            type="button"
+            onClick={() => setShowAfter(false)}
+            aria-pressed={!showAfter}
+            className={`rounded-full px-2.5 py-1 transition ${
+              !showAfter ? "bg-slate-800 text-white" : "text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            Before
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowAfter(true)}
+            aria-pressed={showAfter}
+            className={`rounded-full px-2.5 py-1 transition ${
+              showAfter ? "bg-sky-600 text-white" : "text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            After
+          </button>
+        </div>
+      </div>
+      <div className="p-4">
+        <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
+        <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+          {showAfter ? item.description : item.beforeDescription}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function Gallery() {
   return (
     <section id="gallery" className="bg-white px-4 py-14 sm:py-20">
@@ -508,33 +632,9 @@ function Gallery() {
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {projectsGallery.items.map((item) => {
-            const Icon = SERVICE_ICONS[item.icon];
-            return (
-              <div
-                key={item.id}
-                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-800 to-sky-900">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-                  {Icon ? (
-                    <Icon className="relative h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110" />
-                  ) : null}
-                  <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-800">
-                    {item.category}
-                  </span>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-sm font-semibold text-slate-900">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+          {projectsGallery.items.map((item) => (
+            <GalleryCard key={item.id} item={item} />
+          ))}
         </div>
       </div>
     </section>
@@ -994,6 +1094,40 @@ function Guarantees() {
 }
 
 /* -------------------------------------------------------------------------- */
+/*  Quality/equipment guarantee — the standards behind the guarantees above   */
+/* -------------------------------------------------------------------------- */
+
+function QualityGuarantee() {
+  return (
+    <section className="bg-slate-50 px-4 py-14 sm:py-20">
+      <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
+            {qualityGuaranteeSection.heading}
+          </h2>
+          <p className="mt-3 text-slate-600">{qualityGuaranteeSection.subheading}</p>
+        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {qualityGuaranteeSection.items.map((item) => (
+            <div key={item.id} className="text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                <IconCheck className="h-4.5 w-4.5" />
+              </div>
+              <h3 className="mt-3 text-sm font-semibold text-slate-900">
+                {item.label}
+              </h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /*  Testimonials                                                              */
 /* -------------------------------------------------------------------------- */
 
@@ -1013,10 +1147,17 @@ function Testimonials() {
               key={t.id}
               className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
             >
-              <div className="flex gap-0.5 text-amber-400">
-                {Array.from({ length: t.rating }).map((_, i) => (
-                  <IconStar key={i} className="h-4 w-4" />
-                ))}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex gap-0.5 text-amber-400">
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <IconStar key={i} className="h-4 w-4" />
+                  ))}
+                </div>
+                {t.serviceTag && (
+                  <span className="rounded-full bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700">
+                    {t.serviceTag}
+                  </span>
+                )}
               </div>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
                 "{t.text}"
@@ -1174,6 +1315,7 @@ export default function LandingPage() {
       <Process />
       <QuoteForm />
       <Guarantees />
+      <QualityGuarantee />
       <Testimonials />
       <FAQ />
       <Footer />
