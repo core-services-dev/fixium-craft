@@ -565,49 +565,97 @@ function Services() {
 // others.
 function GalleryCard({ item }) {
   const [showAfter, setShowAfter] = useState(true);
+  // Each real photo slot tracks its own load failure independently, so a
+  // missing "before" photo doesn't affect whether the "after" photo (once
+  // added) still works, and vice versa.
+  const [beforeFailed, setBeforeFailed] = useState(false);
+  const [afterFailed, setAfterFailed] = useState(false);
   const Icon = SERVICE_ICONS[item.icon];
 
   return (
     <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <div
-        className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden transition-colors duration-300 ${
-          showAfter ? "bg-gradient-to-br from-slate-800 to-sky-900" : "bg-gradient-to-br from-slate-500 to-slate-600"
-        }`}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-        {showAfter && Icon ? (
-          <Icon className="relative h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110" />
-        ) : (
-          <IconBox className="relative h-14 w-14 text-white/70" />
-        )}
-        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-800">
-          {item.category}
-        </span>
-        <div
-          role="group"
-          aria-label={`${item.title} — before and after`}
-          className="absolute right-3 top-3 flex rounded-full bg-white/90 p-0.5 text-[11px] font-semibold"
-        >
-          <button
-            type="button"
-            onClick={() => setShowAfter(false)}
-            aria-pressed={!showAfter}
-            className={`rounded-full px-2.5 py-1 transition ${
-              !showAfter ? "bg-slate-800 text-white" : "text-slate-600 hover:text-slate-900"
+      <div className="p-3 pb-0">
+        {/* Header row: category tag + Before/After toggle now live in their
+            own flex row, above the image, instead of being layered on top
+            of it — a long category label truncates instead of overlapping
+            the toggle on narrow (2-up mobile) cards. */}
+        <div className="flex items-center justify-between gap-2">
+          <span className="min-w-0 truncate rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-700">
+            {item.category}
+          </span>
+          <div
+            role="group"
+            aria-label={`${item.title} — before and after`}
+            className="flex flex-shrink-0 rounded-full bg-slate-100 p-0.5 text-[11px] font-semibold"
+          >
+            <button
+              type="button"
+              onClick={() => setShowAfter(false)}
+              aria-pressed={!showAfter}
+              className={`rounded-full px-2.5 py-1 transition ${
+                !showAfter ? "bg-slate-800 text-white" : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Before
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowAfter(true)}
+              aria-pressed={showAfter}
+              className={`rounded-full px-2.5 py-1 transition ${
+                showAfter ? "bg-sky-600 text-white" : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              After
+            </button>
+          </div>
+        </div>
+
+        {/* Image container: fixed 4:3 aspect ratio, its own rounded
+            corners. The gradient+icon base layer always renders (so the
+            card is never blank), and the real before/after photo — once
+            one exists at item.beforeImage/afterImage — fades in on top of
+            it. Until then (or if a file is missing), onError quietly
+            leaves that layer transparent and the base layer keeps showing,
+            so dropping in real photos later needs no code changes here. */}
+        <div className="relative mt-3 aspect-[4/3] w-full overflow-hidden rounded-xl">
+          <div
+            className={`absolute inset-0 flex items-center justify-center transition-colors duration-300 ${
+              showAfter ? "bg-gradient-to-br from-slate-800 to-sky-900" : "bg-gradient-to-br from-slate-500 to-slate-600"
             }`}
           >
-            Before
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowAfter(true)}
-            aria-pressed={showAfter}
-            className={`rounded-full px-2.5 py-1 transition ${
-              showAfter ? "bg-sky-600 text-white" : "text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            After
-          </button>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
+            {showAfter && Icon ? (
+              <Icon className="relative h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110" />
+            ) : (
+              <IconBox className="relative h-14 w-14 text-white/70" />
+            )}
+          </div>
+
+          {item.beforeImage && !beforeFailed && (
+            <Image
+              src={item.beforeImage}
+              alt={`${item.title} — before`}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+              className={`absolute inset-0 object-cover transition-opacity duration-500 ${
+                !showAfter ? "opacity-100" : "opacity-0"
+              }`}
+              onError={() => setBeforeFailed(true)}
+            />
+          )}
+          {item.afterImage && !afterFailed && (
+            <Image
+              src={item.afterImage}
+              alt={`${item.title} — after`}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+              className={`absolute inset-0 object-cover transition-opacity duration-500 ${
+                showAfter ? "opacity-100" : "opacity-0"
+              }`}
+              onError={() => setAfterFailed(true)}
+            />
+          )}
         </div>
       </div>
       <div className="p-4">

@@ -468,6 +468,10 @@ export const projectsGallery = {
         "Platform and storage bed frames built square, level, and silent — no wobble, no leftover hardware.",
       beforeDescription:
         "Before: a flat-pack box of panels, dowels, and an instruction sheet nobody wants to read.",
+      // See public/images/projects/README.md for the exact filenames each
+      // of these slots expects.
+      beforeImage: "/images/projects/bed-before.jpg",
+      afterImage: "/images/projects/bed-after.jpg",
     },
     {
       id: "wardrobe",
@@ -478,6 +482,8 @@ export const projectsGallery = {
         "IKEA PAX wardrobes and closet systems assembled and anchored, with doors and drawers aligned and running smoothly.",
       beforeDescription:
         "Before: stacked panels and hardware bags for a wardrobe or PAX closet system, still in the box.",
+      beforeImage: "/images/projects/wardrobe-before.jpg",
+      afterImage: "/images/projects/wardrobe-after.jpg",
     },
     {
       id: "ac-install",
@@ -488,6 +494,8 @@ export const projectsGallery = {
         "Window air conditioners mounted secure and sealed, with proper support bracketing and no drafts around the frame.",
       beforeDescription:
         "Before: a window AC unit still boxed, with no bracket or sealing done yet.",
+      beforeImage: "/images/projects/ac-before.jpg",
+      afterImage: "/images/projects/ac-after.jpg",
     },
     {
       id: "tv-mounting",
@@ -498,6 +506,8 @@ export const projectsGallery = {
         "TVs, shelves, and fixtures mounted level and stud-anchored, with cables concealed for a clean finish.",
       beforeDescription:
         "Before: a TV leaning against the wall, cables everywhere, no mount in sight.",
+      beforeImage: "/images/projects/tv-mount-before.jpg",
+      afterImage: "/images/projects/tv-mount-after.jpg",
     },
   ],
 };
