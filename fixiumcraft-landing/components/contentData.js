@@ -310,6 +310,17 @@ export const localBusinessSchema = {
     closes: "23:00",
   },
   priceRange: "$$",
+  // Real, verified rating — confirmed by the business owner from
+  // actual Google reviews, not a placeholder (matches hero.googleRating
+  // above). Update both together if the Google average or review count
+  // ever changes — never bump reviewCount without a real new review.
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "2",
+    bestRating: "5",
+    worstRating: "1",
+  },
   // Explicit, machine-readable list of what we offer — built from the same
   // `services` array the homepage renders, so this can never list a
   // service the site doesn't actually show.
