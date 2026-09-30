@@ -135,6 +135,7 @@ type ParsedFields = {
   preferredWindow: string;
   notes: string;
   hasPhoto: boolean;
+  discountRequested: boolean;
 };
 
 // Basic payload validation: reject absurdly long field values before they
@@ -160,6 +161,9 @@ function buildTelegramMessage(fields: ParsedFields): string {
     `<b>Service:</b> ${escapeHtml(fields.serviceLabel) || "—"}`,
     `<b>ZIP / Address:</b> ${escapeHtml(fields.zip) || "—"}`,
   ];
+  if (fields.discountRequested) {
+    lines.push("🎖️ <b>Requested Military/Senior/First Responder discount (10% off)</b>");
+  }
   if (fields.email) lines.push(`<b>Email:</b> ${escapeHtml(fields.email)}`);
   if (fields.preferredWindow) lines.push(`<b>Preferred Time:</b> ${escapeHtml(fields.preferredWindow)}`);
   if (fields.notes) lines.push(`<b>Notes:</b> ${escapeHtml(fields.notes)}`);
@@ -189,6 +193,9 @@ function buildEmailHtml(fields: ParsedFields): string {
   const notesBlock = fields.notes
     ? `<p style="margin-top:16px;"><strong>Notes:</strong><br>${escapeHtml(fields.notes).replace(/\n/g, "<br>")}</p>`
     : "";
+  const discountBlock = fields.discountRequested
+    ? '<p style="margin-top:16px;font-weight:600;">🎖️ Requested Military/Senior/First Responder discount (10% off).</p>'
+    : "";
   const photoBlock = fields.hasPhoto
     ? '<p style="margin-top:16px;">📎 Photo attached to this email.</p>'
     : "";
@@ -198,6 +205,7 @@ function buildEmailHtml(fields: ParsedFields): string {
       <h2 style="margin-bottom:12px;">New quote request — ${escapeHtml(business.name)}</h2>
       <table>${rows}</table>
       ${preferredWindowBlock}
+      ${discountBlock}
       ${notesBlock}
       ${photoBlock}
     </div>
@@ -378,6 +386,7 @@ export async function POST(request: NextRequest) {
       preferredWindow: readField(formData, "preferred_window"),
       notes: readField(formData, "message"),
       hasPhoto: photo !== null,
+      discountRequested: readField(formData, "discount_requested") === "true",
     };
 
     const tooLongField = findFieldTooLong(fields);

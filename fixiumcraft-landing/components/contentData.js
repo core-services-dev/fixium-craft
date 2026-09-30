@@ -261,6 +261,18 @@ export const pricingTrustSection = {
   },
 };
 
+// Military / senior / first responder discount \u2014 shown as a badge in the
+// Pricing & Guarantee section and again near the Quote form, and offered
+// as an opt-in checkbox inside the form itself (quoteForm.fields.discount
+// below). Kept as its own export since the same badge text is reused in
+// two different spots on the page.
+export const discountOffer = {
+  icon: "\ud83c\udf96\ufe0f",
+  label: "10% Discount for Seniors, Military Veterans & First Responders",
+  sublabel:
+    "Our way of saying thank you to the Pittsburgh seniors and service members who've looked out for this community.",
+};
+
 // Heading/subheading for the Services section (kept in contentData, not
 // hardcoded in JSX, so all page copy lives in one place — see the file
 // header comment).
@@ -472,6 +484,15 @@ export const quoteForm = {
       label: "Upload a Photo",
       helpText:
         "Attaching a photo gets you a faster and more accurate flat-rate quote within 1 hour.",
+    },
+    // Opt-in checkbox for the military/senior/first-responder discount (see
+    // discountOffer above for the badge copy shown elsewhere on the page).
+    // Self-reported, same as every other field here \u2014 we don't ask for
+    // ID or proof, we just take the customer's word for it and apply the
+    // 10%.
+    discount: {
+      label: "I qualify for a Military / Senior / First Responder Discount (10% Off)",
+      helpText: "Thank you for your service \u2014 we'll apply this to your quote automatically.",
     },
     notes: {
       label: "Anything else we should know?",
@@ -870,6 +891,7 @@ const contentData = {
   services,
   servicesSection,
   pricingTrustSection,
+  discountOffer,
   projectsGallery,
   process,
   formService,

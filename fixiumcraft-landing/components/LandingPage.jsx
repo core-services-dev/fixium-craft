@@ -31,6 +31,7 @@ import {
   services,
   servicesSection,
   pricingTrustSection,
+  discountOffer,
   projectsGallery,
   process as processSteps,
   formService,
@@ -593,6 +594,17 @@ function PricingTrust() {
           </div>
         </div>
 
+        {/* Military / senior / first responder discount — a second,
+            distinct badge (amber instead of emerald) so it reads as its
+            own offer rather than part of the upfront-pricing guarantee
+            above it. */}
+        <div className="mt-4 flex justify-center">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-amber-200 bg-amber-50 px-4 py-2.5 text-center text-sm font-bold text-amber-900 sm:px-5 sm:py-3 sm:text-base">
+            <span aria-hidden="true">{discountOffer.icon}</span>
+            <span>{discountOffer.label}</span>
+          </div>
+        </div>
+
         {/* What's always included — grounded in the same facts shown
             elsewhere on the site (QualityGuarantee's laser-level/clean-up
             items, the wall-anchoring FAQ), just surfaced here too, right
@@ -757,6 +769,7 @@ const EMPTY_FORM_DATA = {
   services: [],
   preferredWindow: "",
   notes: "",
+  discountRequested: false,
 };
 
 function QuoteForm() {
@@ -862,6 +875,7 @@ function QuoteForm() {
       submission.append("service_needed", selectedServiceLabels.join(", "));
       submission.append("preferred_window", formData.preferredWindow);
       submission.append("message", formData.notes);
+      submission.append("discount_requested", formData.discountRequested ? "true" : "false");
       submission.append("botcheck", ""); // honeypot — must stay empty
       if (photoFile) {
         submission.append("attachment", photoFile);
@@ -919,6 +933,17 @@ function QuoteForm() {
             {quoteForm.heading}
           </h2>
           <p className="mt-3 text-slate-300">{quoteForm.subheading}</p>
+        </div>
+
+        {/* Military / senior / first responder discount banner — same
+            badge shown in the Pricing & Guarantee section, repeated here
+            so it's visible right where someone is about to submit a
+            request, not just further up the page. */}
+        <div className="mt-6 flex justify-center">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-2 text-center text-xs font-bold text-amber-200 sm:px-5 sm:text-sm">
+            <span aria-hidden="true">{discountOffer.icon}</span>
+            <span>{discountOffer.label}</span>
+          </div>
         </div>
 
         <form
@@ -1091,6 +1116,31 @@ function QuoteForm() {
               {quoteForm.fields.photo.helpText}
             </p>
           </div>
+
+          {/* Self-reported, opt-in discount checkbox — no ID or proof asked
+              for here, same as everything else in this form; we just take
+              the customer's word for it and apply the 10% ourselves. */}
+          <label
+            htmlFor="discountRequested"
+            className="flex cursor-pointer items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-sm text-amber-900 transition hover:border-amber-300 hover:bg-amber-100"
+          >
+            <input
+              id="discountRequested"
+              name="discountRequested"
+              type="checkbox"
+              checked={formData.discountRequested}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, discountRequested: e.target.checked }))
+              }
+              className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-amber-300 text-amber-600 focus:ring-amber-400"
+            />
+            <span>
+              <span className="font-medium">{quoteForm.fields.discount.label}</span>
+              <span className="mt-0.5 block text-xs font-normal text-amber-700">
+                {quoteForm.fields.discount.helpText}
+              </span>
+            </span>
+          </label>
 
           <div>
             <label htmlFor="notes" className="text-sm font-medium text-slate-700">
