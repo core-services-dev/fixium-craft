@@ -575,18 +575,22 @@ function GalleryCard({ item }) {
   return (
     <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <div className="p-3 pb-0">
-        {/* Header row: category tag + Before/After toggle now live in their
-            own flex row, above the image, instead of being layered on top
-            of it — a long category label truncates instead of overlapping
-            the toggle on narrow (2-up mobile) cards. */}
-        <div className="flex items-center justify-between gap-2">
-          <span className="min-w-0 truncate rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-700">
-            {item.category}
-          </span>
+        {/* Category tag gets its own full-width line — never sharing a row
+            with the toggle means it never has to compete for space, so it's
+            never truncated, however long the category name is. Font size
+            steps up slightly at wider breakpoints for legibility. */}
+        <span className="inline-block max-w-full rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-700 sm:text-[11px]">
+          {item.category}
+        </span>
+
+        {/* Before/After toggle sits on its own line too, right above the
+            image — right-aligned so it reads as a control on the photo
+            below rather than competing with the category tag above it. */}
+        <div className="mt-2 flex justify-end">
           <div
             role="group"
             aria-label={`${item.title} — before and after`}
-            className="flex flex-shrink-0 rounded-full bg-slate-100 p-0.5 text-[11px] font-semibold"
+            className="flex rounded-full bg-slate-100 p-0.5 text-[11px] font-semibold"
           >
             <button
               type="button"
