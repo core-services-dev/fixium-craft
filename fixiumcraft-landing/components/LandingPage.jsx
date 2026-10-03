@@ -66,6 +66,17 @@ const BTN_OUTLINE_DARK =
   "rounded-lg border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-50";
 
 /* -------------------------------------------------------------------------- */
+/*  Shared form input style                                                   */
+/*                                                                             */
+/*  One place for every Quote form text/email/tel/textarea input: generous   */
+/*  padding, rounded corners, and a clearly visible resting border plus a    */
+/*  high-contrast focus ring, instead of each field re-declaring its own.    */
+/* -------------------------------------------------------------------------- */
+
+const INPUT_BASE =
+  "mt-1.5 w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100";
+
+/* -------------------------------------------------------------------------- */
 /*  Icons (inline SVG — no external icon library dependency)                  */
 /* -------------------------------------------------------------------------- */
 
@@ -970,7 +981,7 @@ function QuoteForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="mt-8 space-y-4 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+          className="mt-8 space-y-5 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
         >
           <div>
             <label htmlFor="name" className="text-sm font-medium text-slate-700">
@@ -984,7 +995,7 @@ function QuoteForm() {
               value={formData.name}
               onChange={handleChange}
               placeholder={quoteForm.fields.name.placeholder}
-              className="mt-1.5 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+              className={INPUT_BASE}
             />
           </div>
 
@@ -1000,8 +1011,13 @@ function QuoteForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder={quoteForm.fields.phone.placeholder}
-              className="mt-1.5 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+              className={INPUT_BASE}
             />
+            {quoteForm.fields.phone.helpText && (
+              <p className="mt-1.5 text-xs font-medium text-slate-500">
+                {quoteForm.fields.phone.helpText}
+              </p>
+            )}
           </div>
 
           <div>
@@ -1016,7 +1032,7 @@ function QuoteForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder={quoteForm.fields.email.placeholder}
-              className="mt-1.5 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+              className={INPUT_BASE}
             />
             <p className="mt-1 text-xs text-slate-400">
               {quoteForm.fields.email.helpText}
@@ -1036,7 +1052,7 @@ function QuoteForm() {
               value={formData.zip}
               onChange={handleChange}
               placeholder={quoteForm.fields.zip.placeholder}
-              className="mt-1.5 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+              className={INPUT_BASE}
             />
           </div>
 
@@ -1047,7 +1063,17 @@ function QuoteForm() {
             <p className="mt-0.5 text-xs text-slate-400">
               {quoteForm.fields.services.helpText}
             </p>
-            <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={quoteForm.fields.services.label}>
+            {/* Large, tappable visual cards instead of small text pills --
+                each shows an icon, the service name, and its real starting
+                price so a visitor can pick a service without typing a
+                word. Multi-select stays exactly as before (toggleService
+                just flips membership in formData.services); only the
+                visual treatment changed. */}
+            <div
+              className="mt-3 grid grid-cols-2 gap-2.5 sm:gap-3"
+              role="group"
+              aria-label={quoteForm.fields.services.label}
+            >
               {quoteForm.fields.services.options.map((opt) => {
                 const selected = formData.services.includes(opt.value);
                 return (
@@ -1056,16 +1082,28 @@ function QuoteForm() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => toggleService(opt.value)}
-                    className={`rounded-full border px-3.5 py-2 text-sm font-medium transition ${
+                    className={`relative flex flex-col items-start gap-1 rounded-2xl border-2 p-3.5 text-left transition sm:p-4 ${
                       selected
-                        ? "border-sky-500 bg-sky-500 text-white shadow-sm"
-                        : "border-slate-300 bg-white text-slate-700 hover:border-sky-400 hover:text-sky-600"
+                        ? "border-sky-500 bg-sky-50 shadow-sm"
+                        : "border-slate-200 bg-white hover:border-sky-300 hover:bg-sky-50/40"
                     }`}
                   >
-                    <span className="inline-flex items-center gap-1.5">
-                      {selected && <IconCheck className="h-3.5 w-3.5" />}
+                    {selected && (
+                      <span className="absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-sky-500 text-white">
+                        <IconCheck className="h-3 w-3" />
+                      </span>
+                    )}
+                    {opt.emoji && (
+                      <span aria-hidden="true" className="text-2xl leading-none sm:text-3xl">
+                        {opt.emoji}
+                      </span>
+                    )}
+                    <span className="text-sm font-semibold leading-snug text-slate-900">
                       {opt.label}
                     </span>
+                    {opt.price && (
+                      <span className="text-xs font-medium text-sky-600">{opt.price}</span>
+                    )}
                   </button>
                 );
               })}
@@ -1088,7 +1126,7 @@ function QuoteForm() {
               value={formData.preferredWindow}
               onChange={handleChange}
               placeholder={quoteForm.fields.preferredWindow.placeholder}
-              className="mt-1.5 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+              className={INPUT_BASE}
             />
             <p className="mt-1 text-xs text-slate-400">
               {quoteForm.fields.preferredWindow.helpText}
@@ -1105,8 +1143,8 @@ function QuoteForm() {
               <label htmlFor="photo" className="text-sm font-medium text-slate-700">
                 {quoteForm.fields.photo.label}
               </label>
-              <span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
-                Recommended
+              <span className="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
+                ⭐ Recommended for Fastest Response
               </span>
             </div>
             <label
@@ -1175,7 +1213,7 @@ function QuoteForm() {
               value={formData.notes}
               onChange={handleChange}
               placeholder={quoteForm.fields.notes.placeholder}
-              className="mt-1.5 w-full resize-none rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+              className={`${INPUT_BASE} resize-none`}
             />
           </div>
 
@@ -1188,7 +1226,7 @@ function QuoteForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className={`w-full px-4 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
+            className={`w-full px-4 py-3.5 text-base shadow-lg shadow-sky-500/30 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
           >
             {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
           </button>

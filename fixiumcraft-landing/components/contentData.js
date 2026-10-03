@@ -188,6 +188,7 @@ export const services = [
     id: "assembly",
     title: "Furniture Assembly",
     icon: "assembly",
+    emoji: "🛋️",
     image: "/services/furniture-assembly.jpg",
     alt: "IKEA and flat-pack furniture assembly service in Pittsburgh, PA",
     description:
@@ -207,6 +208,7 @@ export const services = [
     id: "mounting",
     title: "TV & Wall Mounting",
     icon: "mounting",
+    emoji: "📺",
     image: "/services/tv-wall-mounting.jpg",
     alt: "TV wall mounting and shelf installation service in Pittsburgh, PA",
     description:
@@ -223,6 +225,7 @@ export const services = [
     id: "repairs",
     title: "Minor Home Repairs",
     icon: "repairs",
+    emoji: "🔧",
     image: "/services/minor-home-repairs.jpg",
     alt: "Minor home repair, cabinet hinge, and door lock adjustment service in Pittsburgh, PA",
     description:
@@ -242,6 +245,7 @@ export const services = [
     id: "installation",
     title: "Window AC & Appliance Installation",
     icon: "ac",
+    emoji: "❄️",
     image: "/services/installation-services.jpg",
     alt: "Window AC unit and appliance installation service in Pittsburgh, PA",
     description:
@@ -259,7 +263,9 @@ export const services = [
   {
     id: "locksmith",
     title: "Residential Locksmith & Door Hardware",
+    quoteLabel: "Smart Lock & Security",
     icon: "lock",
+    emoji: "🔐",
     // No real photo yet — Services() falls back to the icon/gradient below
     // (same onError pattern GalleryCard already uses) until a real photo
     // lands at this path, so there's no broken-image icon in the meantime.
@@ -492,6 +498,7 @@ export const quoteForm = {
       label: "Phone Number",
       placeholder: "(412) 555-0100",
       required: true,
+      helpText: "🔒 We strictly send your exact quote via text — zero sales calls or spam.",
     },
     email: {
       label: "Email (optional)",
@@ -509,12 +516,18 @@ export const quoteForm = {
       helpText: "Select all that apply.",
       required: true,
       errorMessage: "Please select at least one service.",
+      // Built from `services` (defined above) rather than a second,
+      // separately-maintained list, so the price/emoji shown here can
+      // never drift from the real services[] data -- and so a new
+      // service automatically becomes selectable here too.
       options: [
-        { value: "assembly", label: "Furniture Assembly" },
-        { value: "mounting", label: "TV & Wall Mounting" },
-        { value: "repairs", label: "Minor Home Repairs" },
-        { value: "installation", label: "Window AC & Appliance Installation" },
-        { value: "other", label: "Something Else" },
+        ...services.map((s) => ({
+          value: s.id,
+          label: s.quoteLabel || s.title,
+          price: s.startingPrice.replace(/^Starting at /, "From "),
+          emoji: s.emoji,
+        })),
+        { value: "other", label: "Something Else", price: null, emoji: "💬" },
       ],
     },
     // Optional — lets a lead flag their own timeline without forcing a
@@ -548,7 +561,7 @@ export const quoteForm = {
       placeholder: "e.g. 2 IKEA PAX wardrobes, need mounted TV above fireplace...",
     },
   },
-  submitLabel: "Request My Quote",
+  submitLabel: "Get My Guaranteed Quote →",
   successMessage:
     "Thanks! We've got your request and will text you a quote shortly.",
   errorMessage:
