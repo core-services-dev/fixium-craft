@@ -318,7 +318,7 @@ function Hero() {
   return (
     <section className="bg-gradient-to-b from-slate-900 to-slate-800 px-4 pb-14 pt-10 text-white sm:pb-20 sm:pt-16">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-3 inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sky-300">
+        <p className="mb-3 inline-block whitespace-nowrap rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-300">
           {hero.eyebrow}
         </p>
         <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
@@ -357,29 +357,6 @@ function Hero() {
             >
               <IconWhatsapp className="h-4 w-4 text-emerald-400" /> WhatsApp
             </a>
-          </div>
-        </div>
-
-        {/* Real Google-review rating (2 real 5-star reviews as of writing —
-            not a placeholder), placed right next to the CTAs per request.
-            Solid white pill (not a translucent overlay) with bold, dark
-            text — stays crisp and legible against the dark hero gradient
-            on any screen, rather than relying on white-on-dark contrast at
-            a small size. */}
-        <div className="mt-5 flex justify-center">
-          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-900 shadow-lg shadow-black/25 sm:gap-x-2.5 sm:px-5 sm:py-2.5 sm:text-base">
-            <span className="flex text-amber-500">
-              {Array.from({ length: hero.googleRating.stars }).map((_, i) => (
-                <IconStar key={i} className="h-4 w-4 sm:h-5 sm:w-5" />
-              ))}
-            </span>
-            <span className="text-slate-900">{hero.googleRating.label}</span>
-            <span aria-hidden="true" className="hidden text-slate-300 sm:inline">
-              |
-            </span>
-            <span className="w-full text-center text-xs font-semibold text-slate-600 sm:w-auto sm:text-sm">
-              {hero.googleRating.sublabel}
-            </span>
           </div>
         </div>
 

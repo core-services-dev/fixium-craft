@@ -128,16 +128,9 @@ export const trustBadges = [
 ];
 
 export const hero = {
-  eyebrow: "⭐ 5.0 ★ Google Reviewed | Fully Insured Pittsburgh Local",
-  headline: "Pittsburgh’s Precision Handyman for Furniture Assembly, Mounting & Locks",
-  subheadline: "Flat-rate pricing, stud-anchored installs, and full clean-up after every job — so your home stays stress-free.",
-  // Real rating from actual Google reviews — confirmed, not a
-  // placeholder. Update `stars` if the average ever changes.
-  googleRating: {
-    stars: 5,
-    label: "5.0/5 Rating on Google Reviews (2 Reviews)",
-    sublabel: "Pittsburgh Local Handyman",
-  },
+  eyebrow: "⭐ 5.0 Rated | Fully Insured Pittsburgh Local",
+  headline: "Precision Handyman & Home Services",
+  subheadline: "Guaranteed flat-rate pricing, stud-anchored mounting, and clean assembly across Pittsburgh.",
   primaryCta: { label: "Get My Instant Quote", action: "form" },
   secondaryCtas: [
     { label: "Call Now", href: business.phoneHref, type: "call" },
@@ -415,9 +408,9 @@ export const localBusinessSchema = {
   },
   priceRange: "$$",
   // Real, verified rating — confirmed by the business owner from
-  // actual Google reviews, not a placeholder (matches hero.googleRating
-  // above). Update both together if the Google average or review count
-  // ever changes — never bump reviewCount without a real new review.
+  // actual Google reviews, not a placeholder. Update if the Google
+  // average or review count ever changes — never bump reviewCount
+  // without a real new review.
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
