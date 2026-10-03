@@ -41,7 +41,7 @@ import {
   guarantees,
   guaranteesSection,
   qualityGuaranteeSection,
-  testimonials,
+  googleReviews,
   testimonialsSection,
   faq,
   faqSection,
@@ -218,6 +218,14 @@ const SERVICE_ICONS = {
       <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none" />
     </svg>
   ),
+  wallmount: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="4" y="4" width="16" height="13" rx="1.5" />
+      <path d="M4.5 13.5l4-4a1.5 1.5 0 0 1 2.12 0L13 11.88l1.5-1.5a1.5 1.5 0 0 1 2.12 0l2.88 2.88" />
+      <circle cx="9" cy="8" r="1.1" fill="currentColor" stroke="none" />
+      <path d="M12 17v3M8.5 20h7" />
+    </svg>
+  ),
 };
 
 /* -------------------------------------------------------------------------- */
@@ -327,6 +335,11 @@ function Hero() {
         <p className="mx-auto mt-4 max-w-xl text-balance text-base text-slate-300 sm:text-lg">
           {hero.subheadline}
         </p>
+        {hero.supportingCopy && (
+          <p className="mx-auto mt-3 max-w-xl text-balance text-sm text-slate-400 sm:text-base">
+            {hero.supportingCopy}
+          </p>
+        )}
 
         {/* Single primary visual button — Call/WhatsApp are still one tap
             away, just demoted to lightweight text links underneath instead
@@ -774,13 +787,22 @@ const SUCCESS_AUTO_DISMISS_MS = 6000;
 const EMPTY_FORM_DATA = {
   name: "",
   phone: "",
-  email: "",
-  zip: "",
   services: [],
-  preferredWindow: "",
   notes: "",
-  discountRequested: false,
+  preferredContactMethod: quoteForm.fields.preferredContactMethod.defaultValue || "text",
+  discountFirstTime: false,
+  discountMilitaryFirstResponder: false,
+  discountSenior: false,
 };
+
+// Maps each `discounts` entry id (contentData.js) to the formData key that
+// tracks its checkbox state -- keeps the 3 checkboxes data-driven (one
+// render loop) while each still has its own named, stable formData field.
+const DISCOUNT_FORM_KEYS = [
+  { id: "firstTime", formKey: "discountFirstTime" },
+  { id: "militaryFirstResponder", formKey: "discountMilitaryFirstResponder" },
+  { id: "senior", formKey: "discountSenior" },
+];
 
 function QuoteForm() {
   const [formData, setFormData] = useState(EMPTY_FORM_DATA);
@@ -880,12 +902,18 @@ function QuoteForm() {
       submission.append("from_name", business.name);
       submission.append("name", formData.name);
       submission.append("phone", formData.phone);
-      submission.append("email", formData.email);
-      submission.append("zip_code", formData.zip);
       submission.append("service_needed", selectedServiceLabels.join(", "));
-      submission.append("preferred_window", formData.preferredWindow);
       submission.append("message", formData.notes);
-      submission.append("discount_requested", formData.discountRequested ? "true" : "false");
+      submission.append("preferred_contact_method", formData.preferredContactMethod);
+      // 3 individual discount flags instead of one combined boolean -- the
+      // server only ever applies a single 10% discount per job even if
+      // more than one is checked (see discountMicrocopy in contentData.js).
+      submission.append("discount_first_time", formData.discountFirstTime ? "true" : "false");
+      submission.append(
+        "discount_military_first_responder",
+        formData.discountMilitaryFirstResponder ? "true" : "false"
+      );
+      submission.append("discount_senior", formData.discountSenior ? "true" : "false");
       submission.append("botcheck", ""); // honeypot — must stay empty
       if (photoFile) {
         submission.append("attachment", photoFile);
@@ -997,42 +1025,6 @@ function QuoteForm() {
             )}
           </div>
 
-          <div>
-            <label htmlFor="email" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.email.label}
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required={quoteForm.fields.email.required}
-              value={formData.email}
-              onChange={handleChange}
-              placeholder={quoteForm.fields.email.placeholder}
-              className={INPUT_BASE}
-            />
-            <p className="mt-1 text-xs text-slate-400">
-              {quoteForm.fields.email.helpText}
-            </p>
-          </div>
-
-          <div>
-            <label htmlFor="zip" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.zip.label}
-            </label>
-            <input
-              id="zip"
-              name="zip"
-              type="text"
-              inputMode="numeric"
-              required={quoteForm.fields.zip.required}
-              value={formData.zip}
-              onChange={handleChange}
-              placeholder={quoteForm.fields.zip.placeholder}
-              className={INPUT_BASE}
-            />
-          </div>
-
           <fieldset>
             <legend className="text-sm font-medium text-slate-700">
               {quoteForm.fields.services.label}
@@ -1092,24 +1084,6 @@ function QuoteForm() {
             )}
           </fieldset>
 
-          <div>
-            <label htmlFor="preferredWindow" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.preferredWindow.label}
-            </label>
-            <input
-              id="preferredWindow"
-              name="preferredWindow"
-              type="text"
-              value={formData.preferredWindow}
-              onChange={handleChange}
-              placeholder={quoteForm.fields.preferredWindow.placeholder}
-              className={INPUT_BASE}
-            />
-            <p className="mt-1 text-xs text-slate-400">
-              {quoteForm.fields.preferredWindow.helpText}
-            </p>
-          </div>
-
           {/* Deliberately the most visually prominent field in the form —
               a photo is the single biggest lever on lead quality (an
               accurate flat-rate quote vs. a rough guess), so it gets a
@@ -1154,31 +1128,6 @@ function QuoteForm() {
             </p>
           </div>
 
-          {/* Self-reported, opt-in discount checkbox — no ID or proof asked
-              for here, same as everything else in this form; we just take
-              the customer's word for it and apply the 10% ourselves. */}
-          <label
-            htmlFor="discountRequested"
-            className="flex cursor-pointer items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-sm text-amber-900 transition hover:border-amber-300 hover:bg-amber-100"
-          >
-            <input
-              id="discountRequested"
-              name="discountRequested"
-              type="checkbox"
-              checked={formData.discountRequested}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, discountRequested: e.target.checked }))
-              }
-              className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-amber-300 text-amber-600 focus:ring-amber-400"
-            />
-            <span>
-              <span className="font-medium">{quoteForm.fields.discount.label}</span>
-              <span className="mt-0.5 block text-xs font-normal text-amber-700">
-                {quoteForm.fields.discount.helpText}
-              </span>
-            </span>
-          </label>
-
           <div>
             <label htmlFor="notes" className="text-sm font-medium text-slate-700">
               {quoteForm.fields.notes.label}
@@ -1192,7 +1141,87 @@ function QuoteForm() {
               placeholder={quoteForm.fields.notes.placeholder}
               className={`${INPUT_BASE} resize-none`}
             />
+            {quoteForm.fields.notes.helpText && (
+              <p className="mt-1 text-xs text-slate-400">
+                {quoteForm.fields.notes.helpText}
+              </p>
+            )}
           </div>
+
+          {/* Preferred Contact Method — a simple 3-way pill group, same
+              toggle pattern as the service pills above but single-select. */}
+          <fieldset>
+            <legend className="text-sm font-medium text-slate-700">
+              {quoteForm.fields.preferredContactMethod.label}
+            </legend>
+            {quoteForm.fields.preferredContactMethod.helpText && (
+              <p className="mt-0.5 text-xs text-slate-400">
+                {quoteForm.fields.preferredContactMethod.helpText}
+              </p>
+            )}
+            <div className="mt-3 grid grid-cols-3 gap-2.5" role="group" aria-label={quoteForm.fields.preferredContactMethod.label}>
+              {quoteForm.fields.preferredContactMethod.options.map((opt) => {
+                const selected = formData.preferredContactMethod === opt.value;
+                return (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() =>
+                      setFormData((prev) => ({ ...prev, preferredContactMethod: opt.value }))
+                    }
+                    className={`flex flex-col items-center gap-1 rounded-xl border-2 py-3 text-sm font-semibold transition ${
+                      selected
+                        ? "border-sky-500 bg-sky-50 text-sky-700"
+                        : "border-slate-200 bg-white text-slate-600 hover:border-sky-300 hover:bg-sky-50/40"
+                    }`}
+                  >
+                    {opt.emoji && <span aria-hidden="true" className="text-lg leading-none">{opt.emoji}</span>}
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
+
+          {/* 3 individual, self-reported opt-in discount checkboxes — no ID
+              or proof asked for here, same as everything else in this
+              form; we just take the customer's word for it. Only one 10%
+              discount applies per job even if more than one is checked
+              (see the microcopy rendered below the checkboxes). */}
+          <fieldset className="space-y-2">
+            <legend className="text-sm font-medium text-slate-700">
+              {quoteForm.fields.discounts.label}
+            </legend>
+            {DISCOUNT_FORM_KEYS.map(({ id, formKey }) => {
+              const option = quoteForm.fields.discounts.options.find((o) => o.id === id);
+              if (!option) return null;
+              return (
+                <label
+                  key={id}
+                  htmlFor={`discount-${id}`}
+                  className="flex cursor-pointer items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-sm text-amber-900 transition hover:border-amber-300 hover:bg-amber-100"
+                >
+                  <input
+                    id={`discount-${id}`}
+                    name={`discount-${id}`}
+                    type="checkbox"
+                    checked={formData[formKey]}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, [formKey]: e.target.checked }))
+                    }
+                    className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-amber-300 text-amber-600 focus:ring-amber-400"
+                  />
+                  <span className="font-medium">{option.label}</span>
+                </label>
+              );
+            })}
+            {quoteForm.fields.discounts.microcopy && (
+              <p className="pt-0.5 text-xs font-medium text-amber-700">
+                {quoteForm.fields.discounts.microcopy}
+              </p>
+            )}
+          </fieldset>
 
           {status === "error" && (
             <p className="rounded-lg bg-rose-50 px-3.5 py-2.5 text-sm text-rose-600">
@@ -1228,7 +1257,7 @@ function Guarantees() {
         <h2 className="text-balance text-center text-2xl font-bold text-slate-900 sm:text-3xl">
           {guaranteesSection.heading}
         </h2>
-        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {guarantees.map((g) => (
             <div key={g.id} className="text-center">
               <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
@@ -1322,43 +1351,34 @@ function About() {
 /*  Testimonials                                                              */
 /* -------------------------------------------------------------------------- */
 
+// Google Reviews trust section. Deliberately shows only the real, verified
+// rating (see localBusinessSchema.aggregateRating in contentData.js) --
+// no invented customer quotes, names, or review counts. Once real reviews
+// exist, swap this stat card for an embed of the actual Google reviews
+// (or individual real quotes) rather than reintroducing placeholder text.
 function Testimonials() {
   return (
     <section id="testimonials" className="bg-slate-50 px-4 py-14 sm:py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
-            {testimonialsSection.heading}
-          </h2>
-        </div>
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
+          {testimonialsSection.heading}
+        </h2>
+        {testimonialsSection.subheading && (
+          <p className="mt-3 text-slate-600">{testimonialsSection.subheading}</p>
+        )}
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-3">
-          {testimonials.map((t) => (
-            <div
-              key={t.id}
-              className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex gap-0.5 text-amber-400">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <IconStar key={i} className="h-4 w-4" />
-                  ))}
-                </div>
-                {t.serviceTag && (
-                  <span className="rounded-full bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700">
-                    {t.serviceTag}
-                  </span>
-                )}
-              </div>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
-                "{t.text}"
-              </p>
-              <p className="mt-4 text-sm font-semibold text-slate-900">
-                {t.name}
-              </p>
-              <p className="text-xs text-slate-500">{t.location}</p>
-            </div>
-          ))}
+        <div className="mx-auto mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm">
+          <div className="flex gap-0.5 text-amber-400">
+            {Array.from({ length: googleReviews.stars }).map((_, i) => (
+              <IconStar key={i} className="h-5 w-5" />
+            ))}
+          </div>
+          <span className="text-lg font-bold text-slate-900">
+            {googleReviews.value} / 5
+          </span>
+          <span className="text-sm font-medium text-slate-500">
+            ({googleReviews.reviewCount} {googleReviews.sourceLabel})
+          </span>
         </div>
       </div>
     </section>

@@ -68,13 +68,18 @@ export const aboutSection = {
 // service+location page (see `servicePages`), so both search engines and AI
 // assistants see the exact coverage area, not just "Pittsburgh."
 export const neighborhoods = [
+  "Shadyside",
+  "Squirrel Hill",
+  "Lawrenceville",
+  "South Side",
+  "Downtown Pittsburgh",
   "Mt. Lebanon",
+  "Cranberry Township",
   "Bethel Park",
   "Upper St. Clair",
   "Dormont",
   "Carnegie",
   "Robinson Township",
-  "Shadyside",
 ];
 
 // Homepage "Service Areas" banner (see ServiceAreas() in LandingPage.jsx) —
@@ -105,11 +110,14 @@ export const seo = {
   description:
     "Fixium Craft provides fast, professional furniture assembly, handyman repairs, and smart lock installations in Pittsburgh, PA. Get your free quote today!",
   keywords: [
+    "handyman Pittsburgh PA",
     "furniture assembly Pittsburgh",
     "IKEA assembly service",
-    "TV wall mounting Pittsburgh",
+    "TV mounting Pittsburgh",
+    "wall mounting services",
     "handyman near me",
     "flat pack furniture assembly",
+    "home repair services Pittsburgh",
     "small home repairs Pittsburgh",
     "smart lock installation Pittsburgh",
     "residential locksmith Pittsburgh",
@@ -128,10 +136,12 @@ export const trustBadges = [
 ];
 
 export const hero = {
-  eyebrow: "⭐ 5.0 Rated | Fully Insured Pittsburgh Local",
-  headline: "Precision Handyman & Home Services",
-  subheadline: "Guaranteed flat-rate pricing, stud-anchored mounting, and clean assembly across Pittsburgh.",
-  primaryCta: { label: "Get My Instant Quote", action: "form" },
+  eyebrow: "⭐ Local Pittsburgh Handyman | Fully Insured",
+  headline: "Reliable Handyman Services in Pittsburgh, PA",
+  subheadline: "Quality Work. Fair Prices. No Surprises.",
+  supportingCopy:
+    "From small home repairs to furniture assembly and TV mounting, we help make your home work better. Contact us today for a free quote.",
+  primaryCta: { label: "Get a Free Quote", action: "form" },
   secondaryCtas: [
     { label: "Call Now", href: business.phoneHref, type: "call" },
     { label: "WhatsApp Us", href: business.whatsappHref, type: "whatsapp" },
@@ -198,30 +208,50 @@ export const services = [
   },
   {
     id: "mounting",
-    title: "TV & Wall Mounting",
+    title: "TV Mounting & Cable Management",
     icon: "mounting",
     emoji: "📺",
     image: "/services/tv-wall-mounting.jpg",
-    alt: "TV wall mounting and shelf installation service in Pittsburgh, PA",
+    alt: "TV wall mounting service in Pittsburgh, PA",
     description:
-      "Stud-anchored TV, shelf, and artwork mounting with clean cord concealment — hung right the first time, no drywall guesswork.",
+      "Stud-anchored TV mounting in Pittsburgh with clean cable and cord concealment — hung level the first time, no drywall guesswork.",
     features: [
       "Fixed, tilting & full-motion TV mounts",
-      "Cable & wire concealment",
-      "Shelves, mirrors & artwork mounting too",
+      "Cable & wire concealment behind the wall or in raceway",
+      "Soundbar & media console mounting",
     ],
     startingPrice: "Starting at $89",
     learnMoreHref: "/tv-mounting-pittsburgh",
   },
   {
+    id: "wallmounting",
+    title: "Wall Mounting",
+    icon: "wallmount",
+    emoji: "🖼️",
+    // No dedicated photo yet -- renders icon-only, same resilience
+    // pattern as every other services[] entry without a real photo
+    // (see ServiceCard's image-fallback comment).
+    image: null,
+    alt: "Wall mounting service for shelves, mirrors, and artwork in Pittsburgh, PA",
+    description:
+      "Wall mounting services for shelves, mirrors, artwork, and other heavy items — stud-anchored and leveled, with drywall-rated hardware when a stud isn't available.",
+    features: [
+      "Floating & bracket shelves",
+      "Mirrors, artwork & heavy wall decor",
+      "Curtain rods, coat racks & other heavy fixtures",
+    ],
+    startingPrice: "Starting at $89",
+    learnMoreHref: null,
+  },
+  {
     id: "repairs",
-    title: "Minor Home Repairs",
+    title: "Home Repairs & Small Fixes",
     icon: "repairs",
     emoji: "🔧",
     image: "/services/minor-home-repairs.jpg",
-    alt: "Minor home repair, cabinet hinge, and door lock adjustment service in Pittsburgh, PA",
+    alt: "Home repair service for cabinet hinges and door lock adjustments in Pittsburgh, PA",
     description:
-      "Sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments — the small fixes on your list that keep getting pushed back, done in one visit.",
+      "Home repair services in Pittsburgh for the small fixes that keep getting pushed back — sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments, done in one visit.",
     features: [
       "Cabinet & drawer hinge adjustments",
       "Door alignment, lock & handle adjustments or replacement",
@@ -320,11 +350,25 @@ export const pricingTrustSection = {
 // below). Kept as its own export since the same badge text is reused in
 // two different spots on the page.
 export const discountOffer = {
-  icon: "\ud83c\udf96\ufe0f",
-  label: "10% Discount for Seniors, Military Veterans & First Responders",
+  icon: "🏷️",
+  label: "10% Off for First-Time Customers, Military, Seniors & First Responders",
   sublabel:
-    "Our way of saying thank you to the Pittsburgh seniors and service members who've looked out for this community.",
+    "Our way of saying thank you to new customers, Pittsburgh seniors, and the service members who've looked out for this community.",
 };
+
+// The 3 individual opt-in discount checkboxes inside the Quote form (see
+// quoteForm.fields.discounts below). Self-reported, same as every other
+// field in the form — no ID or proof required, we just take the
+// customer's word for it. Only one 10% discount applies per job even if
+// more than one box is checked (see discountMicrocopy).
+export const discounts = [
+  { id: "firstTime", label: "First-Time Customer (10% Off)" },
+  { id: "militaryFirstResponder", label: "Military & First Responders (10% Off)" },
+  { id: "senior", label: "Senior Citizen Discount (10% Off)" },
+];
+
+export const discountMicrocopy =
+  "🏷️ Eligible discounts will be automatically applied to your final flat-rate quote. Only one 10% discount applies per job.";
 
 // Heading/subheading for the Services section (kept in contentData, not
 // hardcoded in JSX, so all page copy lives in one place — see the file
@@ -498,19 +542,12 @@ export const quoteForm = {
       required: true,
       helpText: "🔒 We strictly send your exact quote via text — zero sales calls or spam.",
     },
-    email: {
-      label: "Email (optional)",
-      placeholder: "jane@example.com",
-      required: false,
-      helpText: "So we can reply directly if we need more details.",
-    },
-    zip: { label: "ZIP Code", placeholder: "15222", required: true },
     // Multi-select — a job is often more than one service at once (e.g. a
     // TV mount plus a couple of shelves), so this holds an array of
     // selected values rather than a single string. `errorMessage` shows
     // under the pill group when the form is submitted with none selected.
     services: {
-      label: "Services Needed",
+      label: "Service Type",
       helpText: "Select all that apply.",
       required: true,
       errorMessage: "Please select at least one service.",
@@ -528,13 +565,12 @@ export const quoteForm = {
         { value: "other", label: "Something Else", price: null, emoji: "💬" },
       ],
     },
-    // Optional — lets a lead flag their own timeline without forcing a
-    // rigid date-picker/slot-booking UI; a technician still confirms the
-    // actual appointment by phone/text.
-    preferredWindow: {
-      label: "Preferred Date/Time (optional)",
-      placeholder: "e.g. This Saturday morning, or Oct 3 after 5pm",
-      helpText: "Tell us your timeline and we'll try to match it.",
+    // Renamed from the old "Anything else we should know?" framing --
+    // this is now the form's explicit "Job Description" field.
+    notes: {
+      label: "Job Description",
+      placeholder: "e.g. 2 IKEA PAX wardrobes, need mounted TV above fireplace...",
+      helpText: "Tell us what you need done — the more detail, the more accurate your quote.",
     },
     // Deliberately called out as the single highest-leverage field for lead
     // quality — a photo turns a rough estimate into an accurate flat-rate
@@ -545,18 +581,24 @@ export const quoteForm = {
       helpText:
         "Attaching a photo gets you a faster and more accurate flat-rate quote within 1 hour.",
     },
-    // Opt-in checkbox for the military/senior/first-responder discount (see
-    // discountOffer above for the badge copy shown elsewhere on the page).
-    // Self-reported, same as every other field here \u2014 we don't ask for
-    // ID or proof, we just take the customer's word for it and apply the
-    // 10%.
-    discount: {
-      label: "I qualify for a Military / Senior / First Responder Discount (10% Off)",
-      helpText: "Thank you for your service \u2014 we'll apply this to your quote automatically.",
+    preferredContactMethod: {
+      label: "Preferred Contact Method",
+      helpText: "How should we send your quote?",
+      options: [
+        { value: "call", label: "Call", emoji: "📞" },
+        { value: "text", label: "Text", emoji: "💬" },
+        { value: "whatsapp", label: "WhatsApp", emoji: "🟢" },
+      ],
+      defaultValue: "text",
     },
-    notes: {
-      label: "Anything else we should know?",
-      placeholder: "e.g. 2 IKEA PAX wardrobes, need mounted TV above fireplace...",
+    // 3 individual opt-in checkboxes (see `discounts` above) instead of
+    // one combined checkbox -- self-reported, no ID or proof required.
+    // Only one 10% discount applies per job even if more than one is
+    // checked (see discountMicrocopy).
+    discounts: {
+      label: "Discounts",
+      options: discounts,
+      microcopy: discountMicrocopy,
     },
   },
   submitLabel: "Get My Guaranteed Quote →",
@@ -634,9 +676,9 @@ export const guaranteesSection = {
 
 export const guarantees = [
   {
-    id: "guarantee",
-    title: "Satisfaction Guaranteed",
-    description: "Not happy with the job? We'll make it right at no extra cost.",
+    id: "local",
+    title: "Local Pittsburgh Presence",
+    description: "Based right here in Pittsburgh, PA — we know the neighborhoods and show up when we say we will.",
   },
   {
     id: "pricing",
@@ -644,9 +686,19 @@ export const guarantees = [
     description: "What we quote is exactly what you pay — no change orders, no last-minute add-ons.",
   },
   {
+    id: "guarantee",
+    title: "Satisfaction Guaranteed",
+    description: "Not happy with the job? We'll make it right at no extra cost.",
+  },
+  {
     id: "insured",
     title: "Licensed & Insured",
     description: "Every technician is background-checked and fully insured.",
+  },
+  {
+    id: "communication",
+    title: "Easy to Reach",
+    description: "Call, text, or WhatsApp — real answers from a real person, no call centers or endless hold music.",
   },
 ];
 
@@ -685,42 +737,22 @@ export const qualityGuaranteeSection = {
   ],
 };
 
-// PLACEHOLDER CONTENT — these are illustrative sample reviews, not real
-// customers. Swap these for genuine customer testimonials once you have
-// them; the FTC's 2024 rule against fake/fabricated reviews means these
-// shouldn't go live as-is once the business has real customer feedback.
-// Heading for the Testimonials section (kept in contentData, not hardcoded
-// in JSX — see the file header comment).
+// Google Reviews trust section — replaces the earlier placeholder
+// testimonial quotes (fabricated sample reviews, never real customers)
+// with only the verified, real rating already confirmed elsewhere on
+// this page (see localBusinessSchema.aggregateRating above). No invented
+// names, quotes, or review counts.
 export const testimonialsSection = {
-  heading: "What Customers Are Saying",
+  heading: "Rated 5.0 on Google Reviews",
+  subheading: "Real feedback from real Pittsburgh customers — verified, not staged.",
 };
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Rachel M.",
-    location: "Shadyside, PA",
-    rating: 5,
-    serviceTag: "IKEA Wardrobe Assembly",
-    text: "Assembled two IKEA wardrobes and a bed frame in under two hours. Way better than my last attempt (which ended with extra screws and a wobbly shelf).",
-  },
-  {
-    id: 2,
-    name: "David K.",
-    location: "Squirrel Hill, PA",
-    rating: 5,
-    serviceTag: "TV Wall Mount",
-    text: "Mounted our 65\" TV perfectly level with all the cables hidden. Quoted me a flat price over text before they even showed up — no surprises.",
-  },
-  {
-    id: 3,
-    name: "Sarah B.",
-    location: "Lawrenceville, PA",
-    rating: 5,
-    serviceTag: "Repairs & Assembly",
-    text: "Fixed a cabinet door, hung three shelves, and put together a desk — all in one visit. Fast, professional, and my house feels put together again.",
-  },
-];
+export const googleReviews = {
+  stars: 5,
+  value: "5.0",
+  reviewCount: "2",
+  sourceLabel: "Google Reviews",
+};
 
 // Heading for the FAQ section (kept in contentData, not hardcoded in JSX —
 // see the file header comment).
@@ -903,10 +935,10 @@ export const servicePages = [
   {
     slug: "minor-home-repairs-pittsburgh",
     serviceId: "repairs",
-    h1: "Minor Home Repairs in Pittsburgh, PA",
-    metaTitle: "Minor Home Repairs Pittsburgh, PA | Fixium Craft",
+    h1: "Home Repair Services in Pittsburgh, PA",
+    metaTitle: "Home Repair Services Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft handles minor home repairs in Pittsburgh, PA and nearby neighborhoods: cabinet hinges, door and lock adjustments, and general fixes. Flat-rate quotes.",
+      "Fixium Craft provides home repair services in Pittsburgh, PA and nearby neighborhoods: cabinet hinges, door and lock adjustments, and general fixes. Flat-rate quotes.",
     intro: [
       `Fixium Craft provides minor home repairs in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
       "We fix sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments — the small fixes on your list that keep getting pushed back, done in one visit.",
@@ -964,12 +996,12 @@ export const servicePages = [
 ];
 
 export const footer = {
-  about: `${business.name} provides fast, reliable furniture assembly, TV mounting, and minor home repair services across the Pittsburgh area.`,
+  about: `${business.name} provides fast, reliable furniture assembly, TV mounting, wall mounting, and home repair services across the Pittsburgh area.`,
   links: [
     { label: "Services", href: "#services" },
     { label: "Recent Projects", href: "#gallery" },
     { label: "How It Works", href: "#process" },
-    { label: "Reviews", href: "#testimonials" },
+    { label: "Google Reviews", href: "#testimonials" },
     { label: "FAQ", href: "#faq" },
     { label: "Get a Quote", href: "#quote" },
   ],
@@ -988,7 +1020,7 @@ export const footer = {
     { label: "TV Mounting in Pittsburgh", href: "/tv-mounting-pittsburgh" },
     { label: "Handyman Services in Pittsburgh", href: "/handyman-pittsburgh" },
     { label: "Door & Lock Repair in Pittsburgh", href: "/door-lock-repair-pittsburgh" },
-    { label: "Minor Home Repairs in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
+    { label: "Home Repairs & Small Fixes in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
     { label: "Locksmith & Lockout Services in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
   ],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
@@ -1010,6 +1042,8 @@ const contentData = {
   servicesSection,
   pricingTrustSection,
   discountOffer,
+  discounts,
+  discountMicrocopy,
   projectsGallery,
   process,
   formService,
@@ -1017,7 +1051,7 @@ const contentData = {
   guarantees,
   guaranteesSection,
   qualityGuaranteeSection,
-  testimonials,
+  googleReviews,
   testimonialsSection,
   faq,
   faqSection,

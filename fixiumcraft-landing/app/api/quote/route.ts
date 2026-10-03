@@ -25,10 +25,11 @@ import { business } from "@/components/contentData";
 //     purpose: putting arbitrary user input in the `from` header is
 //     exactly the kind of thing that gets a sending domain flagged as
 //     spam or gets messages silently dropped by the recipient's filters.
-//   - The customer's own email (if they gave one — it's an optional form
-//     field) goes in `reply_to` instead, so clicking Reply in the
-//     business inbox goes straight to the customer, without the `from`
-//     header ever claiming to be them.
+//   - The quote form has no email field (streamlined down to name, phone,
+//     service type, job description, photo, and preferred contact method
+//     -- see contentData.js's quoteForm.fields), so there's no customer
+//     email to put in `reply_to` here; the business replies by whichever
+//     method the customer picked (call, text, or WhatsApp).
 //   - Without a verified custom domain, Resend's sandbox sender can only
 //     deliver to the email address the Resend account itself was signed
 //     up with — verify a domain in the Resend dashboard once this needs
@@ -50,10 +51,8 @@ const RESEND_SANDBOX_FROM = `${business.name} Notifications <onboarding@resend.d
 const MAX_FIELD_LENGTHS = {
   name: 100,
   phone: 30,
-  email: 200,
-  zip: 20,
-  serviceLabel: 250, // joined multi-select labels (e.g. all 5 services) can run long
-  preferredWindow: 100,
+  serviceLabel: 250, // joined multi-select labels (e.g. all 6 services) can run long
+  preferredContactMethod: 20,
   notes: 1000,
 };
 const MAX_PHOTO_BYTES = 4 * 1024 * 1024; // 4MB — keeps the Resend request body small and fast
@@ -120,23 +119,41 @@ function escapeHtml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function isValidEmail(value: string): boolean {
-  // Deliberately simple — good enough to decide "is this worth putting in
-  // reply_to", not a full RFC 5322 validator.
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
 type ParsedFields = {
   name: string;
   phone: string;
-  email: string;
-  zip: string;
   serviceLabel: string;
-  preferredWindow: string;
+  preferredContactMethod: string;
   notes: string;
   hasPhoto: boolean;
-  discountRequested: boolean;
+  discountFirstTime: boolean;
+  discountMilitaryFirstResponder: boolean;
+  discountSenior: boolean;
 };
+
+// Human-readable labels for the 3 discount checkboxes -- kept here
+// (rather than imported from contentData.js) since this is a small,
+// server-only lookup and the route doesn't otherwise depend on that file
+// beyond `business`.
+const DISCOUNT_LABELS: Record<"discountFirstTime" | "discountMilitaryFirstResponder" | "discountSenior", string> = {
+  discountFirstTime: "First-Time Customer",
+  discountMilitaryFirstResponder: "Military & First Responders",
+  discountSenior: "Senior Citizen",
+};
+
+// Only one 10% discount ever applies per job, even if the customer
+// checked more than one box -- this builds the one-line summary used by
+// both message builders below.
+function describeDiscounts(fields: ParsedFields): string | null {
+  const claimed = (Object.keys(DISCOUNT_LABELS) as Array<keyof typeof DISCOUNT_LABELS>).filter(
+    (key) => fields[key]
+  );
+  if (claimed.length === 0) return null;
+  const labels = claimed.map((key) => DISCOUNT_LABELS[key]).join(", ");
+  return claimed.length > 1
+    ? `${labels} (max one 10% discount applied)`
+    : `${labels} (10% off)`;
+}
 
 // Basic payload validation: reject absurdly long field values before they
 // ever reach Telegram/Resend. This shouldn't trigger from the real form
@@ -145,10 +162,8 @@ type ParsedFields = {
 function findFieldTooLong(fields: ParsedFields): string | null {
   if (fields.name.length > MAX_FIELD_LENGTHS.name) return "name";
   if (fields.phone.length > MAX_FIELD_LENGTHS.phone) return "phone";
-  if (fields.email.length > MAX_FIELD_LENGTHS.email) return "email";
-  if (fields.zip.length > MAX_FIELD_LENGTHS.zip) return "zip";
   if (fields.serviceLabel.length > MAX_FIELD_LENGTHS.serviceLabel) return "service";
-  if (fields.preferredWindow.length > MAX_FIELD_LENGTHS.preferredWindow) return "preferred time window";
+  if (fields.preferredContactMethod.length > MAX_FIELD_LENGTHS.preferredContactMethod) return "preferred contact method";
   if (fields.notes.length > MAX_FIELD_LENGTHS.notes) return "notes";
   return null;
 }
@@ -159,14 +174,11 @@ function buildTelegramMessage(fields: ParsedFields): string {
     `<b>Name:</b> ${escapeHtml(fields.name) || "—"}`,
     `<b>Phone:</b> ${escapeHtml(fields.phone) || "—"}`,
     `<b>Service:</b> ${escapeHtml(fields.serviceLabel) || "—"}`,
-    `<b>ZIP / Address:</b> ${escapeHtml(fields.zip) || "—"}`,
+    `<b>Preferred Contact:</b> ${escapeHtml(fields.preferredContactMethod) || "—"}`,
   ];
-  if (fields.discountRequested) {
-    lines.push("🎖️ <b>Requested Military/Senior/First Responder discount (10% off)</b>");
-  }
-  if (fields.email) lines.push(`<b>Email:</b> ${escapeHtml(fields.email)}`);
-  if (fields.preferredWindow) lines.push(`<b>Preferred Time:</b> ${escapeHtml(fields.preferredWindow)}`);
-  if (fields.notes) lines.push(`<b>Notes:</b> ${escapeHtml(fields.notes)}`);
+  const discountSummary = describeDiscounts(fields);
+  if (discountSummary) lines.push(`🏷️ <b>Discount requested:</b> ${escapeHtml(discountSummary)}`);
+  if (fields.notes) lines.push(`<b>Job Description:</b> ${escapeHtml(fields.notes)}`);
   if (fields.hasPhoto) lines.push("📎 Photo attached — check email for the file.");
   return lines.join("\n");
 }
@@ -175,9 +187,8 @@ function buildEmailHtml(fields: ParsedFields): string {
   const rows = [
     ["Name", fields.name],
     ["Phone", fields.phone],
-    ["Email", fields.email || "—"],
     ["Service", fields.serviceLabel || "—"],
-    ["ZIP / Address", fields.zip || "—"],
+    ["Preferred Contact", fields.preferredContactMethod || "—"],
   ]
     .map(
       ([label, value]) =>
@@ -187,14 +198,12 @@ function buildEmailHtml(fields: ParsedFields): string {
     )
     .join("");
 
-  const preferredWindowBlock = fields.preferredWindow
-    ? `<p style="margin-top:16px;"><strong>Preferred Time:</strong> ${escapeHtml(fields.preferredWindow)}</p>`
+  const discountSummary = describeDiscounts(fields);
+  const discountBlock = discountSummary
+    ? `<p style="margin-top:16px;font-weight:600;">🏷️ Discount requested: ${escapeHtml(discountSummary)}</p>`
     : "";
   const notesBlock = fields.notes
-    ? `<p style="margin-top:16px;"><strong>Notes:</strong><br>${escapeHtml(fields.notes).replace(/\n/g, "<br>")}</p>`
-    : "";
-  const discountBlock = fields.discountRequested
-    ? '<p style="margin-top:16px;font-weight:600;">🎖️ Requested Military/Senior/First Responder discount (10% off).</p>'
+    ? `<p style="margin-top:16px;"><strong>Job Description:</strong><br>${escapeHtml(fields.notes).replace(/\n/g, "<br>")}</p>`
     : "";
   const photoBlock = fields.hasPhoto
     ? '<p style="margin-top:16px;">📎 Photo attached to this email.</p>'
@@ -204,7 +213,6 @@ function buildEmailHtml(fields: ParsedFields): string {
     <div style="font-family:sans-serif;font-size:14px;color:#0f172a;">
       <h2 style="margin-bottom:12px;">New quote request — ${escapeHtml(business.name)}</h2>
       <table>${rows}</table>
-      ${preferredWindowBlock}
       ${discountBlock}
       ${notesBlock}
       ${photoBlock}
@@ -279,10 +287,6 @@ async function sendEmailViaResend(
     subject,
     html: buildEmailHtml(fields),
   };
-
-  if (fields.email && isValidEmail(fields.email)) {
-    payload.reply_to = fields.email;
-  }
 
   if (photo && photo.size > 0) {
     if (photo.size > MAX_PHOTO_BYTES) {
@@ -380,13 +384,13 @@ export async function POST(request: NextRequest) {
     const fields: ParsedFields = {
       name,
       phone,
-      email: readField(formData, "email"),
-      zip: readField(formData, "zip_code"),
       serviceLabel: readField(formData, "service_needed"),
-      preferredWindow: readField(formData, "preferred_window"),
+      preferredContactMethod: readField(formData, "preferred_contact_method"),
       notes: readField(formData, "message"),
       hasPhoto: photo !== null,
-      discountRequested: readField(formData, "discount_requested") === "true",
+      discountFirstTime: readField(formData, "discount_first_time") === "true",
+      discountMilitaryFirstResponder: readField(formData, "discount_military_first_responder") === "true",
+      discountSenior: readField(formData, "discount_senior") === "true",
     };
 
     const tooLongField = findFieldTooLong(fields);
