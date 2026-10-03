@@ -262,22 +262,27 @@ export const services = [
   },
   {
     id: "locksmith",
-    title: "Residential Locksmith & Door Hardware",
-    quoteLabel: "Smart Lock & Security",
+    // Expanded from "Residential Locksmith & Door Hardware" -- this line
+    // now covers commercial and automotive lockout work too, not just
+    // residential installs, so the title/description/features below
+    // reflect the full scope rather than just the smart-lock angle.
+    title: "Locksmith & Lockout Services",
+    quoteLabel: "Locks, Smart Locks & Lockouts",
     icon: "lock",
     emoji: "🔐",
     // No real photo yet — Services() falls back to the icon/gradient below
     // (same onError pattern GalleryCard already uses) until a real photo
     // lands at this path, so there's no broken-image icon in the meantime.
     image: "/services/locksmith-door-hardware.jpg",
-    alt: "Smart lock installation and door hardware service in Pittsburgh, PA",
+    alt: "Locksmith, smart lock installation, and non-emergency lockout service for homes, businesses, and vehicles in Pittsburgh, PA",
     description:
-      "Scheduled, stress-free door security and hardware upgrades — no emergency pressure, just reliable installation.",
+      "Scheduled & same-day locksmithing — smart lock setups, standard lock replacements, and calm, upfront-priced door & vehicle unlocking. No surprise call-out or damage fees.",
     features: [
       "Smart lock installation & setup (Yale, Schlage, August, Google Nest, Eufy)",
-      "Rekeying & cylinder replacement for new homeowners",
-      "Deadbolt installation & handle set upgrades",
-      "Door alignment & latch repair",
+      "Standard lock, deadbolt & handle installation — plus rekeying & cylinder replacement",
+      "Non-emergency lockout service for homes & businesses",
+      "Vehicle & truck lockout service (cars, vans & commercial trucks)",
+      "Door realignment, strike plate tuning & handle upgrades",
     ],
     startingPrice: "Starting at $79",
     learnMoreHref: "/smart-lock-installation-pittsburgh",
@@ -333,7 +338,7 @@ export const discountOffer = {
 // header comment).
 export const servicesSection = {
   heading: "Our Handyman Services in Pittsburgh, PA",
-  subheading: "Four services, one call away — all backed by the same guarantee.",
+  subheading: "One call away — every service backed by the same guarantee.",
 };
 
 // JSON-LD structured data (schema.org), rendered as a <script
@@ -774,15 +779,21 @@ export const faq = [
   },
   {
     id: "lockout",
-    question: "Do you offer emergency lockout service?",
+    question: "Do you offer lockout service?",
     answer:
-      "No — Fixium Craft's locksmith services are scheduled and non-emergency: smart lock installs, rekeying, and deadbolt/handle set upgrades. If you're locked out right now, please contact a 24/7 emergency locksmith instead.",
+      "Yes — non-emergency, same-day lockout service for homes, businesses, and vehicles (cars, vans & commercial trucks), always with 100% upfront flat-rate pricing and no surprise fees on site. This is scheduled work, not instant emergency dispatch; if you need someone in the next few minutes, please call a 24/7 emergency locksmith instead.",
   },
   {
     id: "smart-locks",
     question: "Do you install smart locks or rekey existing locks?",
     answer:
       "Yes. We install and set up smart locks from Yale, Schlage, August, Google Nest, and Eufy, plus standard deadbolts and handle sets. Bring your own lock and we'll handle the rest. We also rekey and replace cylinders — a common request for new homeowners.",
+  },
+  {
+    id: "vehicle-lockout",
+    question: "Can you help if I'm locked out of my car or work truck?",
+    answer:
+      "Yes — we offer non-emergency, same-day vehicle lockout service for cars, vans, and commercial trucks, with upfront flat-rate pricing. If you need help right now, please call a 24/7 emergency/roadside locksmith instead.",
   },
 ];
 
@@ -878,21 +889,21 @@ export const servicePages = [
     h1: "Door & Lock Repair in Pittsburgh, PA",
     metaTitle: "Door & Lock Repair Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft handles door, handle, and lock repair — deadbolt installs, rekeying, and alignment — as part of our Residential Locksmith & Door Hardware service in Pittsburgh, PA. Flat-rate quotes.",
+      "Fixium Craft handles door, handle, and lock repair — deadbolt installs, rekeying, and alignment — as part of our Locksmith & Lockout Services in Pittsburgh, PA. Flat-rate quotes.",
     intro: [
-      `Fixium Craft handles door and lock repair in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}, as part of our Residential Locksmith & Door Hardware service.`,
+      `Fixium Craft handles door and lock repair in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}, as part of our Locksmith & Lockout Services.`,
       "This covers doors that won't latch or close properly, sticking or misaligned doors, loose or worn handles, and deadbolt or cylinder replacement — realigned, rekeyed, or replaced in one visit. Scheduled and non-emergency, so there's no rush-job pressure or after-hours surcharge.",
     ],
     faqs: [
       {
         question: "Does Fixium Craft fix doors that won't close or latch?",
         answer:
-          "Yes. Door alignment and latch adjustments are part of our Residential Locksmith & Door Hardware service, available throughout Pittsburgh, PA and surrounding areas.",
+          "Yes. Door alignment and latch adjustments are part of our Locksmith & Lockout Services, available throughout Pittsburgh, PA and surrounding areas.",
       },
       {
         question: "Can Fixium Craft adjust, rekey, or replace a door lock or handle?",
         answer:
-          "Yes — deadbolt installs, rekeying/cylinder replacement, and handle set upgrades are all part of this service. This is scheduled, non-emergency work; if you're locked out right now, call a 24/7 emergency locksmith instead.",
+          "Yes — deadbolt installs, rekeying/cylinder replacement, and handle set upgrades are all part of this service. We also offer non-emergency, same-day lockout service if you're locked out but not in a rush; for help in the next few minutes, call a 24/7 emergency locksmith instead.",
       },
     ],
   },
@@ -923,13 +934,16 @@ export const servicePages = [
   {
     slug: "smart-lock-installation-pittsburgh",
     serviceId: "locksmith",
-    h1: "Smart Lock Installation in Pittsburgh, PA",
-    metaTitle: "Smart Lock Installation Pittsburgh, PA | Fixium Craft",
+    // URL slug kept as-is (no routing change requested) even though the
+    // page content below now covers the full locksmith/lockout scope,
+    // not just smart lock installs.
+    h1: "Locksmith, Smart Lock & Lockout Services in Pittsburgh, PA",
+    metaTitle: "Locksmith & Lockout Services Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft installs smart locks (Yale, Schlage, August, Google Nest, Eufy) and handles rekeying and deadbolt upgrades in Pittsburgh, PA. Scheduled, non-emergency. Flat-rate quotes.",
+      "Fixium Craft handles smart lock installs, standard lock & deadbolt work, and non-emergency home, business & vehicle lockouts in Pittsburgh, PA — 100% upfront flat-rate pricing, no hidden fees.",
     intro: [
-      `Fixium Craft installs and sets up smart locks in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
-      "Bring your own Yale, Schlage, August, Google Nest, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it — scheduled and non-emergency, so there's no lockout-style rush pricing. We also handle rekeying and cylinder replacement, a common request for new homeowners.",
+      `Fixium Craft handles the full range of locksmith and lockout work in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")} — smart lock installation, standard lock and deadbolt work, door realignment and strike-plate tuning, and calm, scheduled lockout service for homes, businesses, and vehicles.`,
+      "Bring your own Yale, Schlage, August, Google Nest, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We also handle rekeying and cylinder replacement — a common request for new homeowners. Locked out of your house, business, car, van, or truck? We offer non-emergency, same-day unlocking with 100% upfront flat-rate pricing — no surprise \"service call + damage fee\" once we're on site. This is scheduled, calm-paced work, not instant 24/7 emergency dispatch; if you need someone in the next few minutes, please call a 24/7 emergency locksmith instead.",
     ],
     faqs: [
       {
@@ -938,14 +952,19 @@ export const servicePages = [
           "We install Yale, Schlage, August, Google Nest, and Eufy smart locks, plus standard deadbolts and handle sets. Bring your own lock and we'll handle installation and setup.",
       },
       {
-        question: "Is this an emergency locksmith service?",
+        question: "Do you help with lockouts?",
         answer:
-          "No — this is scheduled, non-emergency installation and rekeying work only. If you're locked out right now, please contact a 24/7 emergency locksmith instead.",
+          "Yes — residential, commercial, and vehicle lockouts (cars, vans, and commercial trucks), always with 100% upfront flat-rate pricing and no surprise fees on site. This is scheduled, same-day service, not instant emergency dispatch; if you need someone in the next few minutes, please call a 24/7 emergency locksmith instead.",
       },
       {
         question: "Can you rekey my locks after moving into a new home?",
         answer:
           "Yes, rekeying and cylinder replacement for new homeowners is one of our most common requests — a flat-rate quote based on the number of locks.",
+      },
+      {
+        question: "Will I be charged extra fees once you arrive?",
+        answer:
+          "No. Every lockout, lock, or hardware job is quoted flat-rate and upfront before we start — no last-minute \"service call\" or \"damage\" fees added on site.",
       },
     ],
   },
@@ -977,7 +996,7 @@ export const footer = {
     { label: "Handyman Services in Pittsburgh", href: "/handyman-pittsburgh" },
     { label: "Door & Lock Repair in Pittsburgh", href: "/door-lock-repair-pittsburgh" },
     { label: "Minor Home Repairs in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
-    { label: "Smart Lock Installation in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
+    { label: "Locksmith & Lockout Services in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
   ],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
