@@ -51,6 +51,7 @@ const RESEND_SANDBOX_FROM = `${business.name} Notifications <onboarding@resend.d
 const MAX_FIELD_LENGTHS = {
   name: 100,
   phone: 30,
+  zipCode: 15, // 5-digit US ZIP in practice, but a little slack for ZIP+4 ("15222-1234")
   serviceLabel: 250, // joined multi-select labels (e.g. all 6 services) can run long
   preferredContactMethod: 20,
   notes: 1000,
@@ -122,6 +123,7 @@ function escapeHtml(value: string): string {
 type ParsedFields = {
   name: string;
   phone: string;
+  zipCode: string;
   serviceLabel: string;
   preferredContactMethod: string;
   notes: string;
@@ -162,6 +164,7 @@ function describeDiscounts(fields: ParsedFields): string | null {
 function findFieldTooLong(fields: ParsedFields): string | null {
   if (fields.name.length > MAX_FIELD_LENGTHS.name) return "name";
   if (fields.phone.length > MAX_FIELD_LENGTHS.phone) return "phone";
+  if (fields.zipCode.length > MAX_FIELD_LENGTHS.zipCode) return "ZIP code";
   if (fields.serviceLabel.length > MAX_FIELD_LENGTHS.serviceLabel) return "service";
   if (fields.preferredContactMethod.length > MAX_FIELD_LENGTHS.preferredContactMethod) return "preferred contact method";
   if (fields.notes.length > MAX_FIELD_LENGTHS.notes) return "notes";
@@ -173,6 +176,7 @@ function buildTelegramMessage(fields: ParsedFields): string {
     `🔔 <b>New quote request</b> — ${escapeHtml(business.name)}`,
     `<b>Name:</b> ${escapeHtml(fields.name) || "—"}`,
     `<b>Phone:</b> ${escapeHtml(fields.phone) || "—"}`,
+    `<b>ZIP Code:</b> ${escapeHtml(fields.zipCode) || "—"}`,
     `<b>Service:</b> ${escapeHtml(fields.serviceLabel) || "—"}`,
     `<b>Preferred Contact:</b> ${escapeHtml(fields.preferredContactMethod) || "—"}`,
   ];
@@ -187,6 +191,7 @@ function buildEmailHtml(fields: ParsedFields): string {
   const rows = [
     ["Name", fields.name],
     ["Phone", fields.phone],
+    ["ZIP Code", fields.zipCode || "—"],
     ["Service", fields.serviceLabel || "—"],
     ["Preferred Contact", fields.preferredContactMethod || "—"],
   ]
@@ -384,6 +389,7 @@ export async function POST(request: NextRequest) {
     const fields: ParsedFields = {
       name,
       phone,
+      zipCode: readField(formData, "zip_code"),
       serviceLabel: readField(formData, "service_needed"),
       preferredContactMethod: readField(formData, "preferred_contact_method"),
       notes: readField(formData, "message"),

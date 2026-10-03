@@ -849,6 +849,7 @@ const SUCCESS_AUTO_DISMISS_MS = 6000;
 const EMPTY_FORM_DATA = {
   name: "",
   phone: "",
+  zip: "",
   services: [],
   notes: "",
   preferredContactMethod: quoteForm.fields.preferredContactMethod.defaultValue || "text",
@@ -964,6 +965,7 @@ function QuoteForm() {
       submission.append("from_name", business.name);
       submission.append("name", formData.name);
       submission.append("phone", formData.phone);
+      submission.append("zip_code", formData.zip);
       submission.append("service_needed", selectedServiceLabels.join(", "));
       submission.append("message", formData.notes);
       submission.append("preferred_contact_method", formData.preferredContactMethod);
@@ -1083,6 +1085,30 @@ function QuoteForm() {
             {quoteForm.fields.phone.helpText && (
               <p className="mt-1.5 text-xs font-medium text-slate-500">
                 {quoteForm.fields.phone.helpText}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="zip" className="text-sm font-medium text-slate-700">
+              {quoteForm.fields.zip.label}
+            </label>
+            <input
+              id="zip"
+              name="zip"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]{5}"
+              maxLength={5}
+              required={quoteForm.fields.zip.required}
+              value={formData.zip}
+              onChange={handleChange}
+              placeholder={quoteForm.fields.zip.placeholder}
+              className={INPUT_BASE}
+            />
+            {quoteForm.fields.zip.helpText && (
+              <p className="mt-1.5 text-xs font-medium text-slate-500">
+                {quoteForm.fields.zip.helpText}
               </p>
             )}
           </div>

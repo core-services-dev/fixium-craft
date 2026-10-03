@@ -581,6 +581,16 @@ export const quoteForm = {
       required: true,
       helpText: "🔒 We strictly send your exact quote via text — zero sales calls or spam.",
     },
+    // 5-digit US ZIP only -- just enough to confirm the job is inside our
+    // service area and route it to the closest tech, without asking for a
+    // full street address on a "quick quote" form (that level of detail
+    // can be collected later, when the job is actually scheduled).
+    zip: {
+      label: "ZIP Code",
+      placeholder: "15222",
+      required: true,
+      helpText: "So we can confirm you're in our service area.",
+    },
     // Multi-select — a job is often more than one service at once (e.g. a
     // TV mount plus a couple of shelves), so this holds an array of
     // selected values rather than a single string. `errorMessage` shows
