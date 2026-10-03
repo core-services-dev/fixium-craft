@@ -270,11 +270,12 @@ export const services = [
     quoteLabel: "Auto & Home Lockouts + Smart Locks",
     icon: "lock",
     emoji: "🔐",
-    // No real photo yet — Services() falls back to the icon/gradient below
-    // (same onError pattern GalleryCard already uses) until a real photo
-    // lands at this path, so there's no broken-image icon in the meantime.
-    image: "/services/locksmith-door-hardware.jpg",
-    alt: "Locksmith, smart lock installation, and non-emergency lockout service for homes, businesses, and vehicles in Pittsburgh, PA",
+    // Real installed-smart-lock photo (Yale touchscreen deadbolt),
+    // same object-cover/aspect-[4/3] treatment as the other 4 service
+    // cards -- the icon/gradient base layer + onError fallback in
+    // ServiceCard still cover the rare case this file fails to load.
+    image: "/images/projects/locksmith-door-hardware.jpg",
+    alt: "Locksmith and door lock installation service in Pittsburgh, PA",
     description:
       "Auto & home lockouts, smart lock installs, and standard lock replacement — scheduled, same-day, and 100% upfront-priced. No surprise call-out or damage fees.",
     features: [
