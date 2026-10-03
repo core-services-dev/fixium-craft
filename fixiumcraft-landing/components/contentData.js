@@ -129,9 +129,9 @@ export const trustBadges = [
 
 export const hero = {
   eyebrow: `Serving ${business.serviceArea}`,
-  headline: "Furniture Assembly, Handyman Repairs & Smart Lock Installation in Pittsburgh, PA",
+  headline: "Furniture Assembly, Handyman Repairs, Smart Locks & Lockouts in Pittsburgh, PA",
   subheadline:
-    "Get your weekend back — IKEA assembly, TV mounting, and home repairs done right, with flat-rate pricing and same-day slots.",
+    "Get your weekend back — IKEA assembly, TV mounting, home repairs, and auto & home lockouts done right, with flat-rate pricing and same-day slots.",
   // Real rating from actual Google reviews — confirmed, not a
   // placeholder. Update `stars` if the average ever changes.
   googleRating: {
@@ -267,7 +267,7 @@ export const services = [
     // residential installs, so the title/description/features below
     // reflect the full scope rather than just the smart-lock angle.
     title: "Locksmith & Lockout Services",
-    quoteLabel: "Locks, Smart Locks & Lockouts",
+    quoteLabel: "Auto & Home Lockouts + Smart Locks",
     icon: "lock",
     emoji: "🔐",
     // No real photo yet — Services() falls back to the icon/gradient below
@@ -276,12 +276,12 @@ export const services = [
     image: "/services/locksmith-door-hardware.jpg",
     alt: "Locksmith, smart lock installation, and non-emergency lockout service for homes, businesses, and vehicles in Pittsburgh, PA",
     description:
-      "Scheduled & same-day locksmithing — smart lock setups, standard lock replacements, and calm, upfront-priced door & vehicle unlocking. No surprise call-out or damage fees.",
+      "Auto & home lockouts, smart lock installs, and standard lock replacement — scheduled, same-day, and 100% upfront-priced. No surprise call-out or damage fees.",
     features: [
-      "Smart lock installation & setup (Yale, Schlage, August, Google Nest, Eufy)",
-      "Standard lock, deadbolt & handle installation — plus rekeying & cylinder replacement",
-      "Non-emergency lockout service for homes & businesses",
       "Vehicle & truck lockout service (cars, vans & commercial trucks)",
+      "Home & business unlocking — non-emergency, scheduled, same-day",
+      "Standard lock replacement, rekeying & deadbolts",
+      "Smart lock installation & setup (Yale, Schlage, August, Google Nest, Eufy)",
       "Door realignment, strike plate tuning & handle upgrades",
     ],
     startingPrice: "Starting at $79",
