@@ -128,10 +128,9 @@ export const trustBadges = [
 ];
 
 export const hero = {
-  eyebrow: `Serving ${business.serviceArea}`,
-  headline: "Furniture Assembly, Handyman Repairs, Smart Locks & Lockouts in Pittsburgh, PA",
-  subheadline:
-    "Get your weekend back — IKEA assembly, TV mounting, home repairs, and auto & home lockouts done right, with flat-rate pricing and same-day slots.",
+  eyebrow: "⭐ 5.0 ★ Google Reviewed | Fully Insured Pittsburgh Local",
+  headline: "Pittsburgh’s Precision Handyman for Furniture Assembly, Mounting & Locks",
+  subheadline: "Flat-rate pricing, stud-anchored installs, and full clean-up after every job — so your home stays stress-free.",
   // Real rating from actual Google reviews — confirmed, not a
   // placeholder. Update `stars` if the average ever changes.
   googleRating: {
