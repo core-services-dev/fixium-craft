@@ -35,6 +35,33 @@ export const business = {
   },
 };
 
+// Header nav — kept in contentData (not hardcoded in JSX) like every
+// other section's copy. Five items by design, matching the simplified
+// nav structure requested: the rest of the page's sections (Gallery,
+// Process, Reviews, FAQ) are still reachable by scrolling, just not
+// linked directly from the header anymore.
+export const navSection = {
+  items: [
+    { label: "Home", href: "#top" },
+    { label: "Services", href: "#services" },
+    { label: "Service Areas", href: "#service-areas" },
+    { label: "About Us", href: "#about" },
+    { label: "Contact Us", href: "#quote" },
+  ],
+};
+
+// About Us section (see About() in LandingPage.jsx). Short and honest —
+// no fabricated years-in-business or team-size claims; it just restates
+// facts already established elsewhere in this file (business.owner, the
+// real guarantees) in a brand-voice "who we are" framing.
+export const aboutSection = {
+  heading: "Built on Craftsman-Quality Work, Not Shortcuts",
+  body: [
+    `${business.name} was founded by ${business.owner} to bring real craftsman-quality assembly, repair, and security installation work to ${business.address.city} homeowners and renters — the kind of job where things are level, square, and anchored right the first time, not just "good enough."`,
+    "Every technician is background-checked and fully insured, every quote is flat-rate and upfront before we pick up a tool, and every job gets the same attention whether it's a single shelf or a full day of work.",
+  ],
+};
+
 // Specific neighborhoods/municipalities we serve around the core Pittsburgh
 // service area — used in localBusinessSchema's areaServed (below), in the
 // FAQ "what areas do you service" answer, and on each dedicated
@@ -74,9 +101,9 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "IKEA Furniture Assembly & Handyman Services in Pittsburgh, PA | Fixium Craft",
+  title: "Handyman, Furniture Assembly & Lock Installation Pittsburgh | Fixium Craft",
   description:
-    "Expert IKEA furniture assembly, TV wall mounting, and minor home repairs in Pittsburgh, PA & surrounding areas. Flat-rate pricing & same-day slots. Get a free quote today!",
+    "Fixium Craft provides fast, professional furniture assembly, handyman repairs, and smart lock installations in Pittsburgh, PA. Get your free quote today!",
   keywords: [
     "furniture assembly Pittsburgh",
     "IKEA assembly service",
@@ -84,6 +111,8 @@ export const seo = {
     "handyman near me",
     "flat pack furniture assembly",
     "small home repairs Pittsburgh",
+    "smart lock installation Pittsburgh",
+    "residential locksmith Pittsburgh",
   ],
   // This is the live, currently-deployed URL (verified reachable) — swap
   // to the custom domain here (and nowhere else) once fixiumcraft.com is
@@ -100,14 +129,14 @@ export const trustBadges = [
 
 export const hero = {
   eyebrow: `Serving ${business.serviceArea}`,
-  headline: "Furniture Assembly & Handyman Repairs in Pittsburgh, PA",
+  headline: "Furniture Assembly, Handyman Repairs & Smart Lock Installation in Pittsburgh, PA",
   subheadline:
     "Get your weekend back — IKEA assembly, TV mounting, and home repairs done right, with flat-rate pricing and same-day slots.",
   // Real rating from actual Google reviews — confirmed, not a
   // placeholder. Update `stars` if the average ever changes.
   googleRating: {
     stars: 5,
-    label: "5.0/5 Rating on Google Reviews",
+    label: "5.0/5 Rating on Google Reviews (2 Reviews)",
     sublabel: "Pittsburgh Local Handyman",
   },
   primaryCta: { label: "Get My Instant Quote", action: "form" },
@@ -226,6 +255,26 @@ export const services = [
     // No dedicated page for this one — only the 5 URLs in servicePages
     // were requested, and this service wasn't among them.
     learnMoreHref: null,
+  },
+  {
+    id: "locksmith",
+    title: "Residential Locksmith & Door Hardware",
+    icon: "lock",
+    // No real photo yet — Services() falls back to the icon/gradient below
+    // (same onError pattern GalleryCard already uses) until a real photo
+    // lands at this path, so there's no broken-image icon in the meantime.
+    image: "/services/locksmith-door-hardware.jpg",
+    alt: "Smart lock installation and door hardware service in Pittsburgh, PA",
+    description:
+      "Scheduled, stress-free door security and hardware upgrades — no emergency pressure, just reliable installation.",
+    features: [
+      "Smart lock installation & setup (Yale, Schlage, August, Google Nest, Eufy)",
+      "Rekeying & cylinder replacement for new homeowners",
+      "Deadbolt installation & handle set upgrades",
+      "Door alignment & latch repair",
+    ],
+    startingPrice: "Starting at $79",
+    learnMoreHref: "/smart-lock-installation-pittsburgh",
   },
 ];
 
@@ -710,6 +759,18 @@ export const faq = [
     answer:
       "We locate real wall studs with a stud finder before drilling and use the mount or furniture manufacturer's rated hardware — never drywall anchors alone for anything load-bearing. For tall IKEA pieces like PAX wardrobes and BILLY bookcases, we install the included anti-tip wall strap so the piece can't tip forward, which matters most in homes with kids or pets.",
   },
+  {
+    id: "lockout",
+    question: "Do you offer emergency lockout service?",
+    answer:
+      "No — Fixium Craft's locksmith services are scheduled and non-emergency: smart lock installs, rekeying, and deadbolt/handle set upgrades. If you're locked out right now, please contact a 24/7 emergency locksmith instead.",
+  },
+  {
+    id: "smart-locks",
+    question: "Do you install smart locks or rekey existing locks?",
+    answer:
+      "Yes. We install and set up smart locks from Yale, Schlage, August, Google Nest, and Eufy, plus standard deadbolts and handle sets. Bring your own lock and we'll handle the rest. We also rekey and replace cylinders — a common request for new homeowners.",
+  },
 ];
 
 // Content for the dedicated service+location pages under
@@ -800,25 +861,25 @@ export const servicePages = [
   },
   {
     slug: "door-lock-repair-pittsburgh",
-    serviceId: "repairs",
+    serviceId: "locksmith",
     h1: "Door & Lock Repair in Pittsburgh, PA",
     metaTitle: "Door & Lock Repair Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft handles door, handle, and lock adjustments as part of our Minor Home Repairs service in Pittsburgh, PA and nearby neighborhoods. Flat-rate quotes.",
+      "Fixium Craft handles door, handle, and lock repair — deadbolt installs, rekeying, and alignment — as part of our Residential Locksmith & Door Hardware service in Pittsburgh, PA. Flat-rate quotes.",
     intro: [
-      `Fixium Craft handles door and lock repair in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}, as part of our Minor Home Repairs service.`,
-      "This covers doors that won't latch or close properly, sticking or misaligned doors, and loose or worn door handles and locks — realigned, tightened, or replaced in one visit.",
+      `Fixium Craft handles door and lock repair in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}, as part of our Residential Locksmith & Door Hardware service.`,
+      "This covers doors that won't latch or close properly, sticking or misaligned doors, loose or worn handles, and deadbolt or cylinder replacement — realigned, rekeyed, or replaced in one visit. Scheduled and non-emergency, so there's no rush-job pressure or after-hours surcharge.",
     ],
     faqs: [
       {
         question: "Does Fixium Craft fix doors that won't close or latch?",
         answer:
-          "Yes. Door alignment and latch adjustments are part of our Minor Home Repairs service, available throughout Pittsburgh, PA and surrounding areas.",
+          "Yes. Door alignment and latch adjustments are part of our Residential Locksmith & Door Hardware service, available throughout Pittsburgh, PA and surrounding areas.",
       },
       {
-        question: "Can Fixium Craft adjust or replace a door lock or handle?",
+        question: "Can Fixium Craft adjust, rekey, or replace a door lock or handle?",
         answer:
-          "Yes — as part of our Minor Home Repairs service we adjust and replace door handles and standard locksets. For advanced locksmith or security work, we can point you to a specialist.",
+          "Yes — deadbolt installs, rekeying/cylinder replacement, and handle set upgrades are all part of this service. This is scheduled, non-emergency work; if you're locked out right now, call a 24/7 emergency locksmith instead.",
       },
     ],
   },
@@ -843,6 +904,35 @@ export const servicePages = [
         question: "How much do minor home repairs cost in Pittsburgh?",
         answer:
           "Minor home repairs start at $49, with a flat-rate quote based on the details and photos you send us.",
+      },
+    ],
+  },
+  {
+    slug: "smart-lock-installation-pittsburgh",
+    serviceId: "locksmith",
+    h1: "Smart Lock Installation in Pittsburgh, PA",
+    metaTitle: "Smart Lock Installation Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "Fixium Craft installs smart locks (Yale, Schlage, August, Google Nest, Eufy) and handles rekeying and deadbolt upgrades in Pittsburgh, PA. Scheduled, non-emergency. Flat-rate quotes.",
+    intro: [
+      `Fixium Craft installs and sets up smart locks in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
+      "Bring your own Yale, Schlage, August, Google Nest, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it — scheduled and non-emergency, so there's no lockout-style rush pricing. We also handle rekeying and cylinder replacement, a common request for new homeowners.",
+    ],
+    faqs: [
+      {
+        question: "What smart lock brands does Fixium Craft install?",
+        answer:
+          "We install Yale, Schlage, August, Google Nest, and Eufy smart locks, plus standard deadbolts and handle sets. Bring your own lock and we'll handle installation and setup.",
+      },
+      {
+        question: "Is this an emergency locksmith service?",
+        answer:
+          "No — this is scheduled, non-emergency installation and rekeying work only. If you're locked out right now, please contact a 24/7 emergency locksmith instead.",
+      },
+      {
+        question: "Can you rekey my locks after moving into a new home?",
+        answer:
+          "Yes, rekeying and cylinder replacement for new homeowners is one of our most common requests — a flat-rate quote based on the number of locks.",
       },
     ],
   },
@@ -874,6 +964,7 @@ export const footer = {
     { label: "Handyman Services in Pittsburgh", href: "/handyman-pittsburgh" },
     { label: "Door & Lock Repair in Pittsburgh", href: "/door-lock-repair-pittsburgh" },
     { label: "Minor Home Repairs in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
+    { label: "Smart Lock Installation in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
   ],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
@@ -881,6 +972,8 @@ export const footer = {
 // Grouped default export for convenience (e.g. `import content from './contentData'`)
 const contentData = {
   business,
+  navSection,
+  aboutSection,
   neighborhoods,
   serviceAreasSection,
   seo,
