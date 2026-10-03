@@ -32,6 +32,7 @@ import {
   painPoints,
   services,
   servicesSection,
+  complementaryServicesSection,
   pricingTrustSection,
   discountOffer,
   projectsGallery,
@@ -489,75 +490,36 @@ function PainPoints() {
 /*  Services grid                                                             */
 /* -------------------------------------------------------------------------- */
 
-function ServiceCard({ service }) {
-  // Same resilience pattern as GalleryCard: a gradient+icon base layer
-  // always renders first (so the card is never blank), and the real photo
-  // fades in on top once it loads. If the file is missing or fails to
-  // load, onError just keeps that layer transparent and the base layer
-  // keeps showing -- no broken-image icon, no build or load error. This
-  // matters most for services[] entries whose photo hasn't been uploaded
-  // yet (e.g. the new locksmith service launches icon-only).
-  const [imageFailed, setImageFailed] = useState(false);
+function CompactServiceCard({ service }) {
   const Icon = SERVICE_ICONS[service.icon];
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
+    <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sky-50 text-sky-600">
           {Icon ? (
-            <Icon className="relative h-12 w-12 text-white/90" />
+            <Icon className="h-5 w-5" />
           ) : (
-            <IconBox className="relative h-12 w-12 text-white/70" />
+            <IconBox className="h-5 w-5" />
           )}
-        </div>
-
-        {service.image && !imageFailed && (
-          <Image
-            src={service.image}
-            alt={service.alt || service.title}
-            fill
-            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-            className="absolute inset-0 object-cover"
-            onError={() => setImageFailed(true)}
-          />
-        )}
-
-        {Icon ? (
-          <span className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sky-600 shadow-md">
-            <Icon className="h-4 w-4" />
-          </span>
-        ) : null}
-      </div>
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-lg font-semibold text-slate-900">
+        </span>
+        <h3 className="text-base font-semibold text-slate-900">
           {service.title}
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">
-          {service.description}
-        </p>
-        <ul className="mt-4 space-y-2">
-          {service.features.map((feature) => (
-            <li
-              key={feature}
-              className="flex items-start gap-2 text-sm text-slate-600"
-            >
-              <IconCheck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-500" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-5 border-t border-slate-100 pt-4">
-          <span className="text-sm font-semibold text-slate-900">
-            {service.startingPrice}
-          </span>
-        </div>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-slate-600">
+        {service.description}
+      </p>
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3">
+        <span className="text-sm font-semibold text-slate-900">
+          {service.startingPrice}
+        </span>
         {service.learnMoreHref && (
           <Link
             href={service.learnMoreHref}
-            className="mt-3 inline-block text-sm font-medium text-sky-600 hover:underline"
+            className="text-sm font-medium text-sky-600 hover:underline"
           >
-            Learn more about {service.title} in Pittsburgh &rarr;
+            Learn more &rarr;
           </Link>
         )}
       </div>
@@ -565,7 +527,18 @@ function ServiceCard({ service }) {
   );
 }
 
-function Services() {
+// Featured, single-service breakdown for Furniture Assembly -- the
+// primary service and main SEO/conversion focus of the homepage. Same
+// image-resilience pattern as the old ServiceCard (gradient+icon base
+// layer always renders, real photo fades in on top, onError just keeps
+// the base layer showing), scaled up into a two-column featured block
+// with the service's four `subsections` (see contentData.js) rendered
+// as H3-level sub-cards underneath.
+function AssemblyBreakdown() {
+  const service = services.find((s) => s.id === "assembly");
+  const [imageFailed, setImageFailed] = useState(false);
+  const Icon = SERVICE_ICONS[service.icon];
+
   return (
     <section id="services" className="bg-slate-50 px-4 py-14 sm:py-20">
       <div className="mx-auto max-w-5xl">
@@ -576,9 +549,98 @@ function Services() {
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+        <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 lg:aspect-auto lg:min-h-[320px]">
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
+                {Icon ? (
+                  <Icon className="relative h-16 w-16 text-white/90" />
+                ) : (
+                  <IconBox className="relative h-16 w-16 text-white/70" />
+                )}
+              </div>
+
+              {service.image && !imageFailed && (
+                <Image
+                  src={service.image}
+                  alt={service.alt || service.title}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="absolute inset-0 object-cover"
+                  onError={() => setImageFailed(true)}
+                />
+              )}
+            </div>
+
+            <div className="flex flex-1 flex-col p-6 sm:p-8">
+              <p className="text-sm font-semibold uppercase tracking-wide text-sky-600">
+                Our Core Service
+              </p>
+              <p className="mt-1 text-xl font-bold text-slate-900">
+                {service.title}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                {service.description}
+              </p>
+
+              <div className="mt-5 border-t border-slate-100 pt-4">
+                <span className="text-sm font-semibold text-slate-900">
+                  {service.startingPrice}
+                </span>
+              </div>
+              {service.learnMoreHref && (
+                <Link
+                  href={service.learnMoreHref}
+                  className="mt-3 inline-block text-sm font-medium text-sky-600 hover:underline"
+                >
+                  Learn more about {service.title} in Pittsburgh &rarr;
+                </Link>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-px border-t border-slate-200 bg-slate-200 sm:grid-cols-2">
+            {service.subsections.map((sub) => (
+              <div key={sub.title} className="bg-white p-6">
+                <h3 className="text-base font-semibold text-slate-900">
+                  {sub.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  {sub.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Secondary, lower-emphasis grid for the other 5 services[] entries --
+// positioned as convenient add-ons to an assembly visit rather than
+// equal, standalone offerings. Uses the lighter CompactServiceCard
+// (no large photo) to keep the visual hierarchy clearly subordinate to
+// AssemblyBreakdown() above.
+function ComplementaryServices() {
+  const addOns = services.filter((service) => service.id !== "assembly");
+
+  return (
+    <section className="bg-white px-4 py-14 sm:py-20">
+      <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
+            {complementaryServicesSection.heading}
+          </h2>
+          <p className="mt-3 text-slate-600">
+            {complementaryServicesSection.subheading}
+          </p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {addOns.map((service) => (
+            <CompactServiceCard key={service.id} service={service} />
           ))}
         </div>
       </div>
@@ -1521,7 +1583,8 @@ export default function LandingPage() {
       <Hero />
       <ServiceAreas />
       <PainPoints />
-      <Services />
+      <AssemblyBreakdown />
+      <ComplementaryServices />
       <PricingTrust />
       <Gallery />
       <Process />

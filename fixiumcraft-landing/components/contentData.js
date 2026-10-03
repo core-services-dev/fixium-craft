@@ -106,9 +106,9 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "Home Services, Furniture Assembly & Lock Installation Pittsburgh | Fixium Craft",
+  title: "Furniture Assembly Pittsburgh, PA | Fixium Craft",
   description:
-    "Fixium Craft provides fast, professional furniture assembly, home maintenance & repairs, and smart lock installations in Pittsburgh, PA. Get your free quote today!",
+    "Professional IKEA & flat-pack furniture assembly in Pittsburgh, PA, plus TV mounting, wall hanging, lock installs & repairs. Free quote today!",
   keywords: [
     "handyman Pittsburgh PA",
     "furniture assembly Pittsburgh",
@@ -136,12 +136,12 @@ export const trustBadges = [
 ];
 
 export const hero = {
-  eyebrow: "⭐ Local Pittsburgh Craftsman | Fully Insured",
-  headline: "Reliable Home Maintenance & Craftsman Services in Pittsburgh, PA",
-  subheadline: "Quality Work. Fair Prices. No Surprises.",
+  eyebrow: "⭐ Furniture Assembly Pros | Fully Insured",
+  headline: "Professional Furniture Assembly in Pittsburgh, PA",
+  subheadline: "Reliable. Precise. Clean. Prompt.",
   supportingCopy:
-    "From small home repairs to custom furniture assembly and TV mounting, we keep your home running smoothly with zero hassle.",
-  primaryCta: { label: "Get a Free Quote", action: "form" },
+    "From IKEA wardrobes to office furniture — plus TV mounting, wall hanging, and small repairs while we're on site. One call, zero hassle.",
+  primaryCta: { label: "Get a Quick Quote", action: "form" },
   secondaryCtas: [
     { label: "Call Now", href: business.phoneHref, type: "call" },
     { label: "WhatsApp Us", href: business.whatsappHref, type: "whatsapp" },
@@ -205,6 +205,32 @@ export const services = [
     // Dedicated SEO page this service card links to (see servicePages
     // below and app/furniture-assembly-pittsburgh/page.tsx).
     learnMoreHref: "/furniture-assembly-pittsburgh",
+    // Four H3-level sub-sections rendered by AssemblyBreakdown() in
+    // LandingPage.jsx, in addition to (not replacing) the `features`
+    // list above -- `features` is still read by ServicePage.tsx for the
+    // dedicated /furniture-assembly-pittsburgh page, so it stays intact.
+    subsections: [
+      {
+        title: "IKEA & Flat-Pack Assembly",
+        description:
+          "PAX wardrobes, beds, desks, dressers, and shelving units — any flat-pack brand, assembled fast, sturdy, and level.",
+      },
+      {
+        title: "Move-In Disassembly & Reassembly",
+        description:
+          "Moving to a new place? We disassemble furniture at the old address and rebuild it at the new one, so nothing gets left behind or damaged in transit.",
+      },
+      {
+        title: "Sliding & Hinged Wardrobe Setup",
+        description:
+          "Sliding-door and hinged wardrobe systems installed plumb and square, with smooth-running doors and properly aligned tracks.",
+      },
+      {
+        title: "Office & Commercial Furniture",
+        description:
+          "Desks, workstations, conference tables, and shelving for home offices and small businesses — assembled on your schedule, including after-hours.",
+      },
+    ],
   },
   {
     id: "mounting",
@@ -374,8 +400,21 @@ export const discountMicrocopy =
 // hardcoded in JSX, so all page copy lives in one place — see the file
 // header comment).
 export const servicesSection = {
-  heading: "Our Home Services in Pittsburgh, PA",
-  subheading: "One call away — every service backed by the same guarantee.",
+  heading: "Furniture Assembly Services in Pittsburgh, PA",
+  subheading:
+    "From a single IKEA wardrobe to a full office move-in — every piece built sturdy, level, and ready to use.",
+};
+
+// Heading/subheading for the secondary "add-on" services section, rendered
+// by ComplementaryServices() in LandingPage.jsx, right after the featured
+// Furniture Assembly breakdown. Covers the other 5 services[] entries
+// (TV mounting, wall mounting, home repairs, AC/appliance installs, and
+// lock hardware) positioned as convenient bundle-on extras rather than
+// equal, standalone offerings.
+export const complementaryServicesSection = {
+  heading: "One-Stop Home Setup & Repairs On the Way",
+  subheading:
+    "Already booking an assembly? Add any of these and we’ll take care of it in the same visit.",
 };
 
 // JSON-LD structured data (schema.org), rendered as a <script
