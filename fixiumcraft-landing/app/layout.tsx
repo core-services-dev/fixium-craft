@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { business, seo } from "@/components/contentData";
+import ScrollToTop from "@/components/ScrollToTop";
 
 // metadataBase lets every relative URL below (canonical, openGraph.url,
 // and the auto-injected opengraph-image.tsx tags) resolve to an absolute
@@ -49,7 +50,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ScrollToTop />
+        {children}
+      </body>
     </html>
   );
 }
