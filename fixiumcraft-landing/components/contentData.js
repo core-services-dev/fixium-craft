@@ -101,14 +101,14 @@ export const serviceAreasSection = {
   popularSearches: [
     { label: "IKEA PAX assembly in Pittsburgh", href: "/furniture-assembly-pittsburgh" },
     { label: "TV wall mounting service in Mt. Lebanon", href: "/tv-mounting-pittsburgh" },
-    { label: "handyman in Shadyside", href: "/handyman-pittsburgh" },
+    { label: "home services in Shadyside", href: "/handyman-pittsburgh" },
   ],
 };
 
 export const seo = {
-  title: "Handyman, Furniture Assembly & Lock Installation Pittsburgh | Fixium Craft",
+  title: "Home Services, Furniture Assembly & Lock Installation Pittsburgh | Fixium Craft",
   description:
-    "Fixium Craft provides fast, professional furniture assembly, handyman repairs, and smart lock installations in Pittsburgh, PA. Get your free quote today!",
+    "Fixium Craft provides fast, professional furniture assembly, home maintenance & repairs, and smart lock installations in Pittsburgh, PA. Get your free quote today!",
   keywords: [
     "handyman Pittsburgh PA",
     "furniture assembly Pittsburgh",
@@ -130,17 +130,17 @@ export const seo = {
 };
 
 export const trustBadges = [
+  { id: "pricing", label: "Upfront Flat Rates" },
   { id: "insured", label: "Fully Insured" },
-  { id: "pricing", label: "Upfront Pricing" },
-  { id: "sameday", label: "Same-Day Service" },
+  { id: "sameday", label: "Scheduled & Same-Day Slots" },
 ];
 
 export const hero = {
-  eyebrow: "⭐ Local Pittsburgh Handyman | Fully Insured",
-  headline: "Reliable Handyman Services in Pittsburgh, PA",
+  eyebrow: "⭐ Local Pittsburgh Craftsman | Fully Insured",
+  headline: "Reliable Home Maintenance & Craftsman Services in Pittsburgh, PA",
   subheadline: "Quality Work. Fair Prices. No Surprises.",
   supportingCopy:
-    "From small home repairs to furniture assembly and TV mounting, we help make your home work better. Contact us today for a free quote.",
+    "From small home repairs to custom furniture assembly and TV mounting, we keep your home running smoothly with zero hassle.",
   primaryCta: { label: "Get a Free Quote", action: "form" },
   secondaryCtas: [
     { label: "Call Now", href: business.phoneHref, type: "call" },
@@ -225,7 +225,7 @@ export const services = [
   },
   {
     id: "wallmounting",
-    title: "Wall Mounting",
+    title: "Wall Mounting (shelves, mirrors, artwork)",
     icon: "wallmount",
     emoji: "🖼️",
     // No dedicated photo yet -- renders icon-only, same resilience
@@ -234,18 +234,18 @@ export const services = [
     image: null,
     alt: "Wall mounting service for shelves, mirrors, and artwork in Pittsburgh, PA",
     description:
-      "Wall mounting services for shelves, mirrors, artwork, and other heavy items — stud-anchored and leveled, with drywall-rated hardware when a stud isn't available.",
+      "Wall mounting services for shelves, mirrors, artwork, and wall decor — stud-anchored and leveled, with drywall-rated hardware when a stud isn't available.",
     features: [
       "Floating & bracket shelves",
-      "Mirrors, artwork & heavy wall decor",
-      "Curtain rods, coat racks & other heavy fixtures",
+      "Mirrors, artwork & wall decor",
+      "Curtain rods, coat racks & other fixtures",
     ],
     startingPrice: "Starting at $89",
     learnMoreHref: null,
   },
   {
     id: "repairs",
-    title: "Home Repairs & Small Fixes",
+    title: "Home Maintenance & Repairs",
     icon: "repairs",
     emoji: "🔧",
     image: "/services/minor-home-repairs.jpg",
@@ -288,7 +288,7 @@ export const services = [
     // now covers commercial and automotive lockout work too, not just
     // residential installs, so the title/description/features below
     // reflect the full scope rather than just the smart-lock angle.
-    title: "Locksmith & Lockout Services",
+    title: "Lock Hardware & Door Services",
     quoteLabel: "Auto & Home Lockouts + Smart Locks",
     icon: "lock",
     emoji: "🔐",
@@ -374,7 +374,7 @@ export const discountMicrocopy =
 // hardcoded in JSX, so all page copy lives in one place — see the file
 // header comment).
 export const servicesSection = {
-  heading: "Our Handyman Services in Pittsburgh, PA",
+  heading: "Our Home Services in Pittsburgh, PA",
   subheading: "One call away — every service backed by the same guarantee.",
 };
 
@@ -882,22 +882,22 @@ export const servicePages = [
   {
     slug: "handyman-pittsburgh",
     serviceId: null,
-    h1: "Handyman Services in Pittsburgh, PA",
-    metaTitle: "Handyman Services Pittsburgh, PA | Fixium Craft",
+    h1: "Home Services in Pittsburgh, PA",
+    metaTitle: "Home Services Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft is a local handyman company serving Pittsburgh, PA and surrounding neighborhoods: furniture assembly, TV mounting, minor repairs, and appliance installs.",
+      "Fixium Craft is a local home services company serving Pittsburgh, PA and surrounding neighborhoods: furniture assembly, TV mounting, minor repairs, and appliance installs.",
     intro: [
-      `Fixium Craft is a local handyman company based in ${business.address.city}, ${business.address.state}, serving ${business.address.city} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
+      `Fixium Craft is a local home services company based in ${business.address.city}, ${business.address.state}, serving ${business.address.city} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
       "We provide furniture assembly, TV and wall mounting, minor home repairs (including door and lock adjustments), and window AC and appliance installation — all with flat-rate pricing and same-day availability.",
     ],
     faqs: [
       {
-        question: "What handyman services does Fixium Craft offer in Pittsburgh?",
+        question: "What home services does Fixium Craft offer in Pittsburgh?",
         answer:
           "Fixium Craft offers furniture assembly, TV and wall mounting, minor home repairs, and window AC and appliance installation throughout Pittsburgh, PA and surrounding areas.",
       },
       {
-        question: "How do I book a handyman in Pittsburgh with Fixium Craft?",
+        question: "How do I book home services in Pittsburgh with Fixium Craft?",
         answer:
           "Send us your details and a photo by text, WhatsApp, or our quote form, and we'll text back a flat-rate quote — usually within an hour.",
       },
@@ -935,10 +935,10 @@ export const servicePages = [
   {
     slug: "minor-home-repairs-pittsburgh",
     serviceId: "repairs",
-    h1: "Home Repair Services in Pittsburgh, PA",
-    metaTitle: "Home Repair Services Pittsburgh, PA | Fixium Craft",
+    h1: "Home Maintenance & Repairs in Pittsburgh, PA",
+    metaTitle: "Home Maintenance & Repairs Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft provides home repair services in Pittsburgh, PA and nearby neighborhoods: cabinet hinges, door and lock adjustments, and general fixes. Flat-rate quotes.",
+      "Fixium Craft provides home maintenance & repairs in Pittsburgh, PA and nearby neighborhoods: cabinet hinges, door and lock adjustments, and general fixes. Flat-rate quotes.",
     intro: [
       `Fixium Craft provides minor home repairs in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
       "We fix sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments — the small fixes on your list that keep getting pushed back, done in one visit.",
@@ -962,8 +962,8 @@ export const servicePages = [
     // URL slug kept as-is (no routing change requested) even though the
     // page content below now covers the full locksmith/lockout scope,
     // not just smart lock installs.
-    h1: "Locksmith, Smart Lock & Lockout Services in Pittsburgh, PA",
-    metaTitle: "Locksmith & Lockout Services Pittsburgh, PA | Fixium Craft",
+    h1: "Lock Hardware, Smart Lock & Door Services in Pittsburgh, PA",
+    metaTitle: "Lock Hardware & Door Services Pittsburgh, PA | Fixium Craft",
     metaDescription:
       "Fixium Craft handles smart lock installs, standard lock & deadbolt work, and non-emergency home, business & vehicle lockouts in Pittsburgh, PA — 100% upfront flat-rate pricing, no hidden fees.",
     intro: [
@@ -1018,10 +1018,10 @@ export const footer = {
   servicePageLinks: [
     { label: "Furniture Assembly in Pittsburgh", href: "/furniture-assembly-pittsburgh" },
     { label: "TV Mounting in Pittsburgh", href: "/tv-mounting-pittsburgh" },
-    { label: "Handyman Services in Pittsburgh", href: "/handyman-pittsburgh" },
+    { label: "Home Services in Pittsburgh", href: "/handyman-pittsburgh" },
     { label: "Door & Lock Repair in Pittsburgh", href: "/door-lock-repair-pittsburgh" },
-    { label: "Home Repairs & Small Fixes in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
-    { label: "Locksmith & Lockout Services in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
+    { label: "Home Maintenance & Repairs in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
+    { label: "Lock Hardware & Door Services in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
   ],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
