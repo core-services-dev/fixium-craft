@@ -106,14 +106,19 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "Furniture Assembly Pittsburgh, PA | Fixium Craft",
+  title: "Fixium Craft | Home Repairs, Mounting & Locksmith Services Pittsburgh PA",
   description:
-    "Professional IKEA & flat-pack furniture assembly in Pittsburgh, PA, plus TV mounting, wall hanging, lock installs & repairs. Free quote today!",
+    "Reliable home services in Pittsburgh, PA. Expert furniture assembly, TV wall mounting, door lock replacement, lock repair, and lockout services.",
   keywords: [
-    "handyman Pittsburgh PA",
+    // Lock/handyman local-search terms first, then the original
+    // furniture-assembly and general home-repair terms.
+    "Handyman Pittsburgh",
+    "lock replacement Pittsburgh",
+    "lock repair Pittsburgh",
+    "door lockout service Pittsburgh",
+    "TV mounting Pittsburgh",
     "furniture assembly Pittsburgh",
     "IKEA assembly service",
-    "TV mounting Pittsburgh",
     "wall mounting services",
     "handyman near me",
     "flat pack furniture assembly",
@@ -325,7 +330,28 @@ export const services = [
     image: "/images/projects/locksmith-door-hardware.jpg",
     alt: "Locksmith and door lock installation service in Pittsburgh, PA",
     description:
-      "Auto & home lockouts, smart lock installs, and standard lock replacement — scheduled, same-day, and 100% upfront-priced. No surprise call-out or damage fees.",
+      "Fast response for home & vehicle lockouts, lock replacement, deadbolt repair, and smart lock setup across Pittsburgh, PA. Scheduled, same-day, and 100% upfront-priced — no surprise call-out or damage fees.",
+    // Specific lock offers for the JSON-LD hasOfferCatalog (see
+    // localBusinessSchema below), so search engines see the individual
+    // lock services rather than one generic "Lock Hardware" entry. The
+    // homepage card itself still renders as a single service.
+    schemaOffers: [
+      {
+        name: "Door Lock Replacement & Rekeying",
+        description:
+          "Standard lock and deadbolt replacement, rekeying, and cylinder changes for homes in Pittsburgh, PA, with upfront flat-rate pricing.",
+      },
+      {
+        name: "Emergency & Scheduled Lockout Service",
+        description:
+          "Fast-response lockout service for homes, businesses, and vehicles in Pittsburgh, PA, with 100% upfront flat-rate pricing and no surprise fees.",
+      },
+      {
+        name: "Smart Lock Installation & Lock Repair",
+        description:
+          "Smart lock installation and setup (Yale, Schlage, August, Google Nest, Eufy), plus deadbolt repair, door realignment, and strike plate tuning in Pittsburgh, PA.",
+      },
+    ],
     features: [
       "Vehicle & truck lockout service (cars, vans & commercial trucks)",
       "Home & business unlocking — non-emergency, scheduled, same-day",
@@ -507,14 +533,20 @@ export const localBusinessSchema = {
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Fixium Craft Services",
-    itemListElement: services.map((service) => ({
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: service.title,
-        description: service.description,
-      },
-    })),
+    // A service with `schemaOffers` (currently the lock service) expands
+    // into one Offer per entry; every other service stays one Offer.
+    itemListElement: services.flatMap((service) =>
+      (service.schemaOffers ?? [{ name: service.title, description: service.description }]).map(
+        (offer) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: offer.name,
+            description: offer.description,
+          },
+        })
+      )
+    ),
   },
 };
 
