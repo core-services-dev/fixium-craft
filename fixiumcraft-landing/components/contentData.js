@@ -106,7 +106,7 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "Fixium Craft | Home Repairs, Mounting & Locksmith Services Pittsburgh PA",
+  title: "Handyman, Furniture Assembly & Lock Services | Fixium Craft",
   description:
     "Reliable home services in Pittsburgh, PA. Expert furniture assembly, TV wall mounting, door lock replacement, lock repair, and lockout services.",
   keywords: [
@@ -342,7 +342,7 @@ export const services = [
           "Standard lock and deadbolt replacement, rekeying, and cylinder changes for homes in Pittsburgh, PA, with upfront flat-rate pricing.",
       },
       {
-        name: "Emergency & Scheduled Lockout Service",
+        name: "Same-Day & Scheduled Lockout Service",
         description:
           "Fast-response lockout service for homes, businesses, and vehicles in Pittsburgh, PA, with 100% upfront flat-rate pricing and no surprise fees.",
       },
