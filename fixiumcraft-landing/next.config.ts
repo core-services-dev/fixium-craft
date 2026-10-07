@@ -20,6 +20,20 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || "",
     NEXT_PUBLIC_COMMIT_SHA: process.env.NEXT_PUBLIC_COMMIT_SHA || "",
   },
+  // The old per-topic root-level pages were replaced by the 3 pillar pages
+  // under /services/<slug>. Permanent redirects (HTTP 308, Next's
+  // method-preserving equivalent of 301) keep existing links and search
+  // rankings pointing at the closest new page.
+  async redirects() {
+    return [
+      { source: "/furniture-assembly-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
+      { source: "/tv-mounting-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
+      { source: "/door-lock-repair-pittsburgh", destination: "/services/locksmith-doors", permanent: true },
+      { source: "/smart-lock-installation-pittsburgh", destination: "/services/locksmith-doors", permanent: true },
+      { source: "/handyman-pittsburgh", destination: "/services/general-handyman", permanent: true },
+      { source: "/minor-home-repairs-pittsburgh", destination: "/services/general-handyman", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

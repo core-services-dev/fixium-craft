@@ -41,13 +41,14 @@ export const business = {
 // Process, Reviews, FAQ) are still reachable by scrolling, just not
 // linked directly from the header anymore.
 export const navSection = {
-  items: [
-    { label: "Home", href: "#top" },
-    { label: "Services", href: "#services" },
-    { label: "Service Areas", href: "#service-areas" },
-    { label: "About Us", href: "#about" },
-    { label: "Contact Us", href: "#quote" },
+  servicesLabel: "Services",
+  // Cross-page hash links ("/#...") so they also work from /services/<slug>.
+  links: [
+    { label: "Areas We Serve", href: "/#service-areas" },
+    { label: "About", href: "/#about" },
   ],
+  callLabel: "Call",
+  quoteCta: { label: "Get a Free Quote", shortLabel: "Free Quote", href: "/#quote" },
 };
 
 // About Us section (see About() in LandingPage.jsx). Short and honest —
@@ -65,7 +66,7 @@ export const aboutSection = {
 // Specific neighborhoods/municipalities we serve around the core Pittsburgh
 // service area — used in localBusinessSchema's areaServed (below), in the
 // FAQ "what areas do you service" answer, and on each dedicated
-// service+location page (see `servicePages`), so both search engines and AI
+// pillar page (see `servicePillars`), so both search engines and AI
 // assistants see the exact coverage area, not just "Pittsburgh."
 export const neighborhoods = [
   "Shadyside",
@@ -80,6 +81,8 @@ export const neighborhoods = [
   "Dormont",
   "Carnegie",
   "Robinson Township",
+  "Wexford",
+  "Moon Township",
 ];
 
 // Homepage "Service Areas" banner (see ServiceAreas() in LandingPage.jsx) —
@@ -94,14 +97,15 @@ export const serviceAreasSection = {
     label: "Not sure we cover your area? Text us your ZIP code.",
     href: business.smsHref,
   },
-  // Long-tail local-search phrases, each linking to the dedicated
-  // service+location page that actually targets it (see `servicePages`
-  // below) — internal links with keyword-rich anchor text, not just more
-  // copy, for both traditional SEO and AI-assistant discoverability.
+  // Long-tail local-search phrases, each linking to the dedicated pillar
+  // page that actually targets it (see `servicePillars` below) — internal
+  // links with keyword-rich anchor text, not just more copy, for both
+  // traditional SEO and AI-assistant discoverability.
   popularSearches: [
-    { label: "IKEA PAX assembly in Pittsburgh", href: "/furniture-assembly-pittsburgh" },
-    { label: "TV wall mounting service in Mt. Lebanon", href: "/tv-mounting-pittsburgh" },
-    { label: "home services in Shadyside", href: "/handyman-pittsburgh" },
+    { label: "IKEA PAX assembly in Pittsburgh", href: "/services/furniture-assembly" },
+    { label: "TV wall mounting service in Mt. Lebanon", href: "/services/furniture-assembly" },
+    { label: "smart lock installation in Squirrel Hill", href: "/services/locksmith-doors" },
+    { label: "handyman services in Shadyside", href: "/services/general-handyman" },
   ],
 };
 
@@ -141,16 +145,16 @@ export const trustBadges = [
 ];
 
 export const hero = {
-  eyebrow: "⭐ Furniture Assembly Pros | Fully Insured",
-  headline: "Professional Furniture Assembly in Pittsburgh, PA",
-  subheadline: "Reliable. Precise. Clean. Prompt.",
+  eyebrow: "Fully Insured | Upfront Flat Rates",
+  headline: "Professional Handyman, Assembly & Locksmith Services in Pittsburgh",
+  subheadline: "Fast, reliable service from background-checked pros — flat-rate quotes before we start.",
   supportingCopy:
-    "From IKEA wardrobes to office furniture — plus TV mounting, wall hanging, and small repairs while we're on site. One call, zero hassle.",
-  primaryCta: { label: "Get a Quick Quote", action: "form" },
+    "Furniture assembly and mounting, locks and door hardware, and general home repairs — one local team for the whole to-do list.",
+  primaryCta: { label: "Request a Quote", action: "form" },
   secondaryCtas: [
+    { label: "Text Us Photos for an Estimate", href: business.smsHref, type: "sms" },
     { label: "Call Now", href: business.phoneHref, type: "call" },
     { label: "WhatsApp Us", href: business.whatsappHref, type: "whatsapp" },
-    { label: "Text a Photo", href: business.smsHref, type: "sms" },
   ],
   trustBadges,
 };
@@ -207,35 +211,9 @@ export const services = [
       "Old furniture disassembly & haul-away available",
     ],
     startingPrice: "Starting at $59",
-    // Dedicated SEO page this service card links to (see servicePages
-    // below and app/furniture-assembly-pittsburgh/page.tsx).
-    learnMoreHref: "/furniture-assembly-pittsburgh",
-    // Four H3-level sub-sections rendered by AssemblyBreakdown() in
-    // LandingPage.jsx, in addition to (not replacing) the `features`
-    // list above -- `features` is still read by ServicePage.tsx for the
-    // dedicated /furniture-assembly-pittsburgh page, so it stays intact.
-    subsections: [
-      {
-        title: "IKEA & Flat-Pack Assembly",
-        description:
-          "PAX wardrobes, beds, desks, dressers, and shelving units — any flat-pack brand, assembled fast, sturdy, and level.",
-      },
-      {
-        title: "Move-In Disassembly & Reassembly",
-        description:
-          "Moving to a new place? We disassemble furniture at the old address and rebuild it at the new one, so nothing gets left behind or damaged in transit.",
-      },
-      {
-        title: "Sliding & Hinged Wardrobe Setup",
-        description:
-          "Sliding-door and hinged wardrobe systems installed plumb and square, with smooth-running doors and properly aligned tracks.",
-      },
-      {
-        title: "Office & Commercial Furniture",
-        description:
-          "Desks, workstations, conference tables, and shelving for home offices and small businesses — assembled on your schedule, including after-hours.",
-      },
-    ],
+    // Dedicated pillar page this service belongs to (see servicePillars
+    // below and app/services/[slug]/page.tsx).
+    learnMoreHref: "/services/furniture-assembly",
   },
   {
     id: "mounting",
@@ -252,7 +230,7 @@ export const services = [
       "Soundbar & media console mounting",
     ],
     startingPrice: "Starting at $89",
-    learnMoreHref: "/tv-mounting-pittsburgh",
+    learnMoreHref: "/services/furniture-assembly",
   },
   {
     id: "wallmounting",
@@ -272,7 +250,7 @@ export const services = [
       "Curtain rods, coat racks & other fixtures",
     ],
     startingPrice: "Starting at $89",
-    learnMoreHref: null,
+    learnMoreHref: "/services/furniture-assembly",
   },
   {
     id: "repairs",
@@ -292,7 +270,7 @@ export const services = [
     // Links to the direct-match dedicated page; door-lock-repair-pittsburgh
     // is a second, differently-angled page for the same underlying
     // service, reachable from the footer instead (see footer.servicePageLinks).
-    learnMoreHref: "/minor-home-repairs-pittsburgh",
+    learnMoreHref: "/services/general-handyman",
   },
   {
     id: "installation",
@@ -311,7 +289,7 @@ export const services = [
     startingPrice: "Starting at $69",
     // No dedicated page for this one — only the 5 URLs in servicePages
     // were requested, and this service wasn't among them.
-    learnMoreHref: null,
+    learnMoreHref: "/services/general-handyman",
   },
   {
     id: "locksmith",
@@ -360,7 +338,7 @@ export const services = [
       "Door realignment, strike plate tuning & handle upgrades",
     ],
     startingPrice: "Starting at $79",
-    learnMoreHref: "/smart-lock-installation-pittsburgh",
+    learnMoreHref: "/services/locksmith-doors",
   },
 ];
 
@@ -422,25 +400,14 @@ export const discounts = [
 export const discountMicrocopy =
   "🏷️ Eligible discounts will be automatically applied to your final flat-rate quote. Only one 10% discount applies per job.";
 
-// Heading/subheading for the Services section (kept in contentData, not
-// hardcoded in JSX, so all page copy lives in one place — see the file
-// header comment).
+// Heading/subheading for the homepage "3 service pillars" section (see
+// ServicePillars() in LandingPage.jsx). The pillar cards themselves come
+// from `servicePillars`; `services` above still drives the quote-form
+// options and the JSON-LD offer catalog.
 export const servicesSection = {
-  heading: "Furniture Assembly Services in Pittsburgh, PA",
+  heading: "Our Home Services in Pittsburgh, PA",
   subheading:
-    "From a single IKEA wardrobe to a full office move-in — every piece built sturdy, level, and ready to use.",
-};
-
-// Heading/subheading for the secondary "add-on" services section, rendered
-// by ComplementaryServices() in LandingPage.jsx, right after the featured
-// Furniture Assembly breakdown. Covers the other 5 services[] entries
-// (TV mounting, wall mounting, home repairs, AC/appliance installs, and
-// lock hardware) positioned as convenient bundle-on extras rather than
-// equal, standalone offerings.
-export const complementaryServicesSection = {
-  heading: "One-Stop Home Setup & Repairs On the Way",
-  subheading:
-    "Already booking an assembly? Add any of these and we’ll take care of it in the same visit.",
+    "Three specialties, one trusted local team. Pick a service to see what's included, common questions, and how to book.",
 };
 
 // JSON-LD structured data (schema.org), rendered as a <script
@@ -903,181 +870,270 @@ export const faq = [
   },
 ];
 
-// Content for the dedicated service+location pages under
-// app/<slug>/page.tsx (rendered by components/ServicePage.tsx). Two of
-// these (door-lock-repair-pittsburgh, minor-home-repairs-pittsburgh) point
-// at the SAME underlying `services` entry ("repairs") rather than a
-// fabricated standalone service — Fixium Craft doesn't offer separate
-// locksmith or plumbing service lines, so door/lock and general repair
-// content both draw from the one real "Minor Home Repairs" service, just
-// with a different keyword angle and FAQ per page.
-export const servicePages = [
+// The 3 core service pillars. One source of truth for: the homepage pillar
+// cards (ServicePillars() in LandingPage.jsx), the Services dropdown in the
+// header (SiteNav.jsx), the dedicated /services/<slug> pages
+// (components/ServicePillarPage.tsx + app/services/[slug]/page.tsx), the
+// sitemap, and the footer links.
+//
+// These replaced the older per-topic root-level pages (e.g.
+// /tv-mounting-pittsburgh); those URLs now 308-redirect to the closest
+// pillar page -- see `redirects()` in next.config.ts.
+//
+// Card fields: slug, title, navLabel/navBlurb (dropdown), icon/image/alt,
+// description, features, startingPrice. Page fields: h1, metaTitle,
+// metaDescription, intro[], taskGroups[{heading, items[]}], faqs[].
+// startingPrice values are the existing real "Starting at" prices from
+// `services` above (lowest price among the services each pillar covers).
+export const servicePillars = [
   {
-    slug: "furniture-assembly-pittsburgh",
-    serviceId: "assembly",
-    h1: "Furniture Assembly in Pittsburgh, PA",
-    metaTitle: "Furniture Assembly Pittsburgh, PA | Fixium Craft",
+    slug: "furniture-assembly",
+    title: "Furniture Assembly & Mounting",
+    navLabel: "Furniture Assembly & Mounting",
+    navBlurb: "IKEA, beds, TVs, shelves & more",
+    icon: "assembly",
+    image: "/services/furniture-assembly.jpg",
+    alt: "IKEA and flat-pack furniture assembly service in Pittsburgh, PA",
+    description:
+      "IKEA and flat-pack assembly plus TV and wall mounting — built sturdy, level, and anchored right the first time.",
+    features: [
+      "IKEA & flat-pack assembly (PAX, desks, dressers)",
+      "Bed frames & bedroom sets",
+      "TV mounting & cable concealment",
+      "Wall mounting: shelves, mirrors & artwork",
+      "Outdoor & patio furniture",
+    ],
+    startingPrice: "Starting at $59",
+    h1: "Furniture Assembly & Mounting in Pittsburgh, PA",
+    metaTitle: "Furniture Assembly & TV Mounting Pittsburgh | Fixium Craft",
     metaDescription:
-      "Fixium Craft assembles IKEA, Wayfair, and flat-pack furniture in Pittsburgh, PA and nearby neighborhoods. Flat-rate pricing, same-day slots. Get a free quote.",
+      "IKEA & flat-pack furniture assembly, TV mounting, and wall mounting in Pittsburgh, PA. Flat-rate quotes, same-day slots, fully insured. Get a free quote.",
     intro: [
-      `Fixium Craft provides professional furniture assembly in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
-      "We assemble beds, wardrobes, desks, shelving, and office furniture from IKEA, Wayfair, Amazon, and other flat-pack brands — built fast, sturdy, and level, with no leftover screws.",
+      `Fixium Craft builds and mounts furniture across ${business.address.city}, ${business.address.state} — IKEA PAX wardrobes, beds, desks, dressers, and anything else that comes in a box — plus TV and wall mounting done level, stud-anchored, and clean.`,
+      `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
+    ],
+    taskGroups: [
+      {
+        heading: "Furniture assembly",
+        items: [
+          "IKEA PAX wardrobes & closet systems, sliding and hinged doors",
+          "Bed frames, platform beds, bunk beds & headboards",
+          "Desks, bookcases, dressers, nightstands & TV stands",
+          "Wayfair, Amazon, Target, Ashley & any other flat-pack brand",
+          "Office & commercial furniture: desks, workstations & shelving",
+          "Disassembly & reassembly for moves, with haul-away available",
+        ],
+      },
+      {
+        heading: "TV & wall mounting",
+        items: [
+          "Fixed, tilting & full-motion TV mounts, stud-anchored",
+          "Cable & wire concealment behind the wall or in raceway",
+          "Soundbar & media console mounting",
+          "Floating shelves, bracket shelves, mirrors & artwork",
+        ],
+      },
+      {
+        heading: "Outdoor furniture",
+        items: [
+          "Patio sets, outdoor dining tables, chairs & loungers",
+          "Outdoor storage benches, deck boxes & shelving",
+        ],
+      },
     ],
     faqs: [
-      {
-        question: "Does Fixium Craft assemble IKEA furniture in Pittsburgh?",
-        answer:
-          "Yes. Fixium Craft assembles IKEA, Wayfair, Amazon, and other flat-pack furniture throughout Pittsburgh, PA and surrounding areas.",
-      },
       {
         question: "How much does furniture assembly cost in Pittsburgh?",
         answer:
-          "Furniture assembly starts at $59, with a flat-rate quote based on the piece and any details you send us — no hourly surprises.",
+          "Furniture assembly starts at $59, with a flat-rate quote based on the pieces and photos you send us — no hourly surprises.",
+      },
+      {
+        question: "Can you assemble IKEA PAX wardrobes?",
+        answer:
+          "Yes. PAX wardrobes and closet systems (sliding or hinged doors, interior organizers) are one of our most common jobs. We build them level and secure them to the wall.",
+      },
+      {
+        question: "Can you mount a TV on any wall?",
+        answer:
+          "Standard drywall and stud walls are our everyday job. If you have brick, concrete, or plaster, mention it in your photo or text and we'll confirm the right hardware in your quote.",
+      },
+      {
+        question: "Do you take away the boxes and packaging?",
+        answer:
+          "Yes — post-job clean-up is included, packaging and all. Haul-away of old furniture is available too; just let us know when you request your quote.",
       },
     ],
   },
   {
-    slug: "tv-mounting-pittsburgh",
-    serviceId: "mounting",
-    h1: "TV Mounting in Pittsburgh, PA",
-    metaTitle: "TV Wall Mounting Pittsburgh, PA | Fixium Craft",
+    slug: "locksmith-doors",
+    title: "Locksmith & Door Hardware",
+    navLabel: "Locksmith & Door Hardware",
+    navBlurb: "Rekeying, smart locks, deadbolts & lockouts",
+    icon: "lock",
+    image: "/images/projects/locksmith-door-hardware.jpg",
+    alt: "Smart lock and door hardware installation in Pittsburgh, PA",
+    description:
+      "Rekeying, smart lock installs, deadbolts, handles, and same-day or scheduled lockouts — flat-rate and upfront.",
+    features: [
+      "Rekeying & lock replacement",
+      "Smart locks: Schlage, Nest, Ring, Yale & more",
+      "Deadbolts & door handle sets",
+      "Home, business & vehicle lockouts",
+      "Door alignment & strike plate repair",
+    ],
+    startingPrice: "Starting at $79",
+    h1: "Locksmith & Door Hardware Services in Pittsburgh, PA",
+    metaTitle: "Locksmith & Smart Lock Install Pittsburgh | Fixium Craft",
     metaDescription:
-      "Fixium Craft mounts TVs, shelves, and artwork in Pittsburgh, PA and nearby neighborhoods. Stud-anchored, cables concealed, flat-rate pricing. Get a free quote.",
+      "Rekeying, smart lock installation (Schlage, Nest, Ring), deadbolts, lock repair & same-day lockouts in Pittsburgh, PA. Flat-rate pricing, fully insured.",
     intro: [
-      `Fixium Craft provides TV wall mounting in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
-      "We mount TVs, shelves, mirrors, and artwork with stud-anchored hardware and clean cord concealment — hung right the first time, with no drywall guesswork.",
+      `Fixium Craft handles home and business locks across ${business.address.city}, ${business.address.state} — rekeying, lock and deadbolt replacement, door handles, smart lock installation, and same-day or scheduled lockouts for homes, businesses, and vehicles.`,
+      `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront — no surprise call-out or damage fees.`,
+    ],
+    taskGroups: [
+      {
+        heading: "Rekeying & lock replacement",
+        items: [
+          "Rekey existing locks to a new key — common for new homeowners",
+          "Replace worn, damaged, or outdated knobs and deadbolts",
+          "Cylinder replacement and key duplication matching",
+        ],
+      },
+      {
+        heading: "Smart locks",
+        items: [
+          "Install and set up Schlage, Google Nest, Ring, Yale, August & Eufy smart locks",
+          "App pairing, Wi-Fi setup & access-code programming",
+          "Swap an old deadbolt for a smart deadbolt",
+        ],
+      },
+      {
+        heading: "Door hardware",
+        items: [
+          "Deadbolt installation & upgrades",
+          "Door handle, lever & handle-set replacement",
+          "Door alignment, latch & strike plate adjustments for sticking doors",
+        ],
+      },
+      {
+        heading: "Lockouts",
+        items: [
+          "Home & business unlocking, same-day or scheduled",
+          "Vehicle lockouts: cars, vans & commercial trucks",
+        ],
+      },
     ],
     faqs: [
       {
-        question: "Do you mount TVs on drywall in Pittsburgh?",
+        question: "Do you offer emergency lockout service?",
         answer:
-          "Yes. Fixium Craft locates and anchors into wall studs behind drywall for a secure mount, and conceals cables for a clean finish.",
+          "We offer same-day and scheduled lockout service with upfront flat-rate pricing, but not instant 24/7 emergency dispatch. If you need someone within the next few minutes, please call a 24/7 emergency locksmith instead.",
       },
       {
-        question: "How much does TV mounting cost in Pittsburgh?",
+        question: "Do I need to buy the smart lock myself?",
         answer:
-          "TV wall mounting starts at $89, with a flat-rate quote confirmed before we begin the job.",
+          "Yes — you supply the lock (Schlage, Google Nest, Ring, Yale, August, Eufy, or a standard deadbolt) and we install, configure, and test it. Not sure which to buy? Text us and we'll point you to a good fit for your door.",
+      },
+      {
+        question: "Can you rekey my locks instead of replacing them?",
+        answer:
+          "In most cases yes. Rekeying makes your existing locks work with a new key, which is usually cheaper than replacing them. We'll tell you if a lock is too worn to rekey.",
+      },
+      {
+        question: "Will I get surprise fees if I'm locked out?",
+        answer:
+          "No. Every lockout, lock, or hardware job is quoted flat-rate and upfront before we start — no last-minute service call or damage fees added on site.",
       },
     ],
   },
   {
-    slug: "handyman-pittsburgh",
-    serviceId: null,
-    h1: "Home Services in Pittsburgh, PA",
-    metaTitle: "Home Services Pittsburgh, PA | Fixium Craft",
+    slug: "general-handyman",
+    title: "General Handyman & Repairs",
+    navLabel: "General Handyman & Repairs",
+    navBlurb: "Drywall, cabinets, fixtures & home upkeep",
+    icon: "repairs",
+    image: "/services/minor-home-repairs.jpg",
+    alt: "General handyman and home repair service in Pittsburgh, PA",
+    description:
+      "Drywall patching, minor plumbing and electrical fixtures, cabinet repair, and the small fixes that keep getting pushed back.",
+    features: [
+      "Drywall patching & touch-ups",
+      "Minor plumbing fixtures",
+      "Minor electrical fixtures",
+      "Cabinet & door repair",
+      "General home upkeep",
+    ],
+    startingPrice: "Starting at $49",
+    h1: "General Handyman & Home Repair in Pittsburgh, PA",
+    metaTitle: "Handyman & Home Repair Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Fixium Craft is a local home services company serving Pittsburgh, PA and surrounding neighborhoods: furniture assembly, TV mounting, minor repairs, and appliance installs.",
+      "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes, fully insured.",
     intro: [
-      `Fixium Craft is a local home services company based in ${business.address.city}, ${business.address.state}, serving ${business.address.city} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
-      "We provide furniture assembly, TV and wall mounting, minor home repairs (including door and lock adjustments), and window AC and appliance installation — all with flat-rate pricing and same-day availability.",
+      `Fixium Craft is a local home-repair team for the small jobs that keep getting pushed back across ${business.address.city}, ${business.address.state} — drywall patching, cabinet repair, minor plumbing and electrical fixtures, and general home upkeep.`,
+      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, and every technician is background-checked and fully insured.`,
+    ],
+    taskGroups: [
+      {
+        heading: "Walls & surfaces",
+        items: [
+          "Drywall patching & small hole repair",
+          "Caulking & sealing around tubs, sinks & trim",
+          "Touch-ups after repairs and installs",
+        ],
+      },
+      {
+        heading: "Cabinets & doors",
+        items: [
+          "Cabinet hinge, door & drawer repair and adjustment",
+          "Sticking or misaligned doors",
+          "Loose handles, pulls & hardware",
+        ],
+      },
+      {
+        heading: "Minor plumbing & electrical fixtures",
+        items: [
+          "Faucet and showerhead replacement",
+          "Running-toilet fixes (flapper, fill valve)",
+          "Light fixture swaps and switch & outlet cover plates",
+        ],
+      },
+      {
+        heading: "General home upkeep",
+        items: [
+          "Window AC unit installation",
+          "Curtain rods & blinds, hung straight",
+          "Furniture repair & childproofing",
+          "A punch-list of small fixes handled in one visit",
+        ],
+      },
     ],
     faqs: [
       {
-        question: "What home services does Fixium Craft offer in Pittsburgh?",
+        question: "What counts as a small handyman job?",
         answer:
-          "Fixium Craft offers furniture assembly, TV and wall mounting, minor home repairs, and window AC and appliance installation throughout Pittsburgh, PA and surrounding areas.",
+          "Anything on that to-do list that doesn't need a specialist: patching a wall, fixing a cabinet door, swapping a faucet or light fixture, hanging blinds. If you're not sure, send us a photo and we'll tell you.",
       },
       {
-        question: "How do I book home services in Pittsburgh with Fixium Craft?",
+        question: "Do you do electrical and plumbing work?",
         answer:
-          "Send us your details and a photo by text, WhatsApp, or our quote form, and we'll text back a flat-rate quote — usually within an hour.",
+          "Minor fixture-level work only, like replacing a faucet, fixing a running toilet, or swapping a light fixture. Anything involving new wiring, panel work, or rerouting pipes needs a licensed electrician or plumber.",
       },
       {
-        question: "Is Fixium Craft insured?",
+        question: "Can you bundle several small jobs into one visit?",
         answer:
-          "Yes — Fixium Craft technicians are fully insured and background-checked before joining the team.",
-      },
-    ],
-  },
-  {
-    slug: "door-lock-repair-pittsburgh",
-    serviceId: "locksmith",
-    h1: "Door & Lock Repair in Pittsburgh, PA",
-    metaTitle: "Door & Lock Repair Pittsburgh, PA | Fixium Craft",
-    metaDescription:
-      "Fixium Craft handles door, handle, and lock repair — deadbolt installs, rekeying, and alignment — as part of our Locksmith & Lockout Services in Pittsburgh, PA. Flat-rate quotes.",
-    intro: [
-      `Fixium Craft handles door and lock repair in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}, as part of our Locksmith & Lockout Services.`,
-      "This covers doors that won't latch or close properly, sticking or misaligned doors, loose or worn handles, and deadbolt or cylinder replacement — realigned, rekeyed, or replaced in one visit. Scheduled and non-emergency, so there's no rush-job pressure or after-hours surcharge.",
-    ],
-    faqs: [
-      {
-        question: "Does Fixium Craft fix doors that won't close or latch?",
-        answer:
-          "Yes. Door alignment and latch adjustments are part of our Locksmith & Lockout Services, available throughout Pittsburgh, PA and surrounding areas.",
+          "Yes, that's the best way to use us. Send photos of everything on your list and we'll quote it as a single flat-rate visit.",
       },
       {
-        question: "Can Fixium Craft adjust, rekey, or replace a door lock or handle?",
+        question: "How much do handyman repairs cost in Pittsburgh?",
         answer:
-          "Yes — deadbolt installs, rekeying/cylinder replacement, and handle set upgrades are all part of this service. We also offer non-emergency, same-day lockout service if you're locked out but not in a rush; for help in the next few minutes, call a 24/7 emergency locksmith instead.",
-      },
-    ],
-  },
-  {
-    slug: "minor-home-repairs-pittsburgh",
-    serviceId: "repairs",
-    h1: "Home Maintenance & Repairs in Pittsburgh, PA",
-    metaTitle: "Home Maintenance & Repairs Pittsburgh, PA | Fixium Craft",
-    metaDescription:
-      "Fixium Craft provides home maintenance & repairs in Pittsburgh, PA and nearby neighborhoods: cabinet hinges, door and lock adjustments, and general fixes. Flat-rate quotes.",
-    intro: [
-      `Fixium Craft provides minor home repairs in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")}.`,
-      "We fix sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments — the small fixes on your list that keep getting pushed back, done in one visit.",
-    ],
-    faqs: [
-      {
-        question: "What counts as a minor home repair for Fixium Craft?",
-        answer:
-          "Cabinet and drawer hinge adjustments, door alignment and hardware fixes (including locks and handles), and general furniture repair or childproofing.",
-      },
-      {
-        question: "How much do minor home repairs cost in Pittsburgh?",
-        answer:
-          "Minor home repairs start at $49, with a flat-rate quote based on the details and photos you send us.",
-      },
-    ],
-  },
-  {
-    slug: "smart-lock-installation-pittsburgh",
-    serviceId: "locksmith",
-    // URL slug kept as-is (no routing change requested) even though the
-    // page content below now covers the full locksmith/lockout scope,
-    // not just smart lock installs.
-    h1: "Lock Hardware, Smart Lock & Door Services in Pittsburgh, PA",
-    metaTitle: "Lock Hardware & Door Services Pittsburgh, PA | Fixium Craft",
-    metaDescription:
-      "Fixium Craft handles smart lock installs, standard lock & deadbolt work, and non-emergency home, business & vehicle lockouts in Pittsburgh, PA — 100% upfront flat-rate pricing, no hidden fees.",
-    intro: [
-      `Fixium Craft handles the full range of locksmith and lockout work in ${business.address.city}, ${business.address.state} and surrounding neighborhoods, including ${neighborhoods.join(", ")} — smart lock installation, standard lock and deadbolt work, door realignment and strike-plate tuning, and calm, scheduled lockout service for homes, businesses, and vehicles.`,
-      "Bring your own Yale, Schlage, August, Google Nest, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We also handle rekeying and cylinder replacement — a common request for new homeowners. Locked out of your house, business, car, van, or truck? We offer non-emergency, same-day unlocking with 100% upfront flat-rate pricing — no surprise \"service call + damage fee\" once we're on site. This is scheduled, calm-paced work, not instant 24/7 emergency dispatch; if you need someone in the next few minutes, please call a 24/7 emergency locksmith instead.",
-    ],
-    faqs: [
-      {
-        question: "What smart lock brands does Fixium Craft install?",
-        answer:
-          "We install Yale, Schlage, August, Google Nest, and Eufy smart locks, plus standard deadbolts and handle sets. Bring your own lock and we'll handle installation and setup.",
-      },
-      {
-        question: "Do you help with lockouts?",
-        answer:
-          "Yes — residential, commercial, and vehicle lockouts (cars, vans, and commercial trucks), always with 100% upfront flat-rate pricing and no surprise fees on site. This is scheduled, same-day service, not instant emergency dispatch; if you need someone in the next few minutes, please call a 24/7 emergency locksmith instead.",
-      },
-      {
-        question: "Can you rekey my locks after moving into a new home?",
-        answer:
-          "Yes, rekeying and cylinder replacement for new homeowners is one of our most common requests — a flat-rate quote based on the number of locks.",
-      },
-      {
-        question: "Will I be charged extra fees once you arrive?",
-        answer:
-          "No. Every lockout, lock, or hardware job is quoted flat-rate and upfront before we start — no last-minute \"service call\" or \"damage\" fees added on site.",
+          "Repairs start at $49, with a flat-rate quote based on the details and photos you send us — never an hourly guess.",
       },
     ],
   },
 ];
 
 export const footer = {
-  about: `${business.name} provides fast, reliable furniture assembly, TV mounting, wall mounting, and home repair services across the Pittsburgh area.`,
+  about: `${business.name} provides furniture assembly and mounting, locksmith and door hardware, and general handyman repairs across the Pittsburgh area.`,
   links: [
     { label: "Services", href: "#services" },
     { label: "Recent Projects", href: "#gallery" },
@@ -1092,18 +1148,13 @@ export const footer = {
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],
-  // Internal links to the dedicated service+location pages (see
-  // `servicePages` above and app/<slug>/page.tsx) — rendered in
-  // LandingPage.jsx's Footer() so they're discoverable from every page,
-  // not just the sitemap.
-  servicePageLinks: [
-    { label: "Furniture Assembly in Pittsburgh", href: "/furniture-assembly-pittsburgh" },
-    { label: "TV Mounting in Pittsburgh", href: "/tv-mounting-pittsburgh" },
-    { label: "Home Services in Pittsburgh", href: "/handyman-pittsburgh" },
-    { label: "Door & Lock Repair in Pittsburgh", href: "/door-lock-repair-pittsburgh" },
-    { label: "Home Maintenance & Repairs in Pittsburgh", href: "/minor-home-repairs-pittsburgh" },
-    { label: "Lock Hardware & Door Services in Pittsburgh", href: "/smart-lock-installation-pittsburgh" },
-  ],
+  // Internal links to the 3 pillar pages (see `servicePillars` above and
+  // app/services/[slug]/page.tsx) — rendered in LandingPage.jsx's Footer()
+  // so they're discoverable from every page, not just the sitemap.
+  servicePageLinks: servicePillars.map((p) => ({
+    label: `${p.navLabel} in Pittsburgh`,
+    href: `/services/${p.slug}`,
+  })),
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
 
@@ -1136,7 +1187,7 @@ const contentData = {
   testimonialsSection,
   faq,
   faqSection,
-  servicePages,
+  servicePillars,
   footer,
 };
 

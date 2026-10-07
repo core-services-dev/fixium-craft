@@ -23,16 +23,16 @@ import Link from "next/link";
 // module, no runtime fs access) — keeps the footer's version string in
 // sync with package.json without hardcoding a second copy of it.
 import packageJson from "../package.json";
+import { SiteNav, StickyMobileBar } from "./SiteNav";
 import {
   business,
-  navSection,
   aboutSection,
   hero,
   serviceAreasSection,
   painPoints,
   services,
   servicesSection,
-  complementaryServicesSection,
+  servicePillars,
   pricingTrustSection,
   discountOffer,
   projectsGallery,
@@ -230,96 +230,6 @@ const SERVICE_ICONS = {
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Navbar                                                                    */
-/* -------------------------------------------------------------------------- */
-
-function Navbar() {
-  return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
-        <a
-          href="#top"
-          className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-slate-900 transition-opacity hover:opacity-80"
-        >
-          <Image
-            src="/logo-icon.png"
-            alt={`${business.name} logo`}
-            width={44}
-            height={44}
-            priority
-            className="h-10 w-10 shrink-0 sm:h-11 sm:w-11"
-          />
-          <span className="leading-none">{business.name}</span>
-        </a>
-
-        <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
-          {navSection.items.map((item) => (
-            <a key={item.href} href={item.href} className="hover:text-slate-900">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <a
-            href={business.phoneHref}
-            aria-label={`Call ${business.name} at ${business.phoneDisplay}`}
-            title={business.phoneDisplay}
-            className={`hidden items-center gap-1.5 px-3 py-2 text-sm sm:flex ${BTN_OUTLINE_DARK}`}
-          >
-            <IconPhone className="h-4 w-4" />
-            <span>Call</span>
-          </a>
-          <a href="#quote" className={`px-3.5 py-2 text-sm ${BTN_PRIMARY}`}>
-            Get a Quote
-          </a>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Sticky mobile action bar                                                  */
-/* -------------------------------------------------------------------------- */
-
-function StickyMobileBar() {
-  return (
-    <nav
-      aria-label="Quick contact actions"
-      className="fixed inset-x-0 bottom-0 z-50 flex border-t border-slate-200 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.08)] lg:hidden"
-    >
-      <a
-        href={business.phoneHref}
-        className="flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-slate-700 active:bg-slate-50"
-        aria-label="Call us"
-      >
-        <IconPhone className="h-5 w-5" />
-        <span className="text-[11px] font-medium">Call</span>
-      </a>
-      <a
-        href="#quote"
-        className="flex flex-1 flex-col items-center justify-center gap-0.5 border-x border-slate-200 py-2.5 text-slate-700 active:bg-slate-50"
-        aria-label="Get a quote"
-      >
-        <IconTag className="h-5 w-5" />
-        <span className="text-[11px] font-medium">Get Quote</span>
-      </a>
-      <a
-        href={business.whatsappHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-1 flex-col items-center justify-center gap-0.5 bg-emerald-500 py-2.5 text-white active:bg-emerald-600"
-        aria-label="Message us on WhatsApp"
-      >
-        <IconWhatsapp className="h-5 w-5" />
-        <span className="text-[11px] font-medium">WhatsApp</span>
-      </a>
-    </nav>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 
@@ -342,17 +252,24 @@ function Hero() {
           </p>
         )}
 
-        {/* Single primary visual button — Call/WhatsApp are still one tap
-            away, just demoted to lightweight text links underneath instead
-            of competing full-size buttons, per the reduced-cognitive-load
-            request. */}
+        {/* Dual CTAs: request a quote (form) + text photos for an estimate.
+            Call / WhatsApp stay one tap away as lightweight links below. */}
         <div className="mt-8 flex flex-col items-center gap-3">
-          <a
-            href="#quote"
-            className={`w-full max-w-xs px-6 py-3.5 text-center text-base shadow-lg shadow-sky-500/30 sm:w-auto sm:px-10 ${BTN_PRIMARY}`}
-          >
-            {hero.primaryCta.label}
-          </a>
+          <div className="flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+            <a
+              href="#quote"
+              className={`px-6 py-3.5 text-center text-base shadow-lg shadow-sky-500/30 sm:px-8 ${BTN_PRIMARY}`}
+            >
+              {hero.primaryCta.label}
+            </a>
+            <a
+              href={business.smsHref}
+              className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 text-center text-base sm:px-8 ${BTN_OUTLINE_LIGHT}`}
+            >
+              <IconMessage className="h-5 w-5 shrink-0" />
+              {hero.secondaryCtas[0].label}
+            </a>
+          </div>
           <div className="flex items-center gap-4 text-sm font-medium text-slate-300">
             <a
               href={business.phoneHref}
@@ -431,7 +348,7 @@ function ServiceAreas() {
           {serviceAreasSection.cta.label} &rarr;
         </a>
 
-        {/* Keyword-rich internal links to the dedicated service+location
+        {/* Keyword-rich internal links to the dedicated pillar
             pages — anchor text is the actual long-tail phrase being
             targeted, not generic "click here" copy. */}
         <p className="mx-auto mt-6 max-w-2xl text-xs text-slate-500">
@@ -490,157 +407,80 @@ function PainPoints() {
 /*  Services grid                                                             */
 /* -------------------------------------------------------------------------- */
 
-function CompactServiceCard({ service }) {
-  const Icon = SERVICE_ICONS[service.icon];
+// One of the 3 equal service pillars. Same image-resilience pattern as the
+// old service cards: the gradient+icon base layer always renders, the real
+// photo fades in on top, and onError just keeps the base layer showing.
+function PillarCard({ pillar }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const Icon = SERVICE_ICONS[pillar.icon];
 
   return (
-    <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sky-50 text-sky-600">
+    <article className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
           {Icon ? (
-            <Icon className="h-5 w-5" />
+            <Icon className="h-14 w-14 text-white/90" />
           ) : (
-            <IconBox className="h-5 w-5" />
+            <IconBox className="h-14 w-14 text-white/70" />
           )}
-        </span>
-        <h3 className="text-base font-semibold text-slate-900">
-          {service.title}
-        </h3>
-      </div>
-      <p className="mt-3 text-sm leading-relaxed text-slate-600">
-        {service.description}
-      </p>
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3">
-        <span className="text-sm font-semibold text-slate-900">
-          {service.startingPrice}
-        </span>
-        {service.learnMoreHref && (
-          <Link
-            href={service.learnMoreHref}
-            className="text-sm font-medium text-sky-600 hover:underline"
-          >
-            Learn more &rarr;
-          </Link>
+        </div>
+        {pillar.image && !imageFailed && (
+          <Image
+            src={pillar.image}
+            alt={pillar.alt || pillar.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="absolute inset-0 object-cover"
+            onError={() => setImageFailed(true)}
+          />
         )}
       </div>
-    </div>
+
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sky-50 text-sky-600">
+            {Icon ? <Icon className="h-5 w-5" /> : <IconBox className="h-5 w-5" />}
+          </span>
+          <h3 className="text-lg font-bold leading-snug text-slate-900">{pillar.title}</h3>
+        </div>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">{pillar.description}</p>
+        <ul className="mt-4 space-y-2 text-sm text-slate-700">
+          {pillar.features.map((feature) => (
+            <li key={feature} className="flex items-start gap-2">
+              <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto pt-5">
+          <p className="mb-3 text-sm font-semibold text-slate-900">{pillar.startingPrice}</p>
+          <Link
+            href={`/services/${pillar.slug}`}
+            className={`block w-full px-5 py-3 text-center text-sm ${BTN_PRIMARY}`}
+          >
+            Learn More &amp; Book
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
-// Featured, single-service breakdown for Furniture Assembly -- the
-// primary service and main SEO/conversion focus of the homepage. Same
-// image-resilience pattern as the old ServiceCard (gradient+icon base
-// layer always renders, real photo fades in on top, onError just keeps
-// the base layer showing), scaled up into a two-column featured block
-// with the service's four `subsections` (see contentData.js) rendered
-// as H3-level sub-cards underneath.
-function AssemblyBreakdown() {
-  const service = services.find((s) => s.id === "assembly");
-  const [imageFailed, setImageFailed] = useState(false);
-  const Icon = SERVICE_ICONS[service.icon];
-
+// The homepage's 3 equal service pillars (data: `servicePillars`), each
+// linking to its own SEO page under /services/<slug>.
+function ServicePillars() {
   return (
-    <section id="services" className="bg-slate-50 px-4 py-14 sm:py-20">
-      <div className="mx-auto max-w-5xl">
+    <section id="services" className="scroll-mt-20 bg-slate-50 px-4 py-14 sm:py-20">
+      <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
             {servicesSection.heading}
           </h2>
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
-
-        <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 lg:aspect-auto lg:min-h-[320px]">
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-                {Icon ? (
-                  <Icon className="relative h-16 w-16 text-white/90" />
-                ) : (
-                  <IconBox className="relative h-16 w-16 text-white/70" />
-                )}
-              </div>
-
-              {service.image && !imageFailed && (
-                <Image
-                  src={service.image}
-                  alt={service.alt || service.title}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="absolute inset-0 object-cover"
-                  onError={() => setImageFailed(true)}
-                />
-              )}
-            </div>
-
-            <div className="flex flex-1 flex-col p-6 sm:p-8">
-              <p className="text-sm font-semibold uppercase tracking-wide text-sky-600">
-                Our Core Service
-              </p>
-              <p className="mt-1 text-xl font-bold text-slate-900">
-                {service.title}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                {service.description}
-              </p>
-
-              <div className="mt-5 border-t border-slate-100 pt-4">
-                <span className="text-sm font-semibold text-slate-900">
-                  {service.startingPrice}
-                </span>
-              </div>
-              {service.learnMoreHref && (
-                <Link
-                  href={service.learnMoreHref}
-                  className="mt-3 inline-block text-sm font-medium text-sky-600 hover:underline"
-                >
-                  Learn more about {service.title} in Pittsburgh &rarr;
-                </Link>
-              )}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-px border-t border-slate-200 bg-slate-200 sm:grid-cols-2">
-            {service.subsections.map((sub) => (
-              <div key={sub.title} className="bg-white p-6">
-                <h3 className="text-base font-semibold text-slate-900">
-                  {sub.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  {sub.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Secondary, lower-emphasis grid for the other 5 services[] entries --
-// positioned as convenient add-ons to an assembly visit rather than
-// equal, standalone offerings. Uses the lighter CompactServiceCard
-// (no large photo) to keep the visual hierarchy clearly subordinate to
-// AssemblyBreakdown() above.
-function ComplementaryServices() {
-  const addOns = services.filter((service) => service.id !== "assembly");
-
-  return (
-    <section className="bg-white px-4 py-14 sm:py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
-            {complementaryServicesSection.heading}
-          </h2>
-          <p className="mt-3 text-slate-600">
-            {complementaryServicesSection.subheading}
-          </p>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {addOns.map((service) => (
-            <CompactServiceCard key={service.id} service={service} />
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {servicePillars.map((pillar) => (
+            <PillarCard key={pillar.slug} pillar={pillar} />
           ))}
         </div>
       </div>
@@ -1552,7 +1392,7 @@ function Footer() {
           ))}
         </nav>
         <nav
-          aria-label="Service areas"
+          aria-label="Services"
           className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs"
         >
           {footer.servicePageLinks.map((link) => (
@@ -1605,12 +1445,11 @@ function Footer() {
 export default function LandingPage() {
   return (
     <main id="top" className="min-h-screen bg-white font-sans text-slate-900">
-      <Navbar />
+      <SiteNav />
       <Hero />
+      <ServicePillars />
       <ServiceAreas />
       <PainPoints />
-      <AssemblyBreakdown />
-      <ComplementaryServices />
       <PricingTrust />
       <Gallery />
       <Process />

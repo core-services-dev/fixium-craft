@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
-import { seo, servicePages } from "@/components/contentData";
+import { seo, servicePillars } from "@/components/contentData";
 
 // app/sitemap.ts (file convention) — served at /sitemap.xml. The homepage
 // is still the main content route (all its sections are anchors on "/"),
-// but app/privacy, app/terms, and the dedicated service+location pages
-// under app/<slug>/page.tsx (built from `servicePages`) are separate,
+// but app/privacy, app/terms, and the pillar pages
+// under app/services/[slug] (built from `servicePillars`) are separate,
 // real routes — listed here per the note this comment used to leave for
 // exactly this situation. See the note in layout.tsx about
 // seo.canonicalUrl needing to be the actual live domain for any of this
@@ -19,10 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    // One entry per servicePages slug, so a new dedicated page added there
+    // One entry per servicePillars slug, so a new dedicated page added there
     // automatically shows up here too.
-    ...servicePages.map((page) => ({
-      url: `${base}/${page.slug}`,
+    ...servicePillars.map((page) => ({
+      url: `${base}/services/${page.slug}`,
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8,
