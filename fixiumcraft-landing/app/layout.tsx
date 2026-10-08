@@ -43,7 +43,11 @@ export const metadata: Metadata = {
     // Next falls back to opengraph-image for Twitter when one isn't set).
   },
   verification: {
-    google: "1A0C3cEVRYG-iN5migckdRiDpysWGYZWgdnUA_0MzaA",
+    // Two Search Console properties verified: keep both tags.
+    google: [
+      "1A0C3cEVRYG-iN5migckdRiDpysWGYZWgdnUA_0MzaA",
+      "PceKkUI3XqEuK606M6VwN3kSB8b7MIfwrwsqtq-_5tg",
+    ],
   },
 };
 
