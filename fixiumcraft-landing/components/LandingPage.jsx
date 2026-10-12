@@ -233,28 +233,54 @@ const SERVICE_ICONS = {
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 
+function HeroServiceCard({ pillar }) {
+  const Icon = SERVICE_ICONS[pillar.icon];
+  return (
+    <Link
+      href={`/services/${pillar.slug}`}
+      className="group flex items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-lg shadow-black/20 ring-1 ring-white/10 transition hover:-translate-y-0.5 hover:shadow-xl sm:flex-col sm:items-start sm:gap-2 sm:p-5"
+    >
+      <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-sky-50 text-sky-600 sm:h-12 sm:w-12">
+        {Icon ? <Icon className="h-6 w-6" /> : <IconBox className="h-6 w-6" />}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-base font-bold leading-snug text-slate-900">
+          {pillar.title}
+        </span>
+        <span className="mt-0.5 block text-xs text-slate-500 sm:text-sm">{pillar.navBlurb}</span>
+        <span className="mt-2 flex items-center justify-between gap-2 sm:mt-3">
+          <span className="whitespace-nowrap rounded-full bg-sky-50 px-2.5 py-1 text-xs font-bold text-sky-700 sm:text-sm">
+            {pillar.startingPrice}
+          </span>
+          <span className="hidden items-center gap-1 whitespace-nowrap text-sm font-semibold text-sky-600 group-hover:underline sm:inline-flex">
+            View &amp; Book <span aria-hidden="true">&rarr;</span>
+          </span>
+        </span>
+      </span>
+      <span aria-hidden="true" className="text-xl text-slate-300 sm:hidden">
+        &rsaquo;
+      </span>
+    </Link>
+  );
+}
+
 function Hero() {
   return (
-    <section className="bg-gradient-to-b from-slate-900 to-slate-800 px-4 pb-14 pt-10 text-white sm:pb-20 sm:pt-16">
-      <div className="mx-auto max-w-3xl text-center">
+    <section className="bg-gradient-to-b from-slate-900 to-slate-800 px-4 pb-10 pt-7 text-white sm:pb-14 sm:pt-12">
+      <div className="mx-auto max-w-5xl text-center">
         <p className="mb-3 inline-block whitespace-nowrap rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-300">
           {hero.eyebrow}
         </p>
-        <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+        <h1 className="text-balance text-[1.75rem] font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]">
           {hero.headline}
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-balance text-base text-slate-300 sm:text-lg">
+        <p className="mx-auto mt-3 max-w-xl text-balance text-base text-slate-300 sm:mt-4 sm:text-lg">
           {hero.subheadline}
         </p>
-        {hero.supportingCopy && (
-          <p className="mx-auto mt-3 max-w-xl text-balance text-sm text-slate-400 sm:text-base">
-            {hero.supportingCopy}
-          </p>
-        )}
 
         {/* Dual CTAs: request a quote (form) + text photos for an estimate.
             Call / WhatsApp stay one tap away as lightweight links below. */}
-        <div className="mt-8 flex flex-col items-center gap-3">
+        <div className="mt-5 flex flex-col items-center gap-3 sm:mt-7">
           <div className="flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
             <a
               href="#quote"
@@ -291,7 +317,18 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto mt-6 flex max-w-lg flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-slate-300 sm:text-sm">
+        {/* The 3 core specialties, right under the CTAs: one tap to the
+            matching service page (where the quote CTA lives). */}
+        <p className="mt-7 text-xs font-semibold uppercase tracking-wide text-slate-400 sm:mt-9">
+          {hero.pickerLabel}
+        </p>
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+          {servicePillars.map((pillar) => (
+            <HeroServiceCard key={pillar.slug} pillar={pillar} />
+          ))}
+        </div>
+
+        <div className="mx-auto mt-5 hidden max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-300 sm:flex">
           {hero.trustBadges.map((badge) => (
             <span key={badge.id} className="inline-flex items-center gap-1.5">
               <IconCheck className="h-3.5 w-3.5 text-emerald-400" />

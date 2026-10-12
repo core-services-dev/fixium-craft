@@ -147,7 +147,9 @@ export const trustBadges = [
 export const hero = {
   eyebrow: "Fully Insured | Upfront Flat Rates",
   headline: "Professional Handyman, Assembly & Locksmith Services in Pittsburgh",
-  subheadline: "Fast, reliable service from background-checked pros — flat-rate quotes before we start.",
+  subheadline: "Fast, reliable service from background-checked pros — upfront flat rates, no surprises.",
+  // Label above the 3 quick-pick service cards directly under the hero CTAs.
+  pickerLabel: "What do you need help with?",
   supportingCopy:
     "Furniture assembly and mounting, locks and door hardware, and general home repairs — one local team for the whole to-do list.",
   primaryCta: { label: "Request a Quote", action: "form" },
