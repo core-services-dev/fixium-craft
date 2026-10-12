@@ -28,8 +28,9 @@ const nextConfig: NextConfig = {
     return [
       { source: "/furniture-assembly-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
       { source: "/tv-mounting-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
-      { source: "/door-lock-repair-pittsburgh", destination: "/services/locksmith-doors", permanent: true },
-      { source: "/smart-lock-installation-pittsburgh", destination: "/services/locksmith-doors", permanent: true },
+      { source: "/door-lock-repair-pittsburgh", destination: "/services/locksmith", permanent: true },
+      { source: "/smart-lock-installation-pittsburgh", destination: "/services/locksmith", permanent: true },
+      { source: "/services/locksmith-doors", destination: "/services/locksmith", permanent: true },
       { source: "/handyman-pittsburgh", destination: "/services/general-handyman", permanent: true },
       { source: "/minor-home-repairs-pittsburgh", destination: "/services/general-handyman", permanent: true },
     ];

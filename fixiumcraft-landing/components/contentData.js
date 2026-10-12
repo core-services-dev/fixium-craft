@@ -104,7 +104,7 @@ export const serviceAreasSection = {
   popularSearches: [
     { label: "IKEA PAX assembly in Pittsburgh", href: "/services/furniture-assembly" },
     { label: "TV wall mounting service in Mt. Lebanon", href: "/services/furniture-assembly" },
-    { label: "smart lock installation in Squirrel Hill", href: "/services/locksmith-doors" },
+    { label: "smart lock installation in Squirrel Hill", href: "/services/locksmith" },
     { label: "handyman services in Shadyside", href: "/services/general-handyman" },
   ],
 };
@@ -340,7 +340,7 @@ export const services = [
       "Door realignment, strike plate tuning & handle upgrades",
     ],
     startingPrice: "Starting at $79",
-    learnMoreHref: "/services/locksmith-doors",
+    learnMoreHref: "/services/locksmith",
   },
 ];
 
@@ -484,6 +484,12 @@ export const localBusinessSchema = {
     opens: "07:00",
     closes: "23:00",
   },
+  // A few real job photos (absolute URLs, as schema.org expects).
+  image: [
+    `${seo.canonicalUrl}/images/work/furniture-desk.jpg`,
+    `${seo.canonicalUrl}/images/work/tv-wall-mount.jpg`,
+    `${seo.canonicalUrl}/images/work/lock-schlage-handleset.jpg`,
+  ],
   priceRange: "$$",
   // Real, verified rating — confirmed by the business owner from
   // actual Google reviews, not a placeholder. Update if the Google
@@ -572,8 +578,11 @@ export const formService = {
 
 export const quoteForm = {
   heading: "Get Your Instant Quote",
-  subheading:
-    "Tell us what you need — most customers hear back within the hour.",
+  subheading: "Four quick fields and you're done — most customers hear back within the hour.",
+  // Everything below the 4 core fields + photo lives in a collapsed
+  // "optional" panel to keep first-glance friction low.
+  moreDetailsLabel: "Add more details (optional)",
+  moreDetailsHint: "Job description, how to reach you, discounts",
   fields: {
     name: { label: "Full Name", placeholder: "Jane Smith", required: true },
     phone: {
@@ -628,8 +637,9 @@ export const quoteForm = {
     // LandingPage.jsx) treat this as "recommended," not just "optional."
     photo: {
       label: "Upload a Photo",
-      helpText:
-        "Attaching a photo gets you a faster and more accurate flat-rate quote within 1 hour.",
+      cta: "Attach a photo for a guaranteed flat-rate quote within 1 hour",
+      hint: "Tap to take a photo or choose one from your phone",
+      helpText: "Optional, but photos get the fastest and most accurate quote.",
     },
     preferredContactMethod: {
       label: "Preferred Contact Method",
@@ -672,49 +682,42 @@ export const quoteForm = {
 // have the Gallery component render a `next/image` when present, falling
 // back to the icon graphic otherwise.
 export const projectsGallery = {
-  heading: "Recent Projects",
-  subheading: "A look at the kind of work we handle, week in and week out.",
+  heading: "Recent Work",
+  subheading: "Real jobs, real results — tap any photo to take a closer look.",
+  categories: [
+    { id: "all", label: "All" },
+    { id: "furniture", label: "Furniture Assembly" },
+    { id: "tv", label: "TV Mounting" },
+    { id: "locksmith", label: "Locksmith" },
+    { id: "handyman", label: "Handyman" },
+  ],
+  // Real job photos (public/images/work/). Each item: category (matches a
+  // `categories` id), title (the caption: job type), optional `area` (the
+  // neighborhood, shown as "Title · Area" -- ONLY fill this in with the
+  // real location of that job; it is deliberately left empty until then),
+  // plus the image's real pixel size (for layout without jank) and alt.
   items: [
+    { id: "tv-1", category: "tv", title: "TV wall mounting", area: "", image: "/images/work/tv-wall-mount.jpg", width: 900, height: 1600, alt: "Flat-screen TV mounted flat on the wall above a white media console" },
+    { id: "desk-1", category: "furniture", title: "Desk with drawers & shelves assembly", area: "", image: "/images/work/furniture-desk.jpg", width: 1600, height: 900, alt: "Assembled industrial-style desk with six drawers and open shelves" },
+    { id: "lock-handleset", category: "locksmith", title: "Front door handleset installation", area: "", image: "/images/work/lock-schlage-handleset.jpg", width: 900, height: 1600, alt: "Oil-rubbed bronze handleset installed on a painted entry door" },
+    { id: "patio-1", category: "furniture", title: "Outdoor patio set assembly", area: "", image: "/images/work/furniture-patio-set.jpg", width: 1600, height: 1200, alt: "Assembled wicker outdoor sectional with ottomans and coffee tables on a patio" },
     {
-      id: "furniture-assembly",
-      title: "Dresser & Furniture Assembly",
-      category: "Furniture Assembly",
-      icon: "assembly",
-      description:
-        "A 6-drawer dresser built square and level — drawers glide smoothly, every knob lines up, and there's no leftover hardware.",
-      // Single static photo per card (see public/images/projects/README.md
-      // for the exact filename each slot expects). If the file isn't in
-      // place yet, GalleryCard falls back to the icon/gradient below with
-      // no broken-image icon and no build or load error.
-      image: "/images/projects/furniture-assembly.jpg",
+      id: "cabinet-ba",
+      category: "handyman",
+      title: "Under-sink cabinet floor repair",
+      area: "",
+      before: { image: "/images/work/repair-cabinet-before.jpg", width: 1600, height: 900, alt: "Under-sink cabinet with a bare, damaged particleboard floor (before)" },
+      after: { image: "/images/work/repair-cabinet-after.jpg", width: 1600, height: 900, alt: "Same under-sink cabinet with a clean, sealed white floor (after)" },
     },
-    {
-      id: "tv-mounting",
-      title: "TV Wall Mounting & Shelving",
-      category: "Mounting & Repairs",
-      icon: "mounting",
-      description:
-        "A flat-screen TV mounted level above the media console, stud-anchored with cables concealed for a clean finish.",
-      image: "/images/projects/tv-mounting.jpg",
-    },
-    {
-      id: "home-repairs",
-      title: "Home Repairs & Maintenance",
-      category: "Home Repairs",
-      icon: "repairs",
-      description:
-        "From water heater shutoff valves to the small fixes that keep getting pushed back — repaired, sealed, and inspected, done right.",
-      image: "/images/projects/home-repairs.jpg",
-    },
-    {
-      id: "ac-install",
-      title: "Window AC Unit Installation",
-      category: "Home Repairs",
-      icon: "ac",
-      description:
-        "A window air conditioner mounted secure and sealed, with proper support bracketing and no drafts around the frame.",
-      image: "/images/projects/ac-installation.jpg",
-    },
+    { id: "lock-cylinder", category: "locksmith", title: "Deadbolt cylinder rekey & replacement", area: "", image: "/images/work/lock-kwikset-cylinder.jpg", width: 900, height: 1600, alt: "Kwikset deadbolt cylinder removed from a door during a rekey" },
+    { id: "dresser-1", category: "furniture", title: "6-drawer dresser assembly", area: "", image: "/images/work/furniture-dresser.jpg", width: 1200, height: 1600, alt: "Assembled white six-drawer dresser in a bedroom" },
+    { id: "ac-1", category: "handyman", title: "Window AC installation", area: "", image: "/images/work/install-window-ac.jpg", width: 1600, height: 900, alt: "Window air conditioner installed with side panels sealed in the window frame" },
+    { id: "grill-1", category: "furniture", title: "Gas grill assembly", area: "", image: "/images/work/furniture-grill.jpg", width: 1600, height: 1200, alt: "Fully assembled stainless-steel gas grill on a wooden deck" },
+    { id: "lock-satin", category: "locksmith", title: "Deadbolt & knob lockset installation", area: "", image: "/images/work/lock-satin-lockset.jpg", width: 900, height: 1600, alt: "Satin nickel deadbolt and knob lockset installed on a white door" },
+    { id: "trampoline-1", category: "furniture", title: "Trampoline assembly", area: "", image: "/images/work/furniture-trampoline.jpg", width: 1600, height: 1200, alt: "Assembled trampoline with safety net enclosure on a patio" },
+    { id: "lock-lever", category: "locksmith", title: "Lever handle & deadbolt plug installation", area: "", image: "/images/work/lock-schlage-lever.jpg", width: 900, height: 1600, alt: "Bronze lever handle installed on a wood door with a deadbolt hole plug" },
+    { id: "heater-1", category: "handyman", title: "Water heater relief valve & discharge pipe", area: "", image: "/images/work/repair-water-heater-valve.jpg", width: 900, height: 1600, alt: "Water heater temperature and pressure relief valve with discharge pipe attached" },
+    { id: "lock-brass", category: "locksmith", title: "Lockset replacement & strike plate", area: "", image: "/images/work/lock-brass-lockset.jpg", width: 900, height: 1600, alt: "Brass deadbolt and knob lockset on a door with strike plates" },
   ],
 };
 
@@ -802,6 +805,19 @@ export const googleReviews = {
   value: "5.0",
   reviewCount: "2",
   sourceLabel: "Google Reviews",
+  // "Review us on Google" button target. This opens a Google Maps search
+  // that lands on the business listing; swap it for the direct
+  // write-a-review link from the Google Business Profile dashboard
+  // (Get more reviews -> share link, looks like https://g.page/r/.../review)
+  // so customers go straight to the review box.
+  reviewUrl:
+    "https://www.google.com/maps/search/?api=1&query=Fixium+Craft+Pittsburgh+PA",
+  // Review cards. ONLY paste real reviews here, word for word, with the
+  // customer's real name as shown on Google (or first name + last
+  // initial): { name: "Jane S.", stars: 5, date: "Aug 2026", text: "..." }.
+  // The cards appear automatically; with none, only the rating badge and
+  // the "Review us on Google" button show.
+  reviews: [],
 };
 
 // Heading for the FAQ section (kept in contentData, not hardcoded in JSX —
@@ -894,8 +910,8 @@ export const servicePillars = [
     navLabel: "Furniture Assembly & Mounting",
     navBlurb: "IKEA, beds, TVs, shelves & more",
     icon: "assembly",
-    image: "/services/furniture-assembly.jpg",
-    alt: "IKEA and flat-pack furniture assembly service in Pittsburgh, PA",
+    image: "/images/work/furniture-desk.jpg",
+    alt: "Assembled desk with drawers and shelves: furniture assembly in Pittsburgh, PA",
     description:
       "IKEA and flat-pack assembly plus TV and wall mounting — built sturdy, level, and anchored right the first time.",
     features: [
@@ -906,6 +922,21 @@ export const servicePillars = [
       "Outdoor & patio furniture",
     ],
     startingPrice: "Starting at $59",
+    galleryCategories: ["furniture", "tv"],
+    galleryHeading: "Recent Furniture Assembly & TV Mounting Work",
+    brandsHeading: "We assemble furniture from",
+    brands: ["IKEA", "Wayfair", "Target", "Amazon", "Ashley", "Costco", "and any other flat-pack brand"],
+    pricingHeading: "Clear starting prices",
+    pricing: [
+      { label: "IKEA & flat-pack furniture assembly", price: "$59", note: "Beds, dressers, desks, PAX wardrobes & more" },
+      { label: "TV mounting", price: "$89", note: "Stud-anchored, with cable concealment available" },
+      { label: "Wall mounting: shelves, mirrors & artwork", price: "$89", note: "Level, anchored to studs or rated anchors" },
+    ],
+    badges: [
+      { icon: "⚡", label: "Same-day & next-day slots" },
+      { icon: "🧹", label: "Packaging cleaned up" },
+      { icon: "🛡️", label: "Fully insured" },
+    ],
     h1: "Furniture Assembly & Mounting in Pittsburgh, PA",
     metaTitle: "Furniture Assembly & TV Mounting Pittsburgh | Fixium Craft",
     metaDescription:
@@ -967,13 +998,13 @@ export const servicePillars = [
     ],
   },
   {
-    slug: "locksmith-doors",
+    slug: "locksmith",
     title: "Locksmith & Door Hardware",
     navLabel: "Locksmith & Door Hardware",
     navBlurb: "Rekeying, smart locks, deadbolts & lockouts",
     icon: "lock",
-    image: "/images/projects/locksmith-door-hardware.jpg",
-    alt: "Smart lock and door hardware installation in Pittsburgh, PA",
+    image: "/images/work/lock-schlage-handleset.jpg",
+    alt: "Handleset installed on an entry door: locksmith and door hardware in Pittsburgh, PA",
     description:
       "Rekeying, smart lock installs, deadbolts, handles, and same-day or scheduled lockouts — flat-rate and upfront.",
     features: [
@@ -984,6 +1015,32 @@ export const servicePillars = [
       "Door alignment & strike plate repair",
     ],
     startingPrice: "Starting at $79",
+    galleryCategories: ["locksmith"],
+    galleryHeading: "Recent Lock & Door Hardware Work",
+    brandsHeading: "Locks we install & service",
+    brands: ["Schlage", "Yale", "Ring", "Google Nest", "Kwikset", "August", "Eufy"],
+    pricingHeading: "Clear starting price",
+    pricing: [
+      { label: "Rekey, lock & deadbolt replacement", price: "$79", note: "Labor and install; bring your own hardware or ask us what to buy" },
+      { label: "Smart lock installation & setup", price: "$79", note: "Installed, paired and tested with your app" },
+      { label: "Handle sets, levers & strike plate fixes", price: "$79", note: "Door alignment and latch repair included in the visit" },
+    ],
+    badges: [
+      { icon: "⚡", label: "Same-day slots available" },
+      { icon: "📅", label: "Scheduled appointments" },
+      { icon: "🛡️", label: "Fully insured" },
+    ],
+    callout: {
+      title: "Locked out? Same-day service available",
+      body: "Call or text us and we'll book the first open slot, for homes, businesses and vehicles. Same-day or scheduled service with flat-rate pricing. We're not a 24/7 emergency dispatch line.",
+    },
+    showcaseHeading: "What we do at the door",
+    showcase: [
+      { title: "Rekeying", description: "New keys for the locks you already have: ideal after a move or a lost key.", image: "/images/work/lock-kwikset-cylinder.jpg", alt: "Deadbolt cylinder removed for rekeying" },
+      { title: "Deadbolt installs", description: "Deadbolt and knob sets fitted square, smooth and secure.", image: "/images/work/lock-satin-lockset.jpg", alt: "Satin nickel deadbolt and knob installed" },
+      { title: "Handle sets & levers", description: "Handle sets and levers installed, aligned and tested.", image: "/images/work/lock-schlage-handleset.jpg", alt: "Handleset installed on an entry door" },
+      { title: "Smart lock setup", description: "Schlage, Yale, Ring, Nest and more: installed, paired and tested.", icon: "lock" },
+    ],
     h1: "Locksmith & Door Hardware Services in Pittsburgh, PA",
     metaTitle: "Locksmith & Smart Lock Install Pittsburgh | Fixium Craft",
     metaDescription:
@@ -1054,8 +1111,8 @@ export const servicePillars = [
     navLabel: "General Handyman & Repairs",
     navBlurb: "Drywall, cabinets, fixtures & home upkeep",
     icon: "repairs",
-    image: "/services/minor-home-repairs.jpg",
-    alt: "General handyman and home repair service in Pittsburgh, PA",
+    image: "/images/work/install-window-ac.jpg",
+    alt: "Window AC unit installed and sealed: handyman and home repair in Pittsburgh, PA",
     description:
       "Drywall patching, minor plumbing and electrical fixtures, cabinet repair, and the small fixes that keep getting pushed back.",
     features: [
@@ -1066,6 +1123,18 @@ export const servicePillars = [
       "General home upkeep",
     ],
     startingPrice: "Starting at $49",
+    galleryCategories: ["handyman"],
+    galleryHeading: "Recent Handyman & Repair Work",
+    pricingHeading: "Clear starting prices",
+    pricing: [
+      { label: "Minor home repairs", price: "$49", note: "Drywall, cabinets, doors and small fixes" },
+      { label: "Fixture & appliance installs", price: "$69", note: "Window AC units, fixtures and more" },
+    ],
+    badges: [
+      { icon: "⚡", label: "Same-day & next-day slots" },
+      { icon: "💬", label: "Photo quotes by text" },
+      { icon: "🛡️", label: "Fully insured" },
+    ],
     h1: "General Handyman & Home Repair in Pittsburgh, PA",
     metaTitle: "Handyman & Home Repair Pittsburgh, PA | Fixium Craft",
     metaDescription:

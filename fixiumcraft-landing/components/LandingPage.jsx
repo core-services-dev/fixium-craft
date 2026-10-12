@@ -24,6 +24,7 @@ import Link from "next/link";
 // sync with package.json without hardcoding a second copy of it.
 import packageJson from "../package.json";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
+import WorkGallery from "./WorkGallery";
 import {
   business,
   aboutSection,
@@ -35,7 +36,6 @@ import {
   servicePillars,
   pricingTrustSection,
   discountOffer,
-  projectsGallery,
   process as processSteps,
   formService,
   quoteForm,
@@ -610,75 +610,8 @@ function PricingTrust() {
 // dedicated component (rather than inline in Gallery()'s .map()) because
 // it needs its own useState — each card's toggle is independent of the
 // others.
-function GalleryCard({ item }) {
-  // No before/after toggle — a single static project photo per card. The
-  // gradient+icon base layer always renders first (so the card is never
-  // blank), and the real photo fades in on top of it once it loads; if
-  // the file is missing or fails to load, onError just leaves that layer
-  // transparent and the base layer keeps showing — no broken-image icon,
-  // no build or load error.
-  const [imageFailed, setImageFailed] = useState(false);
-  const Icon = SERVICE_ICONS[item.icon];
-
-  return (
-    <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <div className="p-3 pb-0">
-        <span className="inline-block max-w-full rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-700 sm:text-[11px]">
-          {item.category}
-        </span>
-
-        {/* Image container: fixed 4:3 aspect ratio, subtle rounded
-            corners. */}
-        <div className="relative mt-3 aspect-[4/3] w-full overflow-hidden rounded-xl">
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-            {Icon ? (
-              <Icon className="relative h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110" />
-            ) : (
-              <IconBox className="relative h-14 w-14 text-white/70" />
-            )}
-          </div>
-
-          {item.image && !imageFailed && (
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-              className="absolute inset-0 object-cover"
-              onError={() => setImageFailed(true)}
-            />
-          )}
-        </div>
-      </div>
-      <div className="p-4">
-        <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
-        <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{item.description}</p>
-      </div>
-    </div>
-  );
-}
-
-
 function Gallery() {
-  return (
-    <section id="gallery" className="bg-white px-4 py-14 sm:py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
-            {projectsGallery.heading}
-          </h2>
-          <p className="mt-3 text-slate-600">{projectsGallery.subheading}</p>
-        </div>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {projectsGallery.items.map((item) => (
-            <GalleryCard key={item.id} item={item} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <WorkGallery id="gallery" initialCount={8} />;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -926,6 +859,7 @@ function QuoteForm() {
         </div>
 
         <form
+          id="quote-form"
           onSubmit={handleSubmit}
           className="mt-8 space-y-5 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
         >
@@ -1049,34 +983,21 @@ function QuoteForm() {
             )}
           </fieldset>
 
-          {/* Deliberately the most visually prominent field in the form —
-              a photo is the single biggest lever on lead quality (an
-              accurate flat-rate quote vs. a rough guess), so it gets a
-              highlighted card, an icon, and a "Recommended" badge instead
-              of blending in with the optional fields around it. */}
+          {/* The photo is the biggest lever on quote accuracy, so it is one
+              large single-tap target right under the 4 core fields. */}
           <div>
-            <div className="flex items-center gap-2">
-              <label htmlFor="photo" className="text-sm font-medium text-slate-700">
-                {quoteForm.fields.photo.label}
-              </label>
-              <span className="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
-                ⭐ Recommended for Fastest Response
-              </span>
-            </div>
             <label
               htmlFor="photo"
-              className="mt-1.5 flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-sky-300 bg-sky-50 px-3.5 py-3 text-sm text-sky-700 transition hover:border-sky-400 hover:bg-sky-100"
+              className="block cursor-pointer rounded-2xl border-2 border-dashed border-sky-400 bg-sky-50 p-4 text-center transition hover:border-sky-500 hover:bg-sky-100 active:scale-[0.99]"
             >
-              <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-sky-600 shadow-sm">
-                <IconCamera className="h-4.5 w-4.5" />
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-sky-600 shadow-sm">
+                <IconCamera className="h-6 w-6" />
               </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate font-medium">
-                  {photoName || "Tap to attach a photo"}
-                </span>
+              <span className="mt-2 block text-base font-bold leading-snug text-slate-900">
+                {photoName ? `\u2713 ${photoName}` : quoteForm.fields.photo.cta}
               </span>
-              <span className="flex-shrink-0 text-xs font-semibold uppercase text-sky-600">
-                Browse
+              <span className="mt-1 block text-xs font-medium text-sky-700">
+                {photoName ? "Tap to change photo" : quoteForm.fields.photo.hint}
               </span>
             </label>
             <input
@@ -1086,13 +1007,25 @@ function QuoteForm() {
               accept="image/*"
               capture="environment"
               onChange={handlePhotoChange}
-              className="hidden"
+              className="sr-only"
             />
-            <p className="mt-1.5 text-xs font-medium text-slate-500">
+            <p className="mt-1.5 text-center text-xs font-medium text-slate-500">
               {quoteForm.fields.photo.helpText}
             </p>
           </div>
 
+          {/* Everything else is optional and tucked away to keep the form short. */}
+          <details className="group rounded-xl border border-slate-200">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-slate-700 [&::-webkit-details-marker]:hidden">
+              <span>
+                {quoteForm.moreDetailsLabel}
+                <span className="mt-0.5 block text-xs font-normal text-slate-400">
+                  {quoteForm.moreDetailsHint}
+                </span>
+              </span>
+              <IconChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="space-y-5 border-t border-slate-100 px-4 py-4">
           <div>
             <label htmlFor="notes" className="text-sm font-medium text-slate-700">
               {quoteForm.fields.notes.label}
@@ -1187,6 +1120,8 @@ function QuoteForm() {
               </p>
             )}
           </fieldset>
+            </div>
+          </details>
 
           {status === "error" && (
             <p className="rounded-lg bg-rose-50 px-3.5 py-2.5 text-sm text-rose-600">
@@ -1321,10 +1256,32 @@ function About() {
 // no invented customer quotes, names, or review counts. Once real reviews
 // exist, swap this stat card for an embed of the actual Google reviews
 // (or individual real quotes) rather than reintroducing placeholder text.
+function ReviewCard({ review }) {
+  return (
+    <figure className="flex h-full min-w-[85%] snap-center flex-col rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm sm:min-w-[60%] md:min-w-0">
+      <div className="flex gap-0.5 text-amber-400" aria-label={`${review.stars} out of 5 stars`}>
+        {Array.from({ length: review.stars }).map((_, i) => (
+          <IconStar key={i} className="h-4 w-4" />
+        ))}
+      </div>
+      <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-slate-700">
+        &ldquo;{review.text}&rdquo;
+      </blockquote>
+      <figcaption className="mt-4 text-sm">
+        <span className="font-semibold text-slate-900">{review.name}</span>
+        <span className="text-slate-500">
+          {review.date ? <> &middot; {review.date}</> : null} &middot; {googleReviews.sourceLabel}
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
+
 function Testimonials() {
+  const reviews = googleReviews.reviews || [];
   return (
     <section id="testimonials" className="bg-slate-50 px-4 py-14 sm:py-20">
-      <div className="mx-auto max-w-3xl text-center">
+      <div className="mx-auto max-w-5xl text-center">
         <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
           {testimonialsSection.heading}
         </h2>
@@ -1345,6 +1302,26 @@ function Testimonials() {
             ({googleReviews.reviewCount} {googleReviews.sourceLabel})
           </span>
         </div>
+
+        {/* Review cards: swipeable row on phones, grid from md up. Only
+            real reviews from googleReviews.reviews ever render here. */}
+        {reviews.length > 0 && (
+          <div className="mt-8 flex snap-x gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3">
+            {reviews.map((review) => (
+              <ReviewCard key={`${review.name}-${review.date}`} review={review} />
+            ))}
+          </div>
+        )}
+
+        <a
+          href={googleReviews.reviewUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
+        >
+          <IconStar className="h-4 w-4 text-amber-400" />
+          Review us on Google
+        </a>
       </div>
     </section>
   );

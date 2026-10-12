@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
+import WorkGallery from "./WorkGallery";
 import { business, neighborhoods, seo, servicePillars } from "./contentData";
 
 // ServicePillarPage.tsx
@@ -130,10 +132,137 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
             </a>
           </div>
           <p className="mt-4 text-sm font-semibold text-sky-300">{page.startingPrice}</p>
+          {page.badges && (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {page.badges.map((badge) => (
+                <li
+                  key={badge.label}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white sm:text-sm"
+                >
+                  <span aria-hidden="true">{badge.icon}</span>
+                  {badge.label}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </section>
 
-      <div className="px-4 py-12 sm:py-16">
+      {/* Same-day callout, pricing cards and visual showcase */}
+      <div className="px-4 pt-12 sm:pt-16">
+        <div className="mx-auto max-w-5xl space-y-12">
+          {page.callout && (
+            <div className="flex flex-col gap-4 rounded-2xl border border-amber-300 bg-amber-50 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div>
+                <p className="text-base font-bold text-amber-900 sm:text-lg">
+                  <span aria-hidden="true">&#9889; </span>
+                  {page.callout.title}
+                </p>
+                <p className="mt-1 text-sm text-amber-900/80">{page.callout.body}</p>
+              </div>
+              <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+                <a
+                  href={business.phoneHref}
+                  className="rounded-lg bg-slate-900 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                >
+                  Call {business.phoneDisplay}
+                </a>
+                <a
+                  href={business.smsHref}
+                  className="rounded-lg border border-amber-400 bg-white px-5 py-3 text-center text-sm font-semibold text-amber-900 hover:bg-amber-100"
+                >
+                  Text Us
+                </a>
+              </div>
+            </div>
+          )}
+
+          {page.pricing && (
+            <section aria-labelledby="pricing-heading">
+              <h2 id="pricing-heading" className="text-xl font-bold sm:text-2xl">
+                {page.pricingHeading}
+              </h2>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {page.pricing.map((tier) => (
+                  <div
+                    key={tier.label}
+                    className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                  >
+                    <p className="text-sm font-semibold text-slate-900">{tier.label}</p>
+                    <p className="mt-3 flex items-baseline gap-1.5">
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                        Starting at
+                      </span>
+                      <span className="text-3xl font-extrabold text-sky-600">{tier.price}</span>
+                    </p>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{tier.note}</p>
+                    <Link
+                      href="/#quote"
+                      className="mt-4 rounded-lg border border-sky-200 bg-sky-50 px-4 py-2.5 text-center text-sm font-semibold text-sky-700 transition hover:bg-sky-100"
+                    >
+                      Get this quote
+                    </Link>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-xs text-slate-500">
+                Flat-rate and quoted upfront. Final price depends on the job; send a photo for an exact number.
+              </p>
+            </section>
+          )}
+
+          {page.showcase && (
+            <section aria-labelledby="showcase-heading">
+              <h2 id="showcase-heading" className="text-xl font-bold sm:text-2xl">
+                {page.showcaseHeading}
+              </h2>
+              <div className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
+                {page.showcase.map((card) => (
+                  <div
+                    key={card.title}
+                    className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+                  >
+                    <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-700 to-sky-900">
+                      {card.image ? (
+                        <Image
+                          src={card.image}
+                          alt={card.alt || card.title}
+                          fill
+                          sizes="(min-width: 1024px) 25vw, 50vw"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.8}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                          className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 text-white/90"
+                        >
+                          <rect x="5" y="11" width="14" height="10" rx="2" />
+                          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                          <circle cx="12" cy="16" r="1" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="p-3 sm:p-4">
+                      <h3 className="text-sm font-bold text-slate-900 sm:text-base">{card.title}</h3>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      </div>
+
+      <div className="px-4 pb-4 pt-12 sm:pt-16">
         <div className="mx-auto max-w-3xl space-y-12">
           {/* Task list */}
           <section>
@@ -156,6 +285,41 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
               ))}
             </div>
           </section>
+
+        </div>
+      </div>
+
+      <WorkGallery
+        id="gallery"
+        categories={page.galleryCategories}
+        heading={page.galleryHeading}
+        subheading="Real jobs we've done. Tap any photo to enlarge."
+        className="bg-slate-50"
+      />
+
+      <div className="px-4 pb-12 pt-12 sm:pb-16 sm:pt-16">
+        <div className="mx-auto max-w-3xl space-y-12">
+          {page.brands && (
+            <section aria-labelledby="brands-heading">
+              <h2 id="brands-heading" className="text-xl font-bold sm:text-2xl">
+                {page.brandsHeading}
+              </h2>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {page.brands.map((brand) => (
+                  <li
+                    key={brand}
+                    className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm"
+                  >
+                    {brand}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-slate-500">
+                Brand names belong to their respective owners. Fixium Craft is an independent installer and is not
+                affiliated with these brands.
+              </p>
+            </section>
+          )}
 
           {/* FAQ accordion */}
           <section>
