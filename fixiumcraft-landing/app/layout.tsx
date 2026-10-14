@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { business, seo } from "@/components/contentData";
 import ScrollToTop from "@/components/ScrollToTop";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
 
 // metadataBase lets every relative URL below (canonical, openGraph.url,
 // and the auto-injected opengraph-image.tsx tags) resolve to an absolute
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <ScrollToTop />
         {children}
+        <AnalyticsProvider />
       </body>
     </html>
   );

@@ -24,6 +24,21 @@ const nextConfig: NextConfig = {
   // under /services/<slug>. Permanent redirects (HTTP 308, Next's
   // method-preserving equivalent of 301) keep existing links and search
   // rankings pointing at the closest new page.
+  images: {
+    // Smaller files for the work-gallery photos on modern browsers.
+    formats: ["image/avif", "image/webp"],
+  },
+  async headers() {
+    return [
+      {
+        // Work photos rarely change: let browsers and the CDN reuse them.
+        source: "/images/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       { source: "/furniture-assembly-pittsburgh", destination: "/services/furniture-assembly", permanent: true },

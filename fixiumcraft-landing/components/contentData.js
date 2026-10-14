@@ -637,7 +637,7 @@ export const quoteForm = {
     // LandingPage.jsx) treat this as "recommended," not just "optional."
     photo: {
       label: "Upload a Photo",
-      cta: "Attach a photo for a guaranteed flat-rate quote within 1 hour",
+      cta: "Attach a photo for a quick flat-rate quote",
       hint: "Tap to take a photo or choose one from your phone",
       helpText: "Optional, but photos get the fastest and most accurate quote.",
     },

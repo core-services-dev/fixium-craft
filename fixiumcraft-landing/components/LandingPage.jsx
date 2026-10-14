@@ -25,6 +25,7 @@ import Link from "next/link";
 import packageJson from "../package.json";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import WorkGallery from "./WorkGallery";
+import { trackEvent } from "./analytics";
 import {
   business,
   aboutSection,
@@ -801,6 +802,15 @@ function QuoteForm() {
       const result = await response.json().catch(() => null);
 
       if (response.ok && result?.success) {
+        // Conversion events (no personal data): custom event + GA4's
+        // recommended "generate_lead".
+        const eventParams = {
+          services: selectedServiceLabels.join(", "),
+          has_photo: Boolean(photoFile),
+          page: window.location.pathname,
+        };
+        trackEvent("quote_form_submit", eventParams);
+        trackEvent("generate_lead", eventParams);
         setStatus("success");
       } else {
         // eslint-disable-next-line no-console
