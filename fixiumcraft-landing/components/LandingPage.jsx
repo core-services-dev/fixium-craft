@@ -623,6 +623,7 @@ const EMPTY_FORM_DATA = {
   name: "",
   phone: "",
   zip: "",
+  streetAddress: "",
   services: [],
   notes: "",
   preferredContactMethod: quoteForm.fields.preferredContactMethod.defaultValue || "text",
@@ -764,6 +765,7 @@ function QuoteForm() {
       submission.append("name", formData.name);
       submission.append("phone", formData.phone);
       submission.append("zip_code", formData.zip);
+      submission.append("street_address", formData.streetAddress.trim());
       submission.append("service_needed", selectedServiceLabels.join(", "));
       submission.append("message", formData.notes);
       submission.append("preferred_contact_method", formData.preferredContactMethod);
@@ -1008,6 +1010,24 @@ function QuoteForm() {
               {quoteForm.fields.phone.helpText && (
                 <p className="text-xs text-slate-500">{quoteForm.fields.phone.helpText}</p>
               )}
+              <div>
+                <label htmlFor="streetAddress" className="text-sm font-semibold text-slate-800">
+                  {quoteForm.fields.streetAddress.label}
+                </label>
+                <input
+                  id="streetAddress"
+                  name="streetAddress"
+                  type="text"
+                  autoComplete="street-address"
+                  value={formData.streetAddress}
+                  onChange={handleChange}
+                  placeholder={quoteForm.fields.streetAddress.placeholder}
+                  className={INPUT_BASE}
+                />
+                <p className="mt-1.5 text-xs text-slate-500">
+                  {quoteForm.fields.streetAddress.helpText}
+                </p>
+              </div>
             </div>
           </div>
 

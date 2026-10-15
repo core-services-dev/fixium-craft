@@ -637,6 +637,14 @@ export const quoteForm = {
       required: true,
       helpText: "So we can confirm you're in our service area.",
     },
+    // Optional — never blocks submission; only included in the lead alert
+    // (Telegram + email) when filled in.
+    streetAddress: {
+      label: "Street Address (Optional)",
+      placeholder: "e.g. 5800 Forbes Ave",
+      required: false,
+      helpText: "(Optional - helps us provide a precise quote for your neighborhood)",
+    },
     // Multi-select — a job is often more than one service at once (e.g. a
     // TV mount plus a couple of shelves), so this holds an array of
     // selected values rather than a single string. `errorMessage` shows
