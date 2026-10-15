@@ -574,7 +574,7 @@ function PricingTrust() {
 // it needs its own useState — each card's toggle is independent of the
 // others.
 function Gallery() {
-  return <WorkGallery id="gallery" initialCount={8} />;
+  return <WorkGallery id="recent-work" initialCount={12} />;
 }
 
 /* -------------------------------------------------------------------------- */

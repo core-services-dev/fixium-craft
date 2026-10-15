@@ -2,9 +2,9 @@
 
 // WorkGallery.jsx
 //
-// "Recent Work" photo gallery: filter tabs, masonry-style grid that keeps
-// each photo's real aspect ratio, "Job type · Area" captions, a tap-to-
-// enlarge lightbox, and a before/after card type. Data lives in
+// "Recent Work" photo gallery: filter tabs, a symmetric grid (2/3/4 columns)
+// of identical square, center-cropped tiles with centered captions, a tap-to-
+// enlarge lightbox, and a before/after tile type. Data lives in
 // `projectsGallery` (contentData.js). Used on the homepage (all
 // categories) and on each /services/<slug> page (just that pillar's
 // categories, via the `categories` prop).
@@ -13,37 +13,34 @@ import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { projectsGallery } from "./contentData";
 
-const SIZES = "(min-width: 1024px) 28vw, (min-width: 640px) 33vw, 50vw";
+const SIZES = "(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw";
 
-function Caption({ item, categoryLabel }) {
+// Centered, muted caption under each photo.
+function Caption({ item }) {
   return (
-    <figcaption className="px-1 pt-2">
-      <span className="inline-block rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600">
-        {categoryLabel}
-      </span>
-      <span className="mt-1 block text-sm font-semibold leading-snug text-slate-900">
-        {item.title}
-        {item.area ? <span className="font-normal text-slate-500"> &middot; {item.area}</span> : null}
-      </span>
+    <figcaption className="mt-2 px-1 text-center text-xs font-medium leading-snug text-slate-700 md:text-sm">
+      {item.title}
+      {item.area ? <span className="font-normal text-slate-500"> &middot; {item.area}</span> : null}
     </figcaption>
   );
 }
 
-function PhotoButton({ photo, label, onOpen, className = "" }) {
+// Fills its (square) parent: every photo is center-cropped to the same size,
+// whatever the original aspect ratio. The lightbox still shows the full photo.
+function PhotoButton({ photo, label, onOpen }) {
   return (
     <button
       type="button"
       onClick={() => onOpen(photo)}
       aria-label={`View larger: ${label}`}
-      className={`group relative block w-full overflow-hidden rounded-xl bg-slate-100 ${className}`}
+      className="group relative block h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-blue-300"
     >
       <Image
         src={photo.image}
         alt={photo.alt}
-        width={photo.width}
-        height={photo.height}
+        fill
         sizes={SIZES}
-        className="h-auto w-full transition duration-300 group-hover:scale-[1.03]"
+        className="object-cover object-center transition-all duration-300 group-hover:scale-[1.03]"
       />
     </button>
   );
@@ -117,7 +114,7 @@ export default function WorkGallery({
   if (scoped.length === 0) return null;
 
   return (
-    <section id={id} className={`px-4 py-14 sm:py-20 ${className}`}>
+    <section id={id} className={`px-4 py-16 md:py-24 ${className}`}>
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">{heading}</h2>
@@ -155,31 +152,33 @@ export default function WorkGallery({
           </div>
         )}
 
-        <div className="mt-8 columns-2 gap-3 sm:columns-3 sm:gap-4 lg:columns-4">
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {visible.map((item) => (
-            <figure key={item.id} className="mb-3 break-inside-avoid sm:mb-4">
-              {item.before ? (
-                <div className="space-y-1.5 overflow-hidden rounded-xl">
-                  {[
-                    { key: "before", label: "Before", photo: item.before },
-                    { key: "after", label: "After", photo: item.after },
-                  ].map(({ key, label, photo }) => (
-                    <div key={key} className="relative">
-                      <PhotoButton photo={photo} label={`${item.title} (${label.toLowerCase()})`} onOpen={setLightbox} />
-                      <span
-                        className={`pointer-events-none absolute left-2 top-2 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white ${
-                          key === "after" ? "bg-emerald-600" : "bg-slate-800/80"
-                        }`}
-                      >
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <PhotoButton photo={item} label={item.title} onOpen={setLightbox} />
-              )}
-              <Caption item={item} categoryLabel={labelFor(item.category)} />
+            <figure key={item.id}>
+              <div className="relative aspect-square overflow-hidden rounded-xl border border-slate-100 bg-slate-100">
+                {item.before ? (
+                  <div className="grid h-full grid-cols-2 gap-px bg-white">
+                    {[
+                      { key: "before", label: "Before", photo: item.before },
+                      { key: "after", label: "After", photo: item.after },
+                    ].map(({ key, label, photo }) => (
+                      <div key={key} className="relative h-full overflow-hidden">
+                        <PhotoButton photo={photo} label={`${item.title} (${label.toLowerCase()})`} onOpen={setLightbox} />
+                        <span
+                          className={`pointer-events-none absolute left-1.5 top-1.5 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white ${
+                            key === "after" ? "bg-emerald-600" : "bg-slate-800/80"
+                          }`}
+                        >
+                          {label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <PhotoButton photo={item} label={item.title} onOpen={setLightbox} />
+                )}
+              </div>
+              <Caption item={item} />
             </figure>
           ))}
         </div>

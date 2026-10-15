@@ -1301,7 +1301,7 @@ export const footer = {
   about: `${business.name} provides furniture assembly and mounting, locksmith and door hardware, and general handyman repairs across the Pittsburgh area.`,
   links: [
     { label: "Services", href: "#services" },
-    { label: "Recent Projects", href: "#gallery" },
+    { label: "Recent Projects", href: "#recent-work" },
     { label: "How It Works", href: "#process" },
     { label: "Google Reviews", href: "#testimonials" },
     { label: "FAQ", href: "#faq" },
