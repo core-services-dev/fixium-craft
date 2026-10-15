@@ -152,7 +152,17 @@ export default function WorkGallery({
           </div>
         )}
 
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div
+          className={`mt-8 grid gap-4 ${
+            visible.length === 1
+              ? "mx-auto max-w-xs grid-cols-1"
+              : visible.length === 2
+                ? "mx-auto max-w-xl grid-cols-2"
+                : visible.length === 3
+                  ? "mx-auto max-w-3xl grid-cols-2 md:grid-cols-3"
+                  : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          }`}
+        >
           {visible.map((item) => (
             <figure key={item.id}>
               <div className="relative aspect-square overflow-hidden rounded-xl border border-slate-100 bg-slate-100">

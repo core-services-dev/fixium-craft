@@ -70,6 +70,20 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
     areaServed: areaServedSchema(),
     description: page.metaDescription,
     url: `${base}/services/${slug}`,
+    // Real starting prices, as an offer catalog (Offer + PriceSpecification).
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: page.title,
+      itemListElement: (page.pricing || []).map((tier) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: tier.label, description: tier.note },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: Number(tier.price.replace(/[^0-9.]/g, "")),
+          priceCurrency: "USD",
+        },
+      })),
+    },
   };
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -104,7 +118,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
       <SiteNav />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-slate-900 to-slate-800 px-4 pb-12 pt-10 text-white sm:pb-16 sm:pt-14">
+      <section className="bg-gradient-to-b from-slate-900 to-slate-800 px-4 py-16 text-white md:py-24">
         <div className="mx-auto max-w-3xl">
           <nav aria-label="Breadcrumb" className="mb-4 text-xs text-slate-400">
             <Link href="/" className="hover:text-white">
@@ -151,7 +165,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
       </section>
 
       {/* Same-day callout, pricing cards and visual showcase */}
-      <div className="px-4 pt-12 sm:pt-16">
+      <div className="px-4 pt-16 md:pt-24">
         <div className="mx-auto max-w-5xl space-y-12">
           {page.callout && (
             <div className="flex flex-col gap-4 rounded-2xl border border-amber-300 bg-amber-50 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
@@ -264,7 +278,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <div className="px-4 pb-4 pt-12 sm:pt-16">
+      <div className="px-4 pb-4 pt-16 md:pt-24">
         <div className="mx-auto max-w-3xl space-y-12">
           {/* Task list */}
           <section>
@@ -370,7 +384,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
           {/* Other services */}
           <section>
             <h2 className="text-xl font-bold sm:text-2xl">Other Services</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
               {others.map((p) => (
                 <Link
                   key={p.slug}
@@ -387,7 +401,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
       </div>
 
       {/* CTA banner */}
-      <section className="bg-slate-900 px-4 py-12 text-center text-white sm:py-14">
+      <section className="bg-slate-900 px-4 py-16 text-center text-white md:py-20">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-balance text-2xl font-extrabold sm:text-3xl">
             Ready to get started?

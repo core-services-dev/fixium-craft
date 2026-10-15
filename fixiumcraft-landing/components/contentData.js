@@ -127,7 +127,7 @@ export const serviceAreasSection = {
   // traditional SEO and AI-assistant discoverability.
   popularSearches: [
     { label: "IKEA PAX assembly in Pittsburgh", href: "/services/furniture-assembly" },
-    { label: "TV wall mounting service in Mt. Lebanon", href: "/services/furniture-assembly" },
+    { label: "TV wall mounting service in Mt. Lebanon", href: "/services/tv-mounting" },
     { label: "smart lock installation in Squirrel Hill", href: "/services/locksmith" },
     { label: "handyman services in Shadyside", href: "/services/handyman-repairs" },
   ],
@@ -890,6 +890,24 @@ export const faq = [
       "No — our technicians bring all necessary tools. If your furniture is missing hardware, we carry common replacement parts too.",
   },
   {
+    id: "tv-cost",
+    question: "How much does TV wall mounting cost in Pittsburgh?",
+    answer:
+      "TV mounting with Fixium Craft starts at $89 flat-rate, stud-anchored and level, with cable concealment available. You get your exact quote by text before we start.",
+  },
+  {
+    id: "ikea-cost",
+    question: "How much does IKEA furniture assembly cost in Pittsburgh?",
+    answer:
+      "IKEA and flat-pack assembly starts at $59 flat-rate. Send a photo of what you need and we'll quote the exact price.",
+  },
+  {
+    id: "mobile-locksmith",
+    question: "Do you offer a mobile locksmith service in Pittsburgh?",
+    answer:
+      "Yes. We come to your door for rekeying, deadbolt and lock replacement, smart lock installation and lockouts, with same-day or scheduled appointments. Locksmith jobs start at $79, flat-rate.",
+  },
+  {
     id: "brands",
     question: "What furniture brands do you assemble?",
     answer:
@@ -958,7 +976,7 @@ export const serviceDetails = [
     cta: "See furniture assembly pricing",
   },
   {
-    slug: "furniture-assembly",
+    slug: "tv-mounting",
     heading: "TV Wall Mounting & Shelf Installation Services",
     body: "Our TV wall mounting service in Pittsburgh covers fixed, tilting and full-motion mounts, stud-anchored and hung level, with cable concealment available. We also install floating shelves, bracket shelves, mirrors and artwork.",
     cta: "See TV & wall mounting",
@@ -1014,9 +1032,9 @@ export const servicePillars = [
       { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "Professional Furniture & IKEA Assembly in Pittsburgh, PA",
-    metaTitle: "Furniture Assembly & TV Mounting Pittsburgh | Fixium Craft",
+    metaTitle: "IKEA Furniture Assembly Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "IKEA & flat-pack furniture assembly, TV mounting, and wall mounting in Pittsburgh, PA. Flat-rate quotes, same-day slots, fully insured. Get a free quote.",
+      "IKEA furniture assembly in Pittsburgh, PA: PAX wardrobes, beds, desks, dressers & any flat-pack build. Flat-rate pricing, same-day slots, fully insured. Get a free quote.",
     intro: [
       `Fixium Craft builds and mounts furniture across ${business.address.city}, ${business.address.state} — IKEA PAX wardrobes, beds, desks, dressers, and anything else that comes in a box — plus TV and wall mounting done level, stud-anchored, and clean.`,
       `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
@@ -1034,7 +1052,7 @@ export const servicePillars = [
         ],
       },
       {
-        heading: "TV Wall Mounting & Shelf Installation Services",
+        heading: "TV & wall mounting",
         items: [
           "Fixed, tilting & full-motion TV mounts, stud-anchored",
           "Cable & wire concealment behind the wall or in raceway",
@@ -1075,6 +1093,95 @@ export const servicePillars = [
         question: "Do you assemble furniture from stores other than IKEA?",
         answer:
           "Yes. We build IKEA, Wayfair, Amazon, Target, Ashley and pretty much any flat-pack or ready-to-assemble furniture. If it comes in a box, we can build it.",
+      },
+    ],
+  },
+  {
+    slug: "tv-mounting",
+    // Own URL for the "TV wall mounting Pittsburgh" search; listed in the
+    // nav/sitemap but kept out of the homepage's 3-card grid.
+    hideFromGrid: true,
+    providerType: "HomeAndConstructionBusiness",
+    includedHeading: "TV Wall Mounting & Shelf Installation Services",
+    title: "TV Wall Mounting & Shelves",
+    navLabel: "TV Wall Mounting",
+    navBlurb: "Stud-anchored mounts, hidden cables & shelves",
+    icon: "mounting",
+    image: "/images/work/tv-wall-mount.jpg",
+    alt: "Flat-screen TV mounted flat on the wall above a media console: TV wall mounting in Pittsburgh, PA",
+    description:
+      "Fixed, tilting and full-motion TV mounts, stud-anchored and level, with clean cable concealment and shelf installation.",
+    features: [
+      "Fixed, tilting & full-motion TV mounts",
+      "Stud-anchored and hung level",
+      "Cable & wire concealment",
+      "Soundbar & media console mounting",
+      "Floating shelves, mirrors & artwork",
+    ],
+    startingPrice: "Starting at $89",
+    galleryCategories: ["tv"],
+    galleryHeading: "Recent TV Mounting Work",
+    pricingHeading: "Clear starting prices",
+    pricing: [
+      { label: "TV mounting", price: "$89", note: "Stud-anchored, with cable concealment available" },
+      { label: "Wall mounting: shelves, mirrors & artwork", price: "$89", note: "Level, anchored to studs or rated anchors" },
+    ],
+    badges: [
+      { icon: "⚡", label: "Same-day & next-day slots" },
+      { icon: "🧹", label: "Packaging cleaned up" },
+      { icon: "🛡️", label: "Fully insured" },
+    ],
+    h1: "TV Wall Mounting in Pittsburgh, PA",
+    metaTitle: "TV Wall Mounting Pittsburgh, PA | Fixium Craft",
+    metaDescription:
+      "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate pricing from $89, fully insured. Get a free quote.",
+    intro: [
+      `Looking for TV wall mounting in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
+      `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, and every technician is background-checked and fully insured.`,
+    ],
+    taskGroups: [
+      {
+        heading: "TV mounting",
+        items: [
+          "Fixed, tilting & full-motion TV mounts, stud-anchored",
+          "Cable & wire concealment behind the wall or in raceway",
+          "Soundbar & media console mounting",
+        ],
+      },
+      {
+        heading: "Shelves & wall mounting",
+        items: [
+          "Floating shelves & bracket shelves",
+          "Mirrors, artwork & wall decor",
+          "Level, anchored to studs or rated anchors",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "How much does TV wall mounting cost in Pittsburgh?",
+        answer:
+          "TV mounting starts at $89, flat-rate, stud-anchored and level, with cable concealment available. You get your exact quote by text before we start.",
+      },
+      {
+        question: "Can you mount a TV on any wall?",
+        answer:
+          "Standard drywall and stud walls are our everyday job. If you have brick, concrete, or plaster, mention it in your photo or text and we'll confirm the right hardware in your quote.",
+      },
+      {
+        question: "Can you hide the TV cables?",
+        answer:
+          "Yes. We can conceal cables and wires behind the wall or in a raceway so the install looks clean. Tell us which option you prefer when you request your quote.",
+      },
+      {
+        question: "Do I need to buy the TV mount myself?",
+        answer:
+          "If you already have a mount, we'll install it. If not, send your TV size and wall type with your quote request and we'll tell you which kind of mount to get.",
+      },
+      {
+        question: "Do you also install shelves and soundbars?",
+        answer:
+          "Yes. We mount floating and bracket shelves, mirrors, artwork, soundbars and media consoles, with starting prices from $89.",
       },
     ],
   },
@@ -1124,10 +1231,10 @@ export const servicePillars = [
       { title: "Handle sets & levers", description: "Handle sets and levers installed, aligned and tested.", image: "/images/work/lock-schlage-handleset.jpg", alt: "Handleset installed on an entry door" },
       { title: "Smart lock setup", description: "Schlage, Yale, Ring, Nest and more: installed, paired and tested.", icon: "lock" },
     ],
-    h1: "Locksmith & Door Hardware Services in Pittsburgh, PA",
-    metaTitle: "Locksmith & Smart Lock Install Pittsburgh | Fixium Craft",
+    h1: "Mobile Locksmith & Door Hardware Services in Pittsburgh, PA",
+    metaTitle: "Mobile Locksmith Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Rekeying, smart lock installation (Schlage, Nest, Ring), deadbolts, lock repair & same-day lockouts in Pittsburgh, PA. Flat-rate pricing, fully insured.",
+      "Mobile locksmith in Pittsburgh, PA: rekeying, smart lock installation (Schlage, Nest, Ring), deadbolts, lock repair & same-day lockouts. Flat-rate pricing, fully insured.",
     intro: [
       `Fixium Craft handles home and business locks across ${business.address.city}, ${business.address.state} — rekeying, lock and deadbolt replacement, door handles, smart lock installation, and same-day or scheduled lockouts for homes, businesses, and vehicles.`,
       `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront — no surprise call-out or damage fees.`,
@@ -1225,7 +1332,7 @@ export const servicePillars = [
       { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "General Handyman & Home Repair in Pittsburgh, PA",
-    metaTitle: "Handyman & Home Repair Pittsburgh, PA | Fixium Craft",
+    metaTitle: "Handyman & Home Repairs Pittsburgh, PA | Fixium Craft",
     metaDescription:
       "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes, fully insured.",
     intro: [

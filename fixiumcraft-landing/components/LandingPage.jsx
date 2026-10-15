@@ -308,7 +308,7 @@ function ServiceAreas() {
   return (
     <section
       id="service-areas"
-      className="border-b border-slate-100 bg-white px-4 py-10 sm:py-14"
+      className="bg-slate-50 px-4 py-16 md:py-24"
     >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -453,7 +453,7 @@ function ServicePillars() {
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {servicePillars.map((pillar) => (
+          {servicePillars.filter((p) => !p.hideFromGrid).map((pillar) => (
             <PillarCard key={pillar.slug} pillar={pillar} />
           ))}
         </div>
@@ -660,6 +660,7 @@ function QuoteForm() {
   const [photoName, setPhotoName] = useState("");
   const [photoFile, setPhotoFile] = useState(null);
   const [dragging, setDragging] = useState(false);
+  const startedRef = useRef(false);
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   // Separate from `status` — this flags the one client-side validation rule
   // (at least one service picked) without borrowing the server-error UI.
@@ -860,6 +861,11 @@ function QuoteForm() {
         <form
           id="quote-form"
           onSubmit={handleSubmit}
+          onFocusCapture={() => {
+            if (startedRef.current) return;
+            startedRef.current = true;
+            trackEvent("quote_form_start", { page: window.location.pathname });
+          }}
           className="mt-8 space-y-8 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
         >
           {/* Step 1 — what do you need? Multi-select chips (same
@@ -880,7 +886,7 @@ function QuoteForm() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => toggleService(opt.value)}
-                    className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2.5 pl-4 pr-5 text-left text-sm font-semibold leading-snug transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 ${
+                    className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2 pl-3 pr-3 text-left text-[13px] font-semibold leading-snug transition sm:py-2.5 sm:pl-4 sm:pr-5 sm:text-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 ${
                       selected
                         ? "border-blue-800 bg-blue-800 text-white"
                         : "border-slate-300 bg-white text-slate-700 hover:border-blue-700 hover:bg-blue-50"
@@ -1478,11 +1484,11 @@ export default function LandingPage() {
       <SiteNav />
       <Hero />
       <ServicePillars />
+      <Gallery />
       <ServiceAreas />
       <PainPoints />
       <PricingTrust />
       <ServiceDetails />
-      <Gallery />
       <Process />
       <QuoteForm />
       <Guarantees />
