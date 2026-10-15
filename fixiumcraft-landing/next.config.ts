@@ -46,8 +46,9 @@ const nextConfig: NextConfig = {
       { source: "/door-lock-repair-pittsburgh", destination: "/services/locksmith", permanent: true },
       { source: "/smart-lock-installation-pittsburgh", destination: "/services/locksmith", permanent: true },
       { source: "/services/locksmith-doors", destination: "/services/locksmith", permanent: true },
-      { source: "/handyman-pittsburgh", destination: "/services/general-handyman", permanent: true },
-      { source: "/minor-home-repairs-pittsburgh", destination: "/services/general-handyman", permanent: true },
+      { source: "/services/general-handyman", destination: "/services/handyman-repairs", permanent: true },
+      { source: "/handyman-pittsburgh", destination: "/services/handyman-repairs", permanent: true },
+      { source: "/minor-home-repairs-pittsburgh", destination: "/services/handyman-repairs", permanent: true },
     ];
   },
 };

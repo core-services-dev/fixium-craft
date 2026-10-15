@@ -129,7 +129,7 @@ export const serviceAreasSection = {
     { label: "IKEA PAX assembly in Pittsburgh", href: "/services/furniture-assembly" },
     { label: "TV wall mounting service in Mt. Lebanon", href: "/services/furniture-assembly" },
     { label: "smart lock installation in Squirrel Hill", href: "/services/locksmith" },
-    { label: "handyman services in Shadyside", href: "/services/general-handyman" },
+    { label: "handyman services in Shadyside", href: "/services/handyman-repairs" },
   ],
 };
 
@@ -300,7 +300,7 @@ export const services = [
     // Links to the direct-match dedicated page; door-lock-repair-pittsburgh
     // is a second, differently-angled page for the same underlying
     // service, reachable from the footer instead (see footer.servicePageLinks).
-    learnMoreHref: "/services/general-handyman",
+    learnMoreHref: "/services/handyman-repairs",
   },
   {
     id: "installation",
@@ -319,7 +319,7 @@ export const services = [
     startingPrice: "Starting at $69",
     // No dedicated page for this one — only the 5 URLs in servicePages
     // were requested, and this service wasn't among them.
-    learnMoreHref: "/services/general-handyman",
+    learnMoreHref: "/services/handyman-repairs",
   },
   {
     id: "locksmith",
@@ -956,7 +956,7 @@ export const serviceDetails = [
     cta: "See locksmith services",
   },
   {
-    slug: "general-handyman",
+    slug: "handyman-repairs",
     heading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
     body: "From drywall patching and cabinet repair to minor plumbing and electrical fixtures, we handle the small home repairs and maintenance that keep getting pushed to next weekend, all at upfront flat rates.",
     cta: "See handyman services",
@@ -966,6 +966,7 @@ export const serviceDetails = [
 export const servicePillars = [
   {
     slug: "furniture-assembly",
+    providerType: "HomeAndConstructionBusiness",
     includedHeading: "IKEA & Flat-Pack Furniture Assembly in Pittsburgh",
     title: "Furniture Assembly & Mounting",
     navLabel: "Furniture Assembly & Mounting",
@@ -998,7 +999,7 @@ export const servicePillars = [
       { icon: "🧹", label: "Packaging cleaned up" },
       { icon: "🛡️", label: "Fully insured" },
     ],
-    h1: "Furniture Assembly & Mounting in Pittsburgh, PA",
+    h1: "Professional Furniture & IKEA Assembly in Pittsburgh, PA",
     metaTitle: "Furniture Assembly & TV Mounting Pittsburgh | Fixium Craft",
     metaDescription:
       "IKEA & flat-pack furniture assembly, TV mounting, and wall mounting in Pittsburgh, PA. Flat-rate quotes, same-day slots, fully insured. Get a free quote.",
@@ -1056,10 +1057,16 @@ export const servicePillars = [
         answer:
           "Yes — post-job clean-up is included, packaging and all. Haul-away of old furniture is available too; just let us know when you request your quote.",
       },
+      {
+        question: "Do you assemble furniture from stores other than IKEA?",
+        answer:
+          "Yes. We build IKEA, Wayfair, Amazon, Target, Ashley and pretty much any flat-pack or ready-to-assemble furniture. If it comes in a box, we can build it.",
+      },
     ],
   },
   {
     slug: "locksmith",
+    providerType: "Locksmith",
     includedHeading: "Residential Locksmith, Smart Locks & Rekeying",
     title: "Locksmith & Door Hardware",
     navLabel: "Locksmith & Door Hardware",
@@ -1165,10 +1172,15 @@ export const servicePillars = [
         answer:
           "No. Every lockout, lock, or hardware job is quoted flat-rate and upfront before we start — no last-minute service call or damage fees added on site.",
       },
+      {
+        question: "Which Pittsburgh neighborhoods do you cover for locksmith service?",
+        answer: `We come to your door across Pittsburgh and nearby, including ${neighborhoods.slice(0, 8).join(", ")} and more. Text us your ZIP code if you're not sure.`,
+      },
     ],
   },
   {
-    slug: "general-handyman",
+    slug: "handyman-repairs",
+    providerType: "HomeAndConstructionBusiness",
     includedHeading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
     title: "General Handyman & Repairs",
     navLabel: "General Handyman & Repairs",
@@ -1261,6 +1273,11 @@ export const servicePillars = [
         question: "How much do handyman repairs cost in Pittsburgh?",
         answer:
           "Repairs start at $49, with a flat-rate quote based on the details and photos you send us — never an hourly guess.",
+      },
+      {
+        question: "Do I need to buy parts or materials myself?",
+        answer:
+          "Our technicians bring their own tools. For small jobs we can often supply common parts; for specific fixtures you want installed, send us the details in your photo or text and we'll confirm what's needed in your quote.",
       },
     ],
   },

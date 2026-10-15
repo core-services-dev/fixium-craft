@@ -58,7 +58,15 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
     "@type": "Service",
     name: page.h1,
     serviceType: page.title,
-    provider: { "@id": `${seo.canonicalUrl}/#business` },
+    // Typed per page (Locksmith on the locksmith page, etc.); the shared @id
+    // ties it to the one business entity defined on the homepage.
+    provider: {
+      "@type": page.providerType,
+      "@id": `${seo.canonicalUrl}/#business`,
+      name: business.name,
+      url: `${base}/`,
+      telephone: business.phoneSchema,
+    },
     areaServed: areaServedSchema(),
     description: page.metaDescription,
     url: `${base}/services/${slug}`,
