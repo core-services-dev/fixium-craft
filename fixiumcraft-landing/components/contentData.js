@@ -23,6 +23,9 @@ export const business = {
   // LocalBusiness.telephone) — keep in sync with phoneHref/phoneDisplay
   // above if the number ever changes.
   phoneE164: "+1-929-780-3017",
+  // Human-readable form used for schema.org `telephone` (matches the visible
+  // number format Google compares against the Business Profile).
+  phoneSchema: "(929) 780-3017",
   smsHref: "sms:+19297803017",
   whatsappHref:
     "https://wa.me/19297803017?text=Hi%20Fixium%20Craft%2C%20I'd%20like%20a%20quote%20for%20a%20job.",
@@ -73,6 +76,7 @@ export const neighborhoods = [
   "Squirrel Hill",
   "Lawrenceville",
   "South Side",
+  "Oakland",
   "Downtown Pittsburgh",
   "Mt. Lebanon",
   "Cranberry Township",
@@ -84,6 +88,26 @@ export const neighborhoods = [
   "Wexford",
   "Moon Township",
 ];
+
+// schema.org `areaServed` — plain place names ("Shadyside", not "Shadyside,
+// PA"), each tied back to Pittsburgh via containedInPlace. Shared by the
+// homepage LocalBusiness schema and every pillar page's Service schema so
+// the coverage area is stated identically everywhere.
+export function areaServedSchema() {
+  const city = business.address.city;
+  return [
+    {
+      "@type": "City",
+      name: city,
+      containedInPlace: { "@type": "State", name: "Pennsylvania" },
+    },
+    ...neighborhoods.map((name) => ({
+      "@type": "Place",
+      name,
+      containedInPlace: { "@type": "City", name: city },
+    })),
+  ];
+}
 
 // Homepage "Service Areas" banner (see ServiceAreas() in LandingPage.jsx) —
 // a visible, above-the-fold-adjacent section so visitors immediately see
@@ -110,12 +134,16 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "Handyman, Furniture Assembly & Lock Services | Fixium Craft",
+  title: "Fixium Craft | Handyman, Furniture Assembly & Locksmith Services in Pittsburgh, PA",
   description:
-    "Reliable home services in Pittsburgh, PA. Expert furniture assembly, TV wall mounting, door lock replacement, lock repair, and lockout services.",
+    "Professional handyman, IKEA furniture assembly, TV wall mounting, and mobile locksmith services in Pittsburgh, PA. Serving Squirrel Hill, Shadyside, Lawrenceville, and surrounding neighborhoods.",
   keywords: [
     // Lock/handyman local-search terms first, then the original
     // furniture-assembly and general home-repair terms.
+    "IKEA furniture assembly Pittsburgh",
+    "TV wall mounting service in Pittsburgh",
+    "mobile locksmith near me",
+    "small home repairs and maintenance",
     "Handyman Pittsburgh",
     "lock replacement Pittsburgh",
     "lock repair Pittsburgh",
@@ -420,10 +448,10 @@ export const servicesSection = {
 // after `services`, because hasOfferCatalog below needs that array to
 // already exist.
 //
-// Using HandymanService (a HomeAndConstructionBusiness/LocalBusiness
-// subtype) rather than the generic LocalBusiness — the most specific,
-// still-valid type for a repair/assembly/handyman service, per Google's
-// structured-data guidelines. No streetAddress is included on purpose:
+// @type is ["HomeAndConstructionBusiness", "Locksmith"] — both real
+// schema.org LocalBusiness subtypes. schema.org has no dedicated "Handyman"
+// business type, so HomeAndConstructionBusiness is the closest match for
+// assembly/repair work, and Locksmith covers the lock services. No streetAddress is included on purpose:
 // this is a service-area business with no public storefront, so only
 // city/state + areaServed are given — a common, accepted pattern.
 //
@@ -433,7 +461,7 @@ export const servicesSection = {
 // update dayOfWeek/opens/closes here too or the two will drift apart.
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "HandymanService",
+  "@type": ["HomeAndConstructionBusiness", "Locksmith"],
   // Stable identifier other pages' Service schema points back to via
   // `provider: { "@id": ... }` instead of repeating this whole block.
   "@id": `${seo.canonicalUrl}/#business`,
@@ -444,8 +472,8 @@ export const localBusinessSchema = {
     name: business.owner,
   },
   description: seo.description,
-  url: seo.canonicalUrl,
-  telephone: business.phoneE164,
+  url: `${seo.canonicalUrl}/`,
+  telephone: business.phoneSchema,
   email: business.email,
   address: {
     "@type": "PostalAddress",
@@ -458,15 +486,17 @@ export const localBusinessSchema = {
   // schema.org, and naming each one (rather than just "Pittsburgh &
   // Surrounding Areas") is what lets AI assistants and Google confidently
   // match "handyman in Mt. Lebanon" to this business.
-  areaServed: [
-    {
-      "@type": "City",
-      name: `${business.address.city}, ${business.address.state}`,
-    },
-    ...neighborhoods.map((name) => ({
-      "@type": "Place",
-      name: `${name}, ${business.address.state}`,
-    })),
+  areaServed: areaServedSchema(),
+  // Topics/skills the business is expert in — helps search and AI
+  // assistants associate the business with these services.
+  knowsAbout: [
+    "Furniture Assembly",
+    "IKEA Assembly",
+    "TV Wall Mounting",
+    "Smart Lock Installation",
+    "Lock Rekeying",
+    "Drywall Patching",
+    "Handyman Services",
   ],
   // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") — keep
   // the two in sync if hours ever change (see the comment on business.hours).
@@ -903,9 +933,40 @@ export const faq = [
 // metaDescription, intro[], taskGroups[{heading, items[]}], faqs[].
 // startingPrice values are the existing real "Starting at" prices from
 // `services` above (lowest price among the services each pillar covers).
+// Homepage "what we do" text section (see ServiceDetails() in
+// LandingPage.jsx): one keyword-bearing H2 per pillar, each linking to its
+// dedicated page. Copy is kept factual — same services/prices as the pillars.
+export const serviceDetails = [
+  {
+    slug: "furniture-assembly",
+    heading: "IKEA & Flat-Pack Furniture Assembly in Pittsburgh",
+    body: "Need IKEA furniture assembly Pittsburgh can count on? We build PAX wardrobes, beds, desks, dressers, bookcases and anything else that comes in a box — sturdy, level and anchored right the first time, with a flat rate quoted before we start.",
+    cta: "See furniture assembly pricing",
+  },
+  {
+    slug: "furniture-assembly",
+    heading: "TV Wall Mounting & Shelf Installation Services",
+    body: "Our TV wall mounting service in Pittsburgh covers fixed, tilting and full-motion mounts, stud-anchored and hung level, with cable concealment available. We also install floating shelves, bracket shelves, mirrors and artwork.",
+    cta: "See TV & wall mounting",
+  },
+  {
+    slug: "locksmith",
+    heading: "Residential Locksmith, Smart Locks & Rekeying",
+    body: "Searching for a mobile locksmith near me? We come to your door in Pittsburgh for rekeying, deadbolt and lock replacement, handle sets, smart lock setup (Schlage, Yale, Ring, Nest, Kwikset) and lockouts, with same-day or scheduled appointments.",
+    cta: "See locksmith services",
+  },
+  {
+    slug: "general-handyman",
+    heading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
+    body: "From drywall patching and cabinet repair to minor plumbing and electrical fixtures, we handle the small home repairs and maintenance that keep getting pushed to next weekend, all at upfront flat rates.",
+    cta: "See handyman services",
+  },
+];
+
 export const servicePillars = [
   {
     slug: "furniture-assembly",
+    includedHeading: "IKEA & Flat-Pack Furniture Assembly in Pittsburgh",
     title: "Furniture Assembly & Mounting",
     navLabel: "Furniture Assembly & Mounting",
     navBlurb: "IKEA, beds, TVs, shelves & more",
@@ -958,7 +1019,7 @@ export const servicePillars = [
         ],
       },
       {
-        heading: "TV & wall mounting",
+        heading: "TV Wall Mounting & Shelf Installation Services",
         items: [
           "Fixed, tilting & full-motion TV mounts, stud-anchored",
           "Cable & wire concealment behind the wall or in raceway",
@@ -999,6 +1060,7 @@ export const servicePillars = [
   },
   {
     slug: "locksmith",
+    includedHeading: "Residential Locksmith, Smart Locks & Rekeying",
     title: "Locksmith & Door Hardware",
     navLabel: "Locksmith & Door Hardware",
     navBlurb: "Rekeying, smart locks, deadbolts & lockouts",
@@ -1107,6 +1169,7 @@ export const servicePillars = [
   },
   {
     slug: "general-handyman",
+    includedHeading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
     title: "General Handyman & Repairs",
     navLabel: "General Handyman & Repairs",
     navBlurb: "Drywall, cabinets, fixtures & home upkeep",

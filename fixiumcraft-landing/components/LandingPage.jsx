@@ -35,6 +35,7 @@ import {
   services,
   servicesSection,
   servicePillars,
+  serviceDetails,
   pricingTrustSection,
   discountOffer,
   process as processSteps,
@@ -529,6 +530,32 @@ function ServicePillars() {
 /* -------------------------------------------------------------------------- */
 /*  Upfront & Fixed Pricing — trust badge, what's always included, CTA      */
 /* -------------------------------------------------------------------------- */
+
+function ServiceDetails() {
+  return (
+    <section className="bg-slate-50 px-4 py-12 sm:py-16" aria-label="Our services in Pittsburgh">
+      <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2">
+        {serviceDetails.map((item) => (
+          <article
+            key={item.heading}
+            className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+          >
+            <h2 className="text-balance text-xl font-bold text-slate-900">{item.heading}</h2>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 sm:text-base">
+              {item.body}
+            </p>
+            <Link
+              href={`/services/${item.slug}`}
+              className="mt-4 text-sm font-semibold text-sky-700 hover:underline"
+            >
+              {item.cta} &rarr;
+            </Link>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function PricingTrust() {
   return (
@@ -1475,6 +1502,7 @@ export default function LandingPage() {
       <ServiceAreas />
       <PainPoints />
       <PricingTrust />
+      <ServiceDetails />
       <Gallery />
       <Process />
       <QuoteForm />

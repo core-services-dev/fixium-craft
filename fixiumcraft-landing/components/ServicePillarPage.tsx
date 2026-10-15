@@ -4,7 +4,7 @@ import Image from "next/image";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
 import WorkGallery from "./WorkGallery";
-import { business, neighborhoods, seo, servicePillars } from "./contentData";
+import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "./contentData";
 
 // ServicePillarPage.tsx
 //
@@ -59,13 +59,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
     name: page.h1,
     serviceType: page.title,
     provider: { "@id": `${seo.canonicalUrl}/#business` },
-    areaServed: [
-      { "@type": "City", name: `${business.address.city}, ${business.address.state}` },
-      ...neighborhoods.map((name) => ({
-        "@type": "Place",
-        name: `${name}, ${business.address.state}`,
-      })),
-    ],
+    areaServed: areaServedSchema(),
     description: page.metaDescription,
     url: `${base}/services/${slug}`,
   };
@@ -266,7 +260,9 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
         <div className="mx-auto max-w-3xl space-y-12">
           {/* Task list */}
           <section>
-            <h2 className="text-xl font-bold sm:text-2xl">What&apos;s Included</h2>
+            <h2 className="text-xl font-bold sm:text-2xl">
+              {page.includedHeading || "What's Included"}
+            </h2>
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
               {page.taskGroups.map((group) => (
                 <div key={group.heading} className="rounded-2xl border border-slate-200 p-5">
