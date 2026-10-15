@@ -48,6 +48,7 @@ export const navSection = {
   // Cross-page hash links ("/#...") so they also work from /services/<slug>.
   links: [
     { label: "Areas We Serve", href: "/#service-areas" },
+    { label: "Guides", href: "/guides" },
     { label: "About", href: "/#about" },
   ],
   callLabel: "Call",
@@ -1427,6 +1428,8 @@ export const footer = {
     label: `${p.navLabel} in Pittsburgh`,
     href: `/services/${p.slug}`,
   })),
+  // Knowledge base (content/guides/*.md, routes in app/guides).
+  resourceLinks: [{ label: "Helpful Guides & Knowledge Base", href: "/guides" }],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,
 };
 

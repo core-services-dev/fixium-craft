@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { seo, servicePillars } from "@/components/contentData";
+import { getAllGuides } from "@/lib/guides";
 
 // app/sitemap.ts (file convention) — served at /sitemap.xml. The homepage
 // is still the main content route (all its sections are anchors on "/"),
@@ -26,6 +27,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    // Knowledge base: the index plus one entry per file in content/guides/,
+    // dated by each guide's own "updated" frontmatter.
+    {
+      url: `${base}/guides`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    ...getAllGuides().map((g) => ({
+      url: `${base}/guides/${g.slug}`,
+      lastModified: new Date(`${g.updated}T00:00:00Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     {
       url: `${base}/privacy`,

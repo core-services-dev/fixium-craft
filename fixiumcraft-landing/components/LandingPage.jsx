@@ -1437,6 +1437,16 @@ function Footer() {
             </Link>
           ))}
         </nav>
+        <nav
+          aria-label="Resources"
+          className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs"
+        >
+          {footer.resourceLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="hover:text-white">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
         <div className="mt-4 flex justify-center gap-4 text-sm">
           <a href={business.phoneHref} className="hover:text-white">
             {business.phoneDisplay}

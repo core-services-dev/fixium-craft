@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
 import WorkGallery from "./WorkGallery";
+import RelatedGuides from "./RelatedGuides";
 import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "./contentData";
 
 // ServicePillarPage.tsx
@@ -397,6 +398,9 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
               ))}
             </div>
           </section>
+
+          {/* Related guides (content/guides/*.md mapped to this service) */}
+          <RelatedGuides serviceSlug={slug} />
         </div>
       </div>
 
