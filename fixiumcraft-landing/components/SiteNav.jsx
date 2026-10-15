@@ -15,7 +15,7 @@ import Link from "next/link";
 import { business, navSection, servicePillars } from "./contentData";
 
 const BTN_PRIMARY =
-  "rounded-lg bg-blue-700 font-semibold text-white transition hover:bg-blue-600";
+  "rounded-lg bg-emerald-700 font-semibold text-white transition hover:bg-emerald-800";
 const BTN_OUTLINE_DARK =
   "rounded-lg border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-50";
 
@@ -158,7 +158,7 @@ export function SiteNav() {
                     <span className="block text-sm font-semibold text-slate-900">
                       {p.navLabel}
                     </span>
-                    <span className="block text-xs text-slate-500">{p.navBlurb}</span>
+                    <span className="block text-xs text-slate-600">{p.navBlurb}</span>
                   </Link>
                 ))}
               </div>
@@ -207,7 +207,7 @@ export function SiteNav() {
           aria-label="Mobile"
           className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-slate-200 bg-white px-4 pb-5 pt-3 md:hidden"
         >
-          <p className="px-1 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
+          <p className="px-1 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-600">
             {navSection.servicesLabel}
           </p>
           <ul className="space-y-1">
@@ -219,7 +219,7 @@ export function SiteNav() {
                   className="block rounded-lg px-3 py-3 hover:bg-slate-50"
                 >
                   <span className="block text-sm font-semibold text-slate-900">{p.navLabel}</span>
-                  <span className="block text-xs text-slate-500">{p.navBlurb}</span>
+                  <span className="block text-xs text-slate-600">{p.navBlurb}</span>
                 </Link>
               </li>
             ))}
@@ -285,7 +285,7 @@ export function StickyMobileBar() {
         href={business.whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-1 flex-col items-center justify-center gap-0.5 bg-emerald-500 py-2.5 text-white active:bg-emerald-600"
+        className="flex flex-1 flex-col items-center justify-center gap-0.5 bg-emerald-700 py-2.5 text-white active:bg-emerald-800"
         aria-label="Message us on WhatsApp"
       >
         <IconWhatsapp className="h-5 w-5" />

@@ -12,7 +12,7 @@ import { business } from "./contentData";
 // exported, so this stays the one shared copy for everything else.
 
 export const BTN_PRIMARY =
-  "rounded-lg bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-600";
+  "rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800";
 
 export function SiteHeader() {
   return (
@@ -45,7 +45,7 @@ export function SiteFooterMini() {
     <footer className="bg-slate-900 px-4 py-10 text-slate-400">
       <div className="mx-auto max-w-5xl text-center">
         <p className="text-lg font-bold text-white">{business.name}</p>
-        <p className="mt-6 text-xs text-slate-500">
+        <p className="mt-6 text-xs text-slate-400">
           © {new Date().getFullYear()} {business.name}. All rights reserved.
         </p>
       </div>

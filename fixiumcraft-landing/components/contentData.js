@@ -1041,7 +1041,7 @@ export const servicePillars = [
     ],
     taskGroups: [
       {
-        heading: "Furniture assembly",
+        heading: "IKEA & flat-pack furniture assembly",
         items: [
           "IKEA PAX wardrobes & closet systems, sliding and hinged doors",
           "Bed frames, platform beds, bunk beds & headboards",
@@ -1141,7 +1141,7 @@ export const servicePillars = [
     ],
     taskGroups: [
       {
-        heading: "TV mounting",
+        heading: "TV wall mounting",
         items: [
           "Fixed, tilting & full-motion TV mounts, stud-anchored",
           "Cable & wire concealment behind the wall or in raceway",
@@ -1241,7 +1241,7 @@ export const servicePillars = [
     ],
     taskGroups: [
       {
-        heading: "Rekeying & lock replacement",
+        heading: "Mobile rekeying & lock replacement",
         items: [
           "Rekey existing locks to a new key — common for new homeowners",
           "Replace worn, damaged, or outdated knobs and deadbolts",
@@ -1265,7 +1265,7 @@ export const servicePillars = [
         ],
       },
       {
-        heading: "Lockouts",
+        heading: "Mobile locksmith lockout help",
         items: [
           "Home & business unlocking, same-day or scheduled",
           "Vehicle lockouts: cars, vans & commercial trucks",
@@ -1341,7 +1341,7 @@ export const servicePillars = [
     ],
     taskGroups: [
       {
-        heading: "Walls & surfaces",
+        heading: "Drywall patching & wall repair",
         items: [
           "Drywall patching & small hole repair",
           "Caulking & sealing around tubs, sinks & trim",

@@ -14,7 +14,7 @@ import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "
 // <details>, no JS), service-area badges, and a text/photo CTA banner.
 
 const BTN_PRIMARY =
-  "rounded-lg bg-blue-600 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-blue-700/30 transition hover:bg-blue-500";
+  "rounded-lg bg-emerald-700 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-emerald-900/30 ring-1 ring-emerald-400/40 transition hover:bg-emerald-800";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
 
@@ -206,7 +206,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                   >
                     <p className="text-sm font-semibold text-slate-900">{tier.label}</p>
                     <p className="mt-3 flex items-baseline gap-1.5">
-                      <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-600">
                         Starting at
                       </span>
                       <span className="text-3xl font-extrabold text-blue-800">{tier.price}</span>
@@ -221,7 +221,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-3 text-xs text-slate-600">
                 Flat-rate and quoted upfront. Final price depends on the job; send a photo for an exact number.
               </p>
             </section>
@@ -332,7 +332,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-3 text-xs text-slate-600">
                 Brand names belong to their respective owners. Fixium Craft is an independent installer and is not
                 affiliated with these brands.
               </p>
@@ -392,7 +392,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                   className="rounded-xl border border-slate-200 p-4 transition hover:border-blue-300 hover:bg-blue-50/40"
                 >
                   <span className="block text-sm font-semibold text-slate-900">{p.title}</span>
-                  <span className="mt-1 block text-xs text-slate-500">{p.navBlurb}</span>
+                  <span className="mt-1 block text-xs text-slate-600">{p.navBlurb}</span>
                 </Link>
               ))}
             </div>

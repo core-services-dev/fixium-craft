@@ -71,9 +71,9 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const BTN_PRIMARY =
-  "rounded-lg bg-blue-700 font-semibold text-white transition hover:bg-blue-600";
+  "rounded-lg bg-emerald-700 font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300";
 const BTN_PRIMARY_ON_DARK =
-  "rounded-lg bg-blue-600 font-semibold text-white transition hover:bg-blue-500";
+  "rounded-lg bg-emerald-700 font-semibold text-white ring-1 ring-emerald-400/40 transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/20 bg-white/5 font-semibold text-white transition hover:bg-white/10";
 const BTN_OUTLINE_LIGHT_WHATSAPP =
@@ -90,7 +90,7 @@ const BTN_OUTLINE_DARK =
 /* -------------------------------------------------------------------------- */
 
 const INPUT_BASE =
-  "mt-1.5 w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-200";
+  "mt-1.5 w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-200";
 
 /* -------------------------------------------------------------------------- */
 /*  Icons (inline SVG — no external icon library dependency)                  */
@@ -264,7 +264,7 @@ function Hero() {
         <div className="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
           <a
             href="#quote"
-            className={`px-8 py-4 text-center text-base shadow-lg shadow-blue-900/40 ${BTN_PRIMARY_ON_DARK}`}
+            className={`px-8 py-4 text-center text-base shadow-lg shadow-emerald-900/40 ${BTN_PRIMARY_ON_DARK}`}
           >
             {hero.primaryCta.label}
           </a>
@@ -284,7 +284,7 @@ function Hero() {
             return (
               <li key={item.id} className="inline-flex items-center gap-2 sm:px-6">
                 <Icon
-                  className={`h-4 w-4 ${item.id === "rating" ? "fill-amber-400 text-amber-400" : "text-emerald-400"}`}
+                  className={`h-4 w-4 ${item.id === "rating" ? "fill-amber-400 text-amber-400" : "text-blue-300"}`}
                   aria-hidden="true"
                 />
                 {item.label}
@@ -344,7 +344,7 @@ function ServiceAreas() {
         {/* Keyword-rich internal links to the dedicated pillar
             pages — anchor text is the actual long-tail phrase being
             targeted, not generic "click here" copy. */}
-        <p className="mx-auto mt-6 max-w-2xl text-xs text-slate-500">
+        <p className="mx-auto mt-6 max-w-2xl text-xs text-slate-600">
           Popular searches we cover:{" "}
           {serviceAreasSection.popularSearches.map((item, index) => (
             <span key={item.href}>
@@ -382,7 +382,7 @@ function PainPoints() {
               key={item.id}
               className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
             >
-              <p className="text-sm font-semibold text-rose-600">
+              <p className="text-sm font-semibold text-rose-700">
                 {item.problem}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
@@ -419,13 +419,13 @@ function PillarCard({ pillar }) {
       <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
         {pillar.features.slice(0, 3).map((feature) => (
           <li key={feature} className="flex items-start gap-2">
-            <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" aria-hidden="true" />
+            <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-700" aria-hidden="true" />
             {feature}
           </li>
         ))}
       </ul>
       <div className="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-5">
-        <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-800">
+        <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-bold text-blue-800">
           {pillar.startingPrice}
         </span>
         <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-800">
@@ -535,7 +535,7 @@ function PricingTrust() {
             items, the wall-anchoring FAQ), just surfaced here too, right
             next to the prices themselves. */}
         <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
-          <h3 className="text-center text-xs font-bold uppercase tracking-wide text-slate-500 sm:text-sm">
+          <h3 className="text-center text-xs font-bold uppercase tracking-wide text-slate-600 sm:text-sm">
             {pricingTrustSection.includedHeading}
           </h3>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -649,7 +649,7 @@ function StepHeading({ n, title, hint }) {
       </span>
       <div>
         <p className="text-base font-bold leading-tight text-slate-900">{title}</p>
-        {hint && <p className="text-xs text-slate-500">{hint}</p>}
+        {hint && <p className="text-xs text-slate-600">{hint}</p>}
       </div>
     </div>
   );
@@ -822,7 +822,7 @@ function QuoteForm() {
             type="button"
             onClick={resetForm}
             aria-label="Close"
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-600"
           >
             <IconX className="h-4 w-4" />
           </button>
@@ -897,7 +897,7 @@ function QuoteForm() {
                       {opt.label}
                     </span>
                     {opt.price && (
-                      <span className={`text-xs font-medium ${selected ? "text-blue-100" : "text-slate-500"}`}>
+                      <span className={`text-xs font-medium ${selected ? "text-blue-100" : "text-slate-600"}`}>
                         {opt.price}
                       </span>
                     )}
@@ -906,7 +906,7 @@ function QuoteForm() {
               })}
             </div>
             {servicesTouched && formData.services.length === 0 && (
-              <p className="mt-3 text-sm font-medium text-rose-600">
+              <p className="mt-3 text-sm font-medium text-rose-700">
                 {quoteForm.fields.services.errorMessage}
               </p>
             )}
@@ -939,7 +939,7 @@ function QuoteForm() {
               <span className="mt-3 break-all text-base font-semibold text-slate-900">
                 {photoName || quoteForm.fields.photo.cta}
               </span>
-              <span className="mt-1 text-sm text-slate-500">
+              <span className="mt-1 text-sm text-slate-600">
                 {photoName ? "Tap to change photo" : quoteForm.fields.photo.hint}
               </span>
             </label>
@@ -951,7 +951,7 @@ function QuoteForm() {
               onChange={handlePhotoChange}
               className="sr-only"
             />
-            <p className="mt-2 text-center text-xs text-slate-500">
+            <p className="mt-2 text-center text-xs text-slate-600">
               {quoteForm.fields.photo.helpText}
             </p>
           </div>
@@ -1014,7 +1014,7 @@ function QuoteForm() {
                 </div>
               </div>
               {quoteForm.fields.phone.helpText && (
-                <p className="text-xs text-slate-500">{quoteForm.fields.phone.helpText}</p>
+                <p className="text-xs text-slate-600">{quoteForm.fields.phone.helpText}</p>
               )}
               <div>
                 <label htmlFor="streetAddress" className="text-sm font-semibold text-slate-800">
@@ -1030,7 +1030,7 @@ function QuoteForm() {
                   placeholder={quoteForm.fields.streetAddress.placeholder}
                   className={INPUT_BASE}
                 />
-                <p className="mt-1.5 text-xs text-slate-500">
+                <p className="mt-1.5 text-xs text-slate-600">
                   {quoteForm.fields.streetAddress.helpText}
                 </p>
               </div>
@@ -1042,7 +1042,7 @@ function QuoteForm() {
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-slate-700 [&::-webkit-details-marker]:hidden">
               <span>
                 {quoteForm.moreDetailsLabel}
-                <span className="mt-0.5 block text-xs font-normal text-slate-400">
+                <span className="mt-0.5 block text-xs font-normal text-slate-600">
                   {quoteForm.moreDetailsHint}
                 </span>
               </span>
@@ -1063,7 +1063,7 @@ function QuoteForm() {
               className={`${INPUT_BASE} resize-none`}
             />
             {quoteForm.fields.notes.helpText && (
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-1 text-xs text-slate-600">
                 {quoteForm.fields.notes.helpText}
               </p>
             )}
@@ -1076,7 +1076,7 @@ function QuoteForm() {
               {quoteForm.fields.preferredContactMethod.label}
             </legend>
             {quoteForm.fields.preferredContactMethod.helpText && (
-              <p className="mt-0.5 text-xs text-slate-400">
+              <p className="mt-0.5 text-xs text-slate-600">
                 {quoteForm.fields.preferredContactMethod.helpText}
               </p>
             )}
@@ -1156,11 +1156,11 @@ function QuoteForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className={`w-full px-4 py-4 text-base shadow-lg shadow-blue-700/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
+              className={`w-full px-4 py-4 text-base shadow-lg shadow-emerald-900/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
             >
               {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
             </button>
-            <p className="mt-3 text-center text-xs text-slate-500">{quoteForm.disclaimer}</p>
+            <p className="mt-3 text-center text-xs text-slate-600">{quoteForm.disclaimer}</p>
           </div>
         </form>
       </div>
@@ -1217,7 +1217,7 @@ function QualityGuarantee() {
               <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                 <IconCheck className="h-4.5 w-4.5" />
               </div>
-              <h3 className="mt-3 text-sm font-semibold text-slate-900">
+              <h3 className="mt-3 text-base font-semibold text-slate-900">
                 {item.label}
               </h3>
               <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
@@ -1291,7 +1291,7 @@ function ReviewCard({ review }) {
       </blockquote>
       <figcaption className="mt-4 text-sm">
         <span className="font-semibold text-slate-900">{review.name}</span>
-        <span className="text-slate-500">
+        <span className="text-slate-600">
           {review.date ? <> &middot; {review.date}</> : null} &middot; {googleReviews.sourceLabel}
         </span>
       </figcaption>
@@ -1320,7 +1320,7 @@ function Testimonials() {
           <span className="text-lg font-bold text-slate-900">
             {googleReviews.value} / 5
           </span>
-          <span className="text-sm font-medium text-slate-500">
+          <span className="text-sm font-medium text-slate-600">
             ({googleReviews.reviewCount} {googleReviews.sourceLabel})
           </span>
         </div>
@@ -1380,7 +1380,7 @@ function FAQ() {
                     {item.question}
                   </span>
                   <IconChevronDown
-                    className={`h-4 w-4 flex-shrink-0 text-slate-400 transition-transform ${
+                    className={`h-4 w-4 flex-shrink-0 text-slate-500 transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
@@ -1456,7 +1456,7 @@ function Footer() {
             </span>
           ))}
         </div>
-        <p className="mt-6 text-xs text-slate-500">
+        <p className="mt-6 text-xs text-slate-400">
           © {new Date().getFullYear()} {business.name}. All rights reserved.
         </p>
         {/* Subtle build/version marker — deliberately the most muted text on
@@ -1465,7 +1465,7 @@ function Footer() {
             point when checking which deploy is live. Commit SHA is only
             present on Vercel builds (see next.config.ts); it's silently
             omitted in local dev instead of showing a broken/empty value. */}
-        <p className="mt-2 text-[11px] text-slate-600">
+        <p className="mt-2 text-[11px] text-slate-400">
           v{packageJson.version}
           {shortCommitSha ? ` (${shortCommitSha})` : ""}
         </p>
