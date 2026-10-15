@@ -10,7 +10,7 @@
 // resets scroll on full page loads).
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import BrandLink from "./BrandLink";
 import Link from "next/link";
 import { business, navSection, servicePillars } from "./contentData";
 
@@ -112,21 +112,10 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3.5">
-        <Link
-          href="/"
-          onClick={closeAll}
+        <BrandLink
+          onNavigate={closeAll}
           className="flex shrink-0 items-center gap-2 text-lg font-extrabold tracking-tight text-slate-900 transition-opacity hover:opacity-80"
-        >
-          <Image
-            src="/logo-icon.png"
-            alt={`${business.name} logo`}
-            width={44}
-            height={44}
-            priority
-            className="h-10 w-10 shrink-0 sm:h-11 sm:w-11"
-          />
-          <span className="leading-none">{business.name}</span>
-        </Link>
+        />
 
         {/* Desktop nav */}
         <nav
