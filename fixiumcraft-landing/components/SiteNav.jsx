@@ -15,7 +15,7 @@ import Link from "next/link";
 import { business, navSection, servicePillars } from "./contentData";
 
 const BTN_PRIMARY =
-  "rounded-lg bg-sky-500 font-semibold text-white transition hover:bg-sky-400";
+  "rounded-lg bg-blue-700 font-semibold text-white transition hover:bg-blue-600";
 const BTN_OUTLINE_DARK =
   "rounded-lg border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-50";
 
@@ -275,7 +275,7 @@ export function StickyMobileBar() {
       </a>
       <Link
         href="/#quote"
-        className={`${item} border-x border-slate-200 text-sky-600`}
+        className={`${item} border-x border-slate-200 text-blue-800`}
         aria-label="Get a free quote"
       >
         <IconTag className="h-5 w-5" />

@@ -12,7 +12,7 @@ import { business } from "./contentData";
 // exported, so this stays the one shared copy for everything else.
 
 export const BTN_PRIMARY =
-  "rounded-lg bg-sky-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-400";
+  "rounded-lg bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-600";
 
 export function SiteHeader() {
   return (

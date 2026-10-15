@@ -14,7 +14,7 @@ import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "
 // <details>, no JS), service-area badges, and a text/photo CTA banner.
 
 const BTN_PRIMARY =
-  "rounded-lg bg-sky-500 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400";
+  "rounded-lg bg-blue-600 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-blue-700/30 transition hover:bg-blue-500";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
 
@@ -133,7 +133,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
               Text Us Photos for an Estimate
             </a>
           </div>
-          <p className="mt-4 text-sm font-semibold text-sky-300">{page.startingPrice}</p>
+          <p className="mt-4 text-sm font-semibold text-blue-300">{page.startingPrice}</p>
           {page.badges && (
             <ul className="mt-4 flex flex-wrap gap-2">
               {page.badges.map((badge) => (
@@ -195,12 +195,12 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                       <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
                         Starting at
                       </span>
-                      <span className="text-3xl font-extrabold text-sky-600">{tier.price}</span>
+                      <span className="text-3xl font-extrabold text-blue-800">{tier.price}</span>
                     </p>
                     <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{tier.note}</p>
                     <Link
                       href="/#quote"
-                      className="mt-4 rounded-lg border border-sky-200 bg-sky-50 px-4 py-2.5 text-center text-sm font-semibold text-sky-700 transition hover:bg-sky-100"
+                      className="mt-4 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2.5 text-center text-sm font-semibold text-blue-800 transition hover:bg-blue-100"
                     >
                       Get this quote
                     </Link>
@@ -224,7 +224,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                     key={card.title}
                     className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
                   >
-                    <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-700 to-sky-900">
+                    <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-700 to-blue-900">
                       {card.image ? (
                         <Image
                           src={card.image}
@@ -278,7 +278,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                   <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
                     {group.items.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span aria-hidden="true" className="mt-0.5 text-sky-500">
+                        <span aria-hidden="true" className="mt-0.5 text-blue-700">
                           &#10003;
                         </span>
                         {item}
@@ -335,7 +335,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                     {item.question}
                     <span
                       aria-hidden="true"
-                      className="shrink-0 text-xl leading-none text-sky-500 transition-transform group-open:rotate-45"
+                      className="shrink-0 text-xl leading-none text-blue-700 transition-transform group-open:rotate-45"
                     >
                       +
                     </span>
@@ -375,7 +375,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                 <Link
                   key={p.slug}
                   href={`/services/${p.slug}`}
-                  className="rounded-xl border border-slate-200 p-4 transition hover:border-sky-300 hover:bg-sky-50/40"
+                  className="rounded-xl border border-slate-200 p-4 transition hover:border-blue-300 hover:bg-blue-50/40"
                 >
                   <span className="block text-sm font-semibold text-slate-900">{p.title}</span>
                   <span className="mt-1 block text-xs text-slate-500">{p.navBlurb}</span>

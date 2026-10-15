@@ -17,7 +17,6 @@
 //   export default function Page() { return <LandingPage />; }
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 // Build-time JSON import (webpack/Turbopack resolve this to a plain JS
 // module, no runtime fs access) — keeps the footer's version string in
@@ -25,6 +24,18 @@ import Link from "next/link";
 import packageJson from "../package.json";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import WorkGallery from "./WorkGallery";
+import {
+  Armchair,
+  ArrowRight,
+  Check,
+  Clock,
+  CloudUpload,
+  KeyRound,
+  MessageSquareText,
+  ShieldCheck,
+  Star,
+  Wrench,
+} from "lucide-react";
 import { trackEvent } from "./analytics";
 import {
   business,
@@ -60,7 +71,9 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const BTN_PRIMARY =
-  "rounded-lg bg-sky-500 font-semibold text-white transition hover:bg-sky-400";
+  "rounded-lg bg-blue-700 font-semibold text-white transition hover:bg-blue-600";
+const BTN_PRIMARY_ON_DARK =
+  "rounded-lg bg-blue-600 font-semibold text-white transition hover:bg-blue-500";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/20 bg-white/5 font-semibold text-white transition hover:bg-white/10";
 const BTN_OUTLINE_LIGHT_WHATSAPP =
@@ -77,7 +90,7 @@ const BTN_OUTLINE_DARK =
 /* -------------------------------------------------------------------------- */
 
 const INPUT_BASE =
-  "mt-1.5 w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100";
+  "mt-1.5 w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-200";
 
 /* -------------------------------------------------------------------------- */
 /*  Icons (inline SVG — no external icon library dependency)                  */
@@ -235,109 +248,50 @@ const SERVICE_ICONS = {
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 
-function HeroServiceCard({ pillar }) {
-  const Icon = SERVICE_ICONS[pillar.icon];
-  return (
-    <Link
-      href={`/services/${pillar.slug}`}
-      className="group flex items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-lg shadow-black/20 ring-1 ring-white/10 transition hover:-translate-y-0.5 hover:shadow-xl sm:flex-col sm:items-start sm:gap-2 sm:p-5"
-    >
-      <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-sky-50 text-sky-600 sm:h-12 sm:w-12">
-        {Icon ? <Icon className="h-6 w-6" /> : <IconBox className="h-6 w-6" />}
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="block text-base font-bold leading-snug text-slate-900">
-          {pillar.title}
-        </span>
-        <span className="mt-0.5 block text-xs text-slate-500 sm:text-sm">{pillar.navBlurb}</span>
-        <span className="mt-2 flex items-center justify-between gap-2 sm:mt-3">
-          <span className="whitespace-nowrap rounded-full bg-sky-50 px-2.5 py-1 text-xs font-bold text-sky-700 sm:text-sm">
-            {pillar.startingPrice}
-          </span>
-          <span className="hidden items-center gap-1 whitespace-nowrap text-sm font-semibold text-sky-600 group-hover:underline sm:inline-flex">
-            View &amp; Book <span aria-hidden="true">&rarr;</span>
-          </span>
-        </span>
-      </span>
-      <span aria-hidden="true" className="text-xl text-slate-300 sm:hidden">
-        &rsaquo;
-      </span>
-    </Link>
-  );
-}
+const HERO_TRUST_ICONS = { rating: Star, insured: ShieldCheck, sameday: Clock };
 
 function Hero() {
   return (
-    <section className="bg-gradient-to-b from-slate-900 to-slate-800 px-4 pb-10 pt-7 text-white sm:pb-14 sm:pt-12">
-      <div className="mx-auto max-w-5xl text-center">
-        <p className="mb-3 inline-block whitespace-nowrap rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-300">
-          {hero.eyebrow}
-        </p>
-        <h1 className="text-balance text-[1.75rem] font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]">
+    <section className="bg-slate-900 px-4 py-16 text-white md:py-24">
+      <div className="mx-auto max-w-4xl text-center">
+        <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
           {hero.headline}
         </h1>
-        <p className="mx-auto mt-3 max-w-xl text-balance text-base text-slate-300 sm:mt-4 sm:text-lg">
+        <p className="mx-auto mt-5 max-w-2xl text-balance text-base text-slate-300 sm:text-lg">
           {hero.subheadline}
         </p>
 
-        {/* Dual CTAs: request a quote (form) + text photos for an estimate.
-            Call / WhatsApp stay one tap away as lightweight links below. */}
-        <div className="mt-5 flex flex-col items-center gap-3 sm:mt-7">
-          <div className="flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
-            <a
-              href="#quote"
-              className={`px-6 py-3.5 text-center text-base shadow-lg shadow-sky-500/30 sm:px-8 ${BTN_PRIMARY}`}
-            >
-              {hero.primaryCta.label}
-            </a>
-            <a
-              href={business.smsHref}
-              className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 text-center text-base sm:px-8 ${BTN_OUTLINE_LIGHT}`}
-            >
-              <IconMessage className="h-5 w-5 shrink-0" />
-              {hero.secondaryCtas[0].label}
-            </a>
-          </div>
-          <div className="flex items-center gap-4 text-sm font-medium text-slate-300">
-            <a
-              href={business.phoneHref}
-              className="inline-flex items-center gap-1.5 transition hover:text-white"
-            >
-              <IconPhone className="h-4 w-4" /> Call
-            </a>
-            <span aria-hidden="true" className="text-slate-600">
-              |
-            </span>
-            <a
-              href={business.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 transition hover:text-white"
-            >
-              <IconWhatsapp className="h-4 w-4 text-emerald-400" /> WhatsApp
-            </a>
-          </div>
+        <div className="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+          <a
+            href="#quote"
+            className={`px-8 py-4 text-center text-base shadow-lg shadow-blue-900/40 ${BTN_PRIMARY_ON_DARK}`}
+          >
+            {hero.primaryCta.label}
+          </a>
+          <a
+            href={business.smsHref}
+            className={`inline-flex items-center justify-center gap-2 px-8 py-4 text-center text-base ${BTN_OUTLINE_LIGHT}`}
+          >
+            <MessageSquareText className="h-5 w-5 shrink-0" aria-hidden="true" />
+            {hero.secondaryCtas[0].label}
+          </a>
         </div>
 
-        {/* The 3 core specialties, right under the CTAs: one tap to the
-            matching service page (where the quote CTA lives). */}
-        <p className="mt-7 text-xs font-semibold uppercase tracking-wide text-slate-400 sm:mt-9">
-          {hero.pickerLabel}
-        </p>
-        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-          {servicePillars.map((pillar) => (
-            <HeroServiceCard key={pillar.slug} pillar={pillar} />
-          ))}
-        </div>
-
-        <div className="mx-auto mt-5 hidden max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-300 sm:flex">
-          {hero.trustBadges.map((badge) => (
-            <span key={badge.id} className="inline-flex items-center gap-1.5">
-              <IconCheck className="h-3.5 w-3.5 text-emerald-400" />
-              {badge.label}
-            </span>
-          ))}
-        </div>
+        {/* Trust bar directly under the CTAs. */}
+        <ul className="mx-auto mt-12 flex max-w-2xl flex-col items-center justify-center gap-3 border-t border-white/10 pt-6 text-sm font-medium text-slate-200 sm:flex-row sm:gap-0 sm:divide-x sm:divide-white/15">
+          {hero.trustBar.map((item) => {
+            const Icon = HERO_TRUST_ICONS[item.id];
+            return (
+              <li key={item.id} className="inline-flex items-center gap-2 sm:px-6">
+                <Icon
+                  className={`h-4 w-4 ${item.id === "rating" ? "fill-amber-400 text-amber-400" : "text-emerald-400"}`}
+                  aria-hidden="true"
+                />
+                {item.label}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
@@ -368,12 +322,12 @@ function ServiceAreas() {
               key={area}
               className={
                 index === 0
-                  ? "inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white"
+                  ? "inline-flex items-center gap-1.5 rounded-full bg-blue-800 px-4 py-2 text-sm font-semibold text-white"
                   : "inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700"
               }
             >
               <IconMapPin
-                className={index === 0 ? "h-4 w-4" : "h-4 w-4 text-sky-500"}
+                className={index === 0 ? "h-4 w-4" : "h-4 w-4 text-blue-700"}
               />
               {area}
             </li>
@@ -382,7 +336,7 @@ function ServiceAreas() {
 
         <a
           href={serviceAreasSection.cta.href}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sky-600 hover:underline"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-800 hover:underline"
         >
           {serviceAreasSection.cta.label} &rarr;
         </a>
@@ -395,7 +349,7 @@ function ServiceAreas() {
           {serviceAreasSection.popularSearches.map((item, index) => (
             <span key={item.href}>
               {index > 0 && ", "}
-              <Link href={item.href} className="font-medium text-sky-600 hover:underline">
+              <Link href={item.href} className="font-medium text-blue-800 hover:underline">
                 {item.label}
               </Link>
             </span>
@@ -413,7 +367,7 @@ function ServiceAreas() {
 
 function PainPoints() {
   return (
-    <section className="bg-white px-4 py-14 sm:py-20">
+    <section className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -446,62 +400,43 @@ function PainPoints() {
 /*  Services grid                                                             */
 /* -------------------------------------------------------------------------- */
 
-// One of the 3 equal service pillars. Same image-resilience pattern as the
-// old service cards: the gradient+icon base layer always renders, the real
-// photo fades in on top, and onError just keeps the base layer showing.
+// One of the 3 equal service pillars: a single clickable card (icon, short
+// description, 3 highlights, starting-price badge) linking to /services/<slug>.
+const PILLAR_ICONS = { assembly: Armchair, lock: KeyRound, repairs: Wrench };
+
 function PillarCard({ pillar }) {
-  const [imageFailed, setImageFailed] = useState(false);
-  const Icon = SERVICE_ICONS[pillar.icon];
-
+  const Icon = PILLAR_ICONS[pillar.icon] || Wrench;
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-sky-900">
-          {Icon ? (
-            <Icon className="h-14 w-14 text-white/90" />
-          ) : (
-            <IconBox className="h-14 w-14 text-white/70" />
-          )}
-        </div>
-        {pillar.image && !imageFailed && (
-          <Image
-            src={pillar.image}
-            alt={pillar.alt || pillar.title}
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="absolute inset-0 object-cover"
-            onError={() => setImageFailed(true)}
+    <Link
+      href={`/services/${pillar.slug}`}
+      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 sm:p-8"
+    >
+      <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
+        <Icon className="h-6 w-6" aria-hidden="true" />
+      </span>
+      <h3 className="mt-5 text-xl font-bold text-slate-900">{pillar.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{pillar.description}</p>
+      <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
+        {pillar.features.slice(0, 3).map((feature) => (
+          <li key={feature} className="flex items-start gap-2">
+            <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" aria-hidden="true" />
+            {feature}
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-5">
+        <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-800">
+          {pillar.startingPrice}
+        </span>
+        <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-800">
+          View &amp; Book
+          <ArrowRight
+            className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+            aria-hidden="true"
           />
-        )}
+        </span>
       </div>
-
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sky-50 text-sky-600">
-            {Icon ? <Icon className="h-5 w-5" /> : <IconBox className="h-5 w-5" />}
-          </span>
-          <h3 className="text-lg font-bold leading-snug text-slate-900">{pillar.title}</h3>
-        </div>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600">{pillar.description}</p>
-        <ul className="mt-4 space-y-2 text-sm text-slate-700">
-          {pillar.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-2">
-              <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-auto pt-5">
-          <p className="mb-3 text-sm font-semibold text-slate-900">{pillar.startingPrice}</p>
-          <Link
-            href={`/services/${pillar.slug}`}
-            className={`block w-full px-5 py-3 text-center text-sm ${BTN_PRIMARY}`}
-          >
-            Learn More &amp; Book
-          </Link>
-        </div>
-      </div>
-    </article>
+    </Link>
   );
 }
 
@@ -509,7 +444,7 @@ function PillarCard({ pillar }) {
 // linking to its own SEO page under /services/<slug>.
 function ServicePillars() {
   return (
-    <section id="services" className="scroll-mt-20 bg-slate-50 px-4 py-14 sm:py-20">
+    <section id="services" className="scroll-mt-20 bg-slate-50 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -517,7 +452,7 @@ function ServicePillars() {
           </h2>
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {servicePillars.map((pillar) => (
             <PillarCard key={pillar.slug} pillar={pillar} />
           ))}
@@ -533,7 +468,7 @@ function ServicePillars() {
 
 function ServiceDetails() {
   return (
-    <section className="bg-slate-50 px-4 py-12 sm:py-16" aria-label="Our services in Pittsburgh">
+    <section className="bg-slate-50 px-4 py-16 md:py-24" aria-label="Our services in Pittsburgh">
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2">
         {serviceDetails.map((item) => (
           <article
@@ -546,7 +481,7 @@ function ServiceDetails() {
             </p>
             <Link
               href={`/services/${item.slug}`}
-              className="mt-4 text-sm font-semibold text-sky-700 hover:underline"
+              className="mt-4 text-sm font-semibold text-blue-800 hover:underline"
             >
               {item.cta} &rarr;
             </Link>
@@ -559,7 +494,7 @@ function ServiceDetails() {
 
 function PricingTrust() {
   return (
-    <section className="bg-white px-4 pb-14 sm:pb-20">
+    <section className="bg-white px-4 pb-16 md:pb-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -648,7 +583,7 @@ function Gallery() {
 
 function Process() {
   return (
-    <section id="process" className="bg-white px-4 py-14 sm:py-20">
+    <section id="process" className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -705,10 +640,25 @@ const DISCOUNT_FORM_KEYS = [
   { id: "senior", formKey: "discountSenior" },
 ];
 
+function StepHeading({ n, title, hint }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-blue-800 text-sm font-bold text-white">
+        {n}
+      </span>
+      <div>
+        <p className="text-base font-bold leading-tight text-slate-900">{title}</p>
+        {hint && <p className="text-xs text-slate-500">{hint}</p>}
+      </div>
+    </div>
+  );
+}
+
 function QuoteForm() {
   const [formData, setFormData] = useState(EMPTY_FORM_DATA);
   const [photoName, setPhotoName] = useState("");
   const [photoFile, setPhotoFile] = useState(null);
+  const [dragging, setDragging] = useState(false);
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   // Separate from `status` — this flags the one client-side validation rule
   // (at least one service picked) without borrowing the server-error UI.
@@ -769,6 +719,16 @@ function QuoteForm() {
     const file = e.target.files && e.target.files[0];
     setPhotoName(file ? file.name : "");
     setPhotoFile(file || null);
+  }
+
+  function handlePhotoDrop(e) {
+    e.preventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setPhotoName(file.name);
+      setPhotoFile(file);
+    }
   }
 
   async function handleSubmit(e) {
@@ -853,7 +813,7 @@ function QuoteForm() {
 
   if (status === "success") {
     return (
-      <section id="quote" className="bg-slate-900 px-4 py-14 sm:py-20">
+      <section id="quote" className="bg-slate-900 px-4 py-16 md:py-24">
         <div className="relative mx-auto max-w-md rounded-2xl bg-white p-8 text-center shadow-xl">
           <button
             type="button"
@@ -875,7 +835,7 @@ function QuoteForm() {
   }
 
   return (
-    <section id="quote" className="bg-slate-900 px-4 py-14 sm:py-20">
+    <section id="quote" className="bg-slate-900 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-md">
         <div className="text-center text-white">
           <h2 className="text-balance text-2xl font-bold sm:text-3xl">
@@ -898,84 +858,15 @@ function QuoteForm() {
         <form
           id="quote-form"
           onSubmit={handleSubmit}
-          className="mt-8 space-y-5 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+          className="mt-8 space-y-8 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
         >
-          <div>
-            <label htmlFor="name" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.name.label}
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required={quoteForm.fields.name.required}
-              value={formData.name}
-              onChange={handleChange}
-              placeholder={quoteForm.fields.name.placeholder}
-              className={INPUT_BASE}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.phone.label}
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              required={quoteForm.fields.phone.required}
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder={quoteForm.fields.phone.placeholder}
-              className={INPUT_BASE}
-            />
-            {quoteForm.fields.phone.helpText && (
-              <p className="mt-1.5 text-xs font-medium text-slate-500">
-                {quoteForm.fields.phone.helpText}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="zip" className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.zip.label}
-            </label>
-            <input
-              id="zip"
-              name="zip"
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]{5}"
-              maxLength={5}
-              required={quoteForm.fields.zip.required}
-              value={formData.zip}
-              onChange={handleChange}
-              placeholder={quoteForm.fields.zip.placeholder}
-              className={INPUT_BASE}
-            />
-            {quoteForm.fields.zip.helpText && (
-              <p className="mt-1.5 text-xs font-medium text-slate-500">
-                {quoteForm.fields.zip.helpText}
-              </p>
-            )}
-          </div>
-
+          {/* Step 1 — what do you need? Multi-select chips (same
+              toggleService logic as before). */}
           <fieldset>
-            <legend className="text-sm font-medium text-slate-700">
-              {quoteForm.fields.services.label}
-            </legend>
-            <p className="mt-0.5 text-xs text-slate-400">
-              {quoteForm.fields.services.helpText}
-            </p>
-            {/* Large, tappable visual cards instead of small text pills --
-                each shows an icon, the service name, and its real starting
-                price so a visitor can pick a service without typing a
-                word. Multi-select stays exactly as before (toggleService
-                just flips membership in formData.services); only the
-                visual treatment changed. */}
+            <legend className="sr-only">{quoteForm.fields.services.label}</legend>
+            <StepHeading n={1} title={quoteForm.fields.services.label} hint="Pick one or more" />
             <div
-              className="mt-3 grid grid-cols-2 gap-2.5 sm:gap-3"
+              className="mt-4 grid gap-2.5 sm:grid-cols-2"
               role="group"
               aria-label={quoteForm.fields.services.label}
             >
@@ -987,53 +878,60 @@ function QuoteForm() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => toggleService(opt.value)}
-                    className={`relative flex flex-col items-start gap-1 rounded-2xl border-2 p-3.5 text-left transition sm:p-4 ${
+                    className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2.5 pl-4 pr-5 text-left text-sm font-semibold leading-snug transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 ${
                       selected
-                        ? "border-sky-500 bg-sky-50 shadow-sm"
-                        : "border-slate-200 bg-white hover:border-sky-300 hover:bg-sky-50/40"
+                        ? "border-blue-800 bg-blue-800 text-white"
+                        : "border-slate-300 bg-white text-slate-700 hover:border-blue-700 hover:bg-blue-50"
                     }`}
                   >
-                    {selected && (
-                      <span className="absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-sky-500 text-white">
-                        <IconCheck className="h-3 w-3" />
-                      </span>
-                    )}
-                    {opt.emoji && (
-                      <span aria-hidden="true" className="text-2xl leading-none sm:text-3xl">
-                        {opt.emoji}
-                      </span>
-                    )}
-                    <span className="text-sm font-semibold leading-snug text-slate-900">
+                    <span className="inline-flex items-center gap-1.5">
+                      {selected && <Check className="h-4 w-4 flex-shrink-0" aria-hidden="true" />}
                       {opt.label}
                     </span>
                     {opt.price && (
-                      <span className="text-xs font-medium text-sky-600">{opt.price}</span>
+                      <span className={`text-xs font-medium ${selected ? "text-blue-100" : "text-slate-500"}`}>
+                        {opt.price}
+                      </span>
                     )}
                   </button>
                 );
               })}
             </div>
             {servicesTouched && formData.services.length === 0 && (
-              <p className="mt-2 text-xs font-medium text-rose-600">
+              <p className="mt-3 text-sm font-medium text-rose-600">
                 {quoteForm.fields.services.errorMessage}
               </p>
             )}
           </fieldset>
 
-          {/* The photo is the biggest lever on quote accuracy, so it is one
-              large single-tap target right under the 4 core fields. */}
+          {/* Step 2 — photo dropzone (biggest lever on quote accuracy). */}
           <div>
+            <StepHeading n={2} title="Add a photo" hint="Optional, but gets you the fastest quote" />
             <label
               htmlFor="photo"
-              className="block cursor-pointer rounded-2xl border-2 border-dashed border-sky-400 bg-sky-50 p-4 text-center transition hover:border-sky-500 hover:bg-sky-100 active:scale-[0.99]"
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragging(true);
+              }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={handlePhotoDrop}
+              className={`mt-4 flex cursor-pointer flex-col items-center rounded-2xl border-2 border-dashed px-4 py-7 text-center transition focus-within:ring-4 focus-within:ring-blue-200 ${
+                dragging || photoName
+                  ? "border-blue-700 bg-blue-50"
+                  : "border-slate-300 bg-slate-50 hover:border-blue-700 hover:bg-blue-50"
+              }`}
             >
-              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-sky-600 shadow-sm">
-                <IconCamera className="h-6 w-6" />
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-blue-800 shadow-sm ring-1 ring-slate-200">
+                {photoName ? (
+                  <Check className="h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <CloudUpload className="h-6 w-6" aria-hidden="true" />
+                )}
               </span>
-              <span className="mt-2 block text-base font-bold leading-snug text-slate-900">
-                {photoName ? `\u2713 ${photoName}` : quoteForm.fields.photo.cta}
+              <span className="mt-3 break-all text-base font-semibold text-slate-900">
+                {photoName || quoteForm.fields.photo.cta}
               </span>
-              <span className="mt-1 block text-xs font-medium text-sky-700">
+              <span className="mt-1 text-sm text-slate-500">
                 {photoName ? "Tap to change photo" : quoteForm.fields.photo.hint}
               </span>
             </label>
@@ -1042,13 +940,75 @@ function QuoteForm() {
               name="photo"
               type="file"
               accept="image/*"
-              capture="environment"
               onChange={handlePhotoChange}
               className="sr-only"
             />
-            <p className="mt-1.5 text-center text-xs font-medium text-slate-500">
+            <p className="mt-2 text-center text-xs text-slate-500">
               {quoteForm.fields.photo.helpText}
             </p>
+          </div>
+
+          {/* Step 3 — contact details. */}
+          <div>
+            <StepHeading n={3} title="Where should we reach you?" />
+            <div className="mt-4 space-y-4">
+              <div>
+                <label htmlFor="name" className="text-sm font-semibold text-slate-800">
+                  {quoteForm.fields.name.label}
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required={quoteForm.fields.name.required}
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder={quoteForm.fields.name.placeholder}
+                  className={INPUT_BASE}
+                />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-[1fr_9rem]">
+                <div>
+                  <label htmlFor="phone" className="text-sm font-semibold text-slate-800">
+                    {quoteForm.fields.phone.label}
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    required={quoteForm.fields.phone.required}
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder={quoteForm.fields.phone.placeholder}
+                    className={INPUT_BASE}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="zip" className="text-sm font-semibold text-slate-800">
+                    {quoteForm.fields.zip.label}
+                  </label>
+                  <input
+                    id="zip"
+                    name="zip"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="postal-code"
+                    pattern="[0-9]{5}"
+                    maxLength={5}
+                    required={quoteForm.fields.zip.required}
+                    value={formData.zip}
+                    onChange={handleChange}
+                    placeholder={quoteForm.fields.zip.placeholder}
+                    className={INPUT_BASE}
+                  />
+                </div>
+              </div>
+              {quoteForm.fields.phone.helpText && (
+                <p className="text-xs text-slate-500">{quoteForm.fields.phone.helpText}</p>
+              )}
+            </div>
           </div>
 
           {/* Everything else is optional and tucked away to keep the form short. */}
@@ -1107,8 +1067,8 @@ function QuoteForm() {
                     }
                     className={`flex flex-col items-center gap-1 rounded-xl border-2 py-3 text-sm font-semibold transition ${
                       selected
-                        ? "border-sky-500 bg-sky-50 text-sky-700"
-                        : "border-slate-200 bg-white text-slate-600 hover:border-sky-300 hover:bg-sky-50/40"
+                        ? "border-blue-700 bg-blue-50 text-blue-800"
+                        : "border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-blue-50/40"
                     }`}
                   >
                     {opt.emoji && <span aria-hidden="true" className="text-lg leading-none">{opt.emoji}</span>}
@@ -1161,22 +1121,21 @@ function QuoteForm() {
           </details>
 
           {status === "error" && (
-            <p className="rounded-lg bg-rose-50 px-3.5 py-2.5 text-sm text-rose-600">
+            <p className="rounded-lg bg-rose-50 px-3.5 py-2.5 text-sm text-rose-700">
               {quoteForm.errorMessage}
             </p>
           )}
 
-          <button
-            type="submit"
-            disabled={status === "submitting"}
-            className={`w-full px-4 py-3.5 text-base shadow-lg shadow-sky-500/30 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
-          >
-            {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
-          </button>
-
-          <p className="text-center text-xs text-slate-400">
-            {quoteForm.disclaimer}
-          </p>
+          <div>
+            <button
+              type="submit"
+              disabled={status === "submitting"}
+              className={`w-full px-4 py-4 text-base shadow-lg shadow-blue-700/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
+            >
+              {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
+            </button>
+            <p className="mt-3 text-center text-xs text-slate-500">{quoteForm.disclaimer}</p>
+          </div>
         </form>
       </div>
     </section>
@@ -1189,7 +1148,7 @@ function QuoteForm() {
 
 function Guarantees() {
   return (
-    <section className="bg-white px-4 py-14 sm:py-20">
+    <section className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-balance text-center text-2xl font-bold text-slate-900 sm:text-3xl">
           {guaranteesSection.heading}
@@ -1218,7 +1177,7 @@ function Guarantees() {
 
 function QualityGuarantee() {
   return (
-    <section className="bg-slate-50 px-4 py-14 sm:py-20">
+    <section className="bg-slate-50 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -1252,7 +1211,7 @@ function QualityGuarantee() {
 
 function About() {
   return (
-    <section id="about" className="bg-white px-4 py-14 sm:py-20">
+    <section id="about" className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2 sm:items-center sm:gap-12">
         <div>
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -1317,7 +1276,7 @@ function ReviewCard({ review }) {
 function Testimonials() {
   const reviews = googleReviews.reviews || [];
   return (
-    <section id="testimonials" className="bg-slate-50 px-4 py-14 sm:py-20">
+    <section id="testimonials" className="bg-slate-50 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-5xl text-center">
         <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
           {testimonialsSection.heading}
@@ -1372,7 +1331,7 @@ function FAQ() {
   const [openId, setOpenId] = useState(null);
 
   return (
-    <section id="faq" className="bg-white px-4 py-14 sm:py-20">
+    <section id="faq" className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto max-w-3xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
