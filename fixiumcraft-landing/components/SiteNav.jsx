@@ -15,7 +15,7 @@ import Link from "next/link";
 import { business, navSection, servicePillars } from "./contentData";
 
 const BTN_PRIMARY =
-  "rounded-lg bg-emerald-700 font-semibold text-white transition hover:bg-emerald-800";
+  "rounded-lg bg-amber-500 font-semibold text-slate-950 transition hover:bg-amber-600";
 const BTN_OUTLINE_DARK =
   "rounded-lg border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-50";
 
@@ -274,7 +274,7 @@ export function StickyMobileBar() {
         href={business.whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-1 flex-col items-center justify-center gap-0.5 bg-emerald-700 py-2.5 text-white active:bg-emerald-800"
+        className="flex flex-1 flex-col items-center justify-center gap-0.5 bg-amber-500 py-2.5 text-slate-950 active:bg-amber-600"
         aria-label="Message us on WhatsApp"
       >
         <IconWhatsapp className="h-5 w-5" />

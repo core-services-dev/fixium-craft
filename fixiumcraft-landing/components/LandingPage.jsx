@@ -71,13 +71,13 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const BTN_PRIMARY =
-  "rounded-lg bg-emerald-700 font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300";
+  "rounded-lg bg-amber-500 font-semibold text-slate-950 transition hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300";
 const BTN_PRIMARY_ON_DARK =
-  "rounded-lg bg-emerald-700 font-semibold text-white ring-1 ring-emerald-400/40 transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300";
+  "rounded-lg bg-amber-500 font-semibold text-slate-950 ring-1 ring-amber-300/40 transition hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/20 bg-white/5 font-semibold text-white transition hover:bg-white/10";
 const BTN_OUTLINE_LIGHT_WHATSAPP =
-  "rounded-lg border border-emerald-400/30 bg-white/5 font-semibold text-white transition hover:bg-emerald-400/10";
+  "rounded-lg border border-white/25 bg-white/5 font-semibold text-white transition hover:bg-white/10";
 const BTN_OUTLINE_DARK =
   "rounded-lg border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-50";
 
@@ -264,7 +264,7 @@ function Hero() {
         <div className="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
           <a
             href="#quote"
-            className={`px-8 py-4 text-center text-base shadow-lg shadow-emerald-900/40 ${BTN_PRIMARY_ON_DARK}`}
+            className={`px-8 py-4 text-center text-base shadow-lg shadow-amber-900/40 ${BTN_PRIMARY_ON_DARK}`}
           >
             {hero.primaryCta.label}
           </a>
@@ -507,20 +507,20 @@ function PricingTrust() {
             pattern as the Hero's rating badge) so it reads as a distinct
             trust signal rather than blending into the page copy. */}
         <div className="mt-6 flex justify-center">
-          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-center text-sm font-bold text-emerald-900 sm:px-5 sm:py-3 sm:text-base">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-blue-200 bg-blue-50 px-4 py-2.5 text-center text-sm font-bold text-blue-900 sm:px-5 sm:py-3 sm:text-base">
             <span aria-hidden="true">{pricingTrustSection.badge.icon}</span>
             <span>{pricingTrustSection.badge.label}</span>
-            <span aria-hidden="true" className="hidden text-emerald-300 sm:inline">
+            <span aria-hidden="true" className="hidden text-blue-300 sm:inline">
               |
             </span>
-            <span className="w-full text-center text-xs font-semibold text-emerald-700 sm:w-auto sm:text-sm">
+            <span className="w-full text-center text-xs font-semibold text-blue-800 sm:w-auto sm:text-sm">
               {pricingTrustSection.badge.sublabel}
             </span>
           </div>
         </div>
 
         {/* Military / senior / first responder discount — a second,
-            distinct badge (amber instead of emerald) so it reads as its
+            distinct badge (amber, not the blue discount pill above) so it reads as its
             own offer rather than part of the upfront-pricing guarantee
             above it. */}
         <div className="mt-4 flex justify-center">
@@ -541,7 +541,7 @@ function PricingTrust() {
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {pricingTrustSection.included.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
-                <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
+                <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-700" />
                 {item}
               </li>
             ))}
@@ -826,7 +826,7 @@ function QuoteForm() {
           >
             <IconX className="h-4 w-4" />
           </button>
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-700">
             <IconCheck className="h-6 w-6" />
           </div>
           <h3 className="mt-4 text-lg font-semibold text-slate-900">
@@ -1156,7 +1156,7 @@ function QuoteForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className={`w-full px-4 py-4 text-base shadow-lg shadow-emerald-900/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
+              className={`w-full px-4 py-4 text-base shadow-lg shadow-amber-900/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
             >
               {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
             </button>
@@ -1182,7 +1182,7 @@ function Guarantees() {
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {guarantees.map((g) => (
             <div key={g.id} className="text-center">
-              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 text-blue-700">
                 <IconCheck className="h-5 w-5" />
               </div>
               <h3 className="mt-3 text-base font-semibold text-slate-900">
@@ -1214,7 +1214,7 @@ function QualityGuarantee() {
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {qualityGuaranteeSection.items.map((item) => (
             <div key={item.id} className="text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-700">
                 <IconCheck className="h-4.5 w-4.5" />
               </div>
               <h3 className="mt-3 text-base font-semibold text-slate-900">
@@ -1254,7 +1254,7 @@ function About() {
         <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-6">
           {guarantees.map((g) => (
             <div key={g.id} className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-700">
                 <IconCheck className="h-4 w-4" />
               </div>
               <div>

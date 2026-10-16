@@ -176,7 +176,7 @@ export default function WorkGallery({
                         <PhotoButton photo={photo} label={`${item.title} (${label.toLowerCase()})`} onOpen={setLightbox} />
                         <span
                           className={`pointer-events-none absolute left-1.5 top-1.5 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white ${
-                            key === "after" ? "bg-emerald-700" : "bg-slate-800/80"
+                            key === "after" ? "bg-blue-800" : "bg-slate-800/80"
                           }`}
                         >
                           {label}

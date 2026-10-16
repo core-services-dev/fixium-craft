@@ -24,7 +24,7 @@ import {
 // generated from the same parsed content as the visible text.
 
 const BTN_PRIMARY =
-  "rounded-lg bg-emerald-700 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-emerald-900/30 ring-1 ring-emerald-400/40 transition hover:bg-emerald-800";
+  "rounded-lg bg-amber-500 px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-amber-900/30 ring-1 ring-amber-300/40 transition hover:bg-amber-600";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
 
@@ -191,7 +191,7 @@ function Section({ s }: { s: GuideSection }) {
                   {group.items.map((item, i) => (
                     <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-slate-700">
                       <Check
-                        className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700"
+                        className="mt-0.5 h-4 w-4 shrink-0 text-blue-800"
                         aria-hidden="true"
                       />
                       <span dangerouslySetInnerHTML={{ __html: item }} />
@@ -400,7 +400,7 @@ export default function GuidePage({ slug }: { slug: string }) {
             {service && (
               <Link
                 href={`/services/${service.slug}`}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-emerald-300 hover:text-emerald-200"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-amber-300 hover:text-amber-200"
               >
                 Learn more about {service.navLabel} in Pittsburgh
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

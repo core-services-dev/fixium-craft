@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const BTN_PRIMARY =
-  "rounded-lg bg-emerald-700 px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-emerald-900/30 ring-1 ring-emerald-400/40 transition hover:bg-emerald-800";
+  "rounded-lg bg-amber-500 px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-amber-900/30 ring-1 ring-amber-300/40 transition hover:bg-amber-600";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
 
