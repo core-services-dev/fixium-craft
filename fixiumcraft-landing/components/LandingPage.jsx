@@ -262,6 +262,9 @@ function Hero() {
         <p className="mx-auto mt-5 max-w-2xl text-balance text-base text-slate-300 sm:text-lg">
           {hero.subheadline}
         </p>
+        <p className="mx-auto mt-3 max-w-2xl text-balance text-sm text-slate-400 sm:text-base">
+          {hero.commercialLine}
+        </p>
 
         <div className="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
           <a
@@ -917,29 +920,6 @@ function QuoteForm() {
                 );
               })}
             </div>
-            {formData.services.includes(quoteForm.fields.services.emergencyNotice.value) && (
-              <div
-                role="note"
-                className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"
-              >
-                <p className="font-bold">{quoteForm.fields.services.emergencyNotice.title}</p>
-                <p className="mt-1 leading-relaxed">{quoteForm.fields.services.emergencyNotice.body}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <a
-                    href={business.phoneHref}
-                    className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-600"
-                  >
-                    Call {business.phoneDisplay}
-                  </a>
-                  <a
-                    href={business.smsHref}
-                    className="rounded-lg border border-amber-400 bg-white px-4 py-2 font-semibold text-amber-900 transition hover:bg-amber-100"
-                  >
-                    Text us
-                  </a>
-                </div>
-              </div>
-            )}
             {servicesTouched && formData.services.length === 0 && (
               <p className="mt-3 text-sm font-medium text-rose-700">
                 {quoteForm.fields.services.errorMessage}

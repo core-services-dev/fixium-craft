@@ -7,7 +7,10 @@
 // enlarge lightbox, and a before/after tile type. Data lives in
 // `projectsGallery` (contentData.js). Used on the homepage (all
 // categories) and on each /services/<slug> page (just that pillar's
-// categories, via the `categories` prop).
+// categories, via the `categories` prop). A page whose scope matches no
+// items (e.g. `categories: []`) renders no gallery at all. Only add photos
+// that are clean, well lit and finished-looking: no half-installed or
+// removed hardware.
 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";

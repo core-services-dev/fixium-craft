@@ -4,11 +4,12 @@ metaTitle: "How to Unlock a Car Door With an Air Wedge"
 description: "Locked out of your own car? Learn the safe air wedge and long-reach tool method, plus how to protect door seals, windows and airbags."
 summary: "The safe air wedge and long-reach tool method for your own vehicle, with warnings on airbags, door seals and window mechanisms."
 category: locksmith
+service: none
 date: 2026-10-15
 updated: 2026-10-15
 totalTime: PT15M
 ctaTitle: "Locks Giving You Trouble at Home? Fixium Craft Can Help"
-ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window, so for a locked car call your roadside assistance provider or an auto locksmith. We do not service vehicles. For your home, our fully insured Pittsburgh technicians handle scheduled smart lock installs, rekeying and deadbolt replacement with flat-rate pricing, plus evening emergency home lockouts from 6:00 PM to 12:00 AM."
+ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window, so for a locked car call your roadside assistance provider or an auto locksmith. We do not service vehicles. For your home, our fully insured Pittsburgh technicians handle scheduled smart lock installs, rekeying and deadbolt replacement with flat-rate pricing."
 ---
 
 Being locked out of your own car is stressful, and it rarely happens somewhere convenient. This guide walks through the method professional locksmiths use for a standard lockout: a small inflatable **air wedge** to open a tiny gap at the door frame, and a **long-reach tool** to press the unlock button or pull the interior handle. Done slowly and with padding, it leaves no marks. Done fast, it bends door frames, tears weatherstripping and can damage wiring inside the door.
@@ -148,4 +149,4 @@ No. Frameless windows, some luxury and electric vehicles, and cars with extra de
 
 ### Can Fixium Craft unlock my car?
 
-No. We don't service vehicles. For a locked car, call your roadside assistance provider or an auto locksmith. We handle home locks: scheduled smart lock installs, rekeying and deadbolt replacement, plus evening emergency home lockouts (6:00 PM – 12:00 AM, call or text (929) 780-3017).
+No. We don't service vehicles. For a locked car, call your roadside assistance provider or an auto locksmith. We handle home locks: scheduled smart lock installs, rekeying and deadbolt replacement, by appointment.

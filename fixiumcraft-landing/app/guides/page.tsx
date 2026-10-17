@@ -8,9 +8,9 @@ import GuidesBrowser from "@/components/GuidesBrowser";
 import { business, seo } from "@/components/contentData";
 import { getActiveCategories, getAllGuides, toSummary } from "@/lib/guides";
 
-const title = `Home Repair, Assembly & Locksmith Guides | ${business.name}`;
+const title = `Home Repair, Assembly & Smart Lock Guides | ${business.name}`;
 const description =
-  "Free step-by-step guides from Pittsburgh handyman, furniture assembly and locksmith pros: safe car lockout tips, flat-pack assembly, drywall repair and more.";
+  "Free step-by-step guides from Pittsburgh handyman, furniture assembly and locksmith pros: flat-pack assembly, drywall repair, safe car door tips and more.";
 
 export const metadata: Metadata = {
   title,
@@ -98,8 +98,8 @@ export default function GuidesIndexPage() {
             Useful Guides &amp; Knowledge Base
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Practical, step-by-step advice from the {business.name} team on locksmith emergencies,
-            furniture assembly and home repairs. Do it yourself safely, or let us handle it.
+            Practical, step-by-step advice from the {business.name} team on furniture assembly,
+            home repairs and everyday home tasks. Do it yourself safely, or let us handle it.
           </p>
         </div>
       </header>
