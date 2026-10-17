@@ -372,7 +372,10 @@ export const services = [
   {
     id: "locksmith",
     title: "Scheduled Locksmith & Smart Locks",
-    quoteLabel: "Scheduled Locksmith & Smart Locks (By Appointment Only)",
+    quoteLabel: "Scheduled Locksmith & Smart Locks",
+    // Price line shown on this service's chip in the quote form (cards and
+    // JSON-LD keep using startingPrice).
+    quotePrice: "From $79 • By Appointment",
     icon: "lock",
     emoji: "🔐",
     // Real installed-smart-lock photo (Yale touchscreen deadbolt).
@@ -380,8 +383,6 @@ export const services = [
     alt: "Smart lock installation service in Pittsburgh, PA",
     description:
       "Smart lock setup (Schlage, Yale, Ring, Nest), handlesets, deadbolts and rekeying for homes and offices. By appointment only, with upfront flat-rate pricing.",
-    // Small helper line shown inside this service's chip in the quote form.
-    formNote: "Scheduled installs 7AM – 11PM",
     // Specific lock offers for the JSON-LD hasOfferCatalog (see
     // localBusinessSchema below).
     schemaOffers: [
@@ -712,11 +713,10 @@ export const quoteForm = {
         ...services.map((s) => ({
           value: s.id,
           label: s.quoteLabel || s.title,
-          price: s.startingPrice,
+          price: s.quotePrice || s.startingPrice,
           emoji: s.emoji,
-          note: s.formNote,
         })),
-        { value: "other", label: "Custom / Other Project", price: null, emoji: "💬" },
+        { value: "other", label: "Custom / Other Project", price: "Have a unique project? Let us know", emoji: "💬" },
       ],
     },
     // Renamed from the old "Anything else we should know?" framing --
