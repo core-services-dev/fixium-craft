@@ -5,6 +5,8 @@ import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
 import GuideToc from "./GuideToc";
 import GuideCard from "./GuideCard";
+import QuickQuoteBanner from "./QuickQuoteBanner";
+import ExpertHelpForm from "./ExpertHelpForm";
 import { business, seo, servicePillars } from "./contentData";
 import {
   formatGuideDate,
@@ -23,10 +25,25 @@ import {
 // conversion-focused CTA box, and HowTo + FAQPage + BreadcrumbList JSON-LD
 // generated from the same parsed content as the visible text.
 
-const BTN_PRIMARY =
-  "rounded-lg bg-amber-500 px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-amber-900/30 ring-1 ring-amber-300/40 transition hover:bg-amber-600";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
+
+// Short service names for the quote banner under the title.
+const BANNER_LABELS: Record<string, string> = {
+  "furniture-assembly": "Furniture assembly",
+  "tv-mounting": "TV mounting",
+  "handyman-repairs": "Handyman repairs",
+  locksmith: "Smart lock installs",
+};
+
+// Guides with no matching service page (e.g. the car guide) get the
+// cheapest starting price on the site instead.
+function lowestStartingPrice() {
+  const prices = servicePillars
+    .map((p) => Number(p.startingPrice.replace(/[^0-9.]/g, "")))
+    .filter((n) => n > 0);
+  return `From $${Math.min(...prices)}`;
+}
 
 const baseUrl = () => seo.canonicalUrl.replace(/\/$/, "");
 
@@ -283,6 +300,8 @@ export default function GuidePage({ slug }: { slug: string }) {
     .sort((a, b) => Number(b.category === g.category) - Number(a.category === g.category))
     .slice(0, 3);
   const items = tocItems(g);
+  const bannerLabel = service ? (BANNER_LABELS[service.slug] ?? service.navLabel) : "Home repairs & installs";
+  const bannerPrice = service ? service.startingPrice : lowestStartingPrice();
 
   return (
     <main className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
@@ -335,6 +354,7 @@ export default function GuidePage({ slug }: { slug: string }) {
           <h1 className="mt-3 max-w-3xl text-balance text-3xl font-extrabold leading-tight sm:text-4xl">
             {g.title}
           </h1>
+          <QuickQuoteBanner label={bannerLabel} price={bannerPrice} />
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
             {g.summary}
           </p>
@@ -383,10 +403,11 @@ export default function GuidePage({ slug }: { slug: string }) {
               {g.ctaText ??
                 `Our fully insured, background-checked Pittsburgh technicians handle the job for you. Flat-rate pricing, quoted upfront.`}
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/#quote" className={BTN_PRIMARY}>
-                Get a Free Quote
-              </Link>
+            <div className="mt-6">
+              <ExpertHelpForm guideTitle={g.title} serviceLabel={service?.navLabel} />
+            </div>
+            <p className="mt-6 text-sm text-slate-300">Prefer to talk it through?</p>
+            <div className="mt-3 flex flex-col gap-3 sm:flex-row">
               <a href={business.phoneHref} className={BTN_OUTLINE_LIGHT}>
                 Call {business.phoneDisplay}
               </a>
