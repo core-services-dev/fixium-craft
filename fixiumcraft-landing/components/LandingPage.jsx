@@ -73,9 +73,9 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const BTN_PRIMARY =
-  "rounded-lg bg-amber-500 font-semibold text-slate-950 transition hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300";
+  "rounded-lg bg-amber-500 font-semibold text-slate-950 transition hover:bg-amber-600 focus-visible:ring-amber-300";
 const BTN_PRIMARY_ON_DARK =
-  "rounded-lg bg-amber-500 font-semibold text-slate-950 ring-1 ring-amber-300/40 transition hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300";
+  "rounded-lg bg-amber-500 font-semibold text-slate-950 ring-1 ring-amber-300/40 transition hover:bg-amber-600 focus-visible:ring-amber-300";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/20 bg-white/5 font-semibold text-white transition hover:bg-white/10";
 const BTN_OUTLINE_LIGHT_WHATSAPP =
@@ -92,7 +92,7 @@ const BTN_OUTLINE_DARK =
 /* -------------------------------------------------------------------------- */
 
 const INPUT_BASE =
-  "mt-1.5 w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-200";
+  "mt-1.5 w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-700";
 
 /* -------------------------------------------------------------------------- */
 /*  Icons (inline SVG — no external icon library dependency)                  */
@@ -416,7 +416,7 @@ function ServiceCard({ item, pillar }) {
   return (
     <Link
       href={`/services/${item.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+      className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
     >
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
         <Icon className="h-6 w-6" aria-hidden="true" />
@@ -872,7 +872,7 @@ function QuoteForm() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => toggleService(opt.value)}
-                    className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2 pl-3 pr-3 text-left text-[13px] font-semibold leading-snug transition sm:py-2.5 sm:pl-4 sm:pr-5 sm:text-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 ${
+                    className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2 pl-3 pr-3 text-left text-[13px] font-semibold leading-snug transition sm:py-2.5 sm:pl-4 sm:pr-5 sm:text-sm ${
                       selected
                         ? "border-blue-800 bg-blue-800 text-white"
                         : "border-slate-300 bg-white text-slate-700 hover:border-blue-700 hover:bg-blue-50"
@@ -899,7 +899,7 @@ function QuoteForm() {
               })}
             </div>
             {servicesTouched && formData.services.length === 0 && (
-              <p className="mt-3 text-sm font-medium text-rose-700">
+              <p role="alert" className="mt-3 text-sm font-medium text-rose-700">
                 {quoteForm.fields.services.errorMessage}
               </p>
             )}
@@ -916,7 +916,7 @@ function QuoteForm() {
               }}
               onDragLeave={() => setDragging(false)}
               onDrop={handlePhotoDrop}
-              className={`mt-4 flex cursor-pointer flex-col items-center rounded-2xl border-2 border-dashed px-4 py-7 text-center transition focus-within:ring-4 focus-within:ring-blue-200 ${
+              className={`mt-4 flex cursor-pointer flex-col items-center rounded-2xl border-2 border-dashed px-4 py-7 text-center transition focus-ring-within ${
                 dragging || photoName
                   ? "border-blue-700 bg-blue-50"
                   : "border-slate-300 bg-slate-50 hover:border-blue-700 hover:bg-blue-50"
@@ -1149,7 +1149,7 @@ function QuoteForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className={`w-full px-4 py-4 text-base shadow-lg shadow-amber-900/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
+              className={`w-full px-4 py-4 text-base shadow-lg shadow-amber-900/30 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
             >
               {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
             </button>
@@ -1484,7 +1484,7 @@ function Footer() {
 
 export default function LandingPage() {
   return (
-    <main id="top" className="min-h-screen bg-white font-sans text-slate-900">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white font-sans text-slate-900">
       <SiteNav />
       <Hero />
       <ServicePillars />

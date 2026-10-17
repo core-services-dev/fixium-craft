@@ -124,11 +124,11 @@ export default function TermsOfServicePage() {
       <LegalSection heading="Contact Us">
         <p>
           Questions about these Terms? Reach us at{" "}
-          <a href={`mailto:${business.email}`} className="font-medium text-sky-600 hover:underline">
+          <a href={`mailto:${business.email}`} className="font-semibold text-blue-800 underline underline-offset-2 hover:text-blue-900">
             {business.email}
           </a>{" "}
           or{" "}
-          <a href={business.phoneHref} className="font-medium text-sky-600 hover:underline">
+          <a href={business.phoneHref} className="font-semibold text-blue-800 underline underline-offset-2 hover:text-blue-900">
             {business.phoneDisplay}
           </a>
           .

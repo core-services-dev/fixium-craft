@@ -304,7 +304,7 @@ export default function GuidePage({ slug }: { slug: string }) {
   const bannerPrice = service ? service.startingPrice : lowestStartingPrice();
 
   return (
-    <main className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
       {buildSchemas(g).map((ld, i) => (
         <script
           key={i}

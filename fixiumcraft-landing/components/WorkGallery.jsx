@@ -12,7 +12,7 @@
 // that are clean, well lit and finished-looking: no half-installed or
 // removed hardware.
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import { projectsGallery } from "./contentData";
 
@@ -36,7 +36,7 @@ function PhotoButton({ photo, label, onOpen }) {
       type="button"
       onClick={() => onOpen(photo)}
       aria-label={`View larger: ${label}`}
-      className="group relative block h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-blue-300"
+      className="group relative block h-full w-full overflow-hidden focus-inset"
     >
       <Image
         src={photo.image}
@@ -50,10 +50,28 @@ function PhotoButton({ photo, label, onOpen }) {
 }
 
 function Lightbox({ photo, onClose }) {
+  const closeRef = useRef(null);
+
+  // Move focus into the dialog when it opens and give it back to the photo
+  // that opened it when it closes (WCAG 2.4.3).
+  useEffect(() => {
+    if (!photo) return undefined;
+    const opener = document.activeElement;
+    closeRef.current?.focus();
+    return () => {
+      if (opener && typeof opener.focus === "function") opener.focus();
+    };
+  }, [photo]);
+
   useEffect(() => {
     if (!photo) return undefined;
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
+      // The close button is the only control in the dialog: keep Tab inside.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeRef.current?.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -69,6 +87,7 @@ function Lightbox({ photo, onClose }) {
       className="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 p-4"
     >
       <button
+        ref={closeRef}
         type="button"
         onClick={onClose}
         aria-label="Close photo"
@@ -126,7 +145,7 @@ export default function WorkGallery({
 
         {tabs.length > 2 && (
           <div
-            role="tablist"
+            role="group"
             aria-label="Filter recent work"
             className="mt-8 flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:justify-center"
           >
@@ -136,8 +155,7 @@ export default function WorkGallery({
                 <button
                   key={tab.id}
                   type="button"
-                  role="tab"
-                  aria-selected={selected}
+                  aria-pressed={selected}
                   onClick={() => {
                     setActive(tab.id);
                     setExpanded(false);

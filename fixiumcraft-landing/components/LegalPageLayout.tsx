@@ -35,7 +35,7 @@ export default function LegalPageLayout({
   children: ReactNode;
 }) {
   return (
-    <main className="min-h-screen bg-white font-sans text-slate-900">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white font-sans text-slate-900">
       <SiteHeader />
 
       <article className="px-4 py-14 sm:py-20">

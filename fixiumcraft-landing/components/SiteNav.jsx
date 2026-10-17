@@ -259,7 +259,7 @@ export function StickyMobileBar() {
         <IconMessage className="h-5 w-5" />
         <span className="text-[11px] font-medium">Text</span>
       </a>
-      <Link href="/#quote" className={hot} aria-label="Get an instant quote">
+      <Link href="/#quote" className={hot}>
         <IconTag className="h-5 w-5" />
         <span className="text-[11px] font-semibold">Get Quote</span>
       </Link>
@@ -268,7 +268,7 @@ export function StickyMobileBar() {
         target="_blank"
         rel="noopener noreferrer"
         className={`${item} border-l border-slate-200`}
-        aria-label="Message us on WhatsApp"
+        aria-label="WhatsApp us (opens in a new tab)"
       >
         <IconWhatsapp className="h-5 w-5" />
         <span className="text-[11px] font-medium">WhatsApp</span>

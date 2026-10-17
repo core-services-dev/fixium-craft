@@ -1379,6 +1379,7 @@ export const footer = {
   legalLinks: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
+    { label: "Accessibility", href: "/accessibility" },
   ],
   // Internal links to the 3 pillar pages (see `servicePillars` above and
   // app/services/[slug]/page.tsx) — rendered in LandingPage.jsx's Footer()

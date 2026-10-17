@@ -45,6 +45,9 @@ export function SiteFooterMini() {
           <Link href="/terms" className="hover:text-white">
             Terms of Service
           </Link>
+          <Link href="/accessibility" className="hover:text-white">
+            Accessibility
+          </Link>
         </nav>
         <p className="mt-6 text-xs text-slate-400">
           © {new Date().getFullYear()} {business.name}. All rights reserved.

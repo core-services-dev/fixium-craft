@@ -67,7 +67,7 @@ export default function GuidesIndexPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
       {jsonLd.map((ld, i) => (
         <script
           key={i}
