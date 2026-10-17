@@ -7,8 +7,8 @@ category: locksmith
 date: 2026-10-15
 updated: 2026-10-15
 totalTime: PT15M
-ctaTitle: "Locked Out in Pittsburgh? Skip the Risk and Call Fixium Craft"
-ctaText: "You now know exactly how a lockout is done safely, and also how easily it goes wrong. If you would rather protect your paint, seals and door electronics, our fully insured mobile locksmith comes to you with flat-rate pricing and same-day slots."
+ctaTitle: "Locks Giving You Trouble at Home? Fixium Craft Can Help"
+ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window, so for a locked car call your roadside assistance provider or an auto locksmith. We do not service vehicles. For your home, our fully insured Pittsburgh technicians handle scheduled smart lock installs, rekeying and deadbolt replacement with flat-rate pricing, plus evening emergency home lockouts from 6:00 PM to 12:00 AM."
 ---
 
 Being locked out of your own car is stressful, and it rarely happens somewhere convenient. This guide walks through the method professional locksmiths use for a standard lockout: a small inflatable **air wedge** to open a tiny gap at the door frame, and a **long-reach tool** to press the unlock button or pull the interior handle. Done slowly and with padding, it leaves no marks. Done fast, it bends door frames, tears weatherstripping and can damage wiring inside the door.
@@ -116,7 +116,7 @@ Never push on the glass or try to lower the window with the tool. Window regulat
 
 ## When to Stop and Call a Professional
 
-Call a licensed, insured locksmith if:
+Call your roadside assistance provider or a licensed, insured auto locksmith if:
 
 - the car has frameless windows, or is a luxury model or electric vehicle with complex door electronics;
 - the keys are inside a running car;
@@ -146,6 +146,6 @@ Call 911 right away. Do not wait to try tools. A parked car heats up quickly, an
 
 No. Frameless windows, some luxury and electric vehicles, and cars with extra deadlocks can be difficult or risky. If your car falls into one of those categories, a professional locksmith is the safer choice.
 
-### How much does a professional mobile locksmith cost in Pittsburgh?
+### Can Fixium Craft unlock my car?
 
-Fixium Craft mobile locksmith visits start at a flat rate of $79, and we confirm your price before we begin. Call (929) 780-3017 for an exact quote based on your vehicle and location.
+No. We don't service vehicles. For a locked car, call your roadside assistance provider or an auto locksmith. We handle home locks: scheduled smart lock installs, rekeying and deadbolt replacement, plus evening emergency home lockouts (6:00 PM – 12:00 AM, call or text (929) 780-3017).

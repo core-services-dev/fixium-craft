@@ -32,6 +32,9 @@ export const business = {
   email: "fixiumcraft@gmail.com",
   serviceArea: "Pittsburgh, PA & Surrounding Areas",
   hours: "Mon–Sun, 7am–11pm",
+  // Scheduled work runs 7am–11pm (see `hours`). Emergency home lockouts are
+  // a separate, narrower window: call/text only, evenings until midnight.
+  emergencyHours: "6:00 PM – 12:00 AM",
   address: {
     city: "Pittsburgh",
     state: "PA",
@@ -180,7 +183,7 @@ export const hero = {
   // Label above the 3 quick-pick service cards directly under the hero CTAs.
   pickerLabel: "What do you need help with?",
   supportingCopy:
-    "Furniture assembly and mounting, locks and door hardware, and general home repairs — one local team for the whole to-do list.",
+    "Furniture & IKEA assembly, TV mounting, handyman repairs and locksmith services — one local team for the whole to-do list.",
   primaryCta: { label: "Get an Instant Quote", action: "form" },
   // Trust bar directly under the hero CTAs. Prices mirror the "starting at"
   // prices on the service pages (handyman $49, assembly $59, locksmith $79).
@@ -235,150 +238,107 @@ export const painPoints = {
 export const services = [
   {
     id: "assembly",
-    title: "Furniture Assembly",
+    title: "Furniture & IKEA Assembly",
+    quoteLabel: "Furniture & IKEA Assembly",
     icon: "assembly",
     emoji: "🛋️",
     image: "/services/furniture-assembly.jpg",
     alt: "IKEA and flat-pack furniture assembly service in Pittsburgh, PA",
     description:
-      "Beds, wardrobes (including IKEA PAX systems), desks, shelving, office furniture — if it comes in a box, we build it fast, sturdy, and level. No leftover screws, no wobble.",
+      "Desks, beds, dressers and IKEA PAX wardrobes — if it comes in a box, we build it fast, sturdy, and level. No leftover screws, no wobble.",
     features: [
+      "Desks, beds & dressers",
       "IKEA PAX wardrobes & closet systems",
       "IKEA, Wayfair, Amazon & all major brands",
-      "Bedroom, office & living room sets",
       "Old furniture disassembly & haul-away available",
     ],
-    startingPrice: "Starting at $59",
+    startingPrice: "From $59",
     // Dedicated pillar page this service belongs to (see servicePillars
     // below and app/services/[slug]/page.tsx).
     learnMoreHref: "/services/furniture-assembly",
   },
   {
     id: "mounting",
-    title: "TV Mounting & Cable Management",
+    title: "TV Mounting & Wall Hanging",
+    quoteLabel: "TV Mounting & Wall Hanging",
     icon: "mounting",
     emoji: "📺",
     image: "/services/tv-wall-mounting.jpg",
     alt: "TV wall mounting service in Pittsburgh, PA",
     description:
-      "Stud-anchored TV mounting in Pittsburgh with clean cable and cord concealment — hung level the first time, no drywall guesswork.",
+      "Stud-anchored TV mounting with clean cable concealment, plus floating shelves, mirrors and artwork hung level the first time — no drywall guesswork.",
     features: [
       "Fixed, tilting & full-motion TV mounts",
       "Cable & wire concealment behind the wall or in raceway",
+      "Floating shelves, mirrors & artwork",
       "Soundbar & media console mounting",
     ],
-    startingPrice: "Starting at $89",
-    learnMoreHref: "/services/furniture-assembly",
+    startingPrice: "From $89",
+    learnMoreHref: "/services/tv-mounting",
   },
   {
-    id: "wallmounting",
-    title: "Wall Mounting (shelves, mirrors, artwork)",
-    icon: "wallmount",
-    emoji: "🖼️",
-    // No dedicated photo yet -- renders icon-only, same resilience
-    // pattern as every other services[] entry without a real photo
-    // (see ServiceCard's image-fallback comment).
-    image: null,
-    alt: "Wall mounting service for shelves, mirrors, and artwork in Pittsburgh, PA",
-    description:
-      "Wall mounting services for shelves, mirrors, artwork, and wall decor — stud-anchored and leveled, with drywall-rated hardware when a stud isn't available.",
-    features: [
-      "Floating & bracket shelves",
-      "Mirrors, artwork & wall decor",
-      "Curtain rods, coat racks & other fixtures",
-    ],
-    startingPrice: "Starting at $89",
-    learnMoreHref: "/services/furniture-assembly",
-  },
-  {
-    id: "repairs",
-    title: "Home Maintenance & Repairs",
+    id: "handyman",
+    title: "General Handyman & Home Repairs",
+    quoteLabel: "General Handyman & Repairs",
     icon: "repairs",
     emoji: "🔧",
     image: "/services/minor-home-repairs.jpg",
-    alt: "Home repair service for cabinet hinges and door lock adjustments in Pittsburgh, PA",
+    alt: "Handyman home repair service for cabinets, drywall and fixtures in Pittsburgh, PA",
     description:
-      "Home repair services in Pittsburgh for the small fixes that keep getting pushed back — sticking cabinet hinges, doors that won't latch, loose drawers, and door lock or handle adjustments, done in one visit.",
+      "Drywall patching, minor plumbing and electrical fixtures, cabinet repairs and the small fixes that keep getting pushed back — done in one visit.",
     features: [
-      "Cabinet & drawer hinge adjustments",
-      "Door alignment, lock & handle adjustments or replacement",
-      "General furniture repair & childproofing",
+      "Drywall patching & paint touch-ups",
+      "Minor plumbing & electrical fixture swaps",
+      "Cabinet, drawer & door repairs",
+      "Window AC & heavy fixture installation",
     ],
-    startingPrice: "Starting at $49",
-    // Links to the direct-match dedicated page; door-lock-repair-pittsburgh
-    // is a second, differently-angled page for the same underlying
-    // service, reachable from the footer instead (see footer.servicePageLinks).
-    learnMoreHref: "/services/handyman-repairs",
-  },
-  {
-    id: "installation",
-    title: "Window AC & Appliance Installation",
-    icon: "ac",
-    emoji: "❄️",
-    image: "/services/installation-services.jpg",
-    alt: "Window AC unit and appliance installation service in Pittsburgh, PA",
-    description:
-      "Seasonal window AC units, heavy wall fixtures, and curtain rods installed secure and level — no drafts, no pulled-out anchors.",
-    features: [
-      "Window AC units, mounted & sealed",
-      "Heavy fixtures anchored to studs",
-      "Curtain rods & blinds, hung straight",
-    ],
-    startingPrice: "Starting at $69",
-    // No dedicated page for this one — only the 5 URLs in servicePages
-    // were requested, and this service wasn't among them.
+    startingPrice: "From $49",
     learnMoreHref: "/services/handyman-repairs",
   },
   {
     id: "locksmith",
-    // Expanded from "Residential Locksmith & Door Hardware" -- this line
-    // now covers commercial and automotive lockout work too, not just
-    // residential installs, so the title/description/features below
-    // reflect the full scope rather than just the smart-lock angle.
-    title: "Lock Hardware & Door Services",
-    quoteLabel: "Auto & Home Lockouts + Smart Locks",
+    title: "Locksmith & Smart Lock Installs",
+    quoteLabel: "Locksmith & Smart Locks",
     icon: "lock",
     emoji: "🔐",
-    // Real installed-smart-lock photo (Yale touchscreen deadbolt),
-    // same object-cover/aspect-[4/3] treatment as the other 4 service
-    // cards -- the icon/gradient base layer + onError fallback in
-    // ServiceCard still cover the rare case this file fails to load.
+    // Real installed-smart-lock photo (Yale touchscreen deadbolt).
     image: "/images/projects/locksmith-door-hardware.jpg",
-    alt: "Locksmith and door lock installation service in Pittsburgh, PA",
+    alt: "Locksmith and smart lock installation service in Pittsburgh, PA",
     description:
-      "Fast response for home & vehicle lockouts, lock replacement, deadbolt repair, and smart lock setup across Pittsburgh, PA. Scheduled, same-day, and 100% upfront-priced — no surprise call-out or damage fees.",
+      "Scheduled rekeying, deadbolt replacement, handlesets and smart lock setup (Schlage, Yale, Nest, Ring), plus evening emergency lockouts. Upfront flat-rate pricing, no surprise fees.",
+    // Small helper line shown inside this service's chip in the quote form.
+    formNote: "Emergency Lockouts available 6PM – 12AM | Scheduled installs 7AM – 11PM",
     // Specific lock offers for the JSON-LD hasOfferCatalog (see
-    // localBusinessSchema below), so search engines see the individual
-    // lock services rather than one generic "Lock Hardware" entry. The
-    // homepage card itself still renders as a single service.
+    // localBusinessSchema below).
     schemaOffers: [
       {
         name: "Door Lock Replacement & Rekeying",
         description:
-          "Standard lock and deadbolt replacement, rekeying, and cylinder changes for homes in Pittsburgh, PA, with upfront flat-rate pricing.",
-      },
-      {
-        name: "Same-Day & Scheduled Lockout Service",
-        description:
-          "Fast-response lockout service for homes, businesses, and vehicles in Pittsburgh, PA, with 100% upfront flat-rate pricing and no surprise fees.",
+          "Scheduled lock and deadbolt replacement, rekeying, and cylinder changes for homes in Pittsburgh, PA, with upfront flat-rate pricing.",
       },
       {
         name: "Smart Lock Installation & Lock Repair",
         description:
-          "Smart lock installation and setup (Yale, Schlage, August, Google Nest, Eufy), plus deadbolt repair, door realignment, and strike plate tuning in Pittsburgh, PA.",
+          "Smart lock installation and setup (Yale, Schlage, August, Google Nest, Ring, Eufy), plus deadbolt repair, door realignment, and strike plate tuning in Pittsburgh, PA.",
+      },
+      {
+        name: "Evening Emergency Home Lockout Service",
+        description:
+          "Emergency home lockout help in Pittsburgh, PA, available 6:00 PM – 12:00 AM by phone or text, with upfront flat-rate pricing and no surprise fees.",
       },
     ],
     features: [
-      "Vehicle & truck lockout service (cars, vans & commercial trucks)",
-      "Home & business unlocking — non-emergency, scheduled, same-day",
-      "Standard lock replacement, rekeying & deadbolts",
-      "Smart lock installation & setup (Yale, Schlage, August, Google Nest, Eufy)",
+      "Smart lock installation & setup (Schlage, Yale, Nest, Ring)",
+      "Scheduled rekeying & lock replacement",
+      "Deadbolts & handlesets",
       "Door realignment, strike plate tuning & handle upgrades",
+      "Evening emergency lockouts, 6:00 PM – 12:00 AM",
     ],
-    startingPrice: "Starting at $79",
+    startingPrice: "From $79",
     learnMoreHref: "/services/locksmith",
   },
 ];
+
 
 // "Upfront & Fixed Pricing" trust section — rendered directly under the
 // Services grid (see PricingTrust() in LandingPage.jsx) so the flat-rate
@@ -445,7 +405,7 @@ export const discountMicrocopy =
 export const servicesSection = {
   heading: "Our Home Services in Pittsburgh, PA",
   subheading:
-    "Three specialties, one trusted local team. Pick a service to see what's included, common questions, and how to book.",
+    "Four core services, one trusted local team. Pick a service to see what's included, common questions, and how to book.",
 };
 
 // JSON-LD structured data (schema.org), rendered as a <script
@@ -506,11 +466,14 @@ export const localBusinessSchema = {
     "Drywall Patching",
     "Handyman Services",
   ],
-  // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") — keep
-  // the two in sync if hours ever change (see the comment on business.hours).
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
+  // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") plus the
+  // evening emergency-lockout window (business.emergencyHours, 6 PM–12 AM) —
+  // keep in sync if hours ever change (see the comment on business.hours).
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      name: "Scheduled service",
+      dayOfWeek: [
       "Monday",
       "Tuesday",
       "Wednesday",
@@ -518,10 +481,26 @@ export const localBusinessSchema = {
       "Friday",
       "Saturday",
       "Sunday",
-    ],
-    opens: "07:00",
-    closes: "23:00",
-  },
+      ],
+      opens: "07:00",
+      closes: "23:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      name: "Evening emergency lockouts (call or text)",
+      dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+      ],
+      opens: "18:00",
+      closes: "23:59",
+    },
+  ],
   // A few real job photos (absolute URLs, as schema.org expects).
   image: [
     `${seo.canonicalUrl}/images/work/furniture-desk.jpg`,
@@ -664,11 +643,19 @@ export const quoteForm = {
         ...services.map((s) => ({
           value: s.id,
           label: s.quoteLabel || s.title,
-          price: s.startingPrice.replace(/^Starting at /, "From "),
+          price: s.startingPrice,
           emoji: s.emoji,
+          note: s.formNote,
         })),
-        { value: "other", label: "Something Else", price: null, emoji: "💬" },
+        { value: "other", label: "Something Else / Custom Project", price: null, emoji: "💬" },
       ],
+      // Shown under the chips when the locksmith service is selected: urgent
+      // lockouts should call/text right away, not wait on a form reply.
+      emergencyNotice: {
+        value: "locksmith",
+        title: "Locked out right now?",
+        body: `Emergency Lockout Service is available ${business.emergencyHours}. For urgent lockouts during these hours, call or text us directly instead of waiting for a form reply.`,
+      },
     },
     // Renamed from the old "Anything else we should know?" framing --
     // this is now the form's explicit "Job Description" field.
@@ -907,7 +894,7 @@ export const faq = [
     id: "mobile-locksmith",
     question: "Do you offer a mobile locksmith service in Pittsburgh?",
     answer:
-      "Yes. We come to your door for rekeying, deadbolt and lock replacement, smart lock installation and lockouts, with same-day or scheduled appointments. Locksmith jobs start at $79, flat-rate.",
+      "Yes. We come to your door for scheduled rekeying, deadbolt and lock replacement and smart lock installation, plus evening emergency home lockouts (6:00 PM – 12:00 AM, call or text us directly). Locksmith jobs start at $79, flat-rate.",
   },
   {
     id: "brands",
@@ -934,9 +921,9 @@ export const faq = [
   },
   {
     id: "lockout",
-    question: "Do you offer lockout service?",
+    question: "Do you offer emergency lockout service?",
     answer:
-      "Yes — non-emergency, same-day lockout service for homes, businesses, and vehicles (cars, vans & commercial trucks), always with 100% upfront flat-rate pricing and no surprise fees on site. This is scheduled work, not instant emergency dispatch; if you need someone in the next few minutes, please call a 24/7 emergency locksmith instead.",
+      "Yes, in the evening. Emergency Lockout Service is available 6:00 PM – 12:00 AM for home lockouts. For urgent lockouts during these hours, call or text us directly rather than filling out the form. At other times we book scheduled locksmith appointments, always with upfront flat-rate pricing and no surprise fees.",
   },
   {
     id: "smart-locks",
@@ -944,15 +931,9 @@ export const faq = [
     answer:
       "Yes. We install and set up smart locks from Yale, Schlage, August, Google Nest, and Eufy, plus standard deadbolts and handle sets. Bring your own lock and we'll handle the rest. We also rekey and replace cylinders — a common request for new homeowners.",
   },
-  {
-    id: "vehicle-lockout",
-    question: "Can you help if I'm locked out of my car or work truck?",
-    answer:
-      "Yes — we offer non-emergency, same-day vehicle lockout service for cars, vans, and commercial trucks, with upfront flat-rate pricing. If you need help right now, please call a 24/7 emergency/roadside locksmith instead.",
-  },
 ];
 
-// The 3 core service pillars. One source of truth for: the homepage pillar
+// The 4 core service pillars. One source of truth for: the homepage pillar
 // cards (ServicePillars() in LandingPage.jsx), the Services dropdown in the
 // header (SiteNav.jsx), the dedicated /services/<slug> pages
 // (components/ServicePillarPage.tsx + app/services/[slug]/page.tsx), the
@@ -980,20 +961,20 @@ export const serviceDetails = [
   {
     slug: "tv-mounting",
     heading: "TV Wall Mounting & Shelf Installation Services",
-    body: "Our TV wall mounting service in Pittsburgh covers fixed, tilting and full-motion mounts, stud-anchored and hung level, with cable concealment available. We also install floating shelves, bracket shelves, mirrors and artwork.",
-    cta: "See TV & wall mounting",
-  },
-  {
-    slug: "locksmith",
-    heading: "Residential Locksmith, Smart Locks & Rekeying",
-    body: "Searching for a mobile locksmith near me? We come to your door in Pittsburgh for rekeying, deadbolt and lock replacement, handle sets, smart lock setup (Schlage, Yale, Ring, Nest, Kwikset) and lockouts, with same-day or scheduled appointments.",
-    cta: "See locksmith services",
+    body: "Our TV wall mounting service in Pittsburgh covers fixed, tilting and full-motion mounts, stud-anchored and hung level, with cable concealment available. We also hang floating shelves, bracket shelves, mirrors and artwork.",
+    cta: "See TV mounting & wall hanging",
   },
   {
     slug: "handyman-repairs",
     heading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
     body: "From drywall patching and cabinet repair to minor plumbing and electrical fixtures, we handle the small home repairs and maintenance that keep getting pushed to next weekend, all at upfront flat rates.",
     cta: "See handyman services",
+  },
+  {
+    slug: "locksmith",
+    heading: "Residential Locksmith, Smart Locks & Rekeying",
+    body: `Searching for a mobile locksmith near me? We come to your door in Pittsburgh for scheduled smart lock installation (Schlage, Yale, Ring, Nest), rekeying, deadbolt replacement and handle sets, quoted upfront so you can book ahead. Locked out of your home this evening? Emergency Lockout Service is available ${business.emergencyHours}: call or text us directly.`,
+    cta: "Get an upfront quote & book ahead",
   },
 ];
 
@@ -1002,31 +983,29 @@ export const servicePillars = [
     slug: "furniture-assembly",
     providerType: "HomeAndConstructionBusiness",
     includedHeading: "IKEA & Flat-Pack Furniture Assembly in Pittsburgh",
-    title: "Furniture Assembly & Mounting",
-    navLabel: "Furniture Assembly & Mounting",
-    navBlurb: "IKEA, beds, TVs, shelves & more",
+    title: "Furniture & IKEA Assembly",
+    navLabel: "Furniture & IKEA Assembly",
+    navBlurb: "IKEA, desks, beds, dressers & PAX wardrobes",
     icon: "assembly",
     image: "/images/work/furniture-desk.jpg",
     alt: "Assembled desk with drawers and shelves: furniture assembly in Pittsburgh, PA",
     description:
-      "IKEA and flat-pack assembly plus TV and wall mounting — built sturdy, level, and anchored right the first time.",
+      "IKEA and flat-pack assembly for desks, beds, dressers and PAX wardrobes — built sturdy, level, and anchored right the first time.",
     features: [
       "IKEA & flat-pack assembly (PAX, desks, dressers)",
       "Bed frames & bedroom sets",
-      "TV mounting & cable concealment",
-      "Wall mounting: shelves, mirrors & artwork",
+      "Bookcases, TV stands & shelving units",
+      "Office & commercial furniture",
       "Outdoor & patio furniture",
     ],
-    startingPrice: "Starting at $59",
-    galleryCategories: ["furniture", "tv"],
-    galleryHeading: "Recent Furniture Assembly & TV Mounting Work",
+    startingPrice: "From $59",
+    galleryCategories: ["furniture"],
+    galleryHeading: "Recent Furniture Assembly Work",
     brandsHeading: "We assemble furniture from",
     brands: ["IKEA", "Wayfair", "Target", "Amazon", "Ashley", "Costco", "and any other flat-pack brand"],
     pricingHeading: "Clear starting prices",
     pricing: [
       { label: "IKEA & flat-pack furniture assembly", price: "$59", note: "Beds, dressers, desks, PAX wardrobes & more" },
-      { label: "TV mounting", price: "$89", note: "Stud-anchored, with cable concealment available" },
-      { label: "Wall mounting: shelves, mirrors & artwork", price: "$89", note: "Level, anchored to studs or rated anchors" },
     ],
     badges: [
       { icon: "⚡", label: "Same-day & next-day slots" },
@@ -1038,7 +1017,7 @@ export const servicePillars = [
     metaDescription:
       "IKEA furniture assembly in Pittsburgh, PA: PAX wardrobes, beds, desks, dressers & any flat-pack build. Flat-rate pricing, same-day slots, fully insured. Get a free quote.",
     intro: [
-      `Fixium Craft builds and mounts furniture across ${business.address.city}, ${business.address.state} — IKEA PAX wardrobes, beds, desks, dressers, and anything else that comes in a box — plus TV and wall mounting done level, stud-anchored, and clean.`,
+      `Fixium Craft builds furniture across ${business.address.city}, ${business.address.state} — IKEA PAX wardrobes, beds, desks, dressers, and anything else that comes in a box — sturdy, level, and anchored right the first time.`,
       `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
     ],
     taskGroups: [
@@ -1051,15 +1030,6 @@ export const servicePillars = [
           "Wayfair, Amazon, Target, Ashley & any other flat-pack brand",
           "Office & commercial furniture: desks, workstations & shelving",
           "Disassembly & reassembly for moves, with haul-away available",
-        ],
-      },
-      {
-        heading: "TV & wall mounting",
-        items: [
-          "Fixed, tilting & full-motion TV mounts, stud-anchored",
-          "Cable & wire concealment behind the wall or in raceway",
-          "Soundbar & media console mounting",
-          "Floating shelves, bracket shelves, mirrors & artwork",
         ],
       },
       {
@@ -1082,9 +1052,9 @@ export const servicePillars = [
           "Yes. PAX wardrobes and closet systems (sliding or hinged doors, interior organizers) are one of our most common jobs. We build them level and secure them to the wall.",
       },
       {
-        question: "Can you mount a TV on any wall?",
+        question: "Do you anchor tall furniture to the wall?",
         answer:
-          "Standard drywall and stud walls are our everyday job. If you have brick, concrete, or plaster, mention it in your photo or text and we'll confirm the right hardware in your quote.",
+          "Yes. For tall pieces like PAX wardrobes, BILLY bookcases and dressers we install the anti-tip wall strap into a stud, so nothing can tip forward. It matters most in homes with kids or pets.",
       },
       {
         question: "Do you take away the boxes and packaging?",
@@ -1100,13 +1070,11 @@ export const servicePillars = [
   },
   {
     slug: "tv-mounting",
-    // Own URL for the "TV wall mounting Pittsburgh" search; listed in the
-    // nav/sitemap but kept out of the homepage's 3-card grid.
-    hideFromGrid: true,
+    // Own URL for the "TV wall mounting Pittsburgh" search and the 2nd homepage card.
     providerType: "HomeAndConstructionBusiness",
     includedHeading: "TV Wall Mounting & Shelf Installation Services",
-    title: "TV Wall Mounting & Shelves",
-    navLabel: "TV Wall Mounting",
+    title: "TV Mounting & Wall Hanging",
+    navLabel: "TV Mounting & Wall Hanging",
     navBlurb: "Stud-anchored mounts, hidden cables & shelves",
     icon: "mounting",
     image: "/images/work/tv-wall-mount.jpg",
@@ -1120,7 +1088,7 @@ export const servicePillars = [
       "Soundbar & media console mounting",
       "Floating shelves, mirrors & artwork",
     ],
-    startingPrice: "Starting at $89",
+    startingPrice: "From $89",
     galleryCategories: ["tv"],
     galleryHeading: "Recent TV Mounting Work",
     pricingHeading: "Clear starting prices",
@@ -1189,27 +1157,24 @@ export const servicePillars = [
   },
   {
     slug: "locksmith",
-    // "dispatch": call-now CTAs and sticky bar. Default (unset) is "quote":
-    // instant quote + text-a-photo CTAs.
-    ctaMode: "dispatch",
     providerType: "Locksmith",
     includedHeading: "Residential Locksmith, Smart Locks & Rekeying",
-    title: "Locksmith & Door Hardware",
-    navLabel: "Locksmith & Door Hardware",
-    navBlurb: "Rekeying, smart locks, deadbolts & lockouts",
+    title: "Locksmith & Smart Lock Installs",
+    navLabel: "Locksmith & Smart Lock Installs",
+    navBlurb: "Smart locks, rekeying, deadbolts & evening lockouts",
     icon: "lock",
     image: "/images/work/lock-schlage-handleset.jpg",
     alt: "Handleset installed on an entry door: locksmith and door hardware in Pittsburgh, PA",
     description:
-      "Rekeying, smart lock installs, deadbolts, handles, and same-day or scheduled lockouts — flat-rate and upfront.",
+      "Scheduled rekeying, deadbolts, handlesets and smart lock setup, plus evening emergency lockouts — flat-rate and upfront.",
     features: [
-      "Rekeying & lock replacement",
-      "Smart locks: Schlage, Nest, Ring, Yale & more",
-      "Deadbolts & door handle sets",
-      "Home, business & vehicle lockouts",
+      "Smart locks: Schlage, Yale, Nest, Ring & more",
+      "Scheduled rekeying & lock replacement",
+      "Deadbolts & handlesets",
       "Door alignment & strike plate repair",
+      "Evening emergency lockouts, 6:00 PM – 12:00 AM",
     ],
-    startingPrice: "Starting at $79",
+    startingPrice: "From $79",
     galleryCategories: ["locksmith"],
     galleryHeading: "Recent Lock & Door Hardware Work",
     brandsHeading: "Locks we install & service",
@@ -1221,13 +1186,16 @@ export const servicePillars = [
       { label: "Handle sets, levers & strike plate fixes", price: "$79", note: "Door alignment and latch repair included in the visit" },
     ],
     badges: [
-      { icon: "⚡", label: "Same-day slots available" },
-      { icon: "📅", label: "Scheduled appointments" },
+      { icon: "📅", label: "Book ahead: scheduled installs 7AM–11PM" },
+      { icon: "🌙", label: "Evening emergency lockouts 6PM–12AM" },
       { icon: "🛡️", label: "Fully insured" },
     ],
+    // Shown as the "secondary track" box under the hero: urgent lockouts go
+    // straight to a call/text, never through the quote form.
+    heroNote: `Urgent home lockout? Emergency Lockout Service is available ${business.emergencyHours}.`,
     callout: {
-      title: "Locked out? Call now for same-day service",
-      body: "Call or text us and we'll book the first open slot, for homes, businesses and vehicles. Same-day or scheduled service with flat-rate pricing. We're not a 24/7 emergency dispatch line.",
+      title: "Locked out this evening? Call or text now",
+      body: `Emergency Lockout Service available ${business.emergencyHours}. For urgent lockouts during these hours, call or text us directly: no form needed.`,
     },
     showcaseHeading: "What we do at the door",
     showcase: [
@@ -1239,9 +1207,9 @@ export const servicePillars = [
     h1: "Fast Same-Day Local Locksmith Services in Pittsburgh",
     metaTitle: "Mobile Locksmith Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Mobile locksmith in Pittsburgh, PA: rekeying, smart lock installation (Schlage, Nest, Ring), deadbolts, lock repair & same-day lockouts. Flat-rate pricing, fully insured.",
+      "Mobile locksmith in Pittsburgh, PA: smart lock installation (Schlage, Yale, Nest, Ring), rekeying, deadbolt replacement & evening emergency lockouts. Flat-rate pricing, fully insured.",
     intro: [
-      `Fixium Craft handles home and business locks across ${business.address.city}, ${business.address.state} — rekeying, lock and deadbolt replacement, door handles, smart lock installation, and same-day or scheduled lockouts for homes, businesses, and vehicles.`,
+      `Fixium Craft handles home locks across ${business.address.city}, ${business.address.state} — scheduled smart lock installation, rekeying, deadbolt and lock replacement, and door handles. Book ahead for an upfront flat-rate quote, or call or text us if you're locked out of your home this evening (Emergency Lockout Service, ${business.emergencyHours}).`,
       `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront — no surprise call-out or damage fees.`,
     ],
     taskGroups: [
@@ -1270,10 +1238,11 @@ export const servicePillars = [
         ],
       },
       {
-        heading: "Mobile locksmith lockout help",
+        heading: "Evening emergency lockouts",
         items: [
-          "Home & business unlocking, same-day or scheduled",
-          "Vehicle lockouts: cars, vans & commercial trucks",
+          `Emergency Lockout Service available ${business.emergencyHours}`,
+          "For urgent lockouts during these hours, call or text us directly: no form needed",
+          "Home lockouts, quoted flat-rate before we start",
         ],
       },
     ],
@@ -1281,7 +1250,7 @@ export const servicePillars = [
       {
         question: "Do you offer emergency lockout service?",
         answer:
-          "We offer same-day and scheduled lockout service with upfront flat-rate pricing, but not instant 24/7 emergency dispatch. If you need someone within the next few minutes, please call a 24/7 emergency locksmith instead.",
+          `Yes, in the evening. Emergency Lockout Service is available ${business.emergencyHours} for home lockouts. For urgent lockouts during these hours, call or text us directly rather than using the quote form. Outside those hours we book scheduled locksmith appointments (7 AM – 11 PM). We don't offer car lockouts.`,
       },
       {
         question: "Do I need to buy the smart lock myself?",
@@ -1308,8 +1277,8 @@ export const servicePillars = [
     slug: "handyman-repairs",
     providerType: "HomeAndConstructionBusiness",
     includedHeading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
-    title: "General Handyman & Repairs",
-    navLabel: "General Handyman & Repairs",
+    title: "General Handyman & Home Repairs",
+    navLabel: "General Handyman & Home Repairs",
     navBlurb: "Drywall, cabinets, fixtures & home upkeep",
     icon: "repairs",
     image: "/images/work/install-window-ac.jpg",
@@ -1323,7 +1292,7 @@ export const servicePillars = [
       "Cabinet & door repair",
       "General home upkeep",
     ],
-    startingPrice: "Starting at $49",
+    startingPrice: "From $49",
     galleryCategories: ["handyman"],
     galleryHeading: "Recent Handyman & Repair Work",
     pricingHeading: "Clear starting prices",

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone } from "lucide-react";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
 import WorkGallery from "./WorkGallery";
@@ -54,8 +53,6 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
 
   const base = seo.canonicalUrl.replace(/\/$/, "");
   const others = servicePillars.filter((p) => p.slug !== slug);
-  // Locksmith pages lead with a call-now / same-day dispatch CTA; the rest lead with an instant quote.
-  const dispatch = page.ctaMode === "dispatch";
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -144,33 +141,30 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
             ))}
           </div>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            {dispatch ? (
-              <>
-                <a
-                  href={business.phoneHref}
-                  className={`${BTN_PRIMARY} inline-flex items-center justify-center gap-2 sm:px-8`}
-                >
-                  <Phone className="h-5 w-5" aria-hidden="true" />
-                  Call Now: {business.phoneDisplay}
-                </a>
-                <a href={business.smsHref} className={BTN_OUTLINE_LIGHT}>
-                  Text Us for Same-Day Dispatch
-                </a>
-              </>
-            ) : (
-              <>
-                <Link href="/#quote" className={`${BTN_PRIMARY} sm:px-8`}>
-                  Get an Instant Quote
-                </Link>
-                <a href={business.smsHref} className={BTN_OUTLINE_LIGHT}>
-                  Text Photo for Estimate
-                </a>
-              </>
-            )}
+            <Link href="/#quote" className={`${BTN_PRIMARY} sm:px-8`}>
+              Get an Instant Quote
+            </Link>
+            <a href={business.smsHref} className={BTN_OUTLINE_LIGHT}>
+              Text Photo for Estimate
+            </a>
           </div>
-          {dispatch && (
+          {page.heroNote && (
             <p className="mt-3 text-sm text-slate-300">
-              Same-day dispatch &middot; {business.hours}
+              {page.heroNote}{" "}
+              <a
+                href={business.phoneHref}
+                className="font-semibold text-amber-300 underline underline-offset-2 hover:text-amber-200"
+              >
+                Call
+              </a>{" "}
+              or{" "}
+              <a
+                href={business.smsHref}
+                className="font-semibold text-amber-300 underline underline-offset-2 hover:text-amber-200"
+              >
+                text us
+              </a>
+              .
             </p>
           )}
           <p className="mt-4 text-sm font-semibold text-blue-300">{page.startingPrice}</p>
@@ -440,37 +434,21 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
             quote.
           </p>
           <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-            {dispatch ? (
-              <>
-                <a href={business.phoneHref} className={BTN_PRIMARY}>
-                  Call Now: {business.phoneDisplay}
-                </a>
-                <a href={business.smsHref} className={BTN_OUTLINE_LIGHT}>
-                  Text Us
-                </a>
-                <Link href="/#quote" className={BTN_OUTLINE_LIGHT}>
-                  Get an Instant Quote
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link href="/#quote" className={BTN_PRIMARY}>
-                  Get an Instant Quote
-                </Link>
-                <a href={business.smsHref} className={BTN_OUTLINE_LIGHT}>
-                  Text Photo for Estimate
-                </a>
-                <a href={business.phoneHref} className={BTN_OUTLINE_LIGHT}>
-                  Call {business.phoneDisplay}
-                </a>
-              </>
-            )}
+            <Link href="/#quote" className={BTN_PRIMARY}>
+              Get an Instant Quote
+            </Link>
+            <a href={business.smsHref} className={BTN_OUTLINE_LIGHT}>
+              Text Photo for Estimate
+            </a>
+            <a href={business.phoneHref} className={BTN_OUTLINE_LIGHT}>
+              Call {business.phoneDisplay}
+            </a>
           </div>
         </div>
       </section>
 
       <SiteFooterMini />
-      <StickyMobileBar mode={dispatch ? "dispatch" : "quote"} />
+      <StickyMobileBar />
     </main>
   );
 }

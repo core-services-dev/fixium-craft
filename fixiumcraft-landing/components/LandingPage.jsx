@@ -35,6 +35,7 @@ import {
   ShieldCheck,
   Star,
   Tag,
+  Tv,
   Wrench,
 } from "lucide-react";
 import { trackEvent } from "./analytics";
@@ -403,14 +404,14 @@ function PainPoints() {
 
 // One of the 3 equal service pillars: a single clickable card (icon, short
 // description, 3 highlights, starting-price badge) linking to /services/<slug>.
-const PILLAR_ICONS = { assembly: Armchair, lock: KeyRound, repairs: Wrench };
+const PILLAR_ICONS = { assembly: Armchair, mounting: Tv, lock: KeyRound, repairs: Wrench };
 
 function PillarCard({ pillar }) {
   const Icon = PILLAR_ICONS[pillar.icon] || Wrench;
   return (
     <Link
       href={`/services/${pillar.slug}`}
-      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 sm:p-8"
+      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
     >
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
         <Icon className="h-6 w-6" aria-hidden="true" />
@@ -441,7 +442,7 @@ function PillarCard({ pillar }) {
   );
 }
 
-// The homepage's 3 equal service pillars (data: `servicePillars`), each
+// The homepage's 4 equal service pillars (data: `servicePillars`), each
 // linking to its own SEO page under /services/<slug>.
 function ServicePillars() {
   return (
@@ -453,7 +454,7 @@ function ServicePillars() {
           </h2>
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {servicePillars
             .filter((p) => !p.hideFromGrid)
             .sort((a, b) => Number(a.slug === "locksmith") - Number(b.slug === "locksmith"))
@@ -905,10 +906,40 @@ function QuoteForm() {
                         {opt.price}
                       </span>
                     )}
+                    {opt.note && (
+                      <span
+                        className={`mt-1 text-[11px] font-normal leading-snug ${selected ? "text-blue-100" : "text-slate-600"}`}
+                      >
+                        {opt.note}
+                      </span>
+                    )}
                   </button>
                 );
               })}
             </div>
+            {formData.services.includes(quoteForm.fields.services.emergencyNotice.value) && (
+              <div
+                role="note"
+                className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"
+              >
+                <p className="font-bold">{quoteForm.fields.services.emergencyNotice.title}</p>
+                <p className="mt-1 leading-relaxed">{quoteForm.fields.services.emergencyNotice.body}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href={business.phoneHref}
+                    className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-600"
+                  >
+                    Call {business.phoneDisplay}
+                  </a>
+                  <a
+                    href={business.smsHref}
+                    className="rounded-lg border border-amber-400 bg-white px-4 py-2 font-semibold text-amber-900 transition hover:bg-amber-100"
+                  >
+                    Text us
+                  </a>
+                </div>
+              </div>
+            )}
             {servicesTouched && formData.services.length === 0 && (
               <p className="mt-3 text-sm font-medium text-rose-700">
                 {quoteForm.fields.services.errorMessage}
