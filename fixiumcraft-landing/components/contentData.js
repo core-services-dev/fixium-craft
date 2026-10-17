@@ -147,6 +147,14 @@ export const seo = {
     // furniture-assembly and general home-repair terms.
     "furniture assembly near me",
     "furniture assembly services",
+    "handyman furniture assembly",
+    "office furniture assembly service",
+    "outdoor furniture assembly",
+    "TV wall mounting service near me",
+    "TV mounting on drywall",
+    "TV mounting above fireplace",
+    "handyman for small jobs near me",
+    "handyman near me Pittsburgh PA",
     "IKEA furniture assembly Pittsburgh",
     "TV wall mounting Pittsburgh",
     "handyman Pittsburgh",
@@ -269,9 +277,19 @@ export const services = [
           "IKEA furniture assembly in Pittsburgh, PA: PAX wardrobes, beds, dressers, desks and more, built sturdy and level at a flat rate starting from $59.",
       },
       {
-        name: "Furniture Assembly Services (Home & Office)",
+        name: "Office Furniture Assembly Service",
         description:
-          "Residential and commercial furniture assembly near you in Pittsburgh, PA: office chairs, standing desks, cubicles, conference tables and reception desks.",
+          "Office furniture assembly service for Pittsburgh, PA businesses: office chairs, standing desks, cubicles, conference tables and reception desks, quoted as one flat rate.",
+      },
+      {
+        name: "Handyman Furniture Assembly (Home)",
+        description:
+          "Handyman furniture assembly for Pittsburgh homes: PAX wardrobes, beds, dressers, bookcases and dining sets, built level and anchored to the wall where needed.",
+      },
+      {
+        name: "Outdoor Furniture Assembly",
+        description:
+          "Outdoor furniture assembly in Pittsburgh, PA: patio sets, outdoor dining tables, loungers and deck boxes built on site.",
       },
     ],
     startingPrice: "From $59",
@@ -299,7 +317,17 @@ export const services = [
       {
         name: "TV Wall Mounting in Pittsburgh",
         description:
-          "Stud-anchored TV wall mounting in Pittsburgh, PA (fixed, tilting or full-motion) with cable concealment, at a flat rate starting from $89.",
+          "TV wall mounting service near you in Pittsburgh, PA (fixed, tilting or full-motion), stud-anchored with cable concealment, at a flat rate starting from $89.",
+      },
+      {
+        name: "TV Mounting on Drywall",
+        description:
+          "TV mounting on drywall in Pittsburgh, PA: studs located, bracket anchored, TV hung level, with cable concealment available.",
+      },
+      {
+        name: "TV Mounting Above Fireplace",
+        description:
+          "TV mounting above a fireplace in Pittsburgh, PA: hardware matched to your drywall, brick or stone surround, with the cable route planned for a clean finish.",
       },
       {
         name: "Shelf, Mirror & Wall Hanging Installation",
@@ -331,6 +359,11 @@ export const services = [
         name: "Handyman Services in Pittsburgh",
         description:
           "Local Pittsburgh handyman for drywall patching, minor plumbing and electrical fixtures, cabinet repair and office hardware maintenance, at a flat rate starting from $49.",
+      },
+      {
+        name: "Handyman for Small Jobs",
+        description:
+          "Handyman for small jobs near you in Pittsburgh, PA: bundle your to-do list into one flat-rate visit starting from $49.",
       },
     ],
     startingPrice: "From $49",
@@ -501,6 +534,14 @@ export const localBusinessSchema = {
     "IKEA Furniture Assembly in Pittsburgh",
     "TV Wall Mounting in Pittsburgh",
     "Handyman Services in Pittsburgh",
+    "Handyman Furniture Assembly",
+    "Office Furniture Assembly Service",
+    "Outdoor Furniture Assembly",
+    "TV Wall Mounting Service",
+    "TV Mounting on Drywall",
+    "TV Mounting Above Fireplace",
+    "Handyman for Small Jobs",
+    "Handyman Near Me in Pittsburgh, PA",
     "Commercial Furniture Assembly",
     "Office Furniture Assembly",
     "IKEA Assembly",
@@ -902,6 +943,24 @@ export const faq = [
       "TV mounting with Fixium Craft starts at $89 flat-rate, stud-anchored and level, with cable concealment available. You get your exact quote by text before we start.",
   },
   {
+    id: "tv-near-me",
+    question: "Is there a TV wall mounting service near me in Pittsburgh?",
+    answer:
+      "Yes. Fixium Craft is a local TV wall mounting service covering Pittsburgh and nearby neighborhoods, with same-day and next-day slots usually available. Text us your TV size and a photo of the wall.",
+  },
+  {
+    id: "tv-drywall",
+    question: "Can you do TV mounting on drywall?",
+    answer:
+      "Yes, TV mounting on drywall is our everyday job. We find the studs, anchor the bracket into them and hang the TV level, so it holds without relying on drywall anchors alone.",
+  },
+  {
+    id: "tv-fireplace",
+    question: "Can you do TV mounting above a fireplace?",
+    answer:
+      "Yes. Send a photo and tell us if the wall is drywall, brick or stone, and we'll confirm the right hardware and cable route in your flat-rate quote. One tip: check how warm the wall gets, since heat is hard on electronics.",
+  },
+  {
     id: "ikea-cost",
     question: "How much does IKEA furniture assembly cost in Pittsburgh?",
     answer:
@@ -915,15 +974,33 @@ export const faq = [
   },
   {
     id: "commercial",
-    question: "Do you assemble furniture for offices and businesses?",
+    question: "Do you offer an office furniture assembly service for businesses?",
     answer:
-      "Yes. We assemble office chairs, standing desks, cubicles, conference tables, waiting room seating and reception desks for Pittsburgh businesses and offices, as well as furniture for private homes. Send a photo or a list for a flat-rate quote.",
+      "Yes. Our office furniture assembly service covers office chairs, standing desks, cubicles, conference tables, waiting room seating and reception desks for Pittsburgh businesses and offices, as well as furniture for private homes. Send a photo or a list for a flat-rate quote.",
+  },
+  {
+    id: "outdoor-furniture",
+    question: "Do you do outdoor furniture assembly?",
+    answer:
+      "Yes. Patio sets, outdoor dining tables, loungers and deck boxes are built on site, flat-rate from $59, same as indoor furniture. Handyman furniture assembly for the whole house can be quoted as one visit.",
   },
   {
     id: "brands",
     question: "What furniture brands do you assemble?",
     answer:
       "IKEA, Wayfair, Amazon, Target, Ashley, and pretty much any flat-pack or ready-to-assemble furniture. If it comes in a box, we can build it.",
+  },
+  {
+    id: "handyman-small-jobs",
+    question: "Is there a handyman for small jobs near me?",
+    answer:
+      "Yes. Small jobs are what we do best: patching a wall, fixing a cabinet door, swapping a faucet or light fixture. Handyman visits start at $49 flat-rate, and you can bundle several jobs into one visit.",
+  },
+  {
+    id: "handyman-pittsburgh",
+    question: "Is there a handyman near me in Pittsburgh, PA?",
+    answer:
+      "Yes. We're a local Pittsburgh handyman serving the city and nearby neighborhoods, 7 AM to 11 PM. Send your ZIP code and we'll confirm availability right away.",
   },
   {
     id: "area",
@@ -973,21 +1050,21 @@ export const serviceDetails = [
   {
     slug: "furniture-assembly",
     heading: "Home & Commercial Furniture Assembly Services in Pittsburgh",
-    body: "IKEA furniture assembly in Pittsburgh for homes, plus office chairs and desks.",
-    subFeatures: ["IKEA PAX Wardrobes", "Office Chairs & Standing Desks", "Beds, Dressers & Dining Sets"],
+    body: "Handyman furniture assembly: IKEA, outdoor sets and office furniture.",
+    subFeatures: ["IKEA PAX Wardrobes", "Office Furniture Assembly Service", "Outdoor & Patio Furniture Assembly"],
     cta: "See furniture assembly",
   },
   {
     slug: "tv-mounting",
     heading: "TV Wall Mounting & Shelf Installation in Pittsburgh",
-    body: "TV wall mounting in Pittsburgh: stud-anchored, hidden cables, shelves, displays.",
-    subFeatures: ["TV Cable Concealment", "Floating Shelves & Mirrors", "Commercial Display Screens"],
+    body: "TV wall mounting service near you: stud-anchored, with hidden cables.",
+    subFeatures: ["TV Mounting on Drywall", "TV Mounting Above Fireplace", "Cable Concealment & Shelves"],
     cta: "See TV mounting",
   },
   {
     slug: "handyman-repairs",
     heading: "Local Handyman & Home Repairs in Pittsburgh",
-    body: "Handyman in Pittsburgh: drywall, minor plumbing and electrical, cabinet repairs.",
+    body: "Handyman for small jobs near you: drywall, fixtures, cabinet repairs.",
     subFeatures: ["Drywall Patching", "Minor Plumbing & Electrical Fixtures", "Cabinet & Office Hardware Repair"],
     cta: "See handyman services",
   },
@@ -1040,7 +1117,7 @@ export const servicePillars = [
     metaDescription:
       "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX wardrobes, beds, dressers, office chairs, standing desks and reception desks. Flat-rate pricing, fully insured. Get a free quote.",
     intro: [
-      `Fixium Craft builds furniture across ${business.address.city}, ${business.address.state}: assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes. IKEA PAX wardrobes, beds, desks, dressers and anything else that comes in a box, built sturdy and level the first time.`,
+      `Fixium Craft is a handyman furniture assembly service across ${business.address.city}, ${business.address.state}: assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes. IKEA PAX wardrobes, beds, desks, dressers and anything else that comes in a box, built sturdy and level the first time.`,
       `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
     ],
     taskGroups: [
@@ -1051,12 +1128,12 @@ export const servicePillars = [
           "Bed frames, platform beds, bunk beds & headboards",
           "Dressers, nightstands, bookcases & TV stands",
           "Dining sets, tables & chairs",
-          "Patio sets, outdoor dining tables, loungers & deck boxes",
+          "Outdoor furniture assembly: patio sets, outdoor dining tables, loungers & deck boxes",
           "Wayfair, Amazon, Target, Ashley & any other flat-pack brand",
         ],
       },
       {
-        heading: "Commercial & B2B furniture assembly",
+        heading: "Office furniture assembly service (commercial & B2B)",
         items: [
           "Office chairs and task seating, in bulk or one at a time",
           "Standing desks, sit-stand frames & workstations",
@@ -1080,9 +1157,19 @@ export const servicePillars = [
           "Furniture assembly starts at $59, with a flat-rate quote based on the pieces and photos you send us. No hourly surprises.",
       },
       {
-        question: "Do you assemble office furniture for businesses?",
+        question: "Do you offer an office furniture assembly service?",
         answer:
-          "Yes. We assemble office chairs, standing desks, cubicles, conference tables, waiting room seating and reception desks for Pittsburgh businesses and offices. Send a list or a photo and we'll quote the whole job as one flat rate.",
+          "Yes. Our office furniture assembly service covers office chairs, standing desks, cubicles, conference tables, waiting room seating and reception desks for Pittsburgh businesses and offices. Send a list or a photo and we'll quote the whole job as one flat rate.",
+      },
+      {
+        question: "Do you assemble outdoor furniture?",
+        answer:
+          "Yes. We build patio sets, outdoor dining tables, loungers and deck boxes on site, with the same flat-rate pricing as indoor furniture.",
+      },
+      {
+        question: "Can a handyman assemble all my furniture in one visit?",
+        answer:
+          "Yes. Handyman furniture assembly is our core job, so send photos or a list of every piece and we'll quote the whole visit as one flat rate.",
       },
       {
         question: "Can you assemble IKEA PAX wardrobes?",
@@ -1145,7 +1232,7 @@ export const servicePillars = [
     metaDescription:
       "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate pricing from $89, fully insured. Get a free quote.",
     intro: [
-      `Looking for TV wall mounting in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
+      `Looking for a TV wall mounting service near you in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
       `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, and every technician is background-checked and fully insured.`,
     ],
     taskGroups: [
@@ -1153,6 +1240,8 @@ export const servicePillars = [
         heading: "TV wall mounting",
         items: [
           "Fixed, tilting & full-motion TV mounts, stud-anchored",
+          "TV mounting on drywall, with studs located and the bracket anchored",
+          "TV mounting above a fireplace (drywall, brick or stone surround)",
           "Cable & wire concealment behind the wall or in raceway",
           "Soundbar & media console mounting",
           "Commercial display screens for offices, lobbies & waiting rooms",
@@ -1172,6 +1261,21 @@ export const servicePillars = [
         question: "How much does TV wall mounting cost in Pittsburgh?",
         answer:
           "TV mounting starts at $89, flat-rate, stud-anchored and level, with cable concealment available. You get your exact quote by text before we start.",
+      },
+      {
+        question: "Is there a TV wall mounting service near me in Pittsburgh?",
+        answer:
+          "Yes. We're a local TV wall mounting service covering Pittsburgh and nearby neighborhoods, with same-day and next-day slots usually available.",
+      },
+      {
+        question: "Can you do TV mounting on drywall?",
+        answer:
+          "Yes, it's our everyday job. We locate the studs, anchor the bracket into them and hang the TV level.",
+      },
+      {
+        question: "Can you do TV mounting above a fireplace?",
+        answer:
+          "Yes. Send a photo and tell us if the surround is drywall, brick or stone, and we'll confirm the hardware and cable route in your quote.",
       },
       {
         question: "Can you mount a TV on any wall?",
@@ -1333,7 +1437,7 @@ export const servicePillars = [
     metaDescription:
       "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes, fully insured.",
     intro: [
-      `Fixium Craft is a local home-repair team for the small jobs that keep getting pushed back across ${business.address.city}, ${business.address.state} — drywall patching, cabinet repair, minor plumbing and electrical fixtures, and general home upkeep.`,
+      `Fixium Craft is a local handyman for small jobs near you in ${business.address.city}, ${business.address.state}: the repairs that keep getting pushed back, like drywall patching, cabinet repair, minor plumbing and electrical fixtures, and general home upkeep.`,
       `Send photos of everything on your list and we'll quote it as one flat-rate visit. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, and every technician is background-checked and fully insured.`,
     ],
     taskGroups: [
@@ -1373,6 +1477,16 @@ export const servicePillars = [
       },
     ],
     faqs: [
+      {
+        question: "Is there a handyman for small jobs near me?",
+        answer:
+          "Yes. We're a Pittsburgh handyman who takes the small jobs other companies skip: a wall patch, a cabinet door, a faucet swap. Visits start at $49 flat-rate.",
+      },
+      {
+        question: "Is there a handyman near me in Pittsburgh, PA?",
+        answer:
+          "Yes. We serve the city and nearby neighborhoods, 7 AM to 11 PM. Send your ZIP code and we'll confirm availability.",
+      },
       {
         question: "What counts as a small handyman job?",
         answer:
