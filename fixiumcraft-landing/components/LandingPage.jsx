@@ -405,24 +405,44 @@ function PainPoints() {
 /*  Services grid                                                             */
 /* -------------------------------------------------------------------------- */
 
-// One of the 4 service cards. The whole card is a single link to its
-// /services/<slug> page; the service name is an <h2>, its key sub-services
-// are <h3>s beneath it, and a "View Rates & Details" button-style label
-// (a span: links can't nest) finishes it.
+// One of the 4 service cards. The service name is an <h2> whose link covers
+// the whole card (stretched-link pattern) and goes to its /services/<slug>
+// page, so crawlers and visitors keep that internal link. Its key
+// sub-services are <h3>s beneath it. The "View Rates & Details" button sits
+// above that link: it pre-selects this service in the quote form and scrolls
+// down to it (see selectServiceAndScroll).
 const PILLAR_ICONS = { assembly: Armchair, mounting: Tv, lock: KeyRound, repairs: Wrench };
+
+// Event the quote form listens for (QuoteForm below). A plain window event
+// keeps the cards and the form decoupled: no shared state or props needed.
+const SELECT_SERVICE_EVENT = "fixium:select-service";
+
+function selectServiceAndScroll(serviceId) {
+  window.dispatchEvent(new CustomEvent(SELECT_SERVICE_EVENT, { detail: { value: serviceId } }));
+  const target = document.getElementById("quote");
+  if (!target) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  window.history.replaceState(null, "", "#quote");
+}
 
 function ServiceCard({ item, pillar }) {
   const Icon = PILLAR_ICONS[pillar.icon] || Wrench;
+  // Quote-form option for this card, matched through the service's page URL
+  // so the two data lists never need a separate slug-to-id table.
+  const quoteService = services.find((s) => s.learnMoreHref === `/services/${item.slug}`);
   return (
-    <Link
-      href={`/services/${item.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-    >
+    <article className="group relative flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
       <h2 className="mt-5 text-balance text-xl font-bold leading-snug text-slate-900">
-        {item.heading}
+        <Link
+          href={`/services/${item.slug}`}
+          className="after:absolute after:inset-0 after:rounded-2xl after:content-['']"
+        >
+          {item.heading}
+        </Link>
       </h2>
       <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">{item.body}</p>
       <ul className="mt-5 flex-1 space-y-2">
@@ -437,15 +457,19 @@ function ServiceCard({ item, pillar }) {
         <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-bold text-blue-800">
           {pillar.startingPrice}
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-lg bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white transition group-hover:bg-blue-900">
+        <button
+          type="button"
+          onClick={() => quoteService && selectServiceAndScroll(quoteService.id)}
+          className="relative z-10 inline-flex items-center gap-1.5 rounded-lg bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white transition group-hover:bg-blue-900"
+        >
           {servicesSection.cardCta}
           <ArrowRight
             className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
             aria-hidden="true"
           />
-        </span>
+        </button>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -652,6 +676,32 @@ function QuoteForm() {
   // (at least one service picked) without borrowing the server-error UI.
   const [servicesTouched, setServicesTouched] = useState(false);
   const autoDismissTimer = useRef(null);
+  const statusRef = useRef(status);
+  statusRef.current = status;
+
+  // A service card's "View Rates & Details" button asks for its service to
+  // be pre-selected (selectServiceAndScroll above). The clicked service
+  // replaces any earlier selection; the chips below stay fully toggleable,
+  // so more services can still be added or removed afterwards. If the
+  // "thanks" screen is showing, start a fresh form first.
+  useEffect(() => {
+    function onSelectService(e) {
+      const value = e.detail && e.detail.value;
+      if (!value) return;
+      if (statusRef.current === "success") resetForm();
+      setFormData((prev) => ({ ...prev, services: [value] }));
+      setServicesTouched(false);
+      // Move keyboard / screen-reader focus to the chosen chip (no extra
+      // scroll: the smooth scroll to #quote is already running).
+      requestAnimationFrame(() => {
+        const chip = document.querySelector(`[data-service="${value}"]`);
+        if (chip) chip.focus({ preventScroll: true });
+      });
+    }
+    window.addEventListener(SELECT_SERVICE_EVENT, onSelectService);
+    return () => window.removeEventListener(SELECT_SERVICE_EVENT, onSelectService);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Fully resets the form back to a blank, ready-for-a-new-request state.
   // Used by both the modal's Close (X) button and the auto-dismiss timer
@@ -870,6 +920,7 @@ function QuoteForm() {
                   <button
                     key={opt.value}
                     type="button"
+                    data-service={opt.value}
                     aria-pressed={selected}
                     onClick={() => toggleService(opt.value)}
                     className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2 pl-3 pr-3 text-left text-[13px] font-semibold leading-snug transition sm:py-2.5 sm:pl-4 sm:pr-5 sm:text-sm ${
