@@ -1,8 +1,8 @@
 "use client";
 
 import { useId, useRef, useState, type FormEvent } from "react";
-import { business, formService } from "./contentData";
-import { trackEvent } from "./analytics";
+import { business, formService } from "@/components/contentData";
+import { trackEvent } from "@/components/analytics";
 
 // ExpertHelpForm.tsx
 //

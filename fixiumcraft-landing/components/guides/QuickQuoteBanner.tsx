@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { business } from "./contentData";
+import { business } from "@/components/contentData";
 
 // QuickQuoteBanner.tsx
 //

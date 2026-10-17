@@ -5,8 +5,8 @@ import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
 import GuideToc from "./GuideToc";
 import GuideCard from "./GuideCard";
-import QuickQuoteBanner from "./QuickQuoteBanner";
-import ExpertHelpForm from "./ExpertHelpForm";
+import QuickQuoteBanner from "./guides/QuickQuoteBanner";
+import ExpertHelpForm from "./guides/ExpertHelpForm";
 import { business, seo, servicePillars } from "./contentData";
 import {
   formatGuideDate,
