@@ -139,19 +139,22 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "Fixium Craft | Furniture Assembly, Handyman & Locksmith Services in Pittsburgh, PA",
+  title: "Professional Furniture Assembly & Handyman Services in Pittsburgh, PA",
   description:
-    "Residential and commercial furniture assembly, IKEA assembly, TV wall mounting, handyman repairs and scheduled smart lock installation in Pittsburgh, PA. Serving Squirrel Hill, Shadyside, Lawrenceville, and surrounding neighborhoods.",
+    "Top-rated local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting, handyman repairs, and smart lock installation with flat-rate pricing.",
   keywords: [
     // Lock/handyman local-search terms first, then the original
     // furniture-assembly and general home-repair terms.
+    "furniture assembly near me",
+    "furniture assembly services",
     "IKEA furniture assembly Pittsburgh",
+    "TV wall mounting Pittsburgh",
+    "handyman Pittsburgh",
     "TV wall mounting service in Pittsburgh",
     "commercial furniture assembly Pittsburgh",
     "office furniture assembly Pittsburgh",
     "scheduled locksmith Pittsburgh",
     "small home repairs and maintenance",
-    "Handyman Pittsburgh",
     "lock replacement Pittsburgh",
     "lock repair Pittsburgh",
     "office chair assembly Pittsburgh",
@@ -183,7 +186,7 @@ export const hero = {
   eyebrow: "Fully Insured | Upfront Flat Rates",
   headline: "Professional Furniture Assembly & Handyman Services in Pittsburgh",
   subheadline:
-    "Expert residential & commercial furniture assembly, TV mounting, home repairs, and scheduled smart lock installations with upfront flat-rate pricing.",
+    "Furniture assembly near you in Pittsburgh: expert IKEA assembly, TV wall mounting, handyman repairs, and scheduled smart lock installations at upfront flat rates.",
   // Explicit B2B line, rendered under the subheadline in Hero().
   commercialLine:
     "Assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes.",
@@ -259,6 +262,18 @@ export const services = [
       "Cubicles, conference tables & reception desks",
       "Waiting room seating for offices and clinics",
     ],
+    schemaOffers: [
+      {
+        name: "IKEA Furniture Assembly in Pittsburgh",
+        description:
+          "IKEA furniture assembly in Pittsburgh, PA: PAX wardrobes, beds, dressers, desks and more, built sturdy and level at a flat rate starting from $59.",
+      },
+      {
+        name: "Furniture Assembly Services (Home & Office)",
+        description:
+          "Residential and commercial furniture assembly near you in Pittsburgh, PA: office chairs, standing desks, cubicles, conference tables and reception desks.",
+      },
+    ],
     startingPrice: "From $59",
     // Dedicated pillar page this service belongs to (see servicePillars
     // below and app/services/[slug]/page.tsx).
@@ -280,6 +295,18 @@ export const services = [
       "Floating shelves, mirrors & artwork",
       "Commercial display screens",
     ],
+    schemaOffers: [
+      {
+        name: "TV Wall Mounting in Pittsburgh",
+        description:
+          "Stud-anchored TV wall mounting in Pittsburgh, PA (fixed, tilting or full-motion) with cable concealment, at a flat rate starting from $89.",
+      },
+      {
+        name: "Shelf, Mirror & Wall Hanging Installation",
+        description:
+          "Floating shelves, mirrors, artwork and commercial display screens hung level and anchored, in Pittsburgh, PA.",
+      },
+    ],
     startingPrice: "From $89",
     learnMoreHref: "/services/tv-mounting",
   },
@@ -298,6 +325,13 @@ export const services = [
       "Minor plumbing & electrical fixture swaps",
       "Cabinet, drawer & door repairs",
       "Office hardware maintenance",
+    ],
+    schemaOffers: [
+      {
+        name: "Handyman Services in Pittsburgh",
+        description:
+          "Local Pittsburgh handyman for drywall patching, minor plumbing and electrical fixtures, cabinet repair and office hardware maintenance, at a flat rate starting from $49.",
+      },
     ],
     startingPrice: "From $49",
     learnMoreHref: "/services/handyman-repairs",
@@ -463,6 +497,10 @@ export const localBusinessSchema = {
   // assistants associate the business with these services.
   knowsAbout: [
     "Furniture Assembly",
+    "Furniture Assembly Services",
+    "IKEA Furniture Assembly in Pittsburgh",
+    "TV Wall Mounting in Pittsburgh",
+    "Handyman Services in Pittsburgh",
     "Commercial Furniture Assembly",
     "Office Furniture Assembly",
     "IKEA Assembly",
@@ -934,22 +972,22 @@ export const faq = [
 export const serviceDetails = [
   {
     slug: "furniture-assembly",
-    heading: "Home & Commercial Furniture Assembly in Pittsburgh",
-    body: "IKEA PAX, beds and dressers at home. Office chairs and desks for businesses.",
+    heading: "Home & Commercial Furniture Assembly Services in Pittsburgh",
+    body: "IKEA furniture assembly in Pittsburgh for homes, plus office chairs and desks.",
     subFeatures: ["IKEA PAX Wardrobes", "Office Chairs & Standing Desks", "Beds, Dressers & Dining Sets"],
     cta: "See furniture assembly",
   },
   {
     slug: "tv-mounting",
     heading: "TV Wall Mounting & Shelf Installation in Pittsburgh",
-    body: "Stud-anchored TV mounts, hidden cables, shelves and commercial displays.",
+    body: "TV wall mounting in Pittsburgh: stud-anchored, hidden cables, shelves, displays.",
     subFeatures: ["TV Cable Concealment", "Floating Shelves & Mirrors", "Commercial Display Screens"],
     cta: "See TV mounting",
   },
   {
     slug: "handyman-repairs",
     heading: "Local Handyman & Home Repairs in Pittsburgh",
-    body: "Drywall patching, minor plumbing and electrical, cabinet and office repairs.",
+    body: "Handyman in Pittsburgh: drywall, minor plumbing and electrical, cabinet repairs.",
     subFeatures: ["Drywall Patching", "Minor Plumbing & Electrical Fixtures", "Cabinet & Office Hardware Repair"],
     cta: "See handyman services",
   },
