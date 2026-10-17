@@ -66,7 +66,7 @@ export const navSection = {
 export const aboutSection = {
   heading: "Built on Craftsman-Quality Work, Not Shortcuts",
   body: [
-    `${business.name} was founded by ${business.owner} to bring real craftsman-quality assembly, repair, and security installation work to ${business.address.city} homeowners and renters — the kind of job where things are level, square, and anchored right the first time, not just "good enough."`,
+    `${business.name} was founded to bring real craftsman-quality assembly, repair, and security installation work to ${business.address.city} homeowners and renters — the kind of job where things are level, square, and anchored right the first time, not just "good enough."`,
     "Every technician is background-checked and fully insured, every quote is flat-rate and upfront before we pick up a tool, and every job gets the same attention whether it's a single shelf or a full day of work.",
   ],
 };
