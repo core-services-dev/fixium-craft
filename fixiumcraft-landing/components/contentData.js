@@ -47,13 +47,16 @@ export const business = {
 export const navSection = {
   servicesLabel: "Services",
   // Cross-page hash links ("/#...") so they also work from /services/<slug>.
+  // Order: proof of work first. The quote button is deliberately NOT in the
+  // header any more (the Hero owns the one primary CTA); the header only has
+  // a discreet Call link.
   links: [
+    { label: "Recent Work", href: "/#recent-work" },
     { label: "Areas We Serve", href: "/#service-areas" },
-    { label: "Guides", href: "/guides" },
     { label: "About", href: "/#about" },
+    { label: "Guides", href: "/guides" },
   ],
   callLabel: "Call",
-  quoteCta: { label: "Get a Free Quote", shortLabel: "Free Quote", href: "/#quote" },
 };
 
 // About Us section (see About() in LandingPage.jsx). Short and honest —
@@ -188,7 +191,7 @@ export const hero = {
   pickerLabel: "What do you need help with?",
   supportingCopy:
     "Home and business furniture assembly, TV mounting, handyman repairs and scheduled locksmith services — one local team for the whole to-do list.",
-  primaryCta: { label: "Get an Instant Quote", action: "form" },
+  primaryCta: { label: "Get Flat-Rate Quote", href: "#quote", action: "form" },
   // Trust bar directly under the hero CTAs. Prices mirror the "starting at"
   // prices on the service pages (handyman $49, assembly $59, locksmith $79).
   trustBar: [
@@ -197,7 +200,7 @@ export const hero = {
     { id: "insured", label: "Fully Insured" },
   ],
   secondaryCtas: [
-    { label: "Text Us Photos for Estimate", href: business.smsHref, type: "sms" },
+    { label: "Text Photos for Estimate", href: business.smsHref, type: "sms" },
     { label: "Call Now", href: business.phoneHref, type: "call" },
     { label: "WhatsApp Us", href: business.whatsappHref, type: "whatsapp" },
   ],
@@ -403,6 +406,8 @@ export const discountMicrocopy =
 export const servicesSection = {
   // Shown as a small label above the four service <h2>s (not a heading itself).
   heading: "Our Home Services in Pittsburgh, PA",
+  // Button-style label at the bottom of every (fully clickable) service card.
+  cardCta: "View Rates & Details",
   subheading:
     "Four core services, one trusted local team. Pick a service to see what's included, common questions, and how to book.",
 };
@@ -673,6 +678,8 @@ export const quoteForm = {
     },
   },
   submitLabel: "Get My Guaranteed Quote →",
+  // Small trust line directly under the submit button.
+  trustLine: "🔒 No spam. Guaranteed flat-rate quote texted within 30–60 minutes.",
   successMessage:
     "Thanks! We've got your request and will text you a quote shortly.",
   errorMessage:

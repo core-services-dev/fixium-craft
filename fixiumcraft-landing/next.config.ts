@@ -42,7 +42,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/furniture-assembly-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
-      { source: "/tv-mounting-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
+      { source: "/tv-mounting-pittsburgh", destination: "/services/tv-mounting", permanent: true },
       { source: "/door-lock-repair-pittsburgh", destination: "/services/locksmith", permanent: true },
       { source: "/smart-lock-installation-pittsburgh", destination: "/services/locksmith", permanent: true },
       { source: "/services/locksmith-doors", destination: "/services/locksmith", permanent: true },

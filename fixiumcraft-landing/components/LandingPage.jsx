@@ -268,7 +268,7 @@ function Hero() {
 
         <div className="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
           <a
-            href="#quote"
+            href={hero.primaryCta.href}
             className={`px-8 py-4 text-center text-base shadow-lg shadow-amber-900/40 ${BTN_PRIMARY_ON_DARK}`}
           >
             {hero.primaryCta.label}
@@ -405,25 +405,24 @@ function PainPoints() {
 /*  Services grid                                                             */
 /* -------------------------------------------------------------------------- */
 
-// One of the 4 service cards: the service is an <h2> that links to its
-// /services/<slug> page, its key sub-services are <h3>s beneath it, and a
-// two-line description, starting price and a second internal link finish it.
+// One of the 4 service cards. The whole card is a single link to its
+// /services/<slug> page; the service name is an <h2>, its key sub-services
+// are <h3>s beneath it, and a "View Rates & Details" button-style label
+// (a span: links can't nest) finishes it.
 const PILLAR_ICONS = { assembly: Armchair, mounting: Tv, lock: KeyRound, repairs: Wrench };
 
 function ServiceCard({ item, pillar }) {
   const Icon = PILLAR_ICONS[pillar.icon] || Wrench;
   return (
-    <article className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-lg">
+    <Link
+      href={`/services/${item.slug}`}
+      className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+    >
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
       <h2 className="mt-5 text-balance text-xl font-bold leading-snug text-slate-900">
-        <Link
-          href={`/services/${item.slug}`}
-          className="hover:text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
-        >
-          {item.heading}
-        </Link>
+        {item.heading}
       </h2>
       <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">{item.body}</p>
       <ul className="mt-5 flex-1 space-y-2">
@@ -438,18 +437,15 @@ function ServiceCard({ item, pillar }) {
         <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-bold text-blue-800">
           {pillar.startingPrice}
         </span>
-        <Link
-          href={`/services/${item.slug}`}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-blue-800 hover:underline"
-        >
-          {item.cta}
+        <span className="inline-flex items-center gap-1.5 rounded-lg bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white transition group-hover:bg-blue-900">
+          {servicesSection.cardCta}
           <ArrowRight
             className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
             aria-hidden="true"
           />
-        </Link>
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -1157,7 +1153,8 @@ function QuoteForm() {
             >
               {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
             </button>
-            <p className="mt-3 text-center text-xs text-slate-600">{quoteForm.disclaimer}</p>
+            <p className="mt-3 text-center text-sm font-medium text-slate-700">{quoteForm.trustLine}</p>
+            <p className="mt-2 text-center text-xs text-slate-600">{quoteForm.disclaimer}</p>
           </div>
         </form>
       </div>

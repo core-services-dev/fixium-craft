@@ -161,23 +161,18 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* Discreet contact trigger: number on tablet/desktop, icon on phones.
+              The one primary (amber) CTA lives in the Hero, not up here. */}
           <a
             href={business.phoneHref}
             aria-label={`Call ${business.name} at ${business.phoneDisplay}`}
-            title={business.phoneDisplay}
-            className={`hidden items-center gap-1.5 px-3 py-2 text-sm sm:flex ${BTN_OUTLINE_DARK}`}
+            className={`inline-flex h-10 items-center justify-center gap-1.5 text-sm max-sm:w-10 sm:px-3.5 ${BTN_OUTLINE_DARK}`}
           >
             <IconPhone className="h-4 w-4" />
-            <span>{navSection.callLabel}</span>
+            <span className="hidden sm:inline">
+              {navSection.callLabel} {business.phoneDisplay}
+            </span>
           </a>
-          <Link
-            href={navSection.quoteCta.href}
-            onClick={closeAll}
-            className={`whitespace-nowrap px-3.5 py-2 text-sm ${BTN_PRIMARY}`}
-          >
-            <span className="sm:hidden">{navSection.quoteCta.shortLabel}</span>
-            <span className="hidden sm:inline">{navSection.quoteCta.label}</span>
-          </Link>
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
