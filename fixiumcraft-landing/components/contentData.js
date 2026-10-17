@@ -178,7 +178,7 @@ export const trustBadges = [
 
 export const hero = {
   eyebrow: "Fully Insured | Upfront Flat Rates",
-  headline: "Professional Furniture Assembly, Handyman & Locksmith Services in Pittsburgh",
+  headline: "Professional Furniture Assembly & Handyman Services in Pittsburgh",
   subheadline:
     "Expert residential & commercial furniture assembly, TV mounting, home repairs, and scheduled smart lock installations with upfront flat-rate pricing.",
   // Explicit B2B line, rendered under the subheadline in Hero().
@@ -401,6 +401,7 @@ export const discountMicrocopy =
 // from `servicePillars`; `services` above still drives the quote-form
 // options and the JSON-LD offer catalog.
 export const servicesSection = {
+  // Shown as a small label above the four service <h2>s (not a heading itself).
   heading: "Our Home Services in Pittsburgh, PA",
   subheading:
     "Four core services, one trusted local team. Pick a service to see what's included, common questions, and how to book.",
@@ -919,33 +920,38 @@ export const faq = [
 // metaDescription, intro[], taskGroups[{heading, items[]}], faqs[].
 // startingPrice values are the existing real "Starting at" prices from
 // `services` above (lowest price among the services each pillar covers).
-// Homepage "what we do" text section (see ServiceDetails() in
-// LandingPage.jsx): one keyword-bearing H2 per pillar, each linking to its
-// dedicated page. Copy is kept factual — same services/prices as the pillars.
+// Homepage services section (see ServicePillars() in LandingPage.jsx): one
+// card per pillar. `heading` renders as the card's <h2> and links to the
+// dedicated page; `subFeatures` render as <h3>s under it. `body` is kept to
+// two lines (about 80 characters) so the cards stay tidy at every width.
 export const serviceDetails = [
   {
     slug: "furniture-assembly",
     heading: "Home & Commercial Furniture Assembly in Pittsburgh",
-    body: "Need IKEA furniture assembly Pittsburgh can count on? At home we build PAX wardrobes, beds, dressers, dining and patio sets. For businesses we assemble office chairs, standing desks, cubicles, conference tables, waiting room seating and reception desks. Sturdy, level, and priced flat-rate before we start.",
-    cta: "See furniture assembly pricing",
+    body: "IKEA PAX, beds and dressers at home. Office chairs and desks for businesses.",
+    subFeatures: ["IKEA PAX Wardrobes", "Office Chairs & Standing Desks", "Beds, Dressers & Dining Sets"],
+    cta: "See furniture assembly",
   },
   {
     slug: "tv-mounting",
-    heading: "TV Wall Mounting & Shelf Installation Services",
-    body: "Our TV wall mounting service in Pittsburgh covers fixed, tilting and full-motion mounts, stud-anchored and hung level, with cable concealment available. We also hang floating shelves, bracket shelves, mirrors, artwork and commercial display screens.",
-    cta: "See TV mounting & wall hanging",
+    heading: "TV Wall Mounting & Shelf Installation in Pittsburgh",
+    body: "Stud-anchored TV mounts, hidden cables, shelves and commercial displays.",
+    subFeatures: ["TV Cable Concealment", "Floating Shelves & Mirrors", "Commercial Display Screens"],
+    cta: "See TV mounting",
   },
   {
     slug: "handyman-repairs",
-    heading: "Local Handyman & Small Home Repairs in Pittsburgh, PA",
-    body: "From drywall patching and cabinet repair to minor plumbing and electrical fixtures and office hardware maintenance, we handle the small repairs that keep getting pushed to next weekend, all at upfront flat rates.",
+    heading: "Local Handyman & Home Repairs in Pittsburgh",
+    body: "Drywall patching, minor plumbing and electrical, cabinet and office repairs.",
+    subFeatures: ["Drywall Patching", "Minor Plumbing & Electrical Fixtures", "Cabinet & Office Hardware Repair"],
     cta: "See handyman services",
   },
   {
     slug: "locksmith",
     heading: "Scheduled Locksmith & Smart Lock Installation",
-    body: "We install smart locks (Schlage, Yale, Ring, Nest), handlesets and deadbolts, and rekey locks for homes and offices across Pittsburgh. Service is by appointment only, quoted upfront so you can book ahead.",
-    cta: "Get an upfront quote & book ahead",
+    body: "By appointment: smart locks, deadbolts and rekeying for homes and offices.",
+    subFeatures: ["Smart Lock Installation", "Rekeying & Deadbolts", "Handlesets for Homes & Offices"],
+    cta: "See locksmith services",
   },
 ];
 

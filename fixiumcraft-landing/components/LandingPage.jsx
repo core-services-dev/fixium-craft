@@ -259,9 +259,9 @@ function Hero() {
         <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
           {hero.headline}
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-balance text-base text-slate-300 sm:text-lg">
+        <h2 className="mx-auto mt-5 max-w-2xl text-balance text-base font-normal text-slate-300 sm:text-lg">
           {hero.subheadline}
-        </p>
+        </h2>
         <p className="mx-auto mt-3 max-w-2xl text-balance text-sm text-slate-400 sm:text-base">
           {hero.commercialLine}
         </p>
@@ -405,27 +405,32 @@ function PainPoints() {
 /*  Services grid                                                             */
 /* -------------------------------------------------------------------------- */
 
-// One of the 3 equal service pillars: a single clickable card (icon, short
-// description, 3 highlights, starting-price badge) linking to /services/<slug>.
+// One of the 4 service cards: the service is an <h2> that links to its
+// /services/<slug> page, its key sub-services are <h3>s beneath it, and a
+// two-line description, starting price and a second internal link finish it.
 const PILLAR_ICONS = { assembly: Armchair, mounting: Tv, lock: KeyRound, repairs: Wrench };
 
-function PillarCard({ pillar }) {
+function ServiceCard({ item, pillar }) {
   const Icon = PILLAR_ICONS[pillar.icon] || Wrench;
   return (
-    <Link
-      href={`/services/${pillar.slug}`}
-      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
-    >
+    <article className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-lg">
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
-      <h3 className="mt-5 text-xl font-bold text-slate-900">{pillar.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{pillar.description}</p>
-      <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
-        {pillar.features.slice(0, 3).map((feature) => (
+      <h2 className="mt-5 text-balance text-xl font-bold leading-snug text-slate-900">
+        <Link
+          href={`/services/${item.slug}`}
+          className="hover:text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+        >
+          {item.heading}
+        </Link>
+      </h2>
+      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">{item.body}</p>
+      <ul className="mt-5 flex-1 space-y-2">
+        {item.subFeatures.map((feature) => (
           <li key={feature} className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-700" aria-hidden="true" />
-            {feature}
+            <h3 className="text-sm font-medium text-slate-700">{feature}</h3>
           </li>
         ))}
       </ul>
@@ -433,37 +438,40 @@ function PillarCard({ pillar }) {
         <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-bold text-blue-800">
           {pillar.startingPrice}
         </span>
-        <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-800">
-          View &amp; Book
+        <Link
+          href={`/services/${item.slug}`}
+          className="inline-flex items-center gap-1 text-sm font-semibold text-blue-800 hover:underline"
+        >
+          {item.cta}
           <ArrowRight
             className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
             aria-hidden="true"
           />
-        </span>
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }
 
-// The homepage's 4 equal service pillars (data: `servicePillars`), each
-// linking to its own SEO page under /services/<slug>.
+// The homepage services section: 4 cards (data: `serviceDetails` for the
+// copy, `servicePillars` for prices and icons), each linking to its own SEO
+// page under /services/<slug>. The section label is a <p>, so the four
+// service <h2>s are the only headings in this block.
 function ServicePillars() {
   return (
-    <section id="services" className="scroll-mt-20 bg-slate-50 px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
+    <section id="services" className="scroll-mt-20 bg-slate-50 px-4 py-16 md:py-24" aria-label={servicesSection.heading}>
+      <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
+          <p className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
             {servicesSection.heading}
-          </h2>
+          </p>
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {servicePillars
-            .filter((p) => !p.hideFromGrid)
-            .sort((a, b) => Number(a.slug === "locksmith") - Number(b.slug === "locksmith"))
-            .map((pillar) => (
-            <PillarCard key={pillar.slug} pillar={pillar} />
-          ))}
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {serviceDetails.map((item) => {
+            const pillar = servicePillars.find((p) => p.slug === item.slug);
+            return pillar ? <ServiceCard key={item.slug} item={item} pillar={pillar} /> : null;
+          })}
         </div>
       </div>
     </section>
@@ -473,32 +481,6 @@ function ServicePillars() {
 /* -------------------------------------------------------------------------- */
 /*  Upfront & Fixed Pricing — trust badge, what's always included, CTA      */
 /* -------------------------------------------------------------------------- */
-
-function ServiceDetails() {
-  return (
-    <section className="bg-slate-50 px-4 py-16 md:py-24" aria-label="Our services in Pittsburgh">
-      <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2">
-        {serviceDetails.map((item) => (
-          <article
-            key={item.heading}
-            className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-          >
-            <h2 className="text-balance text-xl font-bold text-slate-900">{item.heading}</h2>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 sm:text-base">
-              {item.body}
-            </p>
-            <Link
-              href={`/services/${item.slug}`}
-              className="mt-4 text-sm font-semibold text-blue-800 hover:underline"
-            >
-              {item.cta} &rarr;
-            </Link>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function PricingTrust() {
   return (
@@ -1513,7 +1495,6 @@ export default function LandingPage() {
       <ServiceAreas />
       <PainPoints />
       <PricingTrust />
-      <ServiceDetails />
       <Process />
       <QuoteForm />
       <Guarantees />
