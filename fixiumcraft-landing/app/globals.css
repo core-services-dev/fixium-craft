@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light theme: cool off-white page, near-black slate text. */
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* Action colour: primary CTA buttons only (orange-500 / orange-600). */
+  --color-cta: #f97316;
+  --color-cta-hover: #ea580c;
+  /* Trust colour: discount badges and guarantee tags (emerald-500). */
+  --color-trust: #10b981;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -16,6 +22,24 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Shared card surface: white, hairline border, soft shadow. Cards that are
+   clickable or feature boxes add .surface-card-hover for a 2px lift. */
+@layer components {
+  .surface-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  .surface-card-hover {
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  .surface-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.09);
+  }
 }
 
 /* -------------------------------------------------------------------------- */

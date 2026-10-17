@@ -15,7 +15,7 @@ import Link from "next/link";
 import { business, navSection, servicePillars } from "./contentData";
 
 const BTN_PRIMARY =
-  "rounded-lg bg-amber-500 font-semibold text-slate-950 transition hover:bg-amber-600";
+  "rounded-lg bg-cta font-semibold text-slate-950 transition hover:bg-cta-hover";
 const BTN_OUTLINE_DARK =
   "rounded-lg border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-50";
 
@@ -245,7 +245,7 @@ export function StickyMobileBar() {
   const item =
     "flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-slate-700 active:bg-slate-50";
   const hot =
-    "flex flex-1 flex-col items-center justify-center gap-0.5 bg-amber-500 py-2.5 text-slate-950 active:bg-amber-600";
+    "flex flex-1 flex-col items-center justify-center gap-0.5 bg-cta py-2.5 text-slate-950 active:bg-cta-hover";
   return (
     <nav
       aria-label="Quick contact actions"

@@ -15,7 +15,7 @@ import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "
 // <details>, no JS), service-area badges, and a text/photo CTA banner.
 
 const BTN_PRIMARY =
-  "rounded-lg bg-amber-500 px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-amber-900/30 ring-1 ring-amber-300/40 transition hover:bg-amber-600";
+  "rounded-lg bg-cta px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-orange-600/30 ring-1 ring-orange-300/40 transition hover:bg-cta-hover";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
 
@@ -106,7 +106,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
   };
 
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-slate-50 pb-16 font-sans text-slate-900 lg:pb-0">
       {[serviceJsonLd, faqJsonLd, breadcrumbJsonLd].map((ld, i) => (
         <script
           key={i}
@@ -177,7 +177,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
                 {page.pricing.map((tier) => (
                   <div
                     key={tier.label}
-                    className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                    className="surface-card surface-card-hover flex flex-col p-5"
                   >
                     <p className="text-sm font-semibold text-slate-900">{tier.label}</p>
                     <p className="mt-3 flex items-baseline gap-1.5">
@@ -214,7 +214,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
             </h2>
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
               {page.taskGroups.map((group) => (
-                <div key={group.heading} className="rounded-2xl border border-slate-200 p-5">
+                <div key={group.heading} className="surface-card p-5">
                   <h3 className="text-base font-bold text-slate-900">{group.heading}</h3>
                   <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
                     {group.items.map((item) => (
@@ -269,7 +269,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
           {/* FAQ accordion */}
           <section>
             <h2 className="text-xl font-bold sm:text-2xl">Frequently Asked Questions</h2>
-            <div className="mt-5 divide-y divide-slate-200 rounded-2xl border border-slate-200">
+            <div className="mt-5 surface-card divide-y divide-slate-200 overflow-hidden">
               {page.faqs.map((item) => (
                 <details key={item.question} className="group px-5 py-4">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-slate-900 sm:text-base [&::-webkit-details-marker]:hidden">

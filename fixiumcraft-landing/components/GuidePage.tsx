@@ -230,7 +230,7 @@ function Section({ s }: { s: GuideSection }) {
               <li
                 key={step.id}
                 id={step.id}
-                className="scroll-mt-24 flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6"
+                className="surface-card scroll-mt-24 flex gap-4 p-5 sm:p-6"
               >
                 <span
                   aria-hidden="true"
@@ -258,7 +258,7 @@ function Section({ s }: { s: GuideSection }) {
       return (
         <section id={s.id} className="scroll-mt-24">
           <h2 className="text-xl font-bold sm:text-2xl">{s.title}</h2>
-          <div className="mt-5 divide-y divide-slate-200 rounded-2xl border border-slate-200">
+          <div className="mt-5 surface-card divide-y divide-slate-200 overflow-hidden">
             {s.items.map((item) => (
               <details key={item.question} className="group px-5 py-4">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-slate-900 sm:text-base [&::-webkit-details-marker]:hidden">
@@ -304,7 +304,7 @@ export default function GuidePage({ slug }: { slug: string }) {
   const bannerPrice = service ? service.startingPrice : lowestStartingPrice();
 
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-slate-50 pb-16 font-sans text-slate-900 lg:pb-0">
       {buildSchemas(g).map((ld, i) => (
         <script
           key={i}

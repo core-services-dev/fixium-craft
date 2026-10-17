@@ -100,7 +100,7 @@ export default function GuideToc({
         <p className="mt-1 text-xs text-slate-300">Flat-rate quotes, fully insured.</p>
         <Link
           href="/#quote"
-          className="mt-3 block rounded-lg bg-amber-500 px-4 py-2.5 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-600"
+          className="mt-3 block rounded-lg bg-cta px-4 py-2.5 text-center text-sm font-semibold text-slate-950 transition hover:bg-cta-hover"
         >
           Get a Free Quote
         </Link>

@@ -25,8 +25,8 @@ type Props = {
 };
 
 const FIELD =
-  "mt-1.5 block w-full rounded-lg border border-slate-600 bg-slate-800 px-3.5 py-3 text-base text-white placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/40";
-const LABEL = "block text-sm font-medium text-slate-100";
+  "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3 text-base text-slate-900 placeholder:text-slate-500 focus:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700/30";
+const LABEL = "block text-sm font-medium text-slate-800";
 
 export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
   const uid = useId();
@@ -108,11 +108,11 @@ export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
 
   if (status === "success") {
     return (
-      <div role="status" className="rounded-2xl border border-slate-700 bg-slate-900/60 p-6 text-center">
-        <p className="text-lg font-semibold text-white">Thanks, we got it.</p>
-        <p className="mt-2 text-sm text-slate-300">
+      <div role="status" className="surface-card p-6 text-center">
+        <p className="text-lg font-semibold text-slate-900">Thanks, we got it.</p>
+        <p className="mt-2 text-sm text-slate-600">
           We&apos;ll text you a flat-rate quote shortly. Need it sooner? Call{" "}
-          <a href={business.phoneHref} className="font-semibold text-amber-300 underline underline-offset-2">
+          <a href={business.phoneHref} className="font-semibold text-blue-800 underline underline-offset-2">
             {business.phoneDisplay}
           </a>
           .
@@ -124,10 +124,10 @@ export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-4 rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-6"
+      className="surface-card space-y-4 p-4 sm:p-6"
       aria-describedby={`${uid}-hint`}
     >
-      <p id={`${uid}-hint`} className="text-sm text-slate-300">
+      <p id={`${uid}-hint`} className="text-sm text-slate-600">
         Tell us what you&apos;re dealing with and add a photo if you can. We&apos;ll text back a flat-rate quote.
       </p>
 
@@ -182,7 +182,7 @@ export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
 
       <div>
         <label htmlFor={`${uid}-photo`} className={LABEL}>
-          Photo <span className="font-normal text-slate-300">(optional, but gets a faster quote)</span>
+          Photo <span className="font-normal text-slate-600">(optional, but gets a faster quote)</span>
         </label>
         <input
           ref={fileRef}
@@ -191,15 +191,15 @@ export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
           accept="image/*"
           onChange={onPhotoChange}
           aria-describedby={photoError ? `${uid}-photo-error` : undefined}
-          className="mt-1.5 block w-full cursor-pointer rounded-lg border border-dashed border-slate-600 bg-slate-800 text-sm text-slate-200 file:mr-3 file:cursor-pointer file:border-0 file:bg-slate-700 file:px-4 file:py-3 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-600"
+          className="mt-1.5 block w-full cursor-pointer rounded-lg border border-dashed border-slate-300 bg-white text-sm text-slate-700 file:mr-3 file:cursor-pointer file:border-0 file:bg-slate-100 file:px-4 file:py-3 file:text-sm file:font-semibold file:text-slate-800 hover:file:bg-slate-200"
         />
         {photo && (
-          <p className="mt-2 flex items-center gap-2 text-sm text-slate-200">
+          <p className="mt-2 flex items-center gap-2 text-sm text-slate-700">
             <span className="truncate">{photo.name}</span>
             <button
               type="button"
               onClick={clearPhoto}
-              className="shrink-0 font-semibold text-amber-300 underline underline-offset-2 hover:text-amber-200"
+              className="shrink-0 font-semibold text-blue-800 underline underline-offset-2 hover:text-blue-900"
             >
               Remove
             </button>
@@ -223,7 +223,7 @@ export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full rounded-lg bg-amber-500 px-6 py-3.5 text-base font-semibold text-slate-950 shadow-lg shadow-amber-900/30 transition hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-70"
+        className="w-full rounded-lg bg-cta px-6 py-3.5 text-base font-semibold text-slate-950 shadow-lg shadow-orange-600/30 transition hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-70"
       >
         {status === "submitting" ? "Sending…" : "Get My Free Quote"}
       </button>
@@ -234,7 +234,7 @@ export default function ExpertHelpForm({ guideTitle, serviceLabel }: Props) {
         </p>
       )}
 
-      <p className="text-xs text-slate-300">
+      <p className="text-xs text-slate-600">
         We only use your number to text you the quote. No sales calls.
       </p>
     </form>

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const BTN_PRIMARY =
-  "rounded-lg bg-amber-500 px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-amber-900/30 ring-1 ring-amber-300/40 transition hover:bg-amber-600";
+  "rounded-lg bg-cta px-6 py-3.5 text-center text-base font-semibold text-slate-950 shadow-lg shadow-orange-600/30 ring-1 ring-orange-300/40 transition hover:bg-cta-hover";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-center text-base font-semibold text-white transition hover:bg-white/10";
 
@@ -67,7 +67,7 @@ export default function GuidesIndexPage() {
   ];
 
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white pb-16 font-sans text-slate-900 lg:pb-0">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-slate-50 pb-16 font-sans text-slate-900 lg:pb-0">
       {jsonLd.map((ld, i) => (
         <script
           key={i}

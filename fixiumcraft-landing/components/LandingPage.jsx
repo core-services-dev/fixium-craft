@@ -73,9 +73,9 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const BTN_PRIMARY =
-  "rounded-lg bg-amber-500 font-semibold text-slate-950 transition hover:bg-amber-600 focus-visible:ring-amber-300";
+  "rounded-lg bg-cta font-semibold text-slate-950 transition hover:bg-cta-hover focus-visible:ring-orange-300";
 const BTN_PRIMARY_ON_DARK =
-  "rounded-lg bg-amber-500 font-semibold text-slate-950 ring-1 ring-amber-300/40 transition hover:bg-amber-600 focus-visible:ring-amber-300";
+  "rounded-lg bg-cta font-semibold text-slate-950 ring-1 ring-orange-300/40 transition hover:bg-cta-hover focus-visible:ring-orange-300";
 const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/20 bg-white/5 font-semibold text-white transition hover:bg-white/10";
 const BTN_OUTLINE_LIGHT_WHATSAPP =
@@ -269,7 +269,7 @@ function Hero() {
         <div className="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
           <a
             href={hero.primaryCta.href}
-            className={`px-8 py-4 text-center text-base shadow-lg shadow-amber-900/40 ${BTN_PRIMARY_ON_DARK}`}
+            className={`px-8 py-4 text-center text-base shadow-lg shadow-black/25 ${BTN_PRIMARY_ON_DARK}`}
           >
             {hero.primaryCta.label}
           </a>
@@ -313,7 +313,7 @@ function ServiceAreas() {
   return (
     <section
       id="service-areas"
-      className="bg-slate-50 px-4 py-16 md:py-24"
+      className="bg-white px-4 py-16 md:py-24"
     >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -372,7 +372,7 @@ function ServiceAreas() {
 
 function PainPoints() {
   return (
-    <section className="bg-white px-4 py-16 md:py-24">
+    <section className="bg-slate-50 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -385,7 +385,7 @@ function PainPoints() {
           {painPoints.items.map((item) => (
             <div
               key={item.id}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+              className="surface-card surface-card-hover p-5"
             >
               <p className="text-sm font-semibold text-rose-700">
                 {item.problem}
@@ -432,7 +432,7 @@ function ServiceCard({ item, pillar }) {
   // so the two data lists never need a separate slug-to-id table.
   const quoteService = services.find((s) => s.learnMoreHref === `/services/${item.slug}`);
   return (
-    <article className="group relative flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+    <article className="surface-card surface-card-hover group relative flex h-full flex-col p-6">
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-800">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
@@ -504,7 +504,7 @@ function ServicePillars() {
 
 function PricingTrust() {
   return (
-    <section className="bg-white px-4 pb-16 md:pb-24">
+    <section className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -517,24 +517,24 @@ function PricingTrust() {
             pattern as the Hero's rating badge) so it reads as a distinct
             trust signal rather than blending into the page copy. */}
         <div className="mt-6 flex justify-center">
-          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-blue-200 bg-blue-50 px-4 py-2.5 text-center text-sm font-bold text-blue-900 sm:px-5 sm:py-3 sm:text-base">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-emerald-300 bg-emerald-50 px-4 py-2.5 text-center text-sm font-bold text-emerald-900 sm:px-5 sm:py-3 sm:text-base">
             <span aria-hidden="true">{pricingTrustSection.badge.icon}</span>
             <span>{pricingTrustSection.badge.label}</span>
-            <span aria-hidden="true" className="hidden text-blue-300 sm:inline">
+            <span aria-hidden="true" className="hidden text-emerald-400 sm:inline">
               |
             </span>
-            <span className="w-full text-center text-xs font-semibold text-blue-800 sm:w-auto sm:text-sm">
+            <span className="w-full text-center text-xs font-semibold text-emerald-800 sm:w-auto sm:text-sm">
               {pricingTrustSection.badge.sublabel}
             </span>
           </div>
         </div>
 
         {/* Military / senior / first responder discount — a second,
-            distinct badge (amber, not the blue discount pill above) so it reads as its
+            distinct badge (solid emerald, not the pale guarantee pill above) so it reads as its
             own offer rather than part of the upfront-pricing guarantee
             above it. */}
         <div className="mt-4 flex justify-center">
-          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-amber-200 bg-amber-50 px-4 py-2.5 text-center text-sm font-bold text-amber-900 sm:px-5 sm:py-3 sm:text-base">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-emerald-600/30 bg-trust px-4 py-2.5 text-center text-sm font-bold text-emerald-950 sm:px-5 sm:py-3 sm:text-base">
             <span aria-hidden="true">{discountOffer.icon}</span>
             <span>{discountOffer.label}</span>
           </div>
@@ -544,14 +544,14 @@ function PricingTrust() {
             elsewhere on the site (QualityGuarantee's laser-level/clean-up
             items, the wall-anchoring FAQ), just surfaced here too, right
             next to the prices themselves. */}
-        <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+        <div className="mx-auto mt-10 max-w-2xl surface-card p-6 sm:p-8">
           <h3 className="text-center text-xs font-bold uppercase tracking-wide text-slate-600 sm:text-sm">
             {pricingTrustSection.includedHeading}
           </h3>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {pricingTrustSection.included.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
-                <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-700" />
+                <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" />
                 {item}
               </li>
             ))}
@@ -665,8 +665,37 @@ function StepHeading({ n, title, hint }) {
   );
 }
 
+// Phone photos are often 3-8 MB, but the quote API drops anything over 4 MB
+// (and serverless request bodies are capped at about 4.5 MB). So large
+// photos are resized in the browser before they are attached, and anything
+// that still doesn't fit is rejected up front instead of vanishing silently.
+const PHOTO_MAX_BYTES = 4 * 1024 * 1024;
+const PHOTO_SHRINK_ABOVE_BYTES = 1.5 * 1024 * 1024;
+const PHOTO_MAX_EDGE = 2000;
+
+async function preparePhoto(file) {
+  if (file.size <= PHOTO_SHRINK_ABOVE_BYTES) return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, PHOTO_MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d").drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    if (bitmap.close) bitmap.close();
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.82));
+    if (!blob || blob.size >= file.size) return file;
+    return new File([blob], `${file.name.replace(/\.[^.]+$/, "")}.jpg`, { type: "image/jpeg" });
+  } catch {
+    // Format the browser can't decode (e.g. HEIC outside Safari): send as is.
+    return file;
+  }
+}
+
 function QuoteForm() {
   const [formData, setFormData] = useState(EMPTY_FORM_DATA);
+  const [photoError, setPhotoError] = useState("");
+  const [photoBusy, setPhotoBusy] = useState(false);
   const [photoName, setPhotoName] = useState("");
   const [photoFile, setPhotoFile] = useState(null);
   const [dragging, setDragging] = useState(false);
@@ -714,6 +743,7 @@ function QuoteForm() {
     setFormData(EMPTY_FORM_DATA);
     setPhotoName("");
     setPhotoFile(null);
+    setPhotoError("");
     setStatus("idle");
     setServicesTouched(false);
   }
@@ -753,20 +783,42 @@ function QuoteForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
+  // Shared by the file picker and drag-and-drop: validates, shrinks large
+  // photos, then stores the file to attach on submit.
+  async function acceptPhoto(file, input) {
+    setPhotoError("");
+    if (!file) {
+      setPhotoName("");
+      setPhotoFile(null);
+      return;
+    }
+    if (!file.type.startsWith("image/")) {
+      setPhotoError("Please choose an image file (a photo).");
+      if (input) input.value = "";
+      return;
+    }
+    setPhotoBusy(true);
+    const prepared = await preparePhoto(file);
+    setPhotoBusy(false);
+    if (prepared.size > PHOTO_MAX_BYTES) {
+      setPhotoError("That photo is too large (over 4 MB). Please pick a smaller one, or text it to us instead.");
+      setPhotoName("");
+      setPhotoFile(null);
+      if (input) input.value = "";
+      return;
+    }
+    setPhotoName(prepared.name);
+    setPhotoFile(prepared);
+  }
+
   function handlePhotoChange(e) {
-    const file = e.target.files && e.target.files[0];
-    setPhotoName(file ? file.name : "");
-    setPhotoFile(file || null);
+    acceptPhoto((e.target.files && e.target.files[0]) || null, e.target);
   }
 
   function handlePhotoDrop(e) {
     e.preventDefault();
     setDragging(false);
-    const file = e.dataTransfer.files && e.dataTransfer.files[0];
-    if (file && file.type.startsWith("image/")) {
-      setPhotoName(file.name);
-      setPhotoFile(file);
-    }
+    acceptPhoto((e.dataTransfer.files && e.dataTransfer.files[0]) || null, null);
   }
 
   async function handleSubmit(e) {
@@ -852,8 +904,8 @@ function QuoteForm() {
 
   if (status === "success") {
     return (
-      <section id="quote" className="bg-slate-900 px-4 py-16 md:py-24">
-        <div className="relative mx-auto max-w-md rounded-2xl bg-white p-8 text-center shadow-xl">
+      <section id="quote" className="scroll-mt-16 bg-slate-100 px-4 py-16 md:py-24">
+        <div className="surface-card relative mx-auto max-w-md p-8 text-center">
           <button
             type="button"
             onClick={resetForm}
@@ -874,13 +926,13 @@ function QuoteForm() {
   }
 
   return (
-    <section id="quote" className="bg-slate-900 px-4 py-16 md:py-24">
+    <section id="quote" className="scroll-mt-16 bg-slate-100 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-md">
-        <div className="text-center text-white">
+        <div className="text-center text-slate-900">
           <h2 className="text-balance text-2xl font-bold sm:text-3xl">
             {quoteForm.heading}
           </h2>
-          <p className="mt-3 text-slate-300">{quoteForm.subheading}</p>
+          <p className="mt-3 text-slate-600">{quoteForm.subheading}</p>
         </div>
 
         {/* Military / senior / first responder discount banner — same
@@ -888,7 +940,7 @@ function QuoteForm() {
             so it's visible right where someone is about to submit a
             request, not just further up the page. */}
         <div className="mt-6 flex justify-center">
-          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-2 text-center text-xs font-bold text-amber-200 sm:px-5 sm:text-sm">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-emerald-600/30 bg-trust px-4 py-2 text-center text-xs font-bold text-emerald-950 sm:px-5 sm:text-sm">
             <span aria-hidden="true">{discountOffer.icon}</span>
             <span>{discountOffer.label}</span>
           </div>
@@ -902,11 +954,11 @@ function QuoteForm() {
             startedRef.current = true;
             trackEvent("quote_form_start", { page: window.location.pathname });
           }}
-          className="mt-8 space-y-8 rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+          className="mt-8 space-y-4"
         >
           {/* Step 1 — what do you need? Multi-select chips (same
               toggleService logic as before). */}
-          <fieldset>
+          <fieldset className="surface-card p-5 sm:p-6">
             <legend className="sr-only">{quoteForm.fields.services.label}</legend>
             <StepHeading n={1} title={quoteForm.fields.services.label} hint="Pick one or more" />
             <div
@@ -923,7 +975,7 @@ function QuoteForm() {
                     data-service={opt.value}
                     aria-pressed={selected}
                     onClick={() => toggleService(opt.value)}
-                    className={`relative flex w-full flex-col items-start rounded-2xl border-2 py-2 pl-3 pr-3 text-left text-[13px] font-semibold leading-snug transition sm:py-2.5 sm:pl-4 sm:pr-5 sm:text-sm ${
+                    className={`relative flex min-h-[4.5rem] w-full flex-col items-start justify-center rounded-2xl border-2 py-2 pl-3 pr-3 text-left sm:min-h-[6.25rem] text-[13px] font-semibold leading-snug transition sm:py-2.5 sm:pl-4 sm:pr-5 sm:text-sm ${
                       selected
                         ? "border-blue-800 bg-blue-800 text-white"
                         : "border-slate-300 bg-white text-slate-700 hover:border-blue-700 hover:bg-blue-50"
@@ -957,7 +1009,7 @@ function QuoteForm() {
           </fieldset>
 
           {/* Step 2 — photo dropzone (biggest lever on quote accuracy). */}
-          <div>
+          <div className="surface-card p-5 sm:p-6">
             <StepHeading n={2} title="Add a photo" hint="Optional, but gets you the fastest quote" />
             <label
               htmlFor="photo"
@@ -993,15 +1045,21 @@ function QuoteForm() {
               type="file"
               accept="image/*"
               onChange={handlePhotoChange}
+              aria-describedby={photoError ? "photo-error" : undefined}
               className="sr-only"
             />
             <p className="mt-2 text-center text-xs text-slate-600">
               {quoteForm.fields.photo.helpText}
             </p>
+            {photoError && (
+              <p id="photo-error" role="alert" className="mt-2 text-center text-sm font-medium text-rose-700">
+                {photoError}
+              </p>
+            )}
           </div>
 
           {/* Step 3 — contact details. */}
-          <div>
+          <div className="surface-card p-5 sm:p-6">
             <StepHeading n={3} title="Where should we reach you?" />
             <div className="mt-4 space-y-4">
               <div>
@@ -1082,7 +1140,7 @@ function QuoteForm() {
           </div>
 
           {/* Everything else is optional and tucked away to keep the form short. */}
-          <details className="group rounded-xl border border-slate-200">
+          <details className="surface-card group">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-slate-700 [&::-webkit-details-marker]:hidden">
               <span>
                 {quoteForm.moreDetailsLabel}
@@ -1165,7 +1223,7 @@ function QuoteForm() {
                 <label
                   key={id}
                   htmlFor={`discount-${id}`}
-                  className="flex cursor-pointer items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-sm text-amber-900 transition hover:border-amber-300 hover:bg-amber-100"
+                  className="flex cursor-pointer items-start gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-3 text-sm text-emerald-900 transition hover:border-emerald-300 hover:bg-emerald-100"
                 >
                   <input
                     id={`discount-${id}`}
@@ -1175,14 +1233,14 @@ function QuoteForm() {
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, [formKey]: e.target.checked }))
                     }
-                    className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-amber-300 text-amber-600 focus:ring-amber-400"
+                    className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-emerald-400 text-emerald-600 focus:ring-emerald-500"
                   />
                   <span className="font-medium">{option.label}</span>
                 </label>
               );
             })}
             {quoteForm.fields.discounts.microcopy && (
-              <p className="pt-0.5 text-xs font-medium text-amber-700">
+              <p className="pt-0.5 text-xs font-medium text-emerald-800">
                 {quoteForm.fields.discounts.microcopy}
               </p>
             )}
@@ -1199,8 +1257,8 @@ function QuoteForm() {
           <div>
             <button
               type="submit"
-              disabled={status === "submitting"}
-              className={`w-full px-4 py-4 text-base shadow-lg shadow-amber-900/30 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
+              disabled={status === "submitting" || photoBusy}
+              className={`w-full px-4 py-4 text-base shadow-lg shadow-orange-600/30 disabled:cursor-not-allowed disabled:opacity-60 ${BTN_PRIMARY}`}
             >
               {status === "submitting" ? "Sending..." : quoteForm.submitLabel}
             </button>
@@ -1226,8 +1284,8 @@ function Guarantees() {
         </h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {guarantees.map((g) => (
-            <div key={g.id} className="text-center">
-              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 text-blue-700">
+            <div key={g.id} className="surface-card surface-card-hover p-5 text-center">
+              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                 <IconCheck className="h-5 w-5" />
               </div>
               <h3 className="mt-3 text-base font-semibold text-slate-900">
@@ -1258,8 +1316,8 @@ function QualityGuarantee() {
         </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {qualityGuaranteeSection.items.map((item) => (
-            <div key={item.id} className="text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-700">
+            <div key={item.id} className="surface-card surface-card-hover p-4 text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                 <IconCheck className="h-4.5 w-4.5" />
               </div>
               <h3 className="mt-3 text-base font-semibold text-slate-900">
@@ -1282,7 +1340,7 @@ function QualityGuarantee() {
 
 function About() {
   return (
-    <section id="about" className="bg-white px-4 py-16 md:py-24">
+    <section id="about" className="bg-slate-50 px-4 py-16 md:py-24">
       <div className="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2 sm:items-center sm:gap-12">
         <div>
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -1296,10 +1354,10 @@ function About() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+        <div className="flex flex-col gap-3 surface-card p-6">
           {guarantees.map((g) => (
             <div key={g.id} className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-700">
+              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                 <IconCheck className="h-4 w-4" />
               </div>
               <div>
@@ -1325,7 +1383,7 @@ function About() {
 // (or individual real quotes) rather than reintroducing placeholder text.
 function ReviewCard({ review }) {
   return (
-    <figure className="flex h-full min-w-[85%] snap-center flex-col rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm sm:min-w-[60%] md:min-w-0">
+    <figure className="flex h-full min-w-[85%] snap-center flex-col surface-card surface-card-hover p-5 text-left sm:min-w-[60%] md:min-w-0">
       <div className="flex gap-0.5 text-amber-400" aria-label={`${review.stars} out of 5 stars`}>
         {Array.from({ length: review.stars }).map((_, i) => (
           <IconStar key={i} className="h-4 w-4" />
@@ -1347,7 +1405,7 @@ function ReviewCard({ review }) {
 function Testimonials() {
   const reviews = googleReviews.reviews || [];
   return (
-    <section id="testimonials" className="bg-slate-50 px-4 py-16 md:py-24">
+    <section id="testimonials" className="bg-white px-4 py-16 md:py-24">
       <div className="mx-auto max-w-5xl text-center">
         <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
           {testimonialsSection.heading}
@@ -1356,7 +1414,7 @@ function Testimonials() {
           <p className="mt-3 text-slate-600">{testimonialsSection.subheading}</p>
         )}
 
-        <div className="mx-auto mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm">
+        <div className="mx-auto mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 surface-card px-6 py-5">
           <div className="flex gap-0.5 text-amber-400">
             {Array.from({ length: googleReviews.stars }).map((_, i) => (
               <IconStar key={i} className="h-5 w-5" />
@@ -1402,7 +1460,7 @@ function FAQ() {
   const [openId, setOpenId] = useState(null);
 
   return (
-    <section id="faq" className="bg-white px-4 py-16 md:py-24">
+    <section id="faq" className="bg-slate-50 px-4 py-16 md:py-24">
       <div className="mx-auto max-w-3xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -1410,7 +1468,7 @@ function FAQ() {
           </h2>
         </div>
 
-        <div className="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200">
+        <div className="mt-8 surface-card divide-y divide-slate-200 overflow-hidden">
           {faq.map((item) => {
             const isOpen = openId === item.id;
             return (
@@ -1535,7 +1593,7 @@ function Footer() {
 
 export default function LandingPage() {
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white font-sans text-slate-900">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-slate-50 font-sans text-slate-900">
       <SiteNav />
       <Hero />
       <ServicePillars />
