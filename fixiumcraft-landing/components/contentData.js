@@ -195,7 +195,7 @@ export const hero = {
   // Trust bar directly under the hero CTAs. Prices mirror the "starting at"
   // prices on the service pages (handyman $49, assembly $59, locksmith $79).
   trustBar: [
-    { id: "pricing", label: "Upfront Pricing ($49 Handyman, $59 Assembly, $79 Locksmith)" },
+    { id: "pricing", label: "Transparent Flat-Rate Pricing" },
     { id: "sameday", label: "Same-Day Service" },
     { id: "insured", label: "Fully Insured" },
   ],
