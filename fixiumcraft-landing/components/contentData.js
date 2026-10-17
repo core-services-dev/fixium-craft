@@ -152,7 +152,7 @@ export const seo = {
     "outdoor furniture assembly",
     "TV wall mounting service near me",
     "TV mounting on drywall",
-    "TV mounting above fireplace",
+    "flat-screen TV wall mounting",
     "handyman for small jobs near me",
     "handyman near me Pittsburgh PA",
     "IKEA furniture assembly Pittsburgh",
@@ -325,9 +325,9 @@ export const services = [
           "TV mounting on drywall in Pittsburgh, PA: studs located, bracket anchored, TV hung level, with cable concealment available.",
       },
       {
-        name: "TV Mounting Above Fireplace",
+        name: "Flat-Screen TV Wall Mounting",
         description:
-          "TV mounting above a fireplace in Pittsburgh, PA: hardware matched to your drywall, brick or stone surround, with the cable route planned for a clean finish.",
+          "Flat-screen TV wall mounting in Pittsburgh, PA: fixed, tilting or full-motion brackets anchored into studs and hung level, with the cable route planned for a clean finish.",
       },
       {
         name: "Shelf, Mirror & Wall Hanging Installation",
@@ -539,7 +539,7 @@ export const localBusinessSchema = {
     "Outdoor Furniture Assembly",
     "TV Wall Mounting Service",
     "TV Mounting on Drywall",
-    "TV Mounting Above Fireplace",
+    "Flat-Screen TV Wall Mounting",
     "Handyman for Small Jobs",
     "Handyman Near Me in Pittsburgh, PA",
     "Commercial Furniture Assembly",
@@ -723,7 +723,7 @@ export const quoteForm = {
     // this is now the form's explicit "Job Description" field.
     notes: {
       label: "Job Description",
-      placeholder: "e.g. 2 IKEA PAX wardrobes, need mounted TV above fireplace...",
+      placeholder: "e.g. 2 IKEA PAX wardrobes, need TV wall mounted on drywall...",
       helpText: "Tell us what you need done — the more detail, the more accurate your quote.",
     },
     // Deliberately called out as the single highest-leverage field for lead
@@ -955,10 +955,10 @@ export const faq = [
       "Yes, TV mounting on drywall is our everyday job. We find the studs, anchor the bracket into them and hang the TV level, so it holds without relying on drywall anchors alone.",
   },
   {
-    id: "tv-fireplace",
-    question: "Can you do TV mounting above a fireplace?",
+    id: "tv-flat-screen",
+    question: "Can you do flat-screen TV wall mounting?",
     answer:
-      "Yes. Send a photo and tell us if the wall is drywall, brick or stone, and we'll confirm the right hardware and cable route in your flat-rate quote. One tip: check how warm the wall gets, since heat is hard on electronics.",
+      "Yes. Send your TV size and a photo of the wall, and we'll confirm the mount type and cable route in your flat-rate quote. Fixed, tilting and full-motion brackets are all fine.",
   },
   {
     id: "ikea-cost",
@@ -1058,7 +1058,7 @@ export const serviceDetails = [
     slug: "tv-mounting",
     heading: "TV Wall Mounting & Shelf Installation in Pittsburgh",
     body: "TV wall mounting service near you: stud-anchored, with hidden cables.",
-    subFeatures: ["TV Mounting on Drywall", "TV Mounting Above Fireplace", "Cable Concealment & Shelves"],
+    subFeatures: ["TV Mounting on Drywall", "Flat-Screen TV Wall Mounting", "Cable Concealment & Shelves"],
     cta: "See TV mounting",
   },
   {
@@ -1241,7 +1241,7 @@ export const servicePillars = [
         items: [
           "Fixed, tilting & full-motion TV mounts, stud-anchored",
           "TV mounting on drywall, with studs located and the bracket anchored",
-          "TV mounting above a fireplace (drywall, brick or stone surround)",
+          "Flat-screen TV wall mounting: fixed, tilting or full-motion brackets",
           "Cable & wire concealment behind the wall or in raceway",
           "Soundbar & media console mounting",
           "Commercial display screens for offices, lobbies & waiting rooms",
@@ -1273,14 +1273,14 @@ export const servicePillars = [
           "Yes, it's our everyday job. We locate the studs, anchor the bracket into them and hang the TV level.",
       },
       {
-        question: "Can you do TV mounting above a fireplace?",
+        question: "Can you do flat-screen TV wall mounting?",
         answer:
-          "Yes. Send a photo and tell us if the surround is drywall, brick or stone, and we'll confirm the hardware and cable route in your quote.",
+          "Yes. Send your TV size and a photo of the wall, and we'll confirm the mount type and cable route in your quote.",
       },
       {
         question: "Can you mount a TV on any wall?",
         answer:
-          "Standard drywall and stud walls are our everyday job. If you have brick, concrete, or plaster, mention it in your photo or text and we'll confirm the right hardware in your quote.",
+          "Standard drywall and stud walls are our everyday job. If your wall is something different, mention it in your photo or text and we'll confirm the right hardware in your quote.",
       },
       {
         question: "Can you hide the TV cables?",
