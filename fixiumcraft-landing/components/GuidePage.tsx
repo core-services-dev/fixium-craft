@@ -435,7 +435,7 @@ export default function GuidePage({ slug }: { slug: string }) {
       </div>
 
       <SiteFooterMini />
-      <StickyMobileBar />
+      <StickyMobileBar mode={service?.ctaMode === "dispatch" ? "dispatch" : "quote"} />
     </main>
   );
 }

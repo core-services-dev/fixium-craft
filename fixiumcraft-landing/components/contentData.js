@@ -175,18 +175,19 @@ export const trustBadges = [
 
 export const hero = {
   eyebrow: "Fully Insured | Upfront Flat Rates",
-  headline: "Professional Handyman, Assembly & Locksmith Services in Pittsburgh",
-  subheadline: "Upfront flat-rate pricing. Fully insured & background-checked local technicians.",
+  headline: "Top-Rated Handyman & Furniture Assembly in Pittsburgh",
+  subheadline: "Fast home repairs, expert IKEA assembly, and local locksmith solutions with upfront pricing.",
   // Label above the 3 quick-pick service cards directly under the hero CTAs.
   pickerLabel: "What do you need help with?",
   supportingCopy:
     "Furniture assembly and mounting, locks and door hardware, and general home repairs — one local team for the whole to-do list.",
   primaryCta: { label: "Get an Instant Quote", action: "form" },
-  // Trust bar directly under the hero CTAs (rating is the owner-confirmed Google rating).
+  // Trust bar directly under the hero CTAs. Prices mirror the "starting at"
+  // prices on the service pages (handyman $49, assembly $59, locksmith $79).
   trustBar: [
-    { id: "rating", label: "5.0 Rated on Google" },
+    { id: "pricing", label: "Upfront Pricing ($49 Handyman, $59 Assembly, $79 Locksmith)" },
+    { id: "sameday", label: "Same-Day Service" },
     { id: "insured", label: "Fully Insured" },
-    { id: "sameday", label: "Same-Day Slots" },
   ],
   secondaryCtas: [
     { label: "Text Us Photos for Estimate", href: business.smsHref, type: "sms" },
@@ -1032,7 +1033,7 @@ export const servicePillars = [
       { icon: "🧹", label: "Packaging cleaned up" },
       { icon: "🛡️", label: "Fully insured" },
     ],
-    h1: "Professional Furniture & IKEA Assembly in Pittsburgh, PA",
+    h1: "Expert Furniture & IKEA Assembly in Pittsburgh",
     metaTitle: "IKEA Furniture Assembly Pittsburgh, PA | Fixium Craft",
     metaDescription:
       "IKEA furniture assembly in Pittsburgh, PA: PAX wardrobes, beds, desks, dressers & any flat-pack build. Flat-rate pricing, same-day slots, fully insured. Get a free quote.",
@@ -1188,6 +1189,9 @@ export const servicePillars = [
   },
   {
     slug: "locksmith",
+    // "dispatch": call-now CTAs and sticky bar. Default (unset) is "quote":
+    // instant quote + text-a-photo CTAs.
+    ctaMode: "dispatch",
     providerType: "Locksmith",
     includedHeading: "Residential Locksmith, Smart Locks & Rekeying",
     title: "Locksmith & Door Hardware",
@@ -1222,7 +1226,7 @@ export const servicePillars = [
       { icon: "🛡️", label: "Fully insured" },
     ],
     callout: {
-      title: "Locked out? Same-day service available",
+      title: "Locked out? Call now for same-day service",
       body: "Call or text us and we'll book the first open slot, for homes, businesses and vehicles. Same-day or scheduled service with flat-rate pricing. We're not a 24/7 emergency dispatch line.",
     },
     showcaseHeading: "What we do at the door",
@@ -1232,7 +1236,7 @@ export const servicePillars = [
       { title: "Handle sets & levers", description: "Handle sets and levers installed, aligned and tested.", image: "/images/work/lock-schlage-handleset.jpg", alt: "Handleset installed on an entry door" },
       { title: "Smart lock setup", description: "Schlage, Yale, Ring, Nest and more: installed, paired and tested.", icon: "lock" },
     ],
-    h1: "Mobile Locksmith & Door Hardware Services in Pittsburgh, PA",
+    h1: "Fast Same-Day Local Locksmith Services in Pittsburgh",
     metaTitle: "Mobile Locksmith Pittsburgh, PA | Fixium Craft",
     metaDescription:
       "Mobile locksmith in Pittsburgh, PA: rekeying, smart lock installation (Schlage, Nest, Ring), deadbolts, lock repair & same-day lockouts. Flat-rate pricing, fully insured.",
@@ -1332,7 +1336,7 @@ export const servicePillars = [
       { icon: "💬", label: "Photo quotes by text" },
       { icon: "🛡️", label: "Fully insured" },
     ],
-    h1: "General Handyman & Home Repair in Pittsburgh, PA",
+    h1: "Reliable Handyman & Home Repair Services in Pittsburgh",
     metaTitle: "Handyman & Home Repairs Pittsburgh, PA | Fixium Craft",
     metaDescription:
       "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes, fully insured.",

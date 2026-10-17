@@ -34,6 +34,7 @@ import {
   MessageSquareText,
   ShieldCheck,
   Star,
+  Tag,
   Wrench,
 } from "lucide-react";
 import { trackEvent } from "./analytics";
@@ -248,7 +249,7 @@ const SERVICE_ICONS = {
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 
-const HERO_TRUST_ICONS = { rating: Star, insured: ShieldCheck, sameday: Clock };
+const HERO_TRUST_ICONS = { pricing: Tag, rating: Star, insured: ShieldCheck, sameday: Clock };
 
 function Hero() {
   return (
@@ -278,7 +279,7 @@ function Hero() {
         </div>
 
         {/* Trust bar directly under the CTAs. */}
-        <ul className="mx-auto mt-12 flex max-w-2xl flex-col items-center justify-center gap-3 border-t border-white/10 pt-6 text-sm font-medium text-slate-200 sm:flex-row sm:gap-0 sm:divide-x sm:divide-white/15">
+        <ul className="mx-auto mt-12 flex max-w-4xl flex-col items-center justify-center gap-3 border-t border-white/10 pt-6 text-sm font-medium text-slate-200 sm:flex-row sm:gap-0 sm:divide-x sm:divide-white/15">
           {hero.trustBar.map((item) => {
             const Icon = HERO_TRUST_ICONS[item.id];
             return (
@@ -453,7 +454,10 @@ function ServicePillars() {
           <p className="mt-3 text-slate-600">{servicesSection.subheading}</p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {servicePillars.filter((p) => !p.hideFromGrid).map((pillar) => (
+          {servicePillars
+            .filter((p) => !p.hideFromGrid)
+            .sort((a, b) => Number(a.slug === "locksmith") - Number(b.slug === "locksmith"))
+            .map((pillar) => (
             <PillarCard key={pillar.slug} pillar={pillar} />
           ))}
         </div>

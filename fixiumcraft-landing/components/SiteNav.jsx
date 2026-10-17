@@ -246,17 +246,26 @@ export function SiteNav() {
   );
 }
 
-export function StickyMobileBar() {
+// mode "quote" (default): the Quote tab is the highlighted action.
+// mode "dispatch" (locksmith pages): the Call tab is highlighted as "Call Now".
+export function StickyMobileBar({ mode = "quote" }) {
+  const dispatch = mode === "dispatch";
   const item =
     "flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-slate-700 active:bg-slate-50";
+  const hot =
+    "flex flex-1 flex-col items-center justify-center gap-0.5 bg-amber-500 py-2.5 text-slate-950 active:bg-amber-600";
   return (
     <nav
       aria-label="Quick contact actions"
       className="fixed inset-x-0 bottom-0 z-50 flex border-t border-slate-200 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.08)] lg:hidden"
     >
-      <a href={business.phoneHref} className={item} aria-label="Call us">
+      <a
+        href={business.phoneHref}
+        className={dispatch ? hot : item}
+        aria-label={dispatch ? "Call now for same-day locksmith dispatch" : "Call us"}
+      >
         <IconPhone className="h-5 w-5" />
-        <span className="text-[11px] font-medium">Call</span>
+        <span className="text-[11px] font-semibold">{dispatch ? "Call Now" : "Call"}</span>
       </a>
       <a href={business.smsHref} className={`${item} border-l border-slate-200`} aria-label="Text us">
         <IconMessage className="h-5 w-5" />
@@ -264,17 +273,17 @@ export function StickyMobileBar() {
       </a>
       <Link
         href="/#quote"
-        className={`${item} border-x border-slate-200 text-blue-800`}
-        aria-label="Get a free quote"
+        className={dispatch ? `${item} border-x border-slate-200 text-blue-800` : hot}
+        aria-label="Get an instant quote"
       >
         <IconTag className="h-5 w-5" />
-        <span className="text-[11px] font-semibold">Quote</span>
+        <span className="text-[11px] font-semibold">{dispatch ? "Quote" : "Get Quote"}</span>
       </Link>
       <a
         href={business.whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-1 flex-col items-center justify-center gap-0.5 bg-amber-500 py-2.5 text-slate-950 active:bg-amber-600"
+        className={`${item} border-l border-slate-200`}
         aria-label="Message us on WhatsApp"
       >
         <IconWhatsapp className="h-5 w-5" />
