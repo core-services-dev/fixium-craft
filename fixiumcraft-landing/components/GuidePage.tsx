@@ -7,6 +7,8 @@ import { SiteFooterMini } from "./SiteChrome";
 import GuideToc from "./GuideToc";
 import GuideCard from "./GuideCard";
 import QuickQuoteBanner from "./guides/QuickQuoteBanner";
+import { MidGuideCta, DiyVsHire, GuideProof } from "./guides/GuideConversion";
+import { Fragment } from "react";
 import ExpertHelpForm from "./guides/ExpertHelpForm";
 import { business, seo, servicePillars } from "./contentData";
 import {
@@ -408,9 +410,17 @@ export default function GuidePage({ slug }: { slug: string }) {
             />
           )}
 
-          {g.sections.map((s) => (
-            <Section key={s.id} s={s} />
+          {g.sections.map((s, i) => (
+            <Fragment key={s.id}>
+              <Section s={s} />
+              {service && i === Math.ceil(g.sections.length / 2) - 1 && (
+                <MidGuideCta label={bannerLabel} price={bannerPrice} />
+              )}
+            </Fragment>
           ))}
+
+          {service && <DiyVsHire serviceSlug={service.slug} />}
+          {service && <GuideProof serviceSlug={service.slug} />}
 
           {/* CTA */}
           <section

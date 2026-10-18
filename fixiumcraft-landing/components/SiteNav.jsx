@@ -12,6 +12,7 @@
 import { useState, useEffect, useRef } from "react";
 import BrandLink from "./BrandLink";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { business, navSection, servicePillars } from "./contentData";
 
 const BTN_PRIMARY =
@@ -241,7 +242,21 @@ export function SiteNav() {
   );
 }
 
+// Prefilled text so a visitor only has to attach a photo and hit send.
+const SMS_BY_SERVICE = {
+  "furniture-assembly": "Hi Fixium Craft, I need furniture assembled. Here's a photo:",
+  "tv-mounting": "Hi Fixium Craft, I need a TV mounted. Size and wall type:",
+  "handyman-repairs": "Hi Fixium Craft, I have a repair list. Photos attached:",
+  locksmith: "Hi Fixium Craft, I'd like to book a lock install or rekey. Door photo:",
+};
+
 export function StickyMobileBar() {
+  const slug = (usePathname() || "").split("/")[2] || "";
+  const smsBody = encodeURIComponent(
+    SMS_BY_SERVICE[slug] || "Hi Fixium Craft, I'd like a flat-rate quote. Here's a photo:",
+  );
+  const smsHref = `${business.smsHref}?&body=${smsBody}`;
+  const quoteLabel = slug === "locksmith" ? "Book a Slot" : "Get Quote";
   const item =
     "flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-slate-700 active:bg-slate-50";
   const hot =
@@ -255,13 +270,13 @@ export function StickyMobileBar() {
         <IconPhone className="h-5 w-5" />
         <span className="text-[11px] font-medium">Call</span>
       </a>
-      <a href={business.smsHref} className={`${item} border-l border-slate-200`} aria-label="Text us">
+      <a href={smsHref} className={`${item} border-l border-slate-200`} aria-label="Text us">
         <IconMessage className="h-5 w-5" />
         <span className="text-[11px] font-medium">Text</span>
       </a>
       <Link href="/#quote" className={hot}>
         <IconTag className="h-5 w-5" />
-        <span className="text-[11px] font-semibold">Get Quote</span>
+        <span className="text-[11px] font-semibold">{quoteLabel}</span>
       </Link>
       <a
         href={business.whatsappHref}

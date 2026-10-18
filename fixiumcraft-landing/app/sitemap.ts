@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { seo, servicePillars } from "@/components/contentData";
 import { getAllGuides } from "@/lib/guides";
+import { AREAS } from "@/components/areasData";
 
 // app/sitemap.ts (file convention) — served at /sitemap.xml.
 //
@@ -37,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
       images: [`${base}${page.image}`],
+    })),
+    // Neighborhood pages appear here only once marked ready in areasData.ts.
+    ...AREAS.filter((a) => a.ready).map((a) => ({
+      url: `${base}/areas/${a.slug}`,
+      lastModified: SITE_UPDATED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     // Knowledge base: the index plus one entry per file in content/guides/,
     // dated by each guide's own "updated" frontmatter.

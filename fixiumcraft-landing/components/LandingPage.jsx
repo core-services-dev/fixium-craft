@@ -26,6 +26,7 @@ import { SiteNav, StickyMobileBar } from "./SiteNav";
 import WorkGallery from "./WorkGallery";
 import {
   Armchair,
+  BadgeCheck,
   ArrowRight,
   Check,
   Clock,
@@ -250,11 +251,18 @@ const SERVICE_ICONS = {
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 
-const HERO_TRUST_ICONS = { pricing: Tag, rating: Star, insured: ShieldCheck, sameday: Clock };
+const HERO_TRUST_ICONS = { pricing: Tag, rating: Star, insured: ShieldCheck, sameday: Clock, background: BadgeCheck };
+
+// Price anchors under the hero CTAs: each chip pre-selects that service in the quote form.
+const HERO_PRICE_CHIPS = [
+  { id: "handyman", label: "Handyman", price: "$49" },
+  { id: "assembly", label: "Assembly", price: "$59" },
+  { id: "locksmith", label: "Locksmith", price: "$79" },
+];
 
 function Hero() {
   return (
-    <section className="bg-slate-900 px-4 py-16 text-white md:py-24">
+    <section className="bg-slate-900 px-4 py-10 text-white md:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
           {hero.headline}
@@ -282,8 +290,22 @@ function Hero() {
           </a>
         </div>
 
+        <ul aria-label="Starting prices" className="mt-6 flex flex-wrap justify-center gap-2">
+          {HERO_PRICE_CHIPS.map((c) => (
+            <li key={c.id}>
+              <button
+                type="button"
+                onClick={() => selectServiceAndScroll(c.id)}
+                className="min-h-11 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                {c.label} <span className="text-orange-300">from {c.price}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+
         {/* Trust bar directly under the CTAs. */}
-        <ul className="mx-auto mt-12 flex max-w-4xl flex-col items-center justify-center gap-3 border-t border-white/10 pt-6 text-sm font-medium text-slate-200 sm:flex-row sm:gap-0 sm:divide-x sm:divide-white/15">
+        <ul className="mx-auto mt-8 flex max-w-4xl flex-col md:mt-12 items-center justify-center gap-3 border-t border-white/10 pt-6 text-sm font-medium text-slate-200 sm:flex-row sm:gap-0 sm:divide-x sm:divide-white/15">
           {hero.trustBar.map((item) => {
             const Icon = HERO_TRUST_ICONS[item.id];
             return (

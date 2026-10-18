@@ -209,6 +209,8 @@ export const hero = {
     { id: "pricing", label: "Transparent Flat-Rate Pricing" },
     { id: "sameday", label: "Same-Day Service" },
     { id: "insured", label: "Fully Insured" },
+    { id: "background", label: "Background-Checked Techs" },
+    { id: "rating", label: "5.0 on Google" },
   ],
   secondaryCtas: [
     { label: "Text Photos for Estimate", href: business.smsHref, type: "sms" },

@@ -5,6 +5,8 @@ import Image from "next/image";
 import { SiteNav, StickyMobileBar } from "./SiteNav";
 import { SiteFooterMini } from "./SiteChrome";
 import WorkGallery from "./WorkGallery";
+import TrustStrip from "./TrustStrip";
+import PriceEstimator from "./PriceEstimator";
 import RelatedGuides from "./RelatedGuides";
 import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "./contentData";
 
@@ -177,6 +179,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
               ))}
             </ul>
           )}
+          <div className="mt-5"><TrustStrip tone="dark" /></div>
         </div>
       </section>
 
@@ -247,6 +250,10 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
           </section>
 
         </div>
+      </div>
+
+      <div className="mx-auto max-w-4xl px-4 pt-12 empty:hidden">
+        <PriceEstimator slug={slug} label={page.navLabel} />
       </div>
 
       <WorkGallery
