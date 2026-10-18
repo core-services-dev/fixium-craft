@@ -1,3 +1,4 @@
+import { OG_IMAGE } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, Clock, Package, ShieldAlert, Wrench } from "lucide-react";
@@ -65,8 +66,9 @@ export function getGuideMetadata(slug: string): Metadata {
       type: "article",
       publishedTime: g.date,
       modifiedTime: g.updated,
+      images: [OG_IMAGE],
     },
-    twitter: { card: "summary_large_image", title, description: g.description },
+    twitter: { card: "summary_large_image", title, description: g.description, images: [OG_IMAGE.url] },
   };
 }
 
@@ -75,6 +77,25 @@ function buildSchemas(g: Guide) {
   const url = `${base}/guides/${g.slug}`;
   const org = { "@type": "Organization", name: business.name, url: `${base}/` };
   const schemas: Record<string, unknown>[] = [];
+
+  // Article node alongside the HowTo: gives the page a plain "this is an
+  // article by this publisher" entity with a headline, dates and image.
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: g.title,
+    description: g.description,
+    datePublished: g.date,
+    dateModified: g.updated,
+    image: `${base}${OG_IMAGE.url}`,
+    mainEntityOfPage: url,
+    author: org,
+    publisher: {
+      ...org,
+      "@id": `${base}/#business`,
+      logo: { "@type": "ImageObject", url: `${base}/logo-icon.png` },
+    },
+  });
 
   if (g.howToSteps.length) {
     schemas.push({

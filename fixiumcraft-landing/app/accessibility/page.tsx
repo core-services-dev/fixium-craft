@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/seo";
 import LegalPageLayout, { LegalSection } from "@/components/LegalPageLayout";
 import { business } from "@/components/contentData";
 
+const pageTitle = `Accessibility Statement | ${business.name}`;
+const pageDescription = `${business.name} is committed to making this website usable for people with disabilities and aims to meet WCAG 2.1 Level AA. Contact us if you need help.`;
+
 export const metadata: Metadata = {
-  title: `Accessibility Statement | ${business.name}`,
-  description: `${business.name} is committed to making this website usable for people with disabilities and aims to meet WCAG 2.1 Level AA. Contact us if you need help.`,
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/accessibility" },
+  ...socialMetadata({ title: pageTitle, description: pageDescription, path: "/accessibility" }),
 };
 
 // Static, hand-set date: only change it when the statement itself changes.

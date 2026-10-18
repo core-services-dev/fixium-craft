@@ -1,5 +1,6 @@
 import LandingPage from "@/components/LandingPage";
-import { localBusinessSchema, faq } from "@/components/contentData";
+import HomeGuides from "@/components/HomeGuides";
+import { localBusinessSchema, webSiteSchema, faq } from "@/components/contentData";
 
 // FAQPage JSON-LD, built from the same `faq` array LandingPage.jsx's FAQ
 // section renders — so this can't list a question the page doesn't
@@ -37,7 +38,12 @@ export default function Home() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
       />
-      <LandingPage />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+      />
+      <LandingPage guidesSlot={<HomeGuides />} />
     </>
   );
 }

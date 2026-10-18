@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/seo";
 import LegalPageLayout, { LegalSection } from "@/components/LegalPageLayout";
 import { business, services } from "@/components/contentData";
 
+const pageTitle = `Terms of Service | ${business.name}`;
+const pageDescription = `The terms that apply to furniture assembly, wall mounting, and home repair services booked through ${business.name}.`;
+
 export const metadata: Metadata = {
-  title: `Terms of Service | ${business.name}`,
-  description: `The terms that apply to furniture assembly, wall mounting, and home repair services booked through ${business.name}.`,
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/terms" },
+  ...socialMetadata({ title: pageTitle, description: pageDescription, path: "/terms" }),
 };
 
 // See the matching note in app/privacy/page.tsx — a static, hand-set date,

@@ -121,7 +121,7 @@ Heavy layers crack, shrink and leave ridges that sanding can't hide.
 
 ## When to Hire a Professional
 
-Call a handyman if the hole is larger than 6 inches, the drywall is damp or stained, the ceiling is textured and older than the 1980s, electrical or plumbing is involved, or you want the finish to be invisible in every light.
+Call a handyman if the hole is larger than 6 inches, the drywall is damp or stained, the ceiling is textured and older than the 1980s, electrical or plumbing is involved, or you want the finish to be invisible in every light. Our [handyman services in Pittsburgh](/services/handyman-repairs) start at $49 flat-rate, with the patching, priming and paint touch-up done in one visit.
 
 ## Frequently Asked Questions
 

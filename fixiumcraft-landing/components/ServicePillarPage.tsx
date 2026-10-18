@@ -1,3 +1,4 @@
+import { OG_IMAGE } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -38,11 +39,13 @@ export function getPillarMetadata(slug: string): Metadata {
       siteName: business.name,
       locale: "en_US",
       type: "website",
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: page.metaTitle,
       description: page.metaDescription,
+      images: [OG_IMAGE.url],
     },
   };
 }
@@ -71,6 +74,18 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
     areaServed: areaServedSchema(),
     description: page.metaDescription,
     url: `${base}/services/${slug}`,
+    "@id": `${base}/services/${slug}#service`,
+    mainEntityOfPage: `${base}/services/${slug}`,
+    image: `${base}${page.image}`,
+    termsOfService: `${base}/terms`,
+    // One-line price summary next to the per-tier catalog below.
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "USD",
+      lowPrice: Number(page.startingPrice.replace(/[^0-9.]/g, "")),
+      offerCount: (page.pricing || []).length || 1,
+      url: `${base}/services/${slug}`,
+    },
     // Real starting prices, as an offer catalog (Offer + PriceSpecification).
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -100,7 +115,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${base}/` },
-      { "@type": "ListItem", position: 2, name: "Services", item: `${base}/#services` },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${base}/services` },
       { "@type": "ListItem", position: 3, name: page.title, item: `${base}/services/${slug}` },
     ],
   };
@@ -126,7 +141,7 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
               Home
             </Link>
             <span aria-hidden="true"> / </span>
-            <Link href="/#services" className="hover:text-white">
+            <Link href="/services" className="hover:text-white">
               Services
             </Link>
             <span aria-hidden="true"> / </span>

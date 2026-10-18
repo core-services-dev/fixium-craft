@@ -1,3 +1,4 @@
+import { OG_IMAGE } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -23,8 +24,9 @@ export const metadata: Metadata = {
     siteName: business.name,
     locale: "en_US",
     type: "website",
+    images: [OG_IMAGE],
   },
-  twitter: { card: "summary_large_image", title, description },
+  twitter: { card: "summary_large_image", title, description, images: [OG_IMAGE.url] },
 };
 
 const BTN_PRIMARY =

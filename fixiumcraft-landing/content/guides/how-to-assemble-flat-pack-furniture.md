@@ -123,7 +123,7 @@ A tall unit that is not anchored can tip, even if it looks stable.
 
 ## When to Hire a Professional
 
-Consider help if the piece is large (wardrobes, bunk beds, modular kitchens), if you have a lot of items to build, if you are short on time, or if the furniture needs to be anchored into drywall, plaster or masonry. A professional brings the tools and experience to finish quickly and to avoid damage.
+Consider help if the piece is large (wardrobes, bunk beds, modular kitchens), if you have a lot of items to build, if you are short on time, or if the furniture needs to be anchored into drywall, plaster or masonry. A professional brings the tools and experience to finish quickly and to avoid damage. Our [furniture assembly service in Pittsburgh](/services/furniture-assembly) builds IKEA and other flat-pack pieces from $59, flat-rate.
 
 ## Frequently Asked Questions
 

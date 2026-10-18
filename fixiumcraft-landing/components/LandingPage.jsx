@@ -1591,7 +1591,10 @@ function Footer() {
 /*  Page                                                                      */
 /* -------------------------------------------------------------------------- */
 
-export default function LandingPage() {
+// `guidesSlot` is a server-rendered element (see components/HomeGuides.tsx)
+// passed down from app/page.tsx; it renders nothing when omitted.
+/** @param {{ guidesSlot?: import("react").ReactNode }} props */
+export default function LandingPage({ guidesSlot = null }) {
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen bg-slate-50 font-sans text-slate-900">
       <SiteNav />
@@ -1607,6 +1610,7 @@ export default function LandingPage() {
       <QualityGuarantee />
       <Testimonials />
       <About />
+      {guidesSlot}
       <FAQ />
       <Footer />
       <StickyMobileBar />

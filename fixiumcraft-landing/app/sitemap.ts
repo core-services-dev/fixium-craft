@@ -2,37 +2,47 @@ import type { MetadataRoute } from "next";
 import { seo, servicePillars } from "@/components/contentData";
 import { getAllGuides } from "@/lib/guides";
 
-// app/sitemap.ts (file convention) — served at /sitemap.xml. The homepage
-// is still the main content route (all its sections are anchors on "/"),
-// but app/privacy, app/terms, and the pillar pages
-// under app/services/[slug] (built from `servicePillars`) are separate,
-// real routes — listed here per the note this comment used to leave for
-// exactly this situation. See the note in layout.tsx about
-// seo.canonicalUrl needing to be the actual live domain for any of this
-// to point anywhere useful to crawlers.
+// app/sitemap.ts (file convention) — served at /sitemap.xml.
+//
+// lastModified used to be `new Date()` for most entries, which stamps every
+// URL as "changed just now" on every deploy; search engines learn to ignore
+// lastmod when it is always today. These are real content dates now: bump
+// SITE_UPDATED when the homepage or service copy changes, LEGAL_UPDATED when
+// the privacy/terms text changes. Guides keep using their own "updated"
+// frontmatter date.
+const SITE_UPDATED = new Date("2026-10-18T00:00:00Z");
+const LEGAL_UPDATED = new Date("2026-09-22T00:00:00Z");
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = seo.canonicalUrl.replace(/\/$/, "");
-  const lastModified = new Date();
   return [
     {
       url: `${base}/`,
-      lastModified,
+      lastModified: SITE_UPDATED,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    // Hub page that links to every service page.
+    {
+      url: `${base}/services`,
+      lastModified: SITE_UPDATED,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
     },
     // One entry per servicePillars slug, so a new dedicated page added there
     // automatically shows up here too.
     ...servicePillars.map((page) => ({
       url: `${base}/services/${page.slug}`,
-      lastModified,
+      lastModified: SITE_UPDATED,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+      images: [`${base}${page.image}`],
     })),
     // Knowledge base: the index plus one entry per file in content/guides/,
     // dated by each guide's own "updated" frontmatter.
     {
       url: `${base}/guides`,
-      lastModified,
+      lastModified: SITE_UPDATED,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     },
@@ -44,19 +54,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${base}/privacy`,
-      lastModified,
+      lastModified: LEGAL_UPDATED,
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },
     {
       url: `${base}/terms`,
-      lastModified,
+      lastModified: LEGAL_UPDATED,
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },
     {
       url: `${base}/accessibility`,
-      lastModified,
+      lastModified: new Date("2026-10-17T00:00:00Z"),
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },

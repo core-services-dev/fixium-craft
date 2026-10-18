@@ -25,7 +25,7 @@ export const business = {
   phoneE164: "+1-929-780-3017",
   // Human-readable form used for schema.org `telephone` (matches the visible
   // number format Google compares against the Business Profile).
-  phoneSchema: "(929) 780-3017",
+  phoneSchema: "+1-929-780-3017", // E.164-style for schema.org (visible number: phoneDisplay)
   smsHref: "sms:+19297803017",
   whatsappHref:
     "https://wa.me/19297803017?text=Hi%20Fixium%20Craft%2C%20I'd%20like%20a%20quote%20for%20a%20job.",
@@ -499,6 +499,19 @@ export const servicesSection = {
 // business.hours ("Mon–Sun, 7am–11pm") — schema.org needs actual day/time
 // values, not the free-text string, so if business.hours ever changes,
 // update dayOfWeek/opens/closes here too or the two will drift apart.
+// WebSite node: ties the site to the business entity below (publisher) so
+// the homepage declares both "this is a site" and "this is who runs it".
+export const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${seo.canonicalUrl}/#website`,
+  url: `${seo.canonicalUrl}/`,
+  name: business.name,
+  description: seo.description,
+  inLanguage: "en-US",
+  publisher: { "@id": `${seo.canonicalUrl}/#business` },
+};
+
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["HomeAndConstructionBusiness", "Locksmith"],
@@ -515,6 +528,19 @@ export const localBusinessSchema = {
   url: `${seo.canonicalUrl}/`,
   telephone: business.phoneSchema,
   email: business.email,
+  logo: `${seo.canonicalUrl}/logo-icon.png`,
+  currenciesAccepted: "USD",
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: business.phoneSchema,
+    email: business.email,
+    contactType: "customer service",
+    areaServed: "US-PA",
+    availableLanguage: "English",
+  },
+  // Still to add once the owner confirms them (all strengthen the local
+  // entity): `sameAs` (Google Business Profile / Facebook / Yelp URLs),
+  // `hasMap` (the Google Maps listing URL) and `geo`.
   address: {
     "@type": "PostalAddress",
     addressLocality: business.address.city,
@@ -601,6 +627,12 @@ export const localBusinessSchema = {
       (service.schemaOffers ?? [{ name: service.title, description: service.description }]).map(
         (offer) => ({
           "@type": "Offer",
+          url: `${seo.canonicalUrl}${service.learnMoreHref}`,
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: Number(service.startingPrice.replace(/[^0-9.]/g, "")),
+            priceCurrency: "USD",
+          },
           itemOffered: {
             "@type": "Service",
             name: offer.name,
@@ -1115,7 +1147,7 @@ export const servicePillars = [
     h1: "Furniture & IKEA Assembly for Homes & Businesses in Pittsburgh",
     metaTitle: "Furniture & IKEA Assembly Pittsburgh, PA | Home & Office | Fixium Craft",
     metaDescription:
-      "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX wardrobes, beds, dressers, office chairs, standing desks and reception desks. Flat-rate pricing, fully insured. Get a free quote.",
+      "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX, beds, desks, office chairs. Flat-rate pricing from $59, fully insured.",
     intro: [
       `Fixium Craft is a handyman furniture assembly service across ${business.address.city}, ${business.address.state}: assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes. IKEA PAX wardrobes, beds, desks, dressers and anything else that comes in a box, built sturdy and level the first time.`,
       `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
@@ -1230,7 +1262,7 @@ export const servicePillars = [
     h1: "TV Wall Mounting in Pittsburgh, PA",
     metaTitle: "TV Wall Mounting Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate pricing from $89, fully insured. Get a free quote.",
+      "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate from $89, fully insured. Free quote.",
     intro: [
       `Looking for a TV wall mounting service near you in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
       `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, and every technician is background-checked and fully insured.`,
@@ -1337,7 +1369,7 @@ export const servicePillars = [
     h1: "Scheduled Locksmith & Smart Lock Installation in Pittsburgh",
     metaTitle: "Smart Lock Installation & Rekeying Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Scheduled locksmith service in Pittsburgh, PA: smart lock installation (Schlage, Yale, Ring, Nest), handlesets, deadbolts and rekeying for homes and offices. By appointment, flat-rate pricing, fully insured.",
+      "Scheduled locksmith in Pittsburgh, PA: smart lock installation, rekeying, deadbolts and handlesets. By appointment, flat-rate from $79, fully insured.",
     intro: [
       `Fixium Craft handles locks for homes and offices across ${business.address.city}, ${business.address.state}: smart lock installation, rekeying, deadbolt replacement and handlesets. Everything is by appointment only, so book ahead for an upfront flat-rate quote.`,
       `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront and no surprise fees.`,
@@ -1536,10 +1568,13 @@ export const footer = {
   // Internal links to the 3 pillar pages (see `servicePillars` above and
   // app/services/[slug]/page.tsx) — rendered in LandingPage.jsx's Footer()
   // so they're discoverable from every page, not just the sitemap.
-  servicePageLinks: servicePillars.map((p) => ({
-    label: `${p.navLabel} in Pittsburgh`,
-    href: `/services/${p.slug}`,
-  })),
+  servicePageLinks: [
+    ...servicePillars.map((p) => ({
+      label: `${p.navLabel} in Pittsburgh`,
+      href: `/services/${p.slug}`,
+    })),
+    { label: "All Services in Pittsburgh", href: "/services" },
+  ],
   // Knowledge base (content/guides/*.md, routes in app/guides).
   resourceLinks: [{ label: "Helpful Guides & Knowledge Base", href: "/guides" }],
   copyright: `© ${new Date().getFullYear()} ${business.name}. All rights reserved.`,

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/seo";
 import LegalPageLayout, { LegalSection } from "@/components/LegalPageLayout";
 import { business, seo } from "@/components/contentData";
 
+const pageTitle = `Privacy Policy | ${business.name}`;
+const pageDescription = `How ${business.name} collects, uses, and protects the information you share when requesting a quote or booking a service.`;
+
 export const metadata: Metadata = {
-  title: `Privacy Policy | ${business.name}`,
-  description: `How ${business.name} collects, uses, and protects the information you share when requesting a quote or booking a service.`,
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/privacy" },
+  ...socialMetadata({ title: pageTitle, description: pageDescription, path: "/privacy" }),
 };
 
 // Static, hand-set date rather than `new Date()` — a "Last updated" line
