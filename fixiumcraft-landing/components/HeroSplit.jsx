@@ -1,7 +1,5 @@
-"use client";
-
 // Hero: centered dark hero over a full-width photo (headline, subtitle,
-// business line, two CTAs, clickable price chips, trust bar). Self-contained:
+// business line, two CTAs, trust bar). Self-contained:
 // copy comes from `hero` in contentData.js, so the text stays editable in one
 // place. The photo is decorative (alt=""), sits behind a bg-slate-950/75
 // overlay, and text colors are lifted one step so contrast holds on the
@@ -17,24 +15,6 @@ const BTN_OUTLINE_LIGHT =
   "rounded-lg border border-white/30 bg-white/10 font-semibold text-white transition hover:bg-white/20";
 
 const HERO_TRUST_ICONS = { pricing: Tag, rating: Star, insured: ShieldCheck, sameday: Clock, background: BadgeCheck };
-
-// Price anchors under the hero CTAs: each chip pre-selects that service in the quote form.
-const HERO_PRICE_CHIPS = [
-  { id: "handyman", label: "Handyman", price: "$49" },
-  { id: "assembly", label: "Assembly", price: "$59" },
-  { id: "locksmith", label: "Locksmith", price: "$79" },
-];
-
-// Same behaviour as selectServiceAndScroll() in LandingPage.jsx: tell the quote
-// form which service to pre-select, then scroll to it.
-function selectServiceAndScroll(serviceId) {
-  window.dispatchEvent(new CustomEvent("fixium:select-service", { detail: { value: serviceId } }));
-  const target = document.getElementById("quote");
-  if (!target) return;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-  window.history.replaceState(null, "", "#quote");
-}
 
 export default function Hero() {
   return (
@@ -77,20 +57,6 @@ export default function Hero() {
             {hero.secondaryCtas[0].label}
           </a>
         </div>
-
-        <ul aria-label="Starting prices" className="mt-6 flex flex-wrap justify-center gap-2">
-          {HERO_PRICE_CHIPS.map((c) => (
-            <li key={c.id}>
-              <button
-                type="button"
-                onClick={() => selectServiceAndScroll(c.id)}
-                className="min-h-11 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
-              >
-                {c.label} <span className="text-orange-300">from {c.price}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
 
         {/* Trust bar directly under the CTAs. */}
         <ul className="mx-auto mt-8 flex max-w-4xl flex-col items-center justify-center gap-3 border-t border-white/20 pt-6 text-sm font-medium text-slate-100 sm:flex-row sm:gap-0 sm:divide-x sm:divide-white/20 md:mt-12">
