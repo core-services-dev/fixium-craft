@@ -23,7 +23,7 @@ const faqPageSchema = {
 export default function Home() {
   return (
     <>
-      {/* JSON-LD structured data (schema.org LocalBusiness: HomeAndConstructionBusiness + Locksmith) — rendered
+      {/* JSON-LD structured data (schema.org HomeAndConstructionBusiness) — rendered
           server-side here rather than inside LandingPage (a client
           component) so it's present in the initial HTML crawlers see,
           with no hydration involved. See contentData.js for the schema

@@ -104,6 +104,7 @@ export function areaServedSchema() {
     {
       "@type": "City",
       name: city,
+      sameAs: "https://en.wikipedia.org/wiki/Pittsburgh",
       containedInPlace: { "@type": "State", name: "Pennsylvania" },
     },
     ...neighborhoods.map((name) => ({
@@ -490,10 +491,11 @@ export const servicesSection = {
 // after `services`, because hasOfferCatalog below needs that array to
 // already exist.
 //
-// @type is ["HomeAndConstructionBusiness", "Locksmith"] — both real
-// schema.org LocalBusiness subtypes. schema.org has no dedicated "Handyman"
-// business type, so HomeAndConstructionBusiness is the closest match for
-// assembly/repair work, and Locksmith covers the lock services. No streetAddress is included on purpose:
+// @type is the single primary category "HomeAndConstructionBusiness" (matches
+// the Google Business Profile category). schema.org has no dedicated
+// "Handyman" business type, so this is the closest match for assembly/repair
+// work. The lock services are still described, but only as Offers/Services
+// inside hasOfferCatalog, not as a second business type. No streetAddress is included on purpose:
 // this is a service-area business with no public storefront, so only
 // city/state + areaServed are given — a common, accepted pattern.
 //
@@ -516,7 +518,7 @@ export const webSiteSchema = {
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["HomeAndConstructionBusiness", "Locksmith"],
+  "@type": "HomeAndConstructionBusiness",
   // Stable identifier other pages' Service schema points back to via
   // `provider: { "@id": ... }` instead of repeating this whole block.
   "@id": `${seo.canonicalUrl}/#business`,
@@ -526,7 +528,10 @@ export const localBusinessSchema = {
     "@type": "Person",
     name: business.owner,
   },
-  description: seo.description,
+  // Schema-only description: home services, furniture assembly and handyman
+  // repairs. (seo.description is the page <meta> description and is left alone.)
+  description:
+    "Fixium Craft is a Pittsburgh, PA home services company: furniture assembly (IKEA and flat-pack, for homes and offices), TV wall mounting and handyman repairs at flat-rate prices quoted upfront. Fully insured, serving Pittsburgh and surrounding neighborhoods.",
   url: `${seo.canonicalUrl}/`,
   telephone: business.phoneSchema,
   email: business.email,
@@ -1335,7 +1340,7 @@ export const servicePillars = [
   },
   {
     slug: "locksmith",
-    providerType: "Locksmith",
+    providerType: "HomeAndConstructionBusiness",
     includedHeading: "Scheduled Locksmith & Smart Lock Installation",
     title: "Scheduled Locksmith & Smart Locks",
     navLabel: "Scheduled Locksmith & Smart Locks",
