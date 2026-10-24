@@ -1,5 +1,5 @@
 ---
-title: "How to Unlock a Locked Car Door in an Emergency (Air Wedge & Long-Reach Tool, the Safe Way)"
+title: "How to Unlock a Locked Car Door Safely (Air Wedge & Long-Reach Tool)"
 metaTitle: "How to Unlock a Car Door With an Air Wedge"
 description: "Locked out of your own car? Learn the safe air wedge and long-reach tool method, plus how to protect door seals, windows and airbags."
 summary: "The safe air wedge and long-reach tool method for your own vehicle, with warnings on airbags, door seals and window mechanisms."
@@ -19,7 +19,7 @@ Read the safety section first. If anything on this page feels beyond your comfor
 ## Safety First: Read This Before You Start
 
 > - **Only use this method on a vehicle you own or have the owner's permission to open.** Nothing in this guide is meant for any other use.
-> - **If a child, a pet or anyone in distress is inside the car, call 911 immediately.** Do not spend time on tools first. A closed car can reach dangerous temperatures in minutes, and emergency responders can open it faster and with legal authority.
+> - **If a child, a pet or anyone in distress is inside the car, call 911 immediately.** Do not spend time on tools first. A closed car can reach dangerous temperatures in minutes, and first responders can open it faster and with legal authority.
 > - **Get yourself out of traffic.** If you are on a road shoulder or in a parking lot lane, turn on hazard lights if you still can, stand on the side of the car away from traffic, and move to a safe spot before you start.
 > - **Doors contain airbag wiring and electronics.** Modern doors hold side-impact airbag components, window motors, speaker wiring and lock actuators. Never jam a tool into door seams, never pry with metal and never push deeper than you can see.
 > - **Stop if the door resists.** Forcing a wedge or rod is how frames bend and seals tear. If the method is not working after about 15 minutes, call a professional.
@@ -141,7 +141,7 @@ Modern car doors contain airbag wiring, lock cables and electronic actuators tha
 
 ### What should I do if a child or pet is locked in the car?
 
-Call 911 right away. Do not wait to try tools. A parked car heats up quickly, and emergency responders are trained and authorized to get inside fast.
+Call 911 right away. Do not wait to try tools. A parked car heats up quickly, and first responders are trained and authorized to get inside fast.
 
 ### Does this method work on every car?
 
