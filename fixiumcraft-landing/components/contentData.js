@@ -400,7 +400,7 @@ export const services = [
       {
         name: "Lock Repair & Scheduled Door Opening",
         description:
-          "Scheduled lock repair and door opening for homeowners and offices locked out in Pittsburgh, PA, with ownership confirmed and upfront flat-rate pricing. Not an emergency service.",
+          "Scheduled lock repair and door or car opening for homeowners and offices locked out in Pittsburgh, PA, with ownership confirmed and upfront flat-rate pricing. Not an emergency service.",
       },
     ],
     features: [
@@ -1352,12 +1352,12 @@ export const servicePillars = [
     image: "/images/projects/locksmith-door-hardware.jpg",
     alt: "Smart lock installed on a door: scheduled locksmith service in Pittsburgh, PA",
     description:
-      "Lock repair and replacement, rekeying, scheduled door opening, smart locks, handlesets and deadbolts for homes and offices. By appointment only, flat-rate and upfront.",
+      "Lock repair and replacement, rekeying, scheduled door and car opening, smart locks, handlesets and deadbolts for homes and offices. By appointment only, flat-rate and upfront.",
     features: [
       "Smart locks: Schlage, Yale, Ring, Nest & more",
       "Lock repair & replacement for homes & offices",
       "Rekeying, handlesets & deadbolts",
-      "Scheduled locked-out door opening",
+      "Scheduled locked-out door opening (home, office & car)",
       "By appointment only",
     ],
     startingPrice: "From $79",
@@ -1380,9 +1380,9 @@ export const servicePillars = [
     h1: "Scheduled Locksmith & Smart Lock Installation in Pittsburgh",
     metaTitle: "Lock Repair, Rekeying & Smart Locks Pittsburgh | Fixium Craft",
     metaDescription:
-      "Scheduled locksmith in Pittsburgh, PA: lock repair, replacement, rekeying, door opening and smart locks. By appointment, flat-rate from $79.",
+      "Scheduled locksmith in Pittsburgh, PA: lock repair, rekeying, home and car door opening, smart locks. By appointment, flat-rate from $79.",
     intro: [
-      `Fixium Craft handles locks for homes and offices across ${business.address.city}, ${business.address.state}: lock repair and replacement, rekeying, smart lock installation, deadbolts and handlesets, plus scheduled door opening if you are locked out of your own home or office. Everything is by appointment only (we do not offer emergency or 24/7 service), so book ahead for an upfront flat-rate quote.`,
+      `Fixium Craft handles locks for homes and offices across ${business.address.city}, ${business.address.state}: lock repair and replacement, rekeying, smart lock installation, deadbolts and handlesets, plus scheduled door opening if you are locked out of your own home, office or car. Everything is by appointment only (we do not offer emergency or 24/7 service), so book ahead for an upfront flat-rate quote.`,
       `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront and no surprise fees.`,
     ],
     taskGroups: [
@@ -1399,7 +1399,8 @@ export const servicePillars = [
         heading: "Locked out (scheduled visit)",
         items: [
           "Open a locked door to your home or office without damaging the lock where possible",
-          "We confirm you own or live at the property before we open a door",
+          "Open a locked car door with an air wedge and long-reach tool, without damaging paint or seals where possible",
+          "We confirm you own or live at the property, or that the car is yours, before we open anything",
           "Booked ahead like all our work, 7 AM to 11 PM; not an emergency service",
         ],
       },
@@ -1430,6 +1431,11 @@ export const servicePillars = [
         question: "Can you open a door I'm locked out of?",
         answer:
           "Yes, as a scheduled visit. We are not an emergency or 24/7 service, so book a time between 7 AM and 11 PM. We confirm you own or live at the property before opening a door, and the flat rate is quoted before we start.",
+      },
+      {
+        question: "Can you open my car if I'm locked out?",
+        answer:
+          "Yes, as a scheduled visit with the same rules as a door: we confirm the car is yours before opening it, and quote a flat rate upfront. We are not an emergency service. If a child or pet is inside the car, call 911 right away.",
       },
       {
         question: "Do I need to buy the smart lock myself?",
