@@ -18,7 +18,7 @@ import { socialMetadata } from "@/lib/seo";
 const price = (slug: string) => servicePillars.find((p) => p.slug === slug)?.startingPrice.toLowerCase() ?? "";
 
 const title = `Home Services in Pittsburgh, PA | ${business.name}`;
-const description = `Handyman ${price("handyman-repairs")}, furniture assembly ${price("furniture-assembly")}, TV wall mounting ${price("tv-mounting")} and scheduled smart lock service ${price("locksmith")} in Pittsburgh, PA. Flat-rate quotes, fully insured.`;
+const description = `Handyman ${price("handyman-repairs")}, furniture assembly ${price("furniture-assembly")} and TV wall mounting ${price("tv-mounting")} in Pittsburgh, PA. Flat-rate quotes, fully insured.`;
 
 export const metadata: Metadata = {
   title,
@@ -96,8 +96,8 @@ export default function ServicesHubPage() {
             Home Services in Pittsburgh, PA
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Furniture assembly, TV wall mounting, handyman repairs and scheduled smart lock
-            installation, all from one local team. Every quote is flat-rate and sent before we
+            Furniture assembly, TV wall mounting and handyman repairs, all from one local team.
+            Scheduled smart lock installation is also available. Every quote is flat-rate and sent before we
             start.
           </p>
         </div>

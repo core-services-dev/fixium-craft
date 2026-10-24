@@ -134,7 +134,7 @@ export const serviceAreasSection = {
   popularSearches: [
     { label: "IKEA PAX assembly in Pittsburgh", href: "/services/furniture-assembly" },
     { label: "TV wall mounting service in Mt. Lebanon", href: "/services/tv-mounting" },
-    { label: "smart lock installation in Squirrel Hill", href: "/services/locksmith" },
+    { label: "office furniture assembly in Downtown Pittsburgh", href: "/services/furniture-assembly" },
     { label: "handyman services in Shadyside", href: "/services/handyman-repairs" },
   ],
 };
@@ -142,10 +142,10 @@ export const serviceAreasSection = {
 export const seo = {
   title: "Professional Furniture Assembly & Handyman Services in Pittsburgh, PA",
   description:
-    "Top-rated local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting, handyman repairs, and smart lock installation with flat-rate pricing.",
+    "Top-rated local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting and handyman repairs with upfront flat-rate pricing.",
   keywords: [
-    // Lock/handyman local-search terms first, then the original
-    // furniture-assembly and general home-repair terms.
+    // Furniture assembly, TV mounting and handyman terms only (locksmith
+    // is a secondary service and is not targeted site-wide).
     "furniture assembly near me",
     "furniture assembly services",
     "handyman furniture assembly",
@@ -162,10 +162,7 @@ export const seo = {
     "TV wall mounting service in Pittsburgh",
     "commercial furniture assembly Pittsburgh",
     "office furniture assembly Pittsburgh",
-    "scheduled locksmith Pittsburgh",
     "small home repairs and maintenance",
-    "lock replacement Pittsburgh",
-    "lock repair Pittsburgh",
     "office chair assembly Pittsburgh",
     "TV mounting Pittsburgh",
     "furniture assembly Pittsburgh",
@@ -175,8 +172,6 @@ export const seo = {
     "flat pack furniture assembly",
     "home repair services Pittsburgh",
     "small home repairs Pittsburgh",
-    "smart lock installation Pittsburgh",
-    "residential locksmith Pittsburgh",
   ],
   // This is the live, currently-deployed URL (verified reachable) — swap
   // to the custom domain here (and nowhere else) once fixiumcraft.com is
@@ -195,14 +190,14 @@ export const hero = {
   eyebrow: "Fully Insured | Upfront Flat Rates",
   headline: "Professional Furniture Assembly & Handyman Services in Pittsburgh",
   subheadline:
-    "Furniture assembly near you in Pittsburgh: expert IKEA assembly, TV wall mounting, handyman repairs, and scheduled smart lock installations at upfront flat rates.",
+    "Furniture assembly near you in Pittsburgh: expert IKEA assembly, TV wall mounting and handyman repairs at upfront flat rates.",
   // Explicit B2B line, rendered under the subheadline in Hero().
   commercialLine:
     "Assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes.",
   // Label above the 3 quick-pick service cards directly under the hero CTAs.
   pickerLabel: "What do you need help with?",
   supportingCopy:
-    "Home and business furniture assembly, TV mounting, handyman repairs and scheduled locksmith services — one local team for the whole to-do list.",
+    "Home and business furniture assembly, TV mounting and handyman repairs — one local team for the whole to-do list.",
   primaryCta: { label: "Get Flat-Rate Quote", href: "#quote", action: "form" },
   // Trust bar directly under the hero CTAs. Prices mirror the "starting at"
   // prices on the service pages (handyman $49, assembly $59, locksmith $79).
@@ -1556,7 +1551,7 @@ export const servicePillars = [
 ];
 
 export const footer = {
-  about: `${business.name} provides residential and commercial furniture assembly, TV mounting, general handyman repairs and scheduled smart lock installation across the Pittsburgh area.`,
+  about: `${business.name} provides residential and commercial furniture assembly, TV mounting, and general handyman repairs across the Pittsburgh area.`,
   links: [
     { label: "Services", href: "#services" },
     { label: "Recent Projects", href: "#recent-work" },
