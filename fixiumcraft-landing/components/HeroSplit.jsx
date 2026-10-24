@@ -6,6 +6,7 @@
 // brightest parts of the photo.
 
 import Image from "next/image";
+import Link from "next/link";
 import { BadgeCheck, Clock, MessageSquareText, ShieldCheck, Star, Tag } from "lucide-react";
 import { business, hero } from "./contentData";
 
@@ -73,6 +74,13 @@ export default function Hero() {
             );
           })}
         </ul>
+
+        <p className="mt-6 text-sm text-slate-300">
+          {hero.alsoLine.text}{" "}
+          <Link href={hero.alsoLine.href} className="font-medium text-white underline underline-offset-2 hover:text-slate-200">
+            {hero.alsoLine.label}
+          </Link>
+        </p>
       </div>
     </section>
   );

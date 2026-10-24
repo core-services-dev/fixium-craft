@@ -199,6 +199,9 @@ export const hero = {
   supportingCopy:
     "Home and business furniture assembly, TV mounting and handyman repairs — one local team for the whole to-do list.",
   primaryCta: { label: "Get Flat-Rate Quote", href: "#quote", action: "form" },
+  // Small secondary line under the trust bar: lets visitors know locksmith
+  // work exists without making it part of the hero's main message.
+  alsoLine: { text: "Also available by appointment:", label: "locksmith & smart lock service", href: "/services/locksmith" },
   // Trust bar directly under the hero CTAs. Prices mirror the "starting at"
   // prices on the service pages (handyman $49, assembly $59, locksmith $79).
   trustBar: [
@@ -393,6 +396,11 @@ export const services = [
         name: "Smart Lock Installation",
         description:
           "Scheduled smart lock installation and setup (Yale, Schlage, August, Google Nest, Ring, Eufy), plus handlesets and deadbolts for homes and offices in Pittsburgh, PA.",
+      },
+      {
+        name: "Lock Repair & Scheduled Door Opening",
+        description:
+          "Scheduled lock repair and door opening for homeowners and offices locked out in Pittsburgh, PA, with ownership confirmed and upfront flat-rate pricing. Not an emergency service.",
       },
     ],
     features: [
@@ -1004,7 +1012,7 @@ export const faq = [
     id: "mobile-locksmith",
     question: "Do you offer locksmith services in Pittsburgh?",
     answer:
-      "Yes, by appointment only. We come to your home or office for scheduled smart lock installation, rekeying, deadbolt and handleset replacement. Locksmith jobs start at $79, flat-rate, and you can book ahead any day between 7 AM and 11 PM.",
+      "Yes, by appointment only. We come to your home or office for scheduled lock repair and replacement, smart lock installation, rekeying, deadbolt and handleset work, and door opening if you are locked out. Locksmith jobs start at $79, flat-rate, and you can book ahead any day between 7 AM and 11 PM.",
   },
   {
     id: "commercial",
@@ -1105,8 +1113,8 @@ export const serviceDetails = [
   {
     slug: "locksmith",
     heading: "Scheduled Locksmith & Smart Lock Installation",
-    body: "By appointment: smart locks, deadbolts and rekeying for homes and offices.",
-    subFeatures: ["Smart Lock Installation", "Rekeying & Deadbolts", "Handlesets for Homes & Offices"],
+    body: "By appointment: lock repair, rekeying, smart locks and door opening for homes and offices.",
+    subFeatures: ["Smart Lock Installation", "Lock Repair, Rekeying & Replacement", "Scheduled Locked-Out Door Opening"],
     cta: "See locksmith services",
   },
 ];
@@ -1344,11 +1352,12 @@ export const servicePillars = [
     image: "/images/projects/locksmith-door-hardware.jpg",
     alt: "Smart lock installed on a door: scheduled locksmith service in Pittsburgh, PA",
     description:
-      "Smart lock setup (Schlage, Yale, Ring, Nest), handlesets, deadbolts and rekeying for homes and offices. By appointment only, flat-rate and upfront.",
+      "Lock repair and replacement, rekeying, scheduled door opening, smart locks, handlesets and deadbolts for homes and offices. By appointment only, flat-rate and upfront.",
     features: [
       "Smart locks: Schlage, Yale, Ring, Nest & more",
-      "Handlesets & deadbolts",
-      "Rekeying & lock replacement for homes & offices",
+      "Lock repair & replacement for homes & offices",
+      "Rekeying, handlesets & deadbolts",
+      "Scheduled locked-out door opening",
       "By appointment only",
     ],
     startingPrice: "From $79",
@@ -1369,20 +1378,29 @@ export const servicePillars = [
       { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "Scheduled Locksmith & Smart Lock Installation in Pittsburgh",
-    metaTitle: "Smart Lock Installation & Rekeying Pittsburgh, PA | Fixium Craft",
+    metaTitle: "Lock Repair, Rekeying & Smart Locks Pittsburgh | Fixium Craft",
     metaDescription:
-      "Scheduled locksmith in Pittsburgh, PA: smart lock installation, rekeying, deadbolts and handlesets. By appointment, flat-rate from $79, fully insured.",
+      "Scheduled locksmith in Pittsburgh, PA: lock repair, replacement, rekeying, door opening and smart locks. By appointment, flat-rate from $79.",
     intro: [
-      `Fixium Craft handles locks for homes and offices across ${business.address.city}, ${business.address.state}: smart lock installation, rekeying, deadbolt replacement and handlesets. Everything is by appointment only, so book ahead for an upfront flat-rate quote.`,
+      `Fixium Craft handles locks for homes and offices across ${business.address.city}, ${business.address.state}: lock repair and replacement, rekeying, smart lock installation, deadbolts and handlesets, plus scheduled door opening if you are locked out of your own home or office. Everything is by appointment only (we do not offer emergency or 24/7 service), so book ahead for an upfront flat-rate quote.`,
       `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront and no surprise fees.`,
     ],
     taskGroups: [
       {
-        heading: "Rekeying & lock replacement",
+        heading: "Lock repair, rekeying & replacement",
         items: [
+          "Repair sticking, jammed or worn locks and deadbolts",
           "Rekey existing locks to a new key, common for new homeowners and new offices",
           "Replace worn, damaged, or outdated knobs and deadbolts",
           "Cylinder replacement and key matching",
+        ],
+      },
+      {
+        heading: "Locked out (scheduled visit)",
+        items: [
+          "Open a locked door to your home or office without damaging the lock where possible",
+          "We confirm you own or live at the property before we open a door",
+          "Booked ahead like all our work, 7 AM to 11 PM; not an emergency service",
         ],
       },
       {
@@ -1407,6 +1425,11 @@ export const servicePillars = [
         question: "Is locksmith service by appointment only?",
         answer:
           "Yes. All locksmith work is scheduled ahead. Send us your details, we quote a flat rate upfront, and we book a time between 7 AM and 11 PM.",
+      },
+      {
+        question: "Can you open a door I'm locked out of?",
+        answer:
+          "Yes, as a scheduled visit. We are not an emergency or 24/7 service, so book a time between 7 AM and 11 PM. We confirm you own or live at the property before opening a door, and the flat rate is quoted before we start.",
       },
       {
         question: "Do I need to buy the smart lock myself?",
