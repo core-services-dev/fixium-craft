@@ -1280,7 +1280,7 @@ function QualityGuarantee() {
 function About() {
   return (
     <section id="about" className="bg-slate-50 px-4 py-16 md:py-24">
-      <div className="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2 sm:items-center sm:gap-12">
+      <div className="mx-auto max-w-3xl">
         <div>
           <h2 className="text-balance text-2xl font-bold text-slate-900 sm:text-3xl">
             {aboutSection.heading}
@@ -1292,19 +1292,6 @@ function About() {
               </p>
             ))}
           </div>
-        </div>
-        <div className="flex flex-col gap-3 surface-card p-6">
-          {guarantees.map((g) => (
-            <div key={g.id} className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                <IconCheck className="h-4 w-4" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-900">{g.title}</p>
-                <p className="mt-0.5 text-xs leading-relaxed text-slate-600">{g.description}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

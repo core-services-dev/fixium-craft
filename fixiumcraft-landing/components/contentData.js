@@ -979,30 +979,6 @@ export const faq = [
       "No — our technicians bring all necessary tools. If your furniture is missing hardware, we carry common replacement parts too.",
   },
   {
-    id: "tv-cost",
-    question: "How much does TV wall mounting cost in Pittsburgh?",
-    answer:
-      "TV mounting with Fixium Craft starts at $89 flat-rate, stud-anchored and level, with cable concealment available. You get your exact quote by text before we start.",
-  },
-  {
-    id: "tv-near-me",
-    question: "Is there a TV wall mounting service near me in Pittsburgh?",
-    answer:
-      "Yes. Fixium Craft is a local TV wall mounting service covering Pittsburgh and nearby neighborhoods, with same-day and next-day slots usually available. Text us your TV size and a photo of the wall.",
-  },
-  {
-    id: "tv-drywall",
-    question: "Can you do TV mounting on drywall?",
-    answer:
-      "Yes, TV mounting on drywall is our everyday job. We find the studs, anchor the bracket into them and hang the TV level, so it holds without relying on drywall anchors alone.",
-  },
-  {
-    id: "tv-flat-screen",
-    question: "Can you do flat-screen TV wall mounting?",
-    answer:
-      "Yes. Send your TV size and a photo of the wall, and we'll confirm the mount type and cable route in your flat-rate quote. Fixed, tilting and full-motion brackets are all fine.",
-  },
-  {
     id: "ikea-cost",
     question: "How much does IKEA furniture assembly cost in Pittsburgh?",
     answer:
@@ -1033,18 +1009,6 @@ export const faq = [
       "IKEA, Wayfair, Amazon, Target, Ashley, and pretty much any flat-pack or ready-to-assemble furniture. If it comes in a box, we can build it.",
   },
   {
-    id: "handyman-small-jobs",
-    question: "Is there a handyman for small jobs near me?",
-    answer:
-      "Yes. Small jobs are what we do best: patching a wall, fixing a cabinet door, swapping a faucet or light fixture. Handyman visits start at $49 flat-rate, and you can bundle several jobs into one visit.",
-  },
-  {
-    id: "handyman-pittsburgh",
-    question: "Is there a handyman near me in Pittsburgh, PA?",
-    answer:
-      "Yes. We're a local Pittsburgh handyman serving the city and nearby neighborhoods, 7 AM to 11 PM. Send your ZIP code and we'll confirm availability right away.",
-  },
-  {
     id: "area",
     question: "What areas do you service?",
     answer: `We serve ${business.serviceArea}, including ${neighborhoods.join(", ")}. Send us your ZIP code and we'll confirm availability right away.`,
@@ -1060,12 +1024,6 @@ export const faq = [
     question: "How do you anchor TVs and IKEA furniture to the wall?",
     answer:
       "We locate real wall studs with a stud finder before drilling and use the mount or furniture manufacturer's rated hardware — never drywall anchors alone for anything load-bearing. For tall IKEA pieces like PAX wardrobes and BILLY bookcases, we install the included anti-tip wall strap so the piece can't tip forward, which matters most in homes with kids or pets.",
-  },
-  {
-    id: "smart-locks",
-    question: "Do you install smart locks or rekey existing locks?",
-    answer:
-      "Yes. We install and set up smart locks from Yale, Schlage, August, Google Nest, and Eufy, plus standard deadbolts and handle sets. Bring your own lock and we'll handle the rest. We also rekey and replace cylinders — a common request for new homeowners.",
   },
 ];
 
@@ -1160,7 +1118,7 @@ export const servicePillars = [
       "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX, beds, desks, office chairs. Flat-rate pricing from $59, fully insured.",
     intro: [
       `Fixium Craft is a handyman furniture assembly service across ${business.address.city}, ${business.address.state}: assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes. IKEA PAX wardrobes, beds, desks, dressers and anything else that comes in a box, built sturdy and level the first time.`,
-      `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
+      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
     ],
     taskGroups: [
       {
@@ -1275,7 +1233,7 @@ export const servicePillars = [
       "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate from $89, fully insured. Free quote.",
     intro: [
       `Looking for a TV wall mounting service near you in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
-      `We serve ${neighborhoods.join(", ")}, and nearby neighborhoods. Every quote is flat-rate and upfront, and every technician is background-checked and fully insured.`,
+      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, and every technician is background-checked and fully insured.`,
     ],
     taskGroups: [
       {
@@ -1383,7 +1341,7 @@ export const servicePillars = [
       "Scheduled locksmith in Pittsburgh, PA: lock repair, rekeying, home and car door opening, smart locks. By appointment, flat-rate from $79.",
     intro: [
       `Fixium Craft handles locks for homes and offices across ${business.address.city}, ${business.address.state}: lock repair and replacement, rekeying, smart lock installation, deadbolts and handlesets, plus scheduled door opening if you are locked out of your own home, office or car. Everything is by appointment only (we do not offer emergency or 24/7 service), so book ahead for an upfront flat-rate quote.`,
-      `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, with flat-rate pricing quoted upfront and no surprise fees.`,
+      `Bring your own Schlage, Google Nest, Ring, Yale, August, or Eufy smart lock (or a standard deadbolt or handle set) and we'll install and configure it. We work across Pittsburgh and nearby suburbs, with flat-rate pricing quoted upfront and no surprise fees.`,
     ],
     taskGroups: [
       {
@@ -1501,7 +1459,7 @@ export const servicePillars = [
       "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes, fully insured.",
     intro: [
       `Fixium Craft is a local handyman for small jobs near you in ${business.address.city}, ${business.address.state}: the repairs that keep getting pushed back, like drywall patching, cabinet repair, minor plumbing and electrical fixtures, and general home upkeep.`,
-      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We serve ${neighborhoods.join(", ")}, and nearby neighborhoods, and every technician is background-checked and fully insured.`,
+      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We work across Pittsburgh and nearby suburbs, and every technician is background-checked and fully insured.`,
     ],
     taskGroups: [
       {

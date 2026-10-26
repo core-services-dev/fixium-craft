@@ -8,7 +8,7 @@ import WorkGallery from "./WorkGallery";
 import TrustStrip from "./TrustStrip";
 import PriceEstimator from "./PriceEstimator";
 import RelatedGuides from "./RelatedGuides";
-import { areaServedSchema, business, neighborhoods, seo, servicePillars } from "./contentData";
+import { areaServedSchema, business, seo, servicePillars } from "./contentData";
 
 // ServicePillarPage.tsx
 //
@@ -311,24 +311,13 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
             </div>
           </section>
 
-          {/* Areas */}
-          <section>
-            <h2 className="text-xl font-bold sm:text-2xl">
-              Serving {business.address.city} &amp; Nearby
-            </h2>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {[`${business.address.city}, ${business.address.state}`, ...neighborhoods].map(
-                (area) => (
-                  <li
-                    key={area}
-                    className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 sm:text-sm"
-                  >
-                    {area}
-                  </li>
-                ),
-              )}
-            </ul>
-          </section>
+          {/* Areas: full list lives on the homepage only, to avoid repeating it on every page */}
+          <p className="text-sm text-slate-600 sm:text-base">
+            Serving {business.address.city} &amp; nearby suburbs.{" "}
+            <Link href="/#service-areas" className="font-semibold text-emerald-700 underline">
+              See all areas we cover
+            </Link>
+          </p>
 
           {/* Other services */}
           <section>

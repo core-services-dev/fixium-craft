@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(seo.canonicalUrl),
   title: seo.title,
   description: seo.description,
-  keywords: seo.keywords,
   // Resolved against metadataBase into the bare origin
   // ("https://fixium-craft.vercel.app", no trailing slash) — that's
   // Next.js's own normalization for a homepage canonical URL (it always
