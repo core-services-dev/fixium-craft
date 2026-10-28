@@ -12,10 +12,14 @@ import { AREAS } from "@/components/areasData";
 // /services/handyman-repairs (the old /services/handyman-style slugs
 // 308-redirect via next.config.ts and must not be listed).
 //
-// lastModified is the build/revalidation time (new Date()).
+// lastModified must be the date the page content really changed: Google learns
+// to ignore a lastmod that changes on every build. Update SITE_UPDATED only
+// when site copy actually changes; guides use their own `updated` date.
+const SITE_UPDATED = new Date("2026-10-28");
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = seo.canonicalUrl.replace(/\/$/, "");
-  const now = new Date();
+  const now = SITE_UPDATED;
 
   return [
     { url: `${base}/`, lastModified: now, changeFrequency: "daily", priority: 1.0 },
@@ -34,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     ...getAllGuides().map((g) => ({
       url: `${base}/guides/${g.slug}`,
-      lastModified: now,
+      lastModified: new Date(g.updated),
       changeFrequency: "weekly" as const,
       priority: 0.6,
     })),
