@@ -548,9 +548,10 @@ export const localBusinessSchema = {
     areaServed: "US-PA",
     availableLanguage: "English",
   },
-  // Still to add once the owner confirms them (all strengthen the local
-  // entity): `sameAs` (Google Business Profile / Facebook / Yelp URLs),
-  // `hasMap` (the Google Maps listing URL) and `geo`.
+  // Profiles that describe this same business (strengthens the local entity).
+  // Add the Google Business Profile share link and Facebook here once known.
+  sameAs: ["https://www.yelp.com/biz/fixium-craft-pittsburgh"],
+  hasMap: "https://www.google.com/maps/search/?api=1&query=Fixium+Craft+Pittsburgh+PA",
   address: {
     "@type": "PostalAddress",
     addressLocality: business.address.city,
