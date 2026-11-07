@@ -173,10 +173,10 @@ export const seo = {
     "home repair services Pittsburgh",
     "small home repairs Pittsburgh",
   ],
-  // This is the live, currently-deployed URL (verified reachable) — swap
-  // to the custom domain here (and nowhere else) once fixiumcraft.com is
-  // actually pointed at this deployment.
-  canonicalUrl: "https://fixium-craft.vercel.app",
+  // The site's primary domain. Every canonical, Open Graph URL, sitemap and
+  // robots entry and JSON-LD @id is built from this one value, so change it
+  // here and nowhere else (no trailing slash).
+  canonicalUrl: "https://fixiumcraft.com",
   ogImage: "/og-image.jpg",
 };
 
@@ -536,6 +536,7 @@ export const localBusinessSchema = {
   description:
     "Fixium Craft is a Pittsburgh, PA home services company: furniture assembly (IKEA and flat-pack, for homes and offices), TV wall mounting and handyman repairs at flat-rate prices quoted upfront. Fully insured, serving Pittsburgh and surrounding neighborhoods.",
   url: `${seo.canonicalUrl}/`,
+  slogan: business.tagline,
   telephone: business.phoneSchema,
   email: business.email,
   logo: `${seo.canonicalUrl}/logo-icon.png`,
@@ -558,6 +559,22 @@ export const localBusinessSchema = {
     addressRegion: business.address.state,
     addressCountry: "US",
   },
+  // Centre of Pittsburgh, not a street address: this is a service-area
+  // business with no public storefront, so the point only tells search
+  // engines which city the business is based in.
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 40.4406,
+    longitude: -79.9959,
+  },
+  // What the business does, as plain service names (the detailed offers
+  // live in hasOfferCatalog below).
+  serviceType: [
+    "Furniture assembly",
+    "TV wall mounting",
+    "Handyman repairs",
+    "Lock repair and smart lock installation",
+  ],
   // The core city plus every specific neighborhood/municipality we serve
   // (see `neighborhoods` above) — an array of Place entries is valid
   // schema.org, and naming each one (rather than just "Pittsburgh &
@@ -567,27 +584,17 @@ export const localBusinessSchema = {
   // Topics/skills the business is expert in — helps search and AI
   // assistants associate the business with these services.
   knowsAbout: [
-    "Furniture Assembly",
-    "Furniture Assembly Services",
-    "IKEA Furniture Assembly in Pittsburgh",
-    "TV Wall Mounting in Pittsburgh",
-    "Handyman Services in Pittsburgh",
-    "Handyman Furniture Assembly",
-    "Office Furniture Assembly Service",
-    "Outdoor Furniture Assembly",
-    "TV Wall Mounting Service",
-    "TV Mounting on Drywall",
-    "Flat-Screen TV Wall Mounting",
-    "Handyman for Small Jobs",
-    "Handyman Near Me in Pittsburgh, PA",
-    "Commercial Furniture Assembly",
-    "Office Furniture Assembly",
-    "IKEA Assembly",
-    "TV Wall Mounting",
-    "Smart Lock Installation",
-    "Lock Rekeying",
-    "Drywall Patching",
-    "Handyman Services",
+    "IKEA furniture assembly",
+    "Flat-pack furniture assembly",
+    "Office furniture assembly",
+    "TV wall mounting",
+    "Mounting a TV on drywall",
+    "Anchoring furniture to a wall",
+    "Handyman repairs",
+    "Drywall patching",
+    "Hanging shelves and mirrors",
+    "Smart lock installation",
+    "Lock rekeying",
   ],
   // Structured re-statement of business.hours ("Mon–Sun, 7am–11pm") — keep in
   // sync if hours ever change (see the comment on business.hours).

@@ -7,15 +7,14 @@ import AnalyticsProvider from "@/components/AnalyticsProvider";
 // metadataBase lets every relative URL below (canonical, openGraph.url,
 // and the auto-injected opengraph-image.tsx tags) resolve to an absolute
 // one without repeating the domain everywhere. seo.canonicalUrl is the
-// live, currently-deployed URL (https://fixium-craft.vercel.app, no
-// trailing slash) — update it here (and nowhere else) if a custom domain
-// is ever pointed at this deployment instead.
+// site's primary domain (https://fixiumcraft.com, no trailing slash) —
+// change it in contentData.js and nowhere else.
 export const metadata: Metadata = {
   metadataBase: new URL(seo.canonicalUrl),
   title: seo.title,
   description: seo.description,
   // Resolved against metadataBase into the bare origin
-  // ("https://fixium-craft.vercel.app", no trailing slash) — that's
+  // ("https://fixiumcraft.com", no trailing slash) — that's
   // Next.js's own normalization for a homepage canonical URL (it always
   // collapses a root path to origin-only, by design, regardless of what
   // string is passed here), matching seo.canonicalUrl exactly.

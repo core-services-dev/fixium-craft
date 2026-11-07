@@ -41,6 +41,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The old fixium-craft.vercel.app address permanently forwards to the
+      // custom domain, so Google moves the indexed pages and their signals.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "fixium-craft.vercel.app" }],
+        destination: "https://fixiumcraft.com/:path*",
+        permanent: true,
+      },
       { source: "/furniture-assembly-pittsburgh", destination: "/services/furniture-assembly", permanent: true },
       { source: "/tv-mounting-pittsburgh", destination: "/services/tv-mounting", permanent: true },
       { source: "/door-lock-repair-pittsburgh", destination: "/services/locksmith", permanent: true },
