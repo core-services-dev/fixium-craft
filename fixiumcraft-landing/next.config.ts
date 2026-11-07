@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         has: [{ type: "host", value: "fixium-craft.vercel.app" }],
-        destination: "https://fixiumcraft.com/:path*",
+        destination: "https://www.fixiumcraft.com/:path*",
         permanent: true,
       },
       { source: "/furniture-assembly-pittsburgh", destination: "/services/furniture-assembly", permanent: true },

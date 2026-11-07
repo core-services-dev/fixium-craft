@@ -173,10 +173,10 @@ export const seo = {
     "home repair services Pittsburgh",
     "small home repairs Pittsburgh",
   ],
-  // The site's primary domain. Every canonical, Open Graph URL, sitemap and
+  // The site's primary domain (Vercel serves it at www; fixiumcraft.com redirects to it). Every canonical, Open Graph URL, sitemap and
   // robots entry and JSON-LD @id is built from this one value, so change it
   // here and nowhere else (no trailing slash).
-  canonicalUrl: "https://fixiumcraft.com",
+  canonicalUrl: "https://www.fixiumcraft.com",
   ogImage: "/og-image.jpg",
 };
 
