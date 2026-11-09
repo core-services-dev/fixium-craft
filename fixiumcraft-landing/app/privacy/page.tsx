@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
     <LegalPageLayout title="Privacy Policy" updated={LAST_UPDATED}>
       <LegalSection heading="Introduction">
         <p>
-          {business.legalName} ("{business.name}," "we," "us," or "our")
+          {business.name} ("we," "us," or "our")
           provides furniture assembly, TV &amp; wall mounting, and minor home
           repair services in {business.serviceArea}. This Privacy Policy
           explains what information we collect through {seo.canonicalUrl}{" "}

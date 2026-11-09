@@ -9,7 +9,7 @@ date: 2026-10-15
 updated: 2026-10-15
 totalTime: PT15M
 ctaTitle: "Locks Giving You Trouble at Home? Fixium Craft Can Help"
-ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window, so for a locked car call your roadside assistance provider or an auto locksmith. We do not service vehicles. For your home, our fully insured Pittsburgh technicians handle scheduled smart lock installs, rekeying and deadbolt replacement with flat-rate pricing."
+ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window, so for a locked car call your roadside assistance provider or an auto locksmith. We do not service vehicles. For your home, our Pittsburgh technicians handle scheduled smart lock installs, rekeying and deadbolt replacement with flat-rate pricing."
 ---
 
 Being locked out of your own car is stressful, and it rarely happens somewhere convenient. This guide walks through the method professional locksmiths use for a standard lockout: a small inflatable **air wedge** to open a tiny gap at the door frame, and a **long-reach tool** to press the unlock button or pull the interior handle. Done slowly and with padding, it leaves no marks. Done fast, it bends door frames, tears weatherstripping and can damage wiring inside the door.

@@ -12,7 +12,6 @@
 
 export const business = {
   name: "Fixium Craft",
-  legalName: "Fixium Craft LLC",
   // Used for schema.org `founder` in localBusinessSchema below, so
   // AI/search engines can attribute the business to an owner.
   owner: "Vadim",
@@ -67,7 +66,7 @@ export const aboutSection = {
   heading: "Built on Craftsman-Quality Work, Not Shortcuts",
   body: [
     `${business.name} was founded to bring real craftsman-quality assembly, repair, and security installation work to ${business.address.city} homeowners and renters — the kind of job where things are level, square, and anchored right the first time, not just "good enough."`,
-    "Every technician is background-checked and fully insured, every quote is flat-rate and upfront before we pick up a tool, and every job gets the same attention whether it's a single shelf or a full day of work.",
+    "Every technician is background-checked, every quote is flat-rate and upfront before we pick up a tool, and every job gets the same attention whether it's a single shelf or a full day of work.",
   ],
 };
 
@@ -182,12 +181,11 @@ export const seo = {
 
 export const trustBadges = [
   { id: "pricing", label: "Upfront Flat Rates" },
-  { id: "insured", label: "Fully Insured" },
   { id: "sameday", label: "Scheduled & Same-Day Slots" },
 ];
 
 export const hero = {
-  eyebrow: "Fully Insured | Upfront Flat Rates",
+  eyebrow: "Upfront Flat Rates | Pittsburgh, PA",
   headline: "Professional Furniture Assembly & Handyman Services in Pittsburgh",
   subheadline:
     "Furniture assembly near you in Pittsburgh: expert IKEA assembly, TV wall mounting and handyman repairs at upfront flat rates.",
@@ -207,7 +205,6 @@ export const hero = {
   trustBar: [
     { id: "pricing", label: "Transparent Flat-Rate Pricing" },
     { id: "sameday", label: "Same-Day Service" },
-    { id: "insured", label: "Fully Insured" },
     { id: "background", label: "Background-Checked Techs" },
     { id: "rating", label: "5.0 on Google" },
   ],
@@ -245,7 +242,7 @@ export const painPoints = {
       id: "trust",
       problem: "Letting a stranger into your home",
       solution:
-        "Background-checked, fully insured technicians with upfront pricing — no surprise fees, no guesswork.",
+        "Background-checked technicians with upfront pricing — no surprise fees, no guesswork.",
     },
   ],
 };
@@ -526,7 +523,6 @@ export const localBusinessSchema = {
   // `provider: { "@id": ... }` instead of repeating this whole block.
   "@id": `${seo.canonicalUrl}/#business`,
   name: business.name,
-  legalName: business.legalName,
   founder: {
     "@type": "Person",
     name: business.owner,
@@ -534,7 +530,7 @@ export const localBusinessSchema = {
   // Schema-only description: home services, furniture assembly and handyman
   // repairs. (seo.description is the page <meta> description and is left alone.)
   description:
-    "Fixium Craft is a Pittsburgh, PA home services company: furniture assembly (IKEA and flat-pack, for homes and offices), TV wall mounting and handyman repairs at flat-rate prices quoted upfront. Fully insured, serving Pittsburgh and surrounding neighborhoods.",
+    "Fixium Craft is a Pittsburgh, PA home services company: furniture assembly (IKEA and flat-pack, for homes and offices), TV wall mounting and handyman repairs at flat-rate prices quoted upfront. Serving Pittsburgh and surrounding neighborhoods.",
   url: `${seo.canonicalUrl}/`,
   slogan: business.tagline,
   telephone: business.phoneSchema,
@@ -885,11 +881,6 @@ export const guarantees = [
     description: "Not happy with the job? We'll make it right at no extra cost.",
   },
   {
-    id: "insured",
-    title: "Licensed & Insured",
-    description: "Every technician is background-checked and fully insured.",
-  },
-  {
     id: "communication",
     title: "Easy to Reach",
     description: "Call, text, or WhatsApp — real answers from a real person, no call centers or endless hold music.",
@@ -1022,12 +1013,6 @@ export const faq = [
     answer: `We serve ${business.serviceArea}, including ${neighborhoods.join(", ")}. Send us your ZIP code and we'll confirm availability right away.`,
   },
   {
-    id: "insurance",
-    question: "Are you insured?",
-    answer:
-      "Yes — we're fully licensed and insured, and every technician is background-checked before joining the team.",
-  },
-  {
     id: "wall-anchoring",
     question: "How do you anchor TVs and IKEA furniture to the wall?",
     answer:
@@ -1118,15 +1103,14 @@ export const servicePillars = [
     badges: [
       { icon: "⚡", label: "Same-day & next-day slots" },
       { icon: "🧹", label: "Packaging cleaned up" },
-      { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "Furniture & IKEA Assembly for Homes & Businesses in Pittsburgh",
     metaTitle: "Furniture & IKEA Assembly Pittsburgh, PA | Home & Office | Fixium Craft",
     metaDescription:
-      "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX, beds, desks, office chairs. Flat-rate pricing from $59, fully insured.",
+      "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX, beds, desks, office chairs. Flat-rate pricing from $59.",
     intro: [
       `Fixium Craft is a handyman furniture assembly service across ${business.address.city}, ${business.address.state}: assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes. IKEA PAX wardrobes, beds, desks, dressers and anything else that comes in a box, built sturdy and level the first time.`,
-      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, every technician is background-checked and fully insured, and we clean up all the packaging before we leave.`,
+      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, every technician is background-checked, and we clean up all the packaging before we leave.`,
     ],
     taskGroups: [
       {
@@ -1233,15 +1217,14 @@ export const servicePillars = [
     badges: [
       { icon: "⚡", label: "Same-day & next-day slots" },
       { icon: "🧹", label: "Packaging cleaned up" },
-      { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "TV Wall Mounting in Pittsburgh, PA",
     metaTitle: "TV Wall Mounting Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate from $89, fully insured. Free quote.",
+      "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate from $89. Free quote.",
     intro: [
       `Looking for a TV wall mounting service near you in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
-      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, and every technician is background-checked and fully insured.`,
+      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, and every technician is background-checked.`,
     ],
     taskGroups: [
       {
@@ -1341,7 +1324,6 @@ export const servicePillars = [
     badges: [
       { icon: "📅", label: "By appointment only" },
       { icon: "🕖", label: "Scheduled installs 7AM–11PM" },
-      { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "Scheduled Locksmith & Smart Lock Installation in Pittsburgh",
     metaTitle: "Lock Repair, Rekeying & Smart Locks Pittsburgh | Fixium Craft",
@@ -1459,15 +1441,14 @@ export const servicePillars = [
     badges: [
       { icon: "⚡", label: "Same-day & next-day slots" },
       { icon: "💬", label: "Photo quotes by text" },
-      { icon: "🛡️", label: "Fully insured" },
     ],
     h1: "Reliable Handyman & Home Repair Services in Pittsburgh",
     metaTitle: "Handyman & Home Repairs Pittsburgh, PA | Fixium Craft",
     metaDescription:
-      "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes, fully insured.",
+      "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes.",
     intro: [
       `Fixium Craft is a local handyman for small jobs near you in ${business.address.city}, ${business.address.state}: the repairs that keep getting pushed back, like drywall patching, cabinet repair, minor plumbing and electrical fixtures, and general home upkeep.`,
-      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We work across Pittsburgh and nearby suburbs, and every technician is background-checked and fully insured.`,
+      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We work across Pittsburgh and nearby suburbs, and every technician is background-checked.`,
     ],
     taskGroups: [
       {

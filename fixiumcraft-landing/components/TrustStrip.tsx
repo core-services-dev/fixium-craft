@@ -1,4 +1,4 @@
-import { BadgeCheck, MapPin, ShieldCheck, Star, Tag } from "lucide-react";
+import { BadgeCheck, MapPin, Star, Tag } from "lucide-react";
 import { googleReviews } from "./contentData";
 import { trustFacts } from "./proofData";
 
@@ -8,7 +8,6 @@ export default function TrustStrip({ tone = "light" }: { tone?: "light" | "dark"
   const dark = tone === "dark";
   const items = [
     { icon: Star, text: `${googleReviews.value} on Google (${googleReviews.reviewCount} reviews)`, href: "/#testimonials", gold: true },
-    { icon: ShieldCheck, text: trustFacts.insuranceCertOnRequest ? "Fully insured · certificate on request" : "Fully insured" },
     { icon: BadgeCheck, text: "Background-checked techs" },
     { icon: Tag, text: "Flat rate quoted before we start" },
     { icon: MapPin, text: "Pittsburgh-based team" },

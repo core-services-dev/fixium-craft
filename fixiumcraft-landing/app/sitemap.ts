@@ -15,7 +15,7 @@ import { AREAS } from "@/components/areasData";
 // lastModified must be the date the page content really changed: Google learns
 // to ignore a lastmod that changes on every build. Update SITE_UPDATED only
 // when site copy actually changes; guides use their own `updated` date.
-const SITE_UPDATED = new Date("2026-10-28");
+const SITE_UPDATED = new Date("2026-11-09");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = seo.canonicalUrl.replace(/\/$/, "");

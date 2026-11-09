@@ -432,7 +432,7 @@ export default function GuidePage({ slug }: { slug: string }) {
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
               {g.ctaText ??
-                `Our fully insured, background-checked Pittsburgh technicians handle the job for you. Flat-rate pricing, quoted upfront.`}
+                `Our background-checked Pittsburgh technicians handle the job for you. Flat-rate pricing, quoted upfront.`}
             </p>
             <div className="mt-6">
               <ExpertHelpForm guideTitle={g.title} serviceLabel={service?.navLabel} />
@@ -447,7 +447,7 @@ export default function GuidePage({ slug }: { slug: string }) {
               </a>
             </div>
             <p className="mt-5 text-xs text-slate-300">
-              Flat-rate pricing &middot; Fully insured &amp; background-checked &middot; Same-day slots
+              Flat-rate pricing &middot; Background-checked &middot; Same-day slots
             </p>
             {service && (
               <Link

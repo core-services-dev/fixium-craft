@@ -24,7 +24,7 @@ export default function TermsOfServicePage() {
         <p>
           These Terms of Service ("Terms") govern any furniture assembly,
           wall mounting, or home repair service booked with{" "}
-          {business.legalName} ("{business.name}," "we," "us," or "our") in{" "}
+          {business.name} ("we," "us," or "our") in{" "}
           {business.serviceArea}. By requesting a quote, booking a job, or
           otherwise using our services, you agree to these Terms.
         </p>
@@ -98,7 +98,7 @@ export default function TermsOfServicePage() {
 
       <LegalSection heading="Liability">
         <p>
-          Our technicians are insured, and we take care to protect your home
+          We take care to protect your home
           and belongings on every job. That said, to the fullest extent
           permitted by law, our liability for any claim relating to a
           service is limited to the amount you paid for that service. We

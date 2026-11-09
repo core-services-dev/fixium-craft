@@ -18,7 +18,7 @@ import { socialMetadata } from "@/lib/seo";
 const price = (slug: string) => servicePillars.find((p) => p.slug === slug)?.startingPrice.toLowerCase() ?? "";
 
 const title = `Home Services in Pittsburgh, PA | ${business.name}`;
-const description = `Handyman ${price("handyman-repairs")}, furniture assembly ${price("furniture-assembly")} and TV wall mounting ${price("tv-mounting")} in Pittsburgh, PA. Flat-rate quotes, fully insured.`;
+const description = `Handyman ${price("handyman-repairs")}, furniture assembly ${price("furniture-assembly")} and TV wall mounting ${price("tv-mounting")} in Pittsburgh, PA. Flat-rate quotes.`;
 
 export const metadata: Metadata = {
   title,

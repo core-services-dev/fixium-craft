@@ -8,7 +8,7 @@ date: 2026-10-15
 updated: 2026-10-15
 totalTime: PT3H
 ctaTitle: "Want a Repair You Can't Find? Hire Fixium Craft"
-ctaText: "Patching drywall well takes patience, the right tools and a good eye for finishing. If you want it done right the first time, our fully insured Pittsburgh handyman team will repair, prime and paint the wall so the damage is gone for good. Flat-rate pricing and same-day slots are available."
+ctaText: "Patching drywall well takes patience, the right tools and a good eye for finishing. If you want it done right the first time, our Pittsburgh handyman team will repair, prime and paint the wall so the damage is gone for good. Flat-rate pricing and same-day slots are available."
 ---
 
 A hole in drywall is easy to fill. Making it vanish is the hard part. Patches that stay visible usually fail in one of three ways: the compound was not feathered wide enough, the patch was painted without primer so it dulls the finish, or the touch-up paint does not match the wall in color or sheen.

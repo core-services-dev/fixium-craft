@@ -8,7 +8,7 @@ date: 2026-10-15
 updated: 2026-10-15
 totalTime: PT2H
 ctaTitle: "Skip the Frustration: Let Fixium Craft Assemble It for You"
-ctaText: "You now have the full process. If you would rather spend your weekend on something else, our fully insured Pittsburgh technicians assemble IKEA and other flat-pack furniture quickly, precisely and with every piece anchored where needed. Flat-rate pricing, no surprises."
+ctaText: "You now have the full process. If you would rather spend your weekend on something else, our Pittsburgh technicians assemble IKEA and other flat-pack furniture quickly, precisely and with every piece anchored where needed. Flat-rate pricing, no surprises."
 ---
 
 Flat-pack furniture is designed to be assembled by one or two people with a handful of tools, and it works well when you treat it like a small project instead of a race. Most problems we see in homes around Pittsburgh come from the same few habits: skipping the manual, losing small parts, scratching panels on the floor, and cranking screws until the particleboard strips.

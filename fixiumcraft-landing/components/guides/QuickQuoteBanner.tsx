@@ -29,7 +29,7 @@ export default function QuickQuoteBanner({ label, price }: Props) {
         </span>
         <span className="mt-0.5 block whitespace-nowrap text-base font-bold text-blue-800">
           {price}
-          <span className="hidden text-sm font-normal text-slate-600 sm:inline"> · flat-rate &amp; fully insured</span>
+          <span className="hidden text-sm font-normal text-slate-600 sm:inline"> · flat-rate pricing</span>
         </span>
       </p>
       <div className="flex shrink-0 items-center gap-2">

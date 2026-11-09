@@ -97,7 +97,7 @@ export default function GuideToc({
       </ol>
       <div className="mt-6 rounded-xl bg-slate-900 p-4 text-white">
         <p className="text-sm font-semibold">Rather have a pro handle it?</p>
-        <p className="mt-1 text-xs text-slate-300">Flat-rate quotes, fully insured.</p>
+        <p className="mt-1 text-xs text-slate-300">Flat-rate quotes, quoted upfront.</p>
         <Link
           href="/#quote"
           className="mt-3 block rounded-lg bg-cta px-4 py-2.5 text-center text-sm font-semibold text-slate-950 transition hover:bg-cta-hover"

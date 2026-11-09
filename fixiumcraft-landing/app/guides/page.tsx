@@ -133,7 +133,7 @@ export default function GuidesIndexPage() {
           </h2>
           <p className="mt-3 text-sm text-slate-300 sm:text-base">
             Send us a quick text or photo and we&apos;ll get back to you fast with a flat-rate
-            quote. Fully insured, background-checked technicians.
+            quote. Background-checked technicians.
           </p>
           <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
             <Link href="/#quote" className={BTN_PRIMARY}>
