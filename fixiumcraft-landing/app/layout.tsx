@@ -42,10 +42,11 @@ export const metadata: Metadata = {
     // Next falls back to opengraph-image for Twitter when one isn't set).
   },
   verification: {
-    // Two Search Console properties verified: keep both tags.
+    // Search Console verification tags (one per verifying Google account): keep all.
     google: [
       "1A0C3cEVRYG-iN5migckdRiDpysWGYZWgdnUA_0MzaA",
       "PceKkUI3XqEuK606M6VwN3kSB8b7MIfwrwsqtq-_5tg",
+      "QMVpmk8WhcYdMNBd9_w2vCRpsNJxoYrllLkJTgu-RvI",
     ],
   },
 };
