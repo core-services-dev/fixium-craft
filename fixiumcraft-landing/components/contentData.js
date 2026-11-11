@@ -141,7 +141,7 @@ export const serviceAreasSection = {
 export const seo = {
   title: "Professional Furniture Assembly & Handyman Services in Pittsburgh, PA",
   description:
-    "Top-rated local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting and handyman repairs with upfront flat-rate pricing.",
+    "Local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting and handyman repairs with upfront flat-rate pricing.",
   keywords: [
     // Furniture assembly, TV mounting and handyman terms only (locksmith
     // is a secondary service and is not targeted site-wide).
