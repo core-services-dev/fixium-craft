@@ -4,12 +4,12 @@ metaTitle: "How to Unlock a Car Door With an Air Wedge"
 description: "Locked out of your own car? Learn the safe air wedge and long-reach tool method, plus how to protect door seals, windows and airbags."
 summary: "The safe air wedge and long-reach tool method for your own vehicle, with warnings on airbags, door seals and window mechanisms."
 category: locksmith
-service: none
+service: locksmith
 date: 2026-10-15
-updated: 2026-10-15
+updated: 2026-11-13
 totalTime: PT15M
-ctaTitle: "Locks Giving You Trouble at Home? Fixium Craft Can Help"
-ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window, so for a locked car call your roadside assistance provider or an auto locksmith. We do not service vehicles. For your home, our Pittsburgh technicians handle scheduled smart lock installs, rekeying and deadbolt replacement with flat-rate pricing."
+ctaTitle: "Locked Out of Your Car? Book a Scheduled Opening"
+ctaText: "A DIY car lockout is one of the easiest ways to damage a door seal or window. Fixium Craft opens car doors in Pittsburgh as a scheduled visit, 7 AM to 11 PM, with a flat rate quoted upfront. We confirm the car is yours before we open it. Not an emergency service: if a child or pet is inside, call 911."
 ---
 
 Being locked out of your own car is stressful, and it rarely happens somewhere convenient. This guide walks through the method professional locksmiths use for a standard lockout: a small inflatable **air wedge** to open a tiny gap at the door frame, and a **long-reach tool** to press the unlock button or pull the interior handle. Done slowly and with padding, it leaves no marks. Done fast, it bends door frames, tears weatherstripping and can damage wiring inside the door.
@@ -117,7 +117,7 @@ Never push on the glass or try to lower the window with the tool. Window regulat
 
 ## When to Stop and Call a Professional
 
-Call your roadside assistance provider or a licensed, insured auto locksmith if:
+Stop and book a scheduled opening with Fixium Craft (or call your roadside assistance provider if you need help right away) if:
 
 - the car has frameless windows, or is a luxury model or electric vehicle with complex door electronics;
 - the keys are inside a running car;
@@ -149,4 +149,4 @@ No. Frameless windows, some luxury and electric vehicles, and cars with extra de
 
 ### Can Fixium Craft unlock my car?
 
-No. We don't service vehicles. For a locked car, call your roadside assistance provider or an auto locksmith. We handle home locks: scheduled smart lock installs, rekeying and deadbolt replacement, by appointment.
+Yes, as a scheduled visit between 7 AM and 11 PM. We confirm the car is yours before opening it and quote a flat rate upfront. We are not an emergency or 24/7 service, so if you need help right now, call your roadside assistance provider, and if a child or pet is inside, call 911. We also handle home and office locks: rekeying, lock replacement and smart lock installs.
