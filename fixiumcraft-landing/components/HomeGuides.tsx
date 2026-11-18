@@ -13,7 +13,7 @@ import { getAllGuides, toSummary } from "@/lib/guides";
 export default function HomeGuides() {
   const guides = getAllGuides()
     .filter((g) => g.serviceSlug)
-    .slice(0, 3);
+    .slice(0, 6);
   if (!guides.length) return null;
 
   return (

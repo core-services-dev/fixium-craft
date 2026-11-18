@@ -36,9 +36,9 @@ export default function Hero() {
         <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
           {hero.headline}
         </h1>
-        <h2 className="mx-auto mt-5 max-w-2xl text-balance text-base font-normal text-slate-100 sm:text-lg">
+        <p className="mx-auto mt-5 max-w-2xl text-balance text-base font-normal text-slate-100 sm:text-lg">
           {hero.subheadline}
-        </h2>
+        </p>
         <p className="mx-auto mt-3 max-w-2xl text-balance text-sm text-slate-300 sm:text-base">
           {hero.commercialLine}
         </p>
