@@ -48,6 +48,9 @@ export function SiteFooterMini() {
           <Link href="/accessibility" className="hover:text-white">
             Accessibility
           </Link>
+          <a href={business.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            Facebook
+          </a>
         </nav>
         <p className="mt-6 text-xs text-slate-400">
           © {new Date().getFullYear()} {business.name}. All rights reserved.

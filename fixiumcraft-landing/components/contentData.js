@@ -26,6 +26,7 @@ export const business = {
   // number format Google compares against the Business Profile).
   phoneSchema: "+1-929-780-3017", // E.164-style for schema.org (visible number: phoneDisplay)
   smsHref: "sms:+19297803017",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61596246225038",
   whatsappHref:
     "https://wa.me/19297803017?text=Hi%20Fixium%20Craft%2C%20I'd%20like%20a%20quote%20for%20a%20job.",
   email: "fixiumcraft@gmail.com",
@@ -549,7 +550,7 @@ export const localBusinessSchema = {
   // Google Business Profile (by CID), Facebook page and Yelp: all verified to be this business.
   sameAs: [
     "https://www.google.com/maps?cid=10778425333648781362",
-    "https://www.facebook.com/profile.php?id=61596246225038",
+    business.facebookUrl,
     "https://www.yelp.com/biz/fixium-craft-pittsburgh",
   ],
   hasMap: "https://www.google.com/maps/search/?api=1&query=Fixium+Craft+Pittsburgh+PA",

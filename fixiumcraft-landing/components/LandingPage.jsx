@@ -1501,6 +1501,10 @@ function Footer() {
           <a href={`mailto:${business.email}`} className="hover:text-white">
             {business.email}
           </a>
+          <span aria-hidden="true">&middot;</span>
+          <a href={business.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            Facebook
+          </a>
         </div>
         <div className="mt-4 flex justify-center gap-4 text-xs">
           {footer.legalLinks.map((link, index) => (
