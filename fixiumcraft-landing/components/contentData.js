@@ -809,7 +809,7 @@ export const quoteForm = {
   },
   submitLabel: "Get My Guaranteed Quote →",
   // Small trust line directly under the submit button.
-  trustLine: "🔒 No spam. Guaranteed flat-rate quote texted within 30–60 minutes.",
+  trustLine: "🔒 No spam. Your flat-rate price is confirmed before any work starts.",
   successMessage:
     "Thanks! We've got your request and will text you a quote shortly.",
   errorMessage:
