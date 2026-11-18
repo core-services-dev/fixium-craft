@@ -546,8 +546,12 @@ export const localBusinessSchema = {
     availableLanguage: "English",
   },
   // Profiles that describe this same business (strengthens the local entity).
-  // Add the Google Business Profile share link and Facebook here once known.
-  sameAs: ["https://www.yelp.com/biz/fixium-craft-pittsburgh"],
+  // Google Business Profile (by CID), Facebook page and Yelp: all verified to be this business.
+  sameAs: [
+    "https://www.google.com/maps?cid=10778425333648781362",
+    "https://www.facebook.com/profile.php?id=61596246225038",
+    "https://www.yelp.com/biz/fixium-craft-pittsburgh",
+  ],
   hasMap: "https://www.google.com/maps/search/?api=1&query=Fixium+Craft+Pittsburgh+PA",
   address: {
     "@type": "PostalAddress",
