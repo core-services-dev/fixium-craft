@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { socialMetadata } from "@/lib/seo";
 import LegalPageLayout, { LegalSection } from "@/components/LegalPageLayout";
 import { business, seo } from "@/components/contentData";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 // should only change when the policy text actually changes, not on every
 // page load (see the same reasoning on business.hours/copyright, which
 // intentionally *do* auto-update, elsewhere in this project).
-const LAST_UPDATED = "September 22, 2026";
+const LAST_UPDATED = "November 18, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -102,6 +103,21 @@ export default function PrivacyPolicyPage() {
         <p>
           If you upload a photo with your request, it is sent through the
           same channels solely so we can quote your job accurately.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="Text Messages (SMS)">
+        <p>
+          If you opt in to text messages on our quote form, we use your
+          mobile number only to send the messages you agreed to receive:
+          appointment reminders, estimates, project updates, and support.
+          We do not sell your mobile number or share it with third parties
+          for their marketing. You can opt out at any time by replying STOP.
+          See our{" "}
+          <Link href="/terms#sms-messaging" className="font-semibold text-blue-800 underline underline-offset-2">
+            SMS terms
+          </Link>
+          .
         </p>
       </LegalSection>
 

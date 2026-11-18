@@ -10,13 +10,15 @@ import { SiteHeader, SiteFooterMini, BTN_PRIMARY } from "./SiteChrome";
 
 export function LegalSection({
   heading,
+  id,
   children,
 }: {
   heading: string;
+  id?: string;
   children: ReactNode;
 }) {
   return (
-    <section>
+    <section id={id} className="scroll-mt-24">
       <h2 className="text-lg font-bold text-slate-900 sm:text-xl">{heading}</h2>
       <div className="mt-3 space-y-3 text-sm leading-relaxed text-slate-600 sm:text-base">
         {children}

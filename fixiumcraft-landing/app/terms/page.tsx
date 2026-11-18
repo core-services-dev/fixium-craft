@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { socialMetadata } from "@/lib/seo";
 import LegalPageLayout, { LegalSection } from "@/components/LegalPageLayout";
 import { business, services } from "@/components/contentData";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 // See the matching note in app/privacy/page.tsx — a static, hand-set date,
 // not `new Date()`.
-const LAST_UPDATED = "September 22, 2026";
+const LAST_UPDATED = "November 18, 2026";
 
 export default function TermsOfServicePage() {
   return (
@@ -107,6 +108,31 @@ export default function TermsOfServicePage() {
           conditions not disclosed to us before the job (for example,
           weakened drywall behind a mounting point that wasn't visible or
           mentioned beforehand).
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="SMS Text Messaging" id="sms-messaging">
+        <p>
+          If you check the SMS consent box on our quote form, you agree to
+          receive text messages from {business.name} about appointment
+          reminders, estimates, project updates, and customer support. You
+          can still request a quote without checking the box, and consent is
+          not a condition of purchase.
+        </p>
+        <p>
+          Message frequency varies. Message and data rates may apply. Reply
+          STOP at any time to opt out, or HELP for assistance. After you
+          opt out we may send one last message confirming it. For help you
+          can also call {business.phoneDisplay} or email {business.email}.
+          Carriers are not liable for delayed or undelivered messages.
+        </p>
+        <p>
+          We do not sell your mobile number or share it with third parties
+          for their marketing. See our{" "}
+          <Link href="/privacy" className="font-semibold text-blue-800 underline underline-offset-2">
+            Privacy Policy
+          </Link>{" "}
+          for how we handle your information.
         </p>
       </LegalSection>
 

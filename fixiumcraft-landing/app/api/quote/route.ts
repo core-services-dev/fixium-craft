@@ -133,6 +133,7 @@ type ParsedFields = {
   discountFirstTime: boolean;
   discountMilitaryFirstResponder: boolean;
   discountSenior: boolean;
+  smsConsent: boolean;
 };
 
 // Human-readable labels for the 3 discount checkboxes -- kept here
@@ -183,6 +184,7 @@ function buildTelegramMessage(fields: ParsedFields): string {
     ...(fields.streetAddress ? [`<b>Street Address:</b> ${escapeHtml(fields.streetAddress)}`] : []),
     `<b>Service:</b> ${escapeHtml(fields.serviceLabel) || "—"}`,
     `<b>Preferred Contact:</b> ${escapeHtml(fields.preferredContactMethod) || "—"}`,
+    `<b>SMS consent:</b> ${fields.smsConsent ? "Yes" : "No"}`,
   ];
   const discountSummary = describeDiscounts(fields);
   if (discountSummary) lines.push(`🏷️ <b>Discount requested:</b> ${escapeHtml(discountSummary)}`);
@@ -199,6 +201,7 @@ function buildEmailHtml(fields: ParsedFields): string {
     ...(fields.streetAddress ? [["Street Address", fields.streetAddress]] : []),
     ["Service", fields.serviceLabel || "—"],
     ["Preferred Contact", fields.preferredContactMethod || "—"],
+    ["SMS consent", fields.smsConsent ? "Yes" : "No"],
   ]
     .map(
       ([label, value]) =>
@@ -403,6 +406,7 @@ export async function POST(request: NextRequest) {
       discountFirstTime: readField(formData, "discount_first_time") === "true",
       discountMilitaryFirstResponder: readField(formData, "discount_military_first_responder") === "true",
       discountSenior: readField(formData, "discount_senior") === "true",
+      smsConsent: readField(formData, "sms_consent") === "true",
     };
 
     const tooLongField = findFieldTooLong(fields);

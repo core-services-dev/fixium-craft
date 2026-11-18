@@ -813,7 +813,10 @@ export const quoteForm = {
     "Thanks! We've got your request and will text you a quote shortly.",
   errorMessage:
     "Something went wrong sending your request. Please call or WhatsApp us instead — we don't want to miss you.",
-  disclaimer: "By submitting, you agree to be contacted about your quote via call, text, or WhatsApp.",
+  disclaimer: "We only use your details to reply to your request.",
+  // Optional SMS opt-in, unchecked by default. Link targets: /privacy and /terms#sms-messaging.
+  smsConsentText:
+    "By providing your mobile phone number and checking this box, you agree to receive SMS messages from Fixium Craft regarding appointment reminders, estimates, project updates, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is not a condition of purchase.",
 };
 
 // Recent Projects / Services Gallery.

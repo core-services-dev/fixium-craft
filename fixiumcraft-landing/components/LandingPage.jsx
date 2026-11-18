@@ -579,6 +579,7 @@ const EMPTY_FORM_DATA = {
   discountFirstTime: false,
   discountMilitaryFirstResponder: false,
   discountSenior: false,
+  smsConsent: false,
 };
 
 // Maps each `discounts` entry id (contentData.js) to the formData key that
@@ -806,6 +807,7 @@ function QuoteForm() {
         formData.discountMilitaryFirstResponder ? "true" : "false"
       );
       submission.append("discount_senior", formData.discountSenior ? "true" : "false");
+      submission.append("sms_consent", formData.smsConsent ? "true" : "false");
       submission.append("botcheck", ""); // honeypot — must stay empty
       if (photoFile) {
         submission.append("attachment", photoFile);
@@ -1192,6 +1194,21 @@ function QuoteForm() {
               {quoteForm.errorMessage}
             </p>
           )}
+
+          <label className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-600">
+            <input
+              type="checkbox"
+              name="smsConsent"
+              checked={formData.smsConsent}
+              onChange={(e) => setFormData((prev) => ({ ...prev, smsConsent: e.target.checked }))}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-400 text-orange-600"
+            />
+            <span>
+              {quoteForm.smsConsentText} View our{" "}
+              <a href="/privacy" className="font-semibold text-blue-800 underline underline-offset-2">Privacy Policy</a> and{" "}
+              <a href="/terms#sms-messaging" className="font-semibold text-blue-800 underline underline-offset-2">SMS Terms</a>.
+            </span>
+          </label>
 
           <div>
             <button
