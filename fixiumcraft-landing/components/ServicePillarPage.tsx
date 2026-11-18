@@ -8,6 +8,7 @@ import WorkGallery from "./WorkGallery";
 import TrustStrip from "./TrustStrip";
 import PriceEstimator from "./PriceEstimator";
 import RelatedGuides from "./RelatedGuides";
+import AreaLinks from "./AreaLinks";
 import { areaServedSchema, business, seo, servicePillars } from "./contentData";
 
 // ServicePillarPage.tsx
@@ -338,6 +339,9 @@ export default function ServicePillarPage({ slug }: { slug: string }) {
 
           {/* Related guides (content/guides/*.md mapped to this service) */}
           <RelatedGuides serviceSlug={slug} />
+
+          {/* Neighborhood pages for this service (empty until marked ready) */}
+          <AreaLinks serviceSlug={slug} />
         </div>
       </div>
 
