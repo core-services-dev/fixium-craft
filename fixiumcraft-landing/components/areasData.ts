@@ -19,7 +19,7 @@ export const AREAS: Area[] = [
   {
     slug: "squirrel-hill-furniture-assembly",
     name: "Squirrel Hill",
-    ready: false,
+    ready: true,
     service: "furniture-assembly",
     metaTitle: "Furniture Assembly in Squirrel Hill, Pittsburgh | Fixium Craft",
     description:
@@ -101,7 +101,7 @@ export const AREAS: Area[] = [
   {
     slug: "shadyside-furniture-assembly",
     name: "Shadyside",
-    ready: false,
+    ready: true,
     service: "furniture-assembly",
     metaTitle: "Furniture Assembly in Shadyside, Pittsburgh | Fixium Craft",
     description:

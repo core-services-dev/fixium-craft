@@ -139,7 +139,7 @@ export const serviceAreasSection = {
 };
 
 export const seo = {
-  title: "Professional Furniture Assembly & Handyman Services in Pittsburgh, PA",
+  title: "Furniture Assembly & Handyman Pittsburgh, PA | Fixium Craft",
   description:
     "Local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting and handyman repairs with upfront flat-rate pricing.",
   keywords: [
@@ -1105,7 +1105,7 @@ export const servicePillars = [
       { icon: "🧹", label: "Packaging cleaned up" },
     ],
     h1: "Furniture & IKEA Assembly for Homes & Businesses in Pittsburgh",
-    metaTitle: "Furniture & IKEA Assembly Pittsburgh, PA | Home & Office | Fixium Craft",
+    metaTitle: "IKEA & Furniture Assembly Pittsburgh, PA | Fixium Craft",
     metaDescription:
       "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX, beds, desks, office chairs. Flat-rate pricing from $59.",
     intro: [
