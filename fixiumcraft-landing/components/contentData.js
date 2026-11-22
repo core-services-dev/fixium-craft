@@ -847,6 +847,15 @@ export const projectsGallery = {
   // real location of that job; it is deliberately left empty until then),
   // plus the image's real pixel size (for layout without jank) and alt.
   items: [
+    {
+      id: "fireplace-ba",
+      category: "furniture",
+      title: "Electric fireplace mantel assembly",
+      area: "",
+      before: { image: "/images/work/furniture-fireplace-mantel-before.jpg", width: 901, height: 1600, alt: "Flat-pack fireplace mantel panels, hardware bags and instructions laid out on the floor (before)" },
+      after: { image: "/images/work/furniture-fireplace-mantel-after.jpg", width: 901, height: 1600, alt: "Assembled white electric fireplace mantel with twisted columns and a lit insert under a wall-mounted TV (after)" },
+    },
+    { id: "fireplace-1", category: "furniture", title: "Electric fireplace with column mantel", area: "", image: "/images/work/furniture-fireplace-mantel.jpg", width: 901, height: 1600, alt: "Finished electric fireplace mantel with spiral columns, brass studs and a wood-tone top, flames on" },
     { id: "tv-1", category: "tv", title: "TV wall mounting", area: "", image: "/images/work/tv-wall-mount.jpg", width: 900, height: 1600, alt: "Flat-screen TV mounted flat on the wall above a white media console" },
     { id: "desk-1", category: "furniture", title: "Desk with drawers & shelves assembly", area: "", image: "/images/work/furniture-desk.jpg", width: 1600, height: 900, alt: "Assembled industrial-style desk with six drawers and open shelves" },
     { id: "patio-1", category: "furniture", title: "Outdoor patio set assembly", area: "", image: "/images/work/furniture-patio-set.jpg", width: 1600, height: 1200, alt: "Assembled wicker outdoor sectional with ottomans and coffee tables on a patio" },
