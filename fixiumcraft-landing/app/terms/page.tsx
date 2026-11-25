@@ -164,12 +164,6 @@ export default function TermsOfServicePage() {
           </a>
           .
         </p>
-        <p className="text-xs text-slate-600">
-          This page is a general template and isn't a substitute for advice
-          from a licensed attorney familiar with your local requirements —
-          consider having it reviewed before relying on it as your final
-          terms.
-        </p>
       </LegalSection>
     </LegalPageLayout>
   );

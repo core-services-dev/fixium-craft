@@ -67,7 +67,7 @@ export const aboutSection = {
   heading: "Built on Craftsman-Quality Work, Not Shortcuts",
   body: [
     `${business.name} was founded to bring real craftsman-quality assembly, repair, and security installation work to ${business.address.city} homeowners and renters — the kind of job where things are level, square, and anchored right the first time, not just "good enough."`,
-    "Every technician is background-checked, every quote is flat-rate and upfront before we pick up a tool, and every job gets the same attention whether it's a single shelf or a full day of work.",
+    "Every quote is flat-rate and upfront before we pick up a tool, and every job gets the same attention whether it's a single shelf or a full day of work.",
   ],
 };
 
@@ -142,7 +142,7 @@ export const serviceAreasSection = {
 export const seo = {
   title: "Furniture Assembly & Handyman Pittsburgh, PA | Fixium Craft",
   description:
-    "Local furniture assembly near you in Pittsburgh, PA. Expert IKEA assembly, TV wall mounting and handyman repairs with upfront flat-rate pricing.",
+    "Furniture assembly & handyman repairs in Pittsburgh, PA & nearby areas. IKEA and flat-pack assembly, home repairs and TV mounting at upfront flat rates.",
   keywords: [
     // Furniture assembly, TV mounting and handyman terms only (locksmith
     // is a secondary service and is not targeted site-wide).
@@ -189,7 +189,7 @@ export const hero = {
   eyebrow: "Upfront Flat Rates | Pittsburgh, PA",
   headline: "Professional Furniture Assembly & Handyman Services in Pittsburgh",
   subheadline:
-    "Furniture assembly near you in Pittsburgh: expert IKEA assembly, TV wall mounting and handyman repairs at upfront flat rates.",
+    "Furniture assembly near you in Pittsburgh: expert IKEA and flat-pack assembly, handyman repairs and TV mounting at upfront flat rates.",
   // Explicit B2B line, rendered under the subheadline in Hero().
   commercialLine:
     "Assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes.",
@@ -205,8 +205,8 @@ export const hero = {
   // prices on the service pages (handyman $49, assembly $59, locksmith $79).
   trustBar: [
     { id: "pricing", label: "Transparent Flat-Rate Pricing" },
-    { id: "sameday", label: "Same-Day Service" },
-    { id: "background", label: "Background-Checked Techs" },
+    { id: "sameday", label: "Scheduled Appointments" },
+    { id: "background", label: "Clean-Up After Every Job" },
     { id: "rating", label: "5.0 on Google" },
   ],
   secondaryCtas: [
@@ -243,7 +243,7 @@ export const painPoints = {
       id: "trust",
       problem: "Letting a stranger into your home",
       solution:
-        "Background-checked technicians with upfront pricing — no surprise fees, no guesswork.",
+        "Upfront flat-rate pricing and a clear quote before any work starts — no surprise fees, no guesswork.",
     },
   ],
 };
@@ -931,11 +931,6 @@ export const qualityGuaranteeSection = {
       label: "Post-Job Vacuum Clean-Up",
       description: "We vacuum sawdust and packaging debris before we leave — you shouldn't have to clean up after us.",
     },
-    {
-      id: "background-check",
-      label: "Background-Checked Technicians",
-      description: "Every technician is background-checked before stepping into your home.",
-    },
   ],
 };
 
@@ -1127,7 +1122,7 @@ export const servicePillars = [
       "Furniture assembly in Pittsburgh, PA for homes and businesses: IKEA PAX, beds, desks, office chairs. Flat-rate pricing from $59.",
     intro: [
       `Fixium Craft is a handyman furniture assembly service across ${business.address.city}, ${business.address.state}: assembling office chairs, workstations, and furniture for Pittsburgh businesses, offices, and private homes. IKEA PAX wardrobes, beds, desks, dressers and anything else that comes in a box, built sturdy and level the first time.`,
-      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, every technician is background-checked, and we clean up all the packaging before we leave.`,
+      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, and we clean up all the packaging before we leave.`,
     ],
     taskGroups: [
       {
@@ -1241,7 +1236,7 @@ export const servicePillars = [
       "TV wall mounting in Pittsburgh, PA: stud-anchored, level, with hidden cables and shelf installation. Flat-rate from $89. Free quote.",
     intro: [
       `Looking for a TV wall mounting service near you in ${business.address.city}, ${business.address.state}? Fixium Craft mounts TVs on fixed, tilting and full-motion brackets, anchored into studs and hung level the first time, with cables concealed for a clean finish.`,
-      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront, and every technician is background-checked.`,
+      `We work across Pittsburgh and nearby suburbs. Every quote is flat-rate and upfront before we start.`,
     ],
     taskGroups: [
       {
@@ -1465,7 +1460,7 @@ export const servicePillars = [
       "Pittsburgh handyman for drywall patching, cabinet repair, minor plumbing & electrical fixtures, and home upkeep. Flat-rate quotes.",
     intro: [
       `Fixium Craft is a local handyman for small jobs near you in ${business.address.city}, ${business.address.state}: the repairs that keep getting pushed back, like drywall patching, cabinet repair, minor plumbing and electrical fixtures, and general home upkeep.`,
-      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We work across Pittsburgh and nearby suburbs, and every technician is background-checked.`,
+      `Send photos of everything on your list and we'll quote it as one flat-rate visit. We work across Pittsburgh and nearby suburbs.`,
     ],
     taskGroups: [
       {

@@ -8,7 +8,7 @@ export default function TrustStrip({ tone = "light" }: { tone?: "light" | "dark"
   const dark = tone === "dark";
   const items = [
     { icon: Star, text: `${googleReviews.value} on Google (${googleReviews.reviewCount} reviews)`, href: "/#testimonials", gold: true },
-    { icon: BadgeCheck, text: "Background-checked techs" },
+    { icon: BadgeCheck, text: "Clean-up after every job" },
     { icon: Tag, text: "Flat rate quoted before we start" },
     { icon: MapPin, text: "Pittsburgh-based team" },
   ];
