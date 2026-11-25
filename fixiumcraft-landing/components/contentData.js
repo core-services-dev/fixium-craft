@@ -840,6 +840,7 @@ export const projectsGallery = {
     { id: "furniture", label: "Furniture Assembly" },
     { id: "tv", label: "TV Mounting" },
     { id: "handyman", label: "Handyman" },
+    { id: "locksmith", label: "Locks" },
   ],
   // Real job photos (public/images/work/). Each item: category (matches a
   // `categories` id), title (the caption: job type), optional `area` (the
@@ -871,6 +872,8 @@ export const projectsGallery = {
     { id: "ac-1", category: "handyman", title: "Window AC installation", area: "", image: "/images/work/install-window-ac.jpg", width: 1600, height: 900, alt: "Window air conditioner installed with side panels sealed in the window frame" },
     { id: "grill-1", category: "furniture", title: "Gas grill assembly", area: "", image: "/images/work/furniture-grill.jpg", width: 1600, height: 1200, alt: "Fully assembled stainless-steel gas grill on a wooden deck" },
     { id: "trampoline-1", category: "furniture", title: "Trampoline assembly", area: "", image: "/images/work/furniture-trampoline.jpg", width: 1600, height: 1200, alt: "Assembled trampoline with safety net enclosure on a patio" },
+    { id: "lock-1", category: "locksmith", title: "Commercial lever lock installation", area: "", image: "/images/work/locksmith-commercial-lever.jpg", width: 900, height: 1600, alt: "New brushed-steel commercial lever lock with key cylinder installed on a door" },
+    { id: "lock-2", category: "locksmith", title: "Office door lever & latch replacement", area: "", image: "/images/work/locksmith-office-lever-latch.jpg", width: 900, height: 1600, alt: "Office door with a newly installed stainless lever lock and new strike plate" },
     { id: "heater-1", category: "handyman", title: "Water heater relief valve & discharge pipe", area: "", image: "/images/work/repair-water-heater-valve.jpg", width: 900, height: 1600, alt: "Water heater temperature and pressure relief valve with discharge pipe attached" },
   ],
 };
@@ -1324,7 +1327,7 @@ export const servicePillars = [
     startingPrice: "From $79",
     // No job photos for this service yet: an empty list hides the gallery
     // block on this page (WorkGallery renders nothing when nothing matches).
-    galleryCategories: [],
+    galleryCategories: ["locksmith"],
     brandsHeading: "Locks we install & service",
     brands: ["Schlage", "Yale", "Ring", "Google Nest", "Kwikset", "August", "Eufy"],
     pricingHeading: "Clear starting price",
