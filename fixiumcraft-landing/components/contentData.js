@@ -630,7 +630,7 @@ export const localBusinessSchema = {
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
-    reviewCount: "3",
+    reviewCount: "4",
     bestRating: "5",
     worstRating: "1",
   },
@@ -950,7 +950,7 @@ export const testimonialsSection = {
 export const googleReviews = {
   stars: 5,
   value: "5.0",
-  reviewCount: "3",
+  reviewCount: "4",
   sourceLabel: "Google Reviews",
   // "Review us on Google" button target. This opens a Google Maps search
   // that lands on the business listing; swap it for the direct
